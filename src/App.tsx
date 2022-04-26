@@ -9,7 +9,7 @@ function App() {
       <Box
         w="100%"
         h="calc(100vh)"
-        // bgGradient="linear(to-br,primary, secondary, third, seventh , eighth, ninth, tenth)"
+        bgGradient="linear(to-br,primary, secondary, third, seventh , eighth, ninth, tenth)"
       >
         <NavBar />
       </Box>
