@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { Box } from '@chakra-ui/react';
-
-import NavBar from './nabvar';
+import NavBar from './nabvar/NavBar';
 
 function App() {
   return (

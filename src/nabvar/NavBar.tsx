@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { Box, Flex, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 import Logo from './logo';
 import ConnectButton from './ConnectButton';
 
 function NavBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
 
   return (
     <Flex
@@ -17,13 +18,15 @@ function NavBar() {
       w="100%"
       mb={8}
       p={8}
-      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
-      color={['red', 'red', 'primary.700', 'primary.700']}
     >
-      <Logo w="100px" color={['red', 'red', 'primary.500', 'primary.500']} />
+      <HamburgerIcon w={6} h={6} />
+
+      <Logo w="100px" />
+
+      <Text variant="h6">Defi for People</Text>
+
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
         <Box marginLeft="auto" marginRight="0">
-          wena
           <ConnectButton handleOpenModal={onOpen} />
           {/* <AccountModal isOpen={isOpen} onClose={onClose} /> */}
         </Box>

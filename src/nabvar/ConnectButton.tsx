@@ -35,7 +35,7 @@ function ConnectButton({ handleOpenModal }: Props) {
     if (!isAuthenticated) {
       try {
         const user = await authenticate({
-          signingMessage: 'Log in using Moralis',
+          signingMessage: 'Log in DeFi for People using Moralis',
         });
         console.log('logged in user:', user);
         console.log(user!.get('ethAddress'));
