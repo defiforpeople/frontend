@@ -8,7 +8,7 @@ function App() {
       <Box
         w="100%"
         h="calc(100vh)"
-        bgGradient="linear(red.100 0%, orange.100 25%, yellow.100 50%)"
+        bgGradient="linear(white 20%, primary, secondary, third, seventh , eighth, ninth, tenth)"
       ></Box>
     </div>
   );
