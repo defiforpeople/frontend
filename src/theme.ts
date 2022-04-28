@@ -12,6 +12,7 @@ const theme = extendTheme({
     eighth: '#4361EE',
     ninth: '#4895EF',
     tenth: '#4CC9F0',
+    dark: '#191A32',
   },
 });
 

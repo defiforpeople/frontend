@@ -1,13 +1,17 @@
 import React from 'react';
 
-import { Box, Flex, Heading, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import ConnectButton from './ConnectButton';
 import Logo from './logo';
+import AccountModal from './AccountModal';
+import ChainButton from './ChainButton';
+
+// import { ReactComponent as EthereumLogo } from '../assets/logos/ethereum-logo.svg';
 
 function NavBar() {
-  const { onOpen } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex
@@ -16,12 +20,12 @@ function NavBar() {
       justify="space-between"
       wrap="wrap"
       p={3}
-      bgColor={'sixth'}
+      bgColor="dark"
     >
       <Flex align="center" justify="space-between">
         <HamburgerIcon w={6} h={6} color="white" />
 
-        <Logo />
+        {/* <Logo /> */}
 
         <Heading as="h2" size="md" color="white" paddingLeft={5}>
           Defi for People
@@ -29,10 +33,11 @@ function NavBar() {
       </Flex>
 
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
-        <Box>
+        <Flex display={'flex'} align="center">
+          <ChainButton />
           <ConnectButton handleOpenModal={onOpen} />
-          {/* <AccountModal isOpen={isOpen} onClose={onClose} /> */}
-        </Box>
+          <AccountModal isOpen={isOpen} onClose={onClose} />
+        </Flex>
       </Flex>
     </Flex>
   );

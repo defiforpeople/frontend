@@ -86,7 +86,7 @@ function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-    <Button onClick={login}>Connect to a wallet</Button>
+    <Button onClick={login}>Connect Wallet</Button>
   );
 }
 
