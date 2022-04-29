@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useMoralis } from 'react-moralis';
+import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 
 import { Button, Box, Text } from '@chakra-ui/react';
 
@@ -13,17 +13,26 @@ type Props = {
 function ConnectButton({ handleOpenModal }: Props) {
   const [balance, setBalance] = useState('');
 
+  const [ensName, setEnsName] = useState('');
+
   const { authenticate, isAuthenticated, user, Moralis } = useMoralis();
+
+  const Web3Api = useMoralisWeb3Api();
 
   useEffect(() => {
     if (isAuthenticated) {
       const fetchBalance = async () => {
-        const x = await Moralis.Web3API.account.getNativeBalance({
+        // get ENS domain of an address
+        const { name: ensName } = await Web3Api.resolve.resolveAddress();
+
+        setEnsName(ensName);
+
+        const objectBalance = await Moralis.Web3API.account.getNativeBalance({
           chain: 'eth',
           address: user!.attributes.ethAddress,
         });
 
-        setBalance(x.balance);
+        setBalance(objectBalance.balance);
       };
 
       fetchBalance();
@@ -75,14 +84,16 @@ function ConnectButton({ handleOpenModal }: Props) {
         height="38px"
       >
         <Text color="white" fontSize="md" fontWeight="medium" mr="2">
-          {user!.attributes.ethAddress &&
-            `${user!.attributes.ethAddress.slice(
-              0,
-              6,
-            )}...${user!.attributes.ethAddress.slice(
-              user!.attributes.ethAddress.length - 4,
-              user!.attributes.ethAddress.length,
-            )}`}
+          {ensName !== ''
+            ? ensName
+            : user!.attributes.ethAddress &&
+              `${user!.attributes.ethAddress.slice(
+                0,
+                6,
+              )}...${user!.attributes.ethAddress.slice(
+                user!.attributes.ethAddress.length - 4,
+                user!.attributes.ethAddress.length,
+              )}`}
         </Text>
       </Button>
     </Box>
