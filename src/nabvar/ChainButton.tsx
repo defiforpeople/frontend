@@ -23,6 +23,7 @@ import { TriangleDownIcon } from '@chakra-ui/icons';
 
 import Networks from '../utils/network';
 import LogoNetwork from './LogoNetwork';
+import ConnectedNetwork from './ConnectedNetwork';
 
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,10 +54,10 @@ function ChainButton() {
       <Button
         marginRight={5}
         leftIcon={<LogoNetwork chainId={chain} />}
-        rightIcon={<TriangleDownIcon h={3} />}
+        iconSpacing={3}
         onClick={onOpen}
       >
-        {Networks(chain)}
+        <ConnectedNetwork chainId={Networks(chain)} />
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size={'sm'} isCentered>
