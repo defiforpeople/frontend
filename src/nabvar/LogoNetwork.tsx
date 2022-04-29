@@ -7,7 +7,6 @@ import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.
 import { ReactComponent as FantomLogo } from '../assets/logos/fantom-logo.svg';
 
 function LogoNetwork(props: any) {
-  console.log(props.chainId);
   if (props.chainId === '0x1') {
     return <EthereumLogo width={25} />;
   }

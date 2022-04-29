@@ -29,7 +29,7 @@ function ChainButton() {
 
   const { Moralis } = useMoralis();
 
-  const { switchNetwork, chainId } = useChain();
+  const { switchNetwork } = useChain();
 
   const [chain, setChain] = useState('0x1');
 
@@ -39,13 +39,13 @@ function ChainButton() {
 
     try {
       await switchNetwork(networkID);
+
+      setChain(networkID);
+
+      onClose();
     } catch (error) {
       console.log(error);
     }
-    const chainId = await Moralis.getChainId();
-    console.log(chainId);
-
-    setChain(chainId!);
   };
 
   return (
