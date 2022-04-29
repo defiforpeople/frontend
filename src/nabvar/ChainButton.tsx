@@ -34,19 +34,27 @@ function ChainButton() {
 
   const [chain, setChain] = useState('0x1');
 
-  const changeNetwork = async (networkID: string) => {
-    console.log(`Change network to netkorkId: ${networkID}`);
+  const changeNetwork = async (networkId: string) => {
+    console.log(`Change network to netkorkId: ${networkId}`);
     await Moralis.enableWeb3();
 
     try {
-      await switchNetwork(networkID);
+      await switchNetwork(networkId);
 
-      setChain(networkID);
+      setChain(networkId);
 
       onClose();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const networkDisabled = (networkId: string) => {
+    if (networkId === chain) {
+      return true;
+    }
+
+    return false;
   };
 
   return (
@@ -73,6 +81,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            isDisabled={networkDisabled('0x1')}
             onClick={() => changeNetwork('0x1')}
           >
             Ethereum
@@ -85,6 +94,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            isDisabled={networkDisabled('0x89')}
             onClick={() => changeNetwork('0x89')}
           >
             Polygon
@@ -97,6 +107,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            isDisabled={networkDisabled('0x38')}
             onClick={() => changeNetwork('0x38')}
           >
             BNB Chain
@@ -109,6 +120,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            isDisabled={networkDisabled('0xa86a')}
             onClick={() => changeNetwork('0xa86a')}
           >
             Avalanche
@@ -120,6 +132,7 @@ function ChainButton() {
             margin={'auto'}
             justifyContent="start"
             iconSpacing={5}
+            isDisabled={networkDisabled('0xfa')}
             onClick={() => changeNetwork('0xfa')}
           >
             Fantom
