@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { useChain, useMoralis } from 'react-moralis';
 
 import {
   Button,
@@ -19,18 +21,42 @@ import { ReactComponent as FantomLogo } from '../assets/logos/fantom-logo.svg';
 
 import { TriangleDownIcon } from '@chakra-ui/icons';
 
+import Networks from '../utils/network';
+import LogoNetwork from './LogoNetwork';
+
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { Moralis } = useMoralis();
+
+  const { switchNetwork, chainId } = useChain();
+
+  const [chain, setChain] = useState('0x1');
+
+  const changeNetwork = async (networkID: string) => {
+    console.log(`Change network to netkorkId: ${networkID}`);
+    await Moralis.enableWeb3();
+
+    try {
+      await switchNetwork(networkID);
+    } catch (error) {
+      console.log(error);
+    }
+    const chainId = await Moralis.getChainId();
+    console.log(chainId);
+
+    setChain(chainId!);
+  };
 
   return (
     <>
       <Button
         marginRight={5}
-        leftIcon={<EthereumLogo width={25} />}
+        leftIcon={<LogoNetwork chainId={chain} />}
         rightIcon={<TriangleDownIcon h={3} />}
         onClick={onOpen}
       >
-        Ehereum
+        {Networks(chain)}
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size={'sm'} isCentered>
@@ -46,6 +72,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            onClick={() => changeNetwork('0x1')}
           >
             Ethereum
           </Button>
@@ -57,6 +84,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            onClick={() => changeNetwork('0x89')}
           >
             Polygon
           </Button>
@@ -68,6 +96,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            onClick={() => changeNetwork('0x38')}
           >
             BNB Chain
           </Button>
@@ -79,6 +108,7 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
+            onClick={() => changeNetwork('0xa86a')}
           >
             Avalanche
           </Button>
@@ -89,6 +119,7 @@ function ChainButton() {
             margin={'auto'}
             justifyContent="start"
             iconSpacing={5}
+            onClick={() => changeNetwork('0xfa')}
           >
             Fantom
           </Button>
