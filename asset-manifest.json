@@ -1,10 +1,15 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.483cc2b1.js",
+    "main.js": "/frontend/static/js/main.dd2978fa.js",
+    "static/media/avalanche-logo.svg": "/frontend/static/media/avalanche-logo.a3f3731d51c2cd33df24e55af1f23844.svg",
+    "static/media/bnbchain-logo.svg": "/frontend/static/media/bnbchain-logo.797868eb94521320b78e3967134febbe.svg",
+    "static/media/polygon-logo.svg": "/frontend/static/media/polygon-logo.97ff139cc7379a42cf141d74a6595fff.svg",
+    "static/media/fantom-logo.svg": "/frontend/static/media/fantom-logo.3f8c71bb709ec37d4e3bb072c25d75b7.svg",
     "index.html": "/frontend/index.html",
-    "main.483cc2b1.js.map": "/frontend/static/js/main.483cc2b1.js.map"
+    "static/media/ethereum-logo.svg": "/frontend/static/media/ethereum-logo.df265e367364f285053a1285ad8d418d.svg",
+    "main.dd2978fa.js.map": "/frontend/static/js/main.dd2978fa.js.map"
   },
   "entrypoints": [
-    "static/js/main.483cc2b1.js"
+    "static/js/main.dd2978fa.js"
   ]
 }
