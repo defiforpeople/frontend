@@ -13,6 +13,7 @@ const theme = extendTheme({
     ninth: '#4895EF',
     tenth: '#4CC9F0',
     dark: '#191A32',
+    gray: '#F0F3F8',
   },
 });
 

@@ -47,7 +47,7 @@ function ConnectButton({ handleOpenModal }: Props) {
         const user = await authenticate({
           signingMessage: 'Log in DeFi for People using Moralis',
         });
-        console.log('logged in user:', user);
+        console.log('Logged in user:', user);
         console.log(user!.get('ethAddress'));
       } catch (error) {
         console.log(error);
@@ -64,19 +64,19 @@ function ConnectButton({ handleOpenModal }: Props) {
       py="0"
     >
       <Box px="3">
-        <Text color="red" fontSize="md">
+        <Text color="third" fontSize="md" fontWeight={'bold'}>
           {balance && parseFloat(formatEther(balance)).toFixed(4)} ETH
         </Text>
       </Box>
       <Button
         onClick={handleOpenModal}
-        bg="gray.400"
+        bg="third"
         border="1px solid transparent"
         _hover={{
           border: '1px',
           borderStyle: 'solid',
-          borderColor: 'blue.400',
-          // backgroundColor: 'blue',
+          borderColor: 'sixth',
+          backgroundColor: 'sixth',
         }}
         borderRadius="xl"
         m="1px"

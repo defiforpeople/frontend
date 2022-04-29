@@ -6,7 +6,7 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 
 function ConnectedNetwork(props: any) {
   return (
-    <Box verticalAlign="top">
+    <Box width={'100%'}>
       {props.chainId}
 
       <Icon

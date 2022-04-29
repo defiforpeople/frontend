@@ -76,6 +76,8 @@ function ChainButton() {
         leftIcon={<LogoNetwork chainId={chain} />}
         iconSpacing={3}
         onClick={onOpen}
+        variant="solid"
+        bg={'white'}
       >
         <ConnectedNetwork chainId={Networks(chain)} />
       </Button>
