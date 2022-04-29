@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useChain, useMoralis } from 'react-moralis';
 
@@ -19,8 +19,6 @@ import { ReactComponent as BnbChainLogo } from '../assets/logos/bnbchain-logo.sv
 import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
 import { ReactComponent as FantomLogo } from '../assets/logos/fantom-logo.svg';
 
-import { TriangleDownIcon } from '@chakra-ui/icons';
-
 import Networks from '../utils/network';
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
@@ -33,6 +31,20 @@ function ChainButton() {
   const { switchNetwork } = useChain();
 
   const [chain, setChain] = useState('0x1');
+
+  useEffect(() => {
+    const getNetwork = async () => {
+      await Moralis.enableWeb3();
+
+      const chainId = await Moralis.getChainId();
+
+      setChain(chainId!);
+    };
+
+    getNetwork();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const changeNetwork = async (networkId: string) => {
     console.log(`Change network to netkorkId: ${networkId}`);
