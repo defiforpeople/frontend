@@ -1,14 +1,11 @@
 import React from 'react';
 
-import { Box, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react';
+import { Flex, Heading, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import ConnectButton from './ConnectButton';
-import Logo from './logo';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
-
-// import { ReactComponent as EthereumLogo } from '../assets/logos/ethereum-logo.svg';
 
 function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();

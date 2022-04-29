@@ -1,4 +1,4 @@
-install:
+install i:
 	@npm run install
 	
 dev:
