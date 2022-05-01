@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Flex, Heading, useDisclosure } from '@chakra-ui/react';
+import { Flex, useDisclosure } from '@chakra-ui/react';
+
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { ReactComponent as DefiForPeopleLogo } from '../assets/logos/defi-people-logo.svg';
 
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
@@ -11,20 +13,11 @@ function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      p={3}
-      bgColor="dark"
-    >
-      <Flex align="center" justify="space-between">
-        <HamburgerIcon w={6} h={6} color="white" />
+    <Flex justify="space-between" wrap="wrap" bg="white">
+      <Flex align="center">
+        <HamburgerIcon w={6} h={6} color="primary" marginLeft={10} />
 
-        <Heading as="h2" size="md" color="white" paddingLeft={5}>
-          Defi for People
-        </Heading>
+        <DefiForPeopleLogo height={60} />
       </Flex>
 
       <Flex flexDirection="column" alignItems="center" justifyContent="center">

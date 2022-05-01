@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 
-import { Button, Box, Text } from '@chakra-ui/react';
+import { Button, Box, Text, Icon } from '@chakra-ui/react';
 
-import { formatEther } from '@ethersproject/units';
+// import { formatEther } from '@ethersproject/units';
+
+import PersonIcon from '@mui/icons-material/Person';
 
 type Props = {
   handleOpenModal: any;
@@ -63,11 +65,11 @@ function ConnectButton({ handleOpenModal }: Props) {
       borderRadius="xl"
       py="0"
     >
-      <Box px="3">
+      {/* <Box px="3">
         <Text color="third" fontSize="md" fontWeight={'bold'}>
           {balance && parseFloat(formatEther(balance)).toFixed(4)} ETH
         </Text>
-      </Box>
+      </Box> */}
       <Button
         onClick={handleOpenModal}
         bg="third"
@@ -83,6 +85,7 @@ function ConnectButton({ handleOpenModal }: Props) {
         px={3}
         height="38px"
       >
+        <Icon as={PersonIcon} color="white" marginRight={3} />
         <Text color="white" fontSize="md" fontWeight="medium" mr="2">
           {ensName !== ''
             ? ensName
