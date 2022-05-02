@@ -58,13 +58,7 @@ function ConnectButton({ handleOpenModal }: Props) {
   };
 
   return isAuthenticated ? (
-    <Box
-      display="flex"
-      alignItems="center"
-      background="white"
-      borderRadius="xl"
-      py="0"
-    >
+    <Box display="flex" marginRight={10}>
       {/* <Box px="3">
         <Text color="third" fontSize="md" fontWeight={'bold'}>
           {balance && parseFloat(formatEther(balance)).toFixed(4)} ETH

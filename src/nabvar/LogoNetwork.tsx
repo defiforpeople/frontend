@@ -8,26 +8,26 @@ import { ReactComponent as FantomLogo } from '../assets/logos/fantom-logo.svg';
 
 function LogoNetwork(props: any) {
   if (props.chainId === '0x1') {
-    return <EthereumLogo width={25} />;
+    return <EthereumLogo width={25} height={25} />;
   }
 
   if (props.chainId === '0x89') {
-    return <PolygonLogo width={25} />;
+    return <PolygonLogo width={25} height={25} />;
   }
 
   if (props.chainId === '0x38') {
-    return <BnbChainLogo width={25} />;
+    return <BnbChainLogo width={25} height={25} />;
   }
 
   if (props.chainId === '0xa86a') {
-    return <AvalancheLogo width={25} />;
+    return <AvalancheLogo width={25} height={25} />;
   }
 
   if (props.chainId === '0xfa') {
-    return <FantomLogo width={25} />;
+    return <FantomLogo width={25} height={25} />;
   }
 
-  return <EthereumLogo width={25} />;
+  return <EthereumLogo width={25} height={25} />;
 }
 
 export default LogoNetwork;

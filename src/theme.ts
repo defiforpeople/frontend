@@ -14,6 +14,7 @@ const theme = extendTheme({
     tenth: '#4CC9F0',
     dark: '#191A32',
     gray: '#F1F4F6',
+    grayLetter: '#757575',
   },
 });
 

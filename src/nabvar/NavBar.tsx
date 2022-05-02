@@ -13,7 +13,7 @@ function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex justify="space-between" wrap="wrap" bg="white">
+    <Flex justify="space-between" bg="white">
       <Flex align="center">
         <HamburgerIcon w={6} h={6} color="primary" marginLeft={10} />
 
