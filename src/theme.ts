@@ -1,5 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 
+import '@fontsource/gowun-dodum';
+
 const theme = extendTheme({
   colors: {
     primary: '#F72585',
@@ -15,6 +17,10 @@ const theme = extendTheme({
     dark: '#191A32',
     gray: '#F1F4F6',
     grayLetter: '#757575',
+  },
+  fonts: {
+    body: '"Gowun Dodum", sans-serif',
+    heading: '"Roboto", sans-serif',
   },
 });
 
