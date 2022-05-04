@@ -5,12 +5,14 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import App from './App';
 
-import theme from './theme';
+import Theme from './theme';
+import Fonts from './fonts';
 import { MoralisProvider } from 'react-moralis';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
+    <Fonts />
+    <ChakraProvider theme={Theme}>
       <MoralisProvider
         serverUrl="https://ziawpww1v3ok.usemoralis.com:2053/server"
         appId="qNzF6V5ET2HCpzutwtyuJRT1kclgsB3brumwmNBg"
