@@ -6,6 +6,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
+import Logo from '../components/logo';
 
 function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,11 +23,11 @@ function NavBar() {
       <Flex align="center" justify="space-between">
         <HamburgerIcon w={6} h={6} color="white" />
 
-        {/* <Logo /> */}
+        <Logo w={160} h={6} color="#F1F4F6" />
 
-        <Heading as="h2" size="md" color="white" paddingLeft={5}>
+        {/* <Heading as="h2" size="md" color="white" paddingLeft={5}>
           Defi for People
-        </Heading>
+        </Heading> */}
       </Flex>
 
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
