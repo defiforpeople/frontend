@@ -1,6 +1,10 @@
 import { extendTheme } from '@chakra-ui/react';
 
-const theme = extendTheme({
+const Theme = extendTheme({
+  fonts: {
+    heading: 'Louis George Cafe, sans-serif',
+    body: 'Louis George Cafe, sans-serif',
+  },
   colors: {
     primary: '#F72585',
     secondary: '#B5179E',
@@ -16,4 +20,4 @@ const theme = extendTheme({
   },
 });
 
-export default theme;
+export default Theme;
