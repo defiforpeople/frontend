@@ -20,7 +20,7 @@ const theme = extendTheme({
   },
   fonts: {
     body: '"Gowun Dodum", sans-serif',
-    heading: '"Roboto", sans-serif',
+    heading: '"Gowun Dodum", sans-serif',
   },
 });
 

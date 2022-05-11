@@ -73,6 +73,7 @@ function ChainButton() {
     <>
       <Button
         marginRight={5}
+        // leftIcon={LOGO_NETWORK[chain]}
         leftIcon={<LogoNetwork chainId={chain} />}
         iconSpacing={3}
         onClick={onOpen}
