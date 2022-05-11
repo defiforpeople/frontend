@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Box } from '@chakra-ui/react';
 import NavBar from './nabvar/NavBar';
-import Portofolio from './portfolio/Portfolio';
+import Portofolio from './dashboard/Portfolio';
 import FooterApp from './footers/Footers-app';
-import ConnectWallet from './portfolio/ConnectWallet';
+import ConnectWallet from './dashboard/ConnectWallet';
+import Dashboard from './dashboard/Dashboard';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Box w="100%" h="calc(100vh)" bg={'gray'}>
         <NavBar />
         {/* <Portofolio /> */}
-        <ConnectWallet />
+        <Dashboard />
         <FooterApp />
       </Box>
     </div>

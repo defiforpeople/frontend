@@ -4,8 +4,6 @@ import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 
 import { Button, Box, Text, Icon } from '@chakra-ui/react';
 
-// import { formatEther } from '@ethersproject/units';
-
 import PersonIcon from '@mui/icons-material/Person';
 
 type Props = {
