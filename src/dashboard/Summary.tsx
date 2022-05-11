@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Box, HStack, Icon, Text } from '@chakra-ui/react';
 
 function Summary() {
   return (
@@ -34,81 +34,213 @@ function Summary() {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          padding={2}
         >
-          <Text
-            padding={3}
-            fontWeight={400}
-            fontSize={'20'}
-            lineHeight={'24px'}
-            letterSpacing={'-3%'}
-            color="#282828"
-          >
-            Your deposits
-          </Text>
+          <HStack justifyContent="space-between">
+            <HStack>
+              <Text paddingLeft={3} fontSize={'20'}>
+                🟢
+              </Text>
+
+              <Text
+                padding={3}
+                fontWeight={400}
+                fontSize={'20px'}
+                lineHeight={'24px'}
+                letterSpacing={'-3%'}
+                color="#282828"
+              >
+                Your deposits
+              </Text>
+
+              <Text
+                paddingTop={1}
+                fontWeight={400}
+                fontSize={'12px'}
+                lineHeight={'14.4px'}
+                color="grayLetter"
+                fontStyle={'oblique'}
+              >
+                (Last deposit three days ago)
+              </Text>
+            </HStack>
+
+            <Text
+              paddingRight={5}
+              fontWeight={400}
+              fontSize={'20px'}
+              lineHeight={'24px'}
+              letterSpacing={'-3%'}
+              color="#282828"
+            >
+              $25,500
+            </Text>
+          </HStack>
         </Box>
 
         <Box
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          padding={2}
         >
-          <Text
-            padding={3}
-            fontWeight={400}
-            fontSize={'20'}
-            lineHeight={'24px'}
-            letterSpacing={'-3%'}
-            color="#282828"
-          >
-            Rewards
-          </Text>
+          <HStack justifyContent="space-between">
+            <HStack>
+              <Text paddingLeft={3} fontSize={'20'}>
+                🟢
+              </Text>
+
+              <Text
+                padding={3}
+                fontWeight={400}
+                fontSize={'20'}
+                lineHeight={'24px'}
+                letterSpacing={'-3%'}
+                color="#282828"
+              >
+                Rewards
+              </Text>
+
+              <Text
+                paddingTop={1}
+                fontWeight={400}
+                fontSize={'12px'}
+                lineHeight={'14.4px'}
+                color="grayLetter"
+                fontStyle={'oblique'}
+              >
+                (Estimaded average 55.55% APY)
+              </Text>
+            </HStack>
+
+            <Text
+              paddingRight={5}
+              fontWeight={400}
+              fontSize={'20px'}
+              lineHeight={'24px'}
+              letterSpacing={'-3%'}
+              color="#282828"
+            >
+              $1,723.33
+            </Text>
+          </HStack>
         </Box>
 
         <Box
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          padding={2}
         >
-          <Text
-            padding={3}
-            fontWeight={400}
-            fontSize={'20'}
-            lineHeight={'24px'}
-            letterSpacing={'-3%'}
-            color="#282828"
-          >
-            Withdraws
-          </Text>
+          <HStack justifyContent="space-between">
+            <HStack>
+              <Text paddingLeft={3} fontSize={'20'}>
+                🔴
+              </Text>
+
+              <Text
+                padding={3}
+                fontWeight={400}
+                fontSize={'20'}
+                lineHeight={'24px'}
+                letterSpacing={'-3%'}
+                color="#282828"
+              >
+                Withdraws
+              </Text>
+            </HStack>
+
+            <Text
+              paddingRight={5}
+              fontWeight={400}
+              fontSize={'20px'}
+              lineHeight={'24px'}
+              letterSpacing={'-3%'}
+              color="#282828"
+            >
+              -$555
+            </Text>
+          </HStack>
         </Box>
 
         <Box
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          padding={2}
         >
-          <Text
-            padding={3}
-            fontWeight={400}
-            fontSize={'20'}
-            lineHeight={'24px'}
-            letterSpacing={'-3%'}
-            color="#282828"
-          >
-            Other charges
-          </Text>
+          <HStack justifyContent="space-between">
+            <HStack>
+              <Text paddingLeft={3} fontSize={'20'}>
+                🔴
+              </Text>
+
+              <Text
+                padding={3}
+                fontWeight={400}
+                fontSize={'20'}
+                lineHeight={'24px'}
+                letterSpacing={'-3%'}
+                color="#282828"
+              >
+                Other charges
+              </Text>
+
+              <Text
+                paddingTop={1}
+                fontWeight={400}
+                fontSize={'12px'}
+                lineHeight={'14.4px'}
+                color="grayLetter"
+                fontStyle={'oblique'}
+              >
+                (Operational/Administrative fees)
+              </Text>
+            </HStack>
+
+            <Text
+              paddingRight={5}
+              fontWeight={400}
+              fontSize={'20px'}
+              lineHeight={'24px'}
+              letterSpacing={'-3%'}
+              color="#282828"
+            >
+              -$12.71
+            </Text>
+          </HStack>
         </Box>
 
         <Box>
-          <Text
-            padding={3}
-            fontWeight={400}
-            fontSize={'20'}
-            lineHeight={'24px'}
-            letterSpacing={'-3%'}
-            color="#282828"
-          >
-            Total balance
-          </Text>
+          <HStack justifyContent="space-between">
+            <HStack>
+              <Text paddingLeft={3} fontSize={'20'}>
+                💰
+              </Text>
+
+              <Text
+                padding={3}
+                fontWeight={400}
+                fontSize={'20'}
+                lineHeight={'24px'}
+                letterSpacing={'-3%'}
+                color="#282828"
+              >
+                Total balance
+              </Text>
+            </HStack>
+
+            <Text
+              paddingRight={6}
+              fontWeight={400}
+              fontSize={'20px'}
+              lineHeight={'24px'}
+              letterSpacing={'-3%'}
+              color="#282828"
+            >
+              $26,655.62
+            </Text>
+          </HStack>
         </Box>
       </Box>
     </Box>
