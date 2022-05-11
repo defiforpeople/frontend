@@ -64,7 +64,7 @@ function ConnectButton({ handleOpenModal }: Props) {
       </Box> */}
       <Button
         onClick={handleOpenModal}
-        bg="red"
+        bg="primary"
         border="1px solid transparent"
         _hover={{
           border: '1px',
