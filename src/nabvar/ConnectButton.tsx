@@ -64,7 +64,7 @@ function ConnectButton({ handleOpenModal }: Props) {
       </Box> */}
       <Button
         onClick={handleOpenModal}
-        bg="third"
+        bg="red"
         border="1px solid transparent"
         _hover={{
           border: '1px',
@@ -93,7 +93,25 @@ function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-    <Button onClick={login}>Connect Wallet</Button>
+    <Button
+      onClick={login}
+      bg="primary"
+      color="white"
+      border="1px solid transparent"
+      _hover={{
+        border: '1px',
+        borderStyle: 'solid',
+        borderColor: 'sixth',
+        backgroundColor: 'sixth',
+      }}
+      borderRadius="xl"
+      marginRight={5}
+      px={3}
+      height="38px"
+      // magin
+    >
+      Connect Wallet
+    </Button>
   );
 }
 

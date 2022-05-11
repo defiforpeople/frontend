@@ -1,10 +1,25 @@
 import React from 'react';
+import { useMoralis } from 'react-moralis';
 
 import { Box, Button, Center, Text } from '@chakra-ui/react';
 
 import { ReactComponent as WalletIcon } from '../assets/logos/wallet-icon.svg';
 
 function ConnectWallet() {
+  const { authenticate, isAuthenticated } = useMoralis();
+
+  const login = async () => {
+    if (!isAuthenticated) {
+      try {
+        await authenticate({
+          signingMessage: 'Log in DeFi for People using Moralis',
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <Box>
       <Box
@@ -47,7 +62,12 @@ function ConnectWallet() {
         </Center>
 
         <Center margin={5}>
-          <Button bg={'primary'} color="white" borderRadius={70}>
+          <Button
+            bg={'primary'}
+            color="white"
+            borderRadius={70}
+            onClick={login}
+          >
             <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
               Connect to Wallet
             </Text>
