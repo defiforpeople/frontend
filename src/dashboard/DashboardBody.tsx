@@ -3,6 +3,7 @@ import React from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import Menu from './Menu';
+import Summary from './Summary';
 
 function DashboardBody() {
   return (
@@ -11,12 +12,9 @@ function DashboardBody() {
         <Menu />
       </GridItem>
 
-      <GridItem colSpan={2} bg="papayawhip">
-        wena
+      <GridItem rowSpan={2} colSpan={4} bg="papayawhip">
+        <Summary />
       </GridItem>
-
-      <GridItem colSpan={2} bg="papayawhip" />
-      <GridItem colSpan={4} bg="tomato" />
     </Grid>
   );
 }
