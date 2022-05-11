@@ -12,8 +12,8 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <MoralisProvider
-        serverUrl="https://ziawpww1v3ok.usemoralis.com:2053/server"
-        appId="qNzF6V5ET2HCpzutwtyuJRT1kclgsB3brumwmNBg"
+        serverUrl={process.env.REACT_APP_SERVER_URL as string}
+        appId={process.env.REACT_APP_APP_ID as string}
       >
         <App />
       </MoralisProvider>
