@@ -211,7 +211,7 @@ function Summary() {
           </HStack>
         </Box>
 
-        <Box>
+        <Box padding={2}>
           <HStack justifyContent="space-between">
             <HStack>
               <Text paddingLeft={3} fontSize={'20'}>
@@ -231,7 +231,7 @@ function Summary() {
             </HStack>
 
             <Text
-              paddingRight={6}
+              paddingRight={5}
               fontWeight={400}
               fontSize={'20px'}
               lineHeight={'24px'}
@@ -243,6 +243,18 @@ function Summary() {
           </HStack>
         </Box>
       </Box>
+
+      <Text
+        fontWeight={400}
+        fontSize={'16'}
+        lineHeight={'19.2px'}
+        letterSpacing={'1%'}
+        color="grayLetter"
+        paddingTop={5}
+        textAlign={'right'}
+      >
+        Updated at 11/05/2022
+      </Text>
     </Box>
   );
 }

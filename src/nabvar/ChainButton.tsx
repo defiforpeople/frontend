@@ -73,13 +73,13 @@ function ChainButton() {
     <>
       <Button
         marginRight={5}
-        // leftIcon={LOGO_NETWORK[chain]}
         leftIcon={<LogoNetwork chainId={chain} />}
         iconSpacing={3}
         onClick={onOpen}
         variant="solid"
         bg={'gray'}
         size="md"
+        borderRadius={70}
       >
         <ConnectedNetwork chainId={Networks(chain)} />
       </Button>

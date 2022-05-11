@@ -5,6 +5,7 @@ import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import { Button, Box, Text, Icon } from '@chakra-ui/react';
 
 import PersonIcon from '@mui/icons-material/Person';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 type Props = {
   handleOpenModal: any;
@@ -59,21 +60,20 @@ function ConnectButton({ handleOpenModal }: Props) {
     <Box display="flex" marginRight={10}>
       <Button
         onClick={handleOpenModal}
-        bg="primary"
         border="1px solid transparent"
         _hover={{
-          border: '1px',
-          borderStyle: 'solid',
-          borderColor: 'sixth',
-          backgroundColor: 'sixth',
+          backgroundColor: 'primary',
+          color: 'white',
         }}
         borderRadius="xl"
         m="1px"
         px={3}
         height="38px"
+        color="grayLetter"
       >
-        <Icon as={PersonIcon} color="white" marginRight={3} />
-        <Text color="white" fontSize="md" fontWeight="medium" mr="2">
+        <Icon as={PersonIcon} marginRight={3} />
+
+        <Text fontWeight={700} fontSize={'18'} lineHeight={'21.6px'}>
           {ensName !== ''
             ? ensName
             : user!.attributes.ethAddress &&
@@ -85,6 +85,8 @@ function ConnectButton({ handleOpenModal }: Props) {
                 user!.attributes.ethAddress.length,
               )}`}
         </Text>
+
+        <Icon as={KeyboardArrowDownIcon} marginRight={3} />
       </Button>
     </Box>
   ) : (
@@ -103,7 +105,6 @@ function ConnectButton({ handleOpenModal }: Props) {
       marginRight={5}
       px={3}
       height="38px"
-      // magin
     >
       Connect Wallet
     </Button>
