@@ -10,7 +10,7 @@ import Dashboard from './dashboard/Dashboard';
 function App() {
   return (
     <div className="App">
-      <Box w="100%" h="calc(100vh)" bg={'gray'}>
+      <Box w="100%" h="calc(100vh)" bg={'white'}>
         <NavBar />
         {/* <Portofolio /> */}
         <Dashboard />

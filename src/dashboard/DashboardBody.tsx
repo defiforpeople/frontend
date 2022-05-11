@@ -12,7 +12,7 @@ function DashboardBody() {
         <Menu />
       </GridItem>
 
-      <GridItem rowSpan={2} colSpan={4} bg="papayawhip">
+      <GridItem rowSpan={2} colSpan={4}>
         <Summary />
       </GridItem>
     </Grid>
