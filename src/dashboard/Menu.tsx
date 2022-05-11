@@ -2,22 +2,31 @@ import React from 'react';
 
 import { Box, Text } from '@chakra-ui/react';
 
-function Menu() {
+type Props = {
+  menuIndex: number;
+  setMenuIndex: (menuIndex: number) => void;
+};
+
+function Menu({ menuIndex, setMenuIndex }: Props) {
   return (
     <Box padding={10}>
-      <Box
-        boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.1)'}
-        borderBottomLeftRadius={14}
-        borderBottomRightRadius={14}
-      >
-        <Box bg="primary" borderTopLeftRadius={14} borderTopRightRadius={14}>
+      <Box boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.1)'} borderRadius={14}>
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          bg={menuIndex === 0 ? 'primary' : 'white'}
+          borderTopLeftRadius={14}
+          borderTopRightRadius={14}
+          onClick={() => setMenuIndex(0)}
+        >
           <Text
             padding={3}
-            fontWeight={700}
+            fontWeight={menuIndex === 0 ? 'bold' : 'normal'}
             fontSize={'16'}
             lineHeight={'19.2px'}
             letterSpacing={'-3%'}
-            color="white"
+            color={menuIndex === 0 ? 'white' : 'grayLetter'}
           >
             Summary
           </Text>
@@ -27,14 +36,35 @@ function Menu() {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          onClick={() => setMenuIndex(1)}
+          bg={menuIndex === 1 ? 'primary' : 'white'}
         >
           <Text
             padding={3}
-            fontWeight={400}
+            fontWeight={menuIndex === 1 ? 'bold' : 'normal'}
             fontSize={'16'}
             lineHeight={'19.2px'}
             letterSpacing={'-3%'}
-            color="grayLetter"
+            color={menuIndex === 1 ? 'white' : 'grayLetter'}
+          >
+            Recursive Farming
+          </Text>
+        </Box>
+
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          onClick={() => setMenuIndex(2)}
+          bg={menuIndex === 2 ? 'primary' : 'white'}
+        >
+          <Text
+            padding={3}
+            fontWeight={menuIndex === 2 ? 'bold' : 'normal'}
+            fontSize={'16'}
+            lineHeight={'19.2px'}
+            letterSpacing={'-3%'}
+            color={menuIndex === 2 ? 'white' : 'grayLetter'}
           >
             Staking Farming
           </Text>
@@ -44,44 +74,53 @@ function Menu() {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          onClick={() => setMenuIndex(3)}
+          bg={menuIndex === 3 ? 'primary' : 'white'}
         >
           <Text
             padding={3}
-            fontWeight={400}
+            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
             fontSize={'16'}
             lineHeight={'19.2px'}
             letterSpacing={'-3%'}
-            color="grayLetter"
+            color={menuIndex === 3 ? 'white' : 'grayLetter'}
           >
             Delta Neutral
           </Text>
         </Box>
 
-        <Box
+        {/* <Box
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
+          onClick={() => setMenuIndex(4)}
+          bg={menuIndex === 4 ? 'primary' : 'white'}
         >
           <Text
             padding={3}
-            fontWeight={400}
+            fontWeight={menuIndex === 4 ? 'bold' : 'normal'}
             fontSize={'16'}
             lineHeight={'19.2px'}
             letterSpacing={'-3%'}
-            color="grayLetter"
+            color={menuIndex === 4 ? 'white' : 'grayLetter'}
           >
             AXS Delta Staking
           </Text>
-        </Box>
+        </Box> */}
 
-        <Box>
+        <Box
+          onClick={() => setMenuIndex(4)}
+          bg={menuIndex === 4 ? 'primary' : 'white'}
+          borderBottomLeftRadius={14}
+          borderBottomRightRadius={14}
+        >
           <Text
             padding={3}
-            fontWeight={400}
+            fontWeight={menuIndex === 4 ? 'bold' : 'normal'}
             fontSize={'16'}
             lineHeight={'19.2px'}
             letterSpacing={'-3%'}
-            color="grayLetter"
+            color={menuIndex === 4 ? 'white' : 'grayLetter'}
           >
             FAQ
           </Text>
