@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, HStack, Text } from '@chakra-ui/react';
 
 type Props = {
   menuIndex: number;
@@ -126,6 +126,40 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           </Text>
         </Box>
       </Box>
+      <Text
+        paddingTop={10}
+        fontWeight="bold"
+        fontSize={'22'}
+        lineHeight={'26.4px'}
+        color="black"
+      >
+        What do you want?
+      </Text>
+      <HStack padding={3}>
+        <Button
+          bg={'primary'}
+          color="white"
+          borderRadius={53}
+          boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+          width={'125px'}
+        >
+          <Text fontWeight="bold" fontSize={14} lineHeight={'16.8px'}>
+            Invest
+          </Text>
+        </Button>
+
+        <Button
+          bg={'white'}
+          color="primary"
+          borderRadius={53}
+          boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+          width={'125px'}
+        >
+          <Text fontWeight="bold" fontSize={14} lineHeight={'16.8px'}>
+            Withdraw
+          </Text>
+        </Button>
+      </HStack>
     </Box>
   );
 }
