@@ -14,11 +14,19 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Stat,
+  StatArrow,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
+import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
+import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
 
 function RecursiveFarming() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -199,11 +207,123 @@ function RecursiveFarming() {
               <Text
                 fontWeight={700}
                 fontSize={'30'}
-                lineHeight={'26px'}
+                lineHeight={'26.4px'}
                 color="black"
               >
                 -$465.73
               </Text>
+            </GridItem>
+          </Grid>
+        </Box>
+      </HStack>
+
+      <Text
+        fontWeight={700}
+        fontSize={'22'}
+        lineHeight={'26.4px'}
+        color="black"
+        paddingTop={10}
+      >
+        Strategy assets
+      </Text>
+
+      <HStack paddingTop={10} gap={5}>
+        <Box
+          width={310}
+          height={100}
+          borderRadius={15}
+          border="1px"
+          borderColor={'#F1F4F6'}
+          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        >
+          <Grid
+            height={'100%'}
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeat(4, 1fr)"
+          >
+            <GridItem rowSpan={2} colSpan={1}>
+              <Box marginTop={'24px'} marginLeft={'25px'}>
+                <AvalancheLogo width={40} height={40} />
+              </Box>
+            </GridItem>
+
+            <GridItem rowSpan={2} colSpan={1}>
+              <Text
+                fontWeight={700}
+                fontSize={'18'}
+                lineHeight={'21.6px'}
+                color="black"
+                marginTop={'35px'}
+              >
+                AVAX
+              </Text>
+            </GridItem>
+
+            <GridItem rowSpan={2} colSpan={2}>
+              <Stat margin={6}>
+                <StatNumber
+                  fontWeight={700}
+                  fontSize={'18'}
+                  lineHeight={'21.6px'}
+                  color="#7A8AA0"
+                >
+                  $47.3
+                </StatNumber>
+                <StatHelpText>
+                  <StatArrow type="decrease" />
+                  14.54%
+                </StatHelpText>
+              </Stat>
+            </GridItem>
+          </Grid>
+        </Box>
+
+        <Box
+          width={310}
+          height={100}
+          borderRadius={15}
+          border="1px"
+          borderColor={'#F1F4F6'}
+          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        >
+          <Grid
+            height={'100%'}
+            templateRows="repeat(2, 1fr)"
+            templateColumns="repeat(4, 1fr)"
+          >
+            <GridItem rowSpan={2} colSpan={1}>
+              <Box marginTop={'24px'} marginLeft={'25px'}>
+                <AaveLogo width={40} height={40} />
+              </Box>
+            </GridItem>
+
+            <GridItem rowSpan={2} colSpan={1}>
+              <Text
+                fontWeight={700}
+                fontSize={'18'}
+                lineHeight={'21.6px'}
+                color="black"
+                marginTop={'35px'}
+              >
+                AAVE
+              </Text>
+            </GridItem>
+
+            <GridItem rowSpan={2} colSpan={2}>
+              <Stat margin={6}>
+                <StatNumber
+                  fontWeight={700}
+                  fontSize={'18'}
+                  lineHeight={'21.6px'}
+                  color="#7A8AA0"
+                >
+                  $345.670
+                </StatNumber>
+                <StatHelpText>
+                  <StatArrow type="increase" />
+                  23.36%
+                </StatHelpText>
+              </Stat>
             </GridItem>
           </Grid>
         </Box>
