@@ -38,13 +38,17 @@ function ConnectWallet() {
       <Box
         bg={'white'}
         borderRadius={15}
-        height="356px"
-        width="800px"
+        height={['356px']}
+        width={['80%', '80%', '800px']}
         position={'absolute'}
         left={'50%'}
         top={'50%'}
         transform={'translate(-50%, -50%)'}
-        boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.1)'}
+        boxShadow={[
+          '0px 0px 0px rgba(0, 0, 0, 0)',
+          '0px 0px 10px rgba(0, 0, 0, 0.1)',
+          '0px 0px 10px rgba(0, 0, 0, 0.1)',
+        ]}
       >
         <Box marginTop={10}>
           <Center>
@@ -69,6 +73,7 @@ function ConnectWallet() {
             fontSize={'18'}
             lineHeight={'21.6px'}
             color="grayLetter"
+            textAlign={'center'}
           >
             {t('message')}
           </Text>
@@ -88,7 +93,11 @@ function ConnectWallet() {
         </Center>
       </Box>
 
-      <Box position={'absolute'} top={'70%'} left={'43%'}>
+      <Box
+        position={'absolute'}
+        top={'70%'}
+        left={['20%', '40%', '35%', '43%']}
+      >
         <Center>
           <Text fontWeight={400} fontSize={'14'} color="grayLetter">
             {t('changeLanguage')}&nbsp;
