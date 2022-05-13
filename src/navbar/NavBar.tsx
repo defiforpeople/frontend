@@ -8,6 +8,7 @@ import { ReactComponent as DefiForPeopleLogo } from '../assets/logos/defi-people
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
+import Logo from '../components/logo';
 
 function NavBar() {
   const { isOpen, onOpen, onClose } = useDisclosure();

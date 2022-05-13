@@ -1,8 +1,10 @@
 import { extendTheme } from '@chakra-ui/react';
 
-import '@fontsource/gowun-dodum';
-
-const theme = extendTheme({
+const Theme = extendTheme({
+  fonts: {
+    heading: 'Louis George Cafe, sans-serif',
+    body: 'Louis George Cafe, sans-serif',
+  },
   colors: {
     primary: '#F72585',
     secondary: '#B5179E',
@@ -18,10 +20,6 @@ const theme = extendTheme({
     gray: '#F1F4F6',
     grayLetter: '#757575',
   },
-  fonts: {
-    body: '"Gowun Dodum", sans-serif',
-    heading: '"Gowun Dodum", sans-serif',
-  },
 });
 
-export default theme;
+export default Theme;
