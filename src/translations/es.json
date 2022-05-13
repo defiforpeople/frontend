@@ -8,5 +8,8 @@
     "message": "Conecta tu wallet para ver tus activos en DeFi for People ",
     "connect": "Conectar a wallet",
     "changeLanguage": "DeFi for People disponible en: "
+  },
+  "footer": {
+    "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
   }
 }

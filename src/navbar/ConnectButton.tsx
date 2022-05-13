@@ -7,11 +7,16 @@ import { Button, Box, Text, Icon } from '@chakra-ui/react';
 import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 type Props = {
   handleOpenModal: any;
 };
 
 function ConnectButton({ handleOpenModal }: Props) {
+  const { t } = useTranslation('connectWallet');
+
   const [balance, setBalance] = useState('');
 
   const [ensName, setEnsName] = useState('');
@@ -106,7 +111,7 @@ function ConnectButton({ handleOpenModal }: Props) {
       px={3}
       height="38px"
     >
-      Connect Wallet
+      {t('connectWallet')}
     </Button>
   );
 }
