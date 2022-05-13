@@ -80,6 +80,7 @@ function ChainButton() {
         bg={'gray'}
         size="md"
         borderRadius={70}
+        display={['none', 'inherit', 'inherit']}
       >
         <ConnectedNetwork chainId={Networks(chain)} />
       </Button>

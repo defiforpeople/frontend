@@ -14,8 +14,8 @@ function NavBar() {
     <Flex
       justify="space-between"
       bg="white"
+      height={['70px', '50px', '50px']}
       boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.15)'}
-      height={'50px'}
     >
       <Flex align="center">
         <Logo w={160} h={6} color="#3A0CA3" />
