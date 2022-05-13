@@ -17,7 +17,7 @@ function ConnectWallet() {
     if (!isAuthenticated) {
       try {
         await authenticate({
-          signingMessage: 'Log in DeFi for People using Moralis',
+          signingMessage: t('signingMessage'),
         });
       } catch (error) {
         console.log(error);
