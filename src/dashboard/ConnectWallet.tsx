@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import '../i18n';
 
 function ConnectWallet() {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation('connectWallet');
 
   const { authenticate, isAuthenticated } = useMoralis();
 
@@ -70,7 +70,7 @@ function ConnectWallet() {
             lineHeight={'21.6px'}
             color="grayLetter"
           >
-            Connect wallet to view your assets in DeFi for People
+            {t('message')}
           </Text>
         </Center>
 
@@ -82,7 +82,7 @@ function ConnectWallet() {
             onClick={login}
           >
             <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
-              Connect to Wallet
+              {t('connect')}
             </Text>
           </Button>
         </Center>
@@ -91,13 +91,14 @@ function ConnectWallet() {
       <Box position={'absolute'} top={'70%'} left={'43%'}>
         <Center>
           <Text fontWeight={400} fontSize={'14'} color="grayLetter">
-            DeFi for People disponible en:&nbsp;
+            {t('changeLanguage')}&nbsp;
           </Text>
           <Text
             fontWeight={400}
             fontSize={'14'}
             color="sixth"
             onClick={changeLanguage}
+            _hover={{ cursor: 'pointer' }}
           >
             {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
           </Text>

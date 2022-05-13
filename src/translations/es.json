@@ -2,5 +2,11 @@
   "common": {
     "learnReact": "Aprender React",
     "connectWallet": "Conectar Wallet"
+  },
+  "connectWallet": {
+    "connectWallet": "Conectar Wallet",
+    "message": "Conecta tu wallet para ver tus activos en DeFi for People ",
+    "connect": "Conectar a wallet",
+    "changeLanguage": "DeFi for People disponible en: "
   }
 }
