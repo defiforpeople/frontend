@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Flex, useDisclosure } from '@chakra-ui/react';
 
-import { HamburgerIcon } from '@chakra-ui/icons';
-
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
@@ -20,8 +18,6 @@ function NavBar() {
       height={'50px'}
     >
       <Flex align="center">
-        <HamburgerIcon w={6} h={6} color="primary" marginLeft={10} />
-
         <Logo w={160} h={6} color="#3A0CA3" />
       </Flex>
 

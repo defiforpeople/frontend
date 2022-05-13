@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import '../i18n';
 
 function ConnectWallet() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { authenticate, isAuthenticated } = useMoralis();
 
@@ -25,8 +25,16 @@ function ConnectWallet() {
     }
   };
 
+  const changeLanguage = () => {
+    if (i18n.language === 'en') {
+      i18n.changeLanguage('es');
+    } else {
+      i18n.changeLanguage('en');
+    }
+  };
+
   return (
-    <Box>
+    <Box alignItems="baseline">
       <Box
         bg={'white'}
         borderRadius={15}
@@ -77,6 +85,22 @@ function ConnectWallet() {
               Connect to Wallet
             </Text>
           </Button>
+        </Center>
+      </Box>
+
+      <Box position={'absolute'} top={'70%'} left={'43%'}>
+        <Center>
+          <Text fontWeight={400} fontSize={'14'} color="grayLetter">
+            DeFi for People disponible en:&nbsp;
+          </Text>
+          <Text
+            fontWeight={400}
+            fontSize={'14'}
+            color="sixth"
+            onClick={changeLanguage}
+          >
+            {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
+          </Text>
         </Center>
       </Box>
     </Box>
