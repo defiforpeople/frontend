@@ -1,5 +1,5 @@
 install i:
-	@npm run install
+	@npm install
 	
 dev:
 	@npm run start
