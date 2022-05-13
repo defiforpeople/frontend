@@ -17,6 +17,7 @@ function NavBar() {
       justify="space-between"
       bg="white"
       boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.15)'}
+      height={'50px'}
     >
       <Flex align="center">
         <HamburgerIcon w={6} h={6} color="primary" marginLeft={10} />

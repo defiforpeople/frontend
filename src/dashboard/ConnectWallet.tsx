@@ -5,7 +5,12 @@ import { Box, Button, Center, Text } from '@chakra-ui/react';
 
 import { ReactComponent as WalletIcon } from '../assets/logos/wallet-icon.svg';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 function ConnectWallet() {
+  const { t } = useTranslation();
+
   const { authenticate, isAuthenticated } = useMoralis();
 
   const login = async () => {
@@ -46,7 +51,7 @@ function ConnectWallet() {
             letterSpacing={'5px'}
             lineHeight={'26.4px'}
           >
-            Connect Wallet
+            {t('connectWallet')}
           </Text>
         </Center>
 
