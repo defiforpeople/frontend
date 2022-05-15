@@ -3,6 +3,13 @@
     "learnReact": "Aprender React",
     "connectWallet": "Conectar Wallet"
   },
+  "NavbarLanding": {
+    "how": "Como funciona?",
+    "gobernance": "Gobernanza",
+    "more": "Más",
+    "enter": "Entrar",
+    "begin": "Comenzar"
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },

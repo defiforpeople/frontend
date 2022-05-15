@@ -1,12 +1,17 @@
 import React from 'react';
 
-import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
+import { Flex, Text, Button, HStack, Icon, Tooltip } from '@chakra-ui/react';
 
 import Logo from '../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 function NavbarLanding() {
+  const { t } = useTranslation('NavbarLanding');
+
   return (
     <Flex
       justify={['space-evenly', 'space-around', 'space-around']}
@@ -32,7 +37,7 @@ function NavbarLanding() {
         color="grayLetter"
         display={['none', 'block', 'block']}
       >
-        How we work?
+        {t('how')}
       </Text>
 
       <Text
@@ -41,12 +46,12 @@ function NavbarLanding() {
         color="grayLetter"
         display={['none', 'block', 'block']}
       >
-        Governance
+        {t('gobernance')}
       </Text>
 
       <HStack display={['none', 'inherit', 'inherit']}>
         <Text fontSize={'18'} lineHeight={'21.6px'} color="grayLetter">
-          More
+          {t('more')}
         </Text>
 
         <Icon as={KeyboardArrowDownIcon} />
@@ -60,13 +65,13 @@ function NavbarLanding() {
           marginRight={10}
           display={['none', 'block', 'block']}
         >
-          Enter
+          {t('enter')}
         </Text>
 
         <Flex display={'flex'} align="center">
           <Button bg={'primary'} borderRadius={'70'}>
             <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              Begin
+              {t('begin')}
             </Text>
           </Button>
         </Flex>
