@@ -9,7 +9,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
-
 import MobileConnectWalletModal from './MobileConnectWalletModal';
 
 type Props = {

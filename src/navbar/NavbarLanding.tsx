@@ -1,29 +1,74 @@
-import { Flex, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
+
+import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
+
 import Logo from '../components/logo';
-import AccountModal from './AccountModal';
-import ChainButton from './ChainButton';
-import ConnectButton from './ConnectButton';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 function NavbarLanding() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Flex
-      justify="space-between"
-      bg="white"
-      height={['70px', '50px', '50px']}
-      boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.15)'}
+      justify={['space-evenly', 'space-around', 'space-around']}
+      bg="#F1F4F6"
+      height={'76px'}
+      align="center"
+      alignItems={'center'}
     >
-      <Flex align="center">
-        <Logo w={160} h={6} color="#3A0CA3" />
+      <HamburgerIcon
+        w={6}
+        h={6}
+        color="primary"
+        display={['block', 'none', 'none']}
+      />
+
+      <Flex>
+        <Logo w={160} h={10} color="#3A0CA3" />
       </Flex>
 
-      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+      <Text
+        fontSize={'18'}
+        lineHeight={'21.6px'}
+        color="grayLetter"
+        display={['none', 'block', 'block']}
+      >
+        How we work?
+      </Text>
+
+      <Text
+        fontSize={'18'}
+        lineHeight={'21.6px'}
+        color="grayLetter"
+        display={['none', 'block', 'block']}
+      >
+        Governance
+      </Text>
+
+      <HStack display={['none', 'inherit', 'inherit']}>
+        <Text fontSize={'18'} lineHeight={'21.6px'} color="grayLetter">
+          More
+        </Text>
+
+        <Icon as={KeyboardArrowDownIcon} />
+      </HStack>
+
+      <Flex flexDirection="row" alignItems="center" justifyContent="center">
+        <Text
+          fontSize={'18'}
+          lineHeight={'21.6px'}
+          color="primary"
+          marginRight={10}
+          display={['none', 'block', 'block']}
+        >
+          Enter
+        </Text>
+
         <Flex display={'flex'} align="center">
-          <ChainButton />
-          <ConnectButton handleOpenModal={onOpen} />
-          <AccountModal isOpen={isOpen} onClose={onClose} />
+          <Button bg={'primary'} borderRadius={'70'}>
+            <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
+              Begin
+            </Text>
+          </Button>
         </Flex>
       </Flex>
     </Flex>
