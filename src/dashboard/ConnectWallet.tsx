@@ -38,7 +38,7 @@ function ConnectWallet() {
       <Box
         bg={'white'}
         borderRadius={15}
-        height={['356px']}
+        height={['300px', '356px', '356px']}
         width={['80%', '80%', '800px']}
         position={'absolute'}
         left={'50%'}
@@ -85,6 +85,7 @@ function ConnectWallet() {
             color="white"
             borderRadius={70}
             onClick={login}
+            display={['none', 'block', 'block']}
           >
             <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
               {t('connect')}
@@ -96,7 +97,7 @@ function ConnectWallet() {
       <Box
         position={'absolute'}
         top={'70%'}
-        left={['20%', '40%', '35%', '43%']}
+        left={['16%', '40%', '35%', '43%']}
       >
         <Center>
           <Text fontWeight={400} fontSize={'14'} color="grayLetter">

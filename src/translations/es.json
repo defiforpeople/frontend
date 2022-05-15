@@ -3,6 +3,9 @@
     "learnReact": "Aprender React",
     "connectWallet": "Conectar Wallet"
   },
+  "mobileConnectWalletModal": {
+    "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
+  },
   "connectWallet": {
     "connectWallet": "Conectar Wallet",
     "message": "Conecta tu wallet para ver tus activos en DeFi for People ",

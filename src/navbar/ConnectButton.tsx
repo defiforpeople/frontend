@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 
-import { Button, Box, Text, Icon } from '@chakra-ui/react';
+import { Button, Box, Text, Icon, useDisclosure } from '@chakra-ui/react';
 
 import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+
+import MobileConnectWalletModal from './MobileConnectWalletModal';
 
 type Props = {
   handleOpenModal: any;
@@ -24,6 +26,8 @@ function ConnectButton({ handleOpenModal }: Props) {
   const { authenticate, isAuthenticated, user, Moralis } = useMoralis();
 
   const Web3Api = useMoralisWeb3Api();
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -95,24 +99,49 @@ function ConnectButton({ handleOpenModal }: Props) {
       </Button>
     </Box>
   ) : (
-    <Button
-      onClick={login}
-      bg="primary"
-      color="white"
-      border="1px solid transparent"
-      _hover={{
-        border: '1px',
-        borderStyle: 'solid',
-        borderColor: 'sixth',
-        backgroundColor: 'sixth',
-      }}
-      borderRadius="xl"
-      marginRight={5}
-      px={3}
-      height="38px"
-    >
-      {t('connectWallet')}
-    </Button>
+    <Box>
+      <Button
+        onClick={login}
+        bg="primary"
+        color="white"
+        border="1px solid transparent"
+        _hover={{
+          border: '1px',
+          borderStyle: 'solid',
+          borderColor: 'sixth',
+          backgroundColor: 'sixth',
+        }}
+        borderRadius="xl"
+        marginRight={5}
+        px={3}
+        height="38px"
+        display={['none', 'block', 'block']}
+      >
+        {t('connectWallet')}
+      </Button>
+
+      <Button
+        onClick={onOpen}
+        bg="primary"
+        color="white"
+        border="1px solid transparent"
+        _hover={{
+          border: '1px',
+          borderStyle: 'solid',
+          borderColor: 'sixth',
+          backgroundColor: 'sixth',
+        }}
+        borderRadius="xl"
+        marginRight={5}
+        px={3}
+        height="38px"
+        display={['block', 'none', 'none']}
+      >
+        {t('connectWallet')}
+      </Button>
+
+      <MobileConnectWalletModal isOpen={isOpen} onClose={onClose} />
+    </Box>
   );
 }
 
