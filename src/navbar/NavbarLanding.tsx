@@ -23,7 +23,7 @@ function NavbarLanding() {
       <HamburgerIcon
         w={6}
         h={6}
-        color="primary"
+        color="grayLetter"
         display={['block', 'none', 'none']}
       />
 

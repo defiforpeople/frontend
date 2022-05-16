@@ -8,7 +8,7 @@ import SectionOne from './SectionOne';
 
 function Landing() {
   return (
-    <Box w="100%" h="calc(100vh)" bg={'white'}>
+    <Box h="calc(100vh)" bg={'white'}>
       <NavbarLanding />
       <SectionOne />
       {/* <Onboarding /> */}
