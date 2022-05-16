@@ -6,6 +6,7 @@ import NavbarLanding from '../navbar/NavbarLanding';
 import FooterApp from '../footers/Footers-app';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
+import SectionThree from './SectionThree';
 
 function Landing() {
   return (
@@ -13,6 +14,7 @@ function Landing() {
       <NavbarLanding />
       <SectionOne />
       <SectionTwo />
+      <SectionThree />
       {/* <Onboarding /> */}
       <FooterApp />
     </Box>
