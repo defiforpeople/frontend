@@ -23,6 +23,7 @@ function SectionThree() {
             height={'546px'}
             bg={'white'}
             borderRadius={'15px'}
+            margin={10}
           >
             <Box
               bgGradient="linear(to-r, sixth, primary)"
