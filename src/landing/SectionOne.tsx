@@ -4,7 +4,12 @@ import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 
 import { ReactComponent as PhoneImage } from '../assets/images/phone-image.svg';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 function SectionOne() {
+  const { t } = useTranslation('SectionOne');
+
   return (
     <Box bg={'#F1F4F6'}>
       <Center>
@@ -16,7 +21,7 @@ function SectionOne() {
             marginTop={['20px', '100px', '100px']}
             textAlign="center"
           >
-            Investing is simple
+            {t('title')}
           </Text>
 
           <Text
@@ -28,8 +33,7 @@ function SectionOne() {
             padding={['10px', '0px', '0px']}
             width={['90%', '600px', '600px']}
           >
-            Transfer from $1 and we diversify it in decentralized finance and
-            cryptocurrencies. Without fine print and for everyone
+            {t('subtitle')}
           </Text>
 
           <Button
@@ -39,7 +43,7 @@ function SectionOne() {
             marginTop={['30px', '50px', '50px']}
           >
             <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              Begin
+              {t('button')}
             </Text>
           </Button>
 

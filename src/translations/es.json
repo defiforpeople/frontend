@@ -10,6 +10,11 @@
     "enter": "Entrar",
     "begin": "Comenzar"
   },
+  "SectionOne": {
+    "title": "Invertir es simple",
+    "subtitle": "Transfiere desde $1 y lo diversificamos en finanzas descentralizadas y criptomonedas. Sin letra pequeña y para todos",
+    "button": "Comenzar"
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },
