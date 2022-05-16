@@ -1,5 +1,6 @@
-import { Box, Center, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
+
+import { Box, Center, Flex, Text } from '@chakra-ui/react';
 
 function SectionThree() {
   return (
@@ -23,12 +24,17 @@ function SectionThree() {
             bg={'white'}
             borderRadius={'15px'}
           >
+            <Box
+              bgGradient="linear(to-r, sixth, primary)"
+              height={'10px'}
+              borderTopRadius={'15px'}
+            ></Box>
             <Text
               fontWeight={'500'}
               fontSize={'34px'}
               lineHeight={'39.4px'}
               color="sixth"
-              textAlign="center"
+              padding={3}
             >
               Delta Neutral
             </Text>
@@ -38,7 +44,7 @@ function SectionThree() {
               fontSize={'18px'}
               lineHeight={'26px'}
               color="#7A8AA0"
-              textAlign="center"
+              padding={3}
             >
               Deposit USDC to yield farm on STARS-USDC pools, while remaining
               pseudo delta-neutral to STARS but covering all impermanent loss on
@@ -47,10 +53,10 @@ function SectionThree() {
 
             <Text
               fontWeight={'500'}
-              fontSize={'34px'}
-              lineHeight={'39.4px'}
+              fontSize={'18px'}
+              lineHeight={'26px'}
               color="#7A8AA0"
-              textAlign="center"
+              padding={3}
             >
               Current Average APR
             </Text>
@@ -60,7 +66,7 @@ function SectionThree() {
               fontSize={'30px'}
               lineHeight={'26px'}
               color="#273852"
-              textAlign="center"
+              padding={3}
             >
               97.16 %
             </Text>
