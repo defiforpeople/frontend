@@ -15,6 +15,10 @@
     "subtitle": "Transfer from $1 and we diversify it in decentralized finance andcryptocurrencies. Without fine print and for everyone",
     "button": "Begin"
   },
+  "SectionTwo": {
+    "title": "Grow your savings 📈",
+    "button": "Simulate"
+  },
   "mobileConnectWalletModal": {
     "message": "Cannot connect to wallet. Please visit this page on your desktop browser to connect to your wallet."
   },

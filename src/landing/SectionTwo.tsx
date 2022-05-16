@@ -5,7 +5,12 @@ import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 import { ReactComponent as ChartImage } from '../assets/images/chart-image.svg';
 import { ReactComponent as ChartMobileImage } from '../assets/images/chart-mobile-image.svg';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 function SectionTwo() {
+  const { t } = useTranslation('SectionTwo');
+
   return (
     <Box>
       <Center>
@@ -18,7 +23,7 @@ function SectionTwo() {
             textAlign="center"
             width={['300px', '100%', '100%']}
           >
-            Grow your savings 📈
+            {t('title')}
           </Text>
 
           <Box display={['none', 'block', 'block']}>
@@ -37,7 +42,7 @@ function SectionTwo() {
             marginBottom={'20px'}
           >
             <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              Simulate
+              {t('button')}
             </Text>
           </Button>
         </Flex>
