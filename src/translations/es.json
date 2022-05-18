@@ -19,6 +19,13 @@
     "title": "Haz crecer tus ahorros 📈",
     "button": "Simular"
   },
+  "DrawerNavbar": {
+    "how": "Como funciona?",
+    "strategies": "Estrategias",
+    "gobernance": "Gobernanza",
+    "enter": "Entrar",
+    "begin": "Comenzar"
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },

@@ -9,13 +9,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
+import DrawerNavbar from './DrawerNavbar';
+
 import Logo from '../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
-import DrawerNavbar from './DrawerNavbar';
 
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
