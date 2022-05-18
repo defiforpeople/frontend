@@ -9,6 +9,7 @@ import {
   InputRightElement,
   Link,
   Text,
+  Wrap,
 } from '@chakra-ui/react';
 
 import Logo from '../components/logo';
@@ -29,26 +30,24 @@ function FooterLanding() {
   };
 
   return (
-    <Box bg="#C4C4C405" height={'450px'}>
-      <Box paddingTop={50} paddingLeft={100}>
+    <Box bg="#C4C4C405">
+      <Box paddingTop={50} paddingLeft={[5, 100, 100]}>
         <Logo w={160} h={10} color="#3A0CA3" />
       </Box>
 
-      <Flex flexDirection={'row'} paddingTop={5} paddingLeft={100}>
-        <Box width={'20%'}>
+      <Wrap paddingTop={5} paddingLeft={[5, 100, 100]}>
+        <Box width={['45%', '20%', '20%']}>
           <Text
-            fontSize={'28px'}
-            lineHeight={'33.6px'}
-            letterSpacing={'tight'}
+            fontSize={['24px', '28px', '28px']}
+            lineHeight={['28.8px', '33.6px', '33.6px']}
             color="#282828"
           >
             Info
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -56,9 +55,8 @@ function FooterLanding() {
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -66,9 +64,8 @@ function FooterLanding() {
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -76,10 +73,10 @@ function FooterLanding() {
           </Text>
         </Box>
 
-        <Box width={'20%'}>
+        <Box width={['45%', '20%', '20%']}>
           <Text
-            fontSize={'28px'}
-            lineHeight={'33.6px'}
+            fontSize={['24px', '28px', '28px']}
+            lineHeight={['28.8px', '33.6px', '33.6px']}
             letterSpacing={'5px'}
             color="#282828"
           >
@@ -87,9 +84,8 @@ function FooterLanding() {
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -97,9 +93,8 @@ function FooterLanding() {
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -107,9 +102,8 @@ function FooterLanding() {
           </Text>
 
           <Text
-            fontSize={'24px'}
-            lineHeight={'28.8px'}
-            letterSpacing={'5px'}
+            fontSize={['16px', '24px', '24px']}
+            lineHeight={['19.2px', '28.8px', '28.8px']}
             color="grayLetter"
             paddingTop={2}
           >
@@ -117,7 +111,7 @@ function FooterLanding() {
           </Text>
         </Box>
 
-        <Box width={'40%'}>
+        <Box width={'40%'} display={['none', 'block', 'block']}>
           <Text
             fontSize={'28px'}
             lineHeight={'33.6px'}
@@ -162,18 +156,18 @@ function FooterLanding() {
             </InputRightElement>
           </InputGroup>
         </Box>
-      </Flex>
+      </Wrap>
 
-      <Box paddingLeft={100}>
+      <Box marginTop={[5, 5, 5]} paddingLeft={[5, 100, 100]} width="20%">
         <Link
           href="https://github.com/defiforpeople/chainlink-hackathon"
           isExternal
         >
-          <GithubLogo />
+          <GithubLogo href="" />
         </Link>
       </Box>
 
-      <Flex marginTop={5} paddingLeft={100}>
+      <Flex marginTop={5} paddingLeft={[5, 100, 100]}>
         <Text fontWeight={400} fontSize={'14'} color="grayLetter">
           {t('changeLanguage')}&nbsp;
         </Text>
@@ -188,11 +182,14 @@ function FooterLanding() {
         </Text>
       </Flex>
 
-      <Box marginTop={'40px'} paddingLeft={100}>
+      <Box
+        marginTop={['20px', '30px', '30px']}
+        paddingBottom={'10px'}
+        paddingLeft={[5, 100, 100]}
+      >
         <Text
-          fontSize={'24px'}
-          lineHeight={'28.8px'}
-          letterSpacing={'2px'}
+          fontSize={['16px', '24px', '24px']}
+          lineHeight={['19.2px', '28.8px', '28.8px']}
           color="grayLetter"
         >
           Defi for People 2022 © All rights reserved
