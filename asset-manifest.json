@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.c8e5e9db.js",
+    "main.js": "/frontend/static/js/main.afa2596d.js",
     "static/media/phone-image.svg": "/frontend/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/chart-mobile-image.svg": "/frontend/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
     "static/media/chart-image.svg": "/frontend/static/media/chart-image.cc6271aa0a80b82a0af8453a64c5fdfd.svg",
     "static/media/Louis-George-Cafe.ttf": "/frontend/static/media/Louis-George-Cafe.17cd25f83710eb436d1e.ttf",
+    "static/media/github-logo.svg": "/frontend/static/media/github-logo.f6736f1e612cf83d1ad8b2c034d102e2.svg",
     "index.html": "/frontend/index.html",
-    "main.c8e5e9db.js.map": "/frontend/static/js/main.c8e5e9db.js.map"
+    "main.afa2596d.js.map": "/frontend/static/js/main.afa2596d.js.map"
   },
   "entrypoints": [
-    "static/js/main.c8e5e9db.js"
+    "static/js/main.afa2596d.js"
   ]
 }
