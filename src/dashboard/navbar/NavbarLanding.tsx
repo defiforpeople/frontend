@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n';
 import DrawerNavbar from '../../navbar/DrawerNavbar';
 
+
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
 
