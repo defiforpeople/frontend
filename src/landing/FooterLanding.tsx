@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next';
 import '../i18n';
 
 function FooterLanding() {
-  const { t, i18n } = useTranslation('connectWallet');
+  const { t, i18n } = useTranslation('FooterLanding');
 
   const changeLanguage = () => {
     if (i18n.language === 'en') {
@@ -42,7 +42,7 @@ function FooterLanding() {
             lineHeight={['28.8px', '33.6px', '33.6px']}
             color="#282828"
           >
-            Info
+            {t('info')}
           </Text>
 
           <Text
@@ -51,7 +51,7 @@ function FooterLanding() {
             color="grayLetter"
             paddingTop={2}
           >
-            How we work?
+            {t('work')}
           </Text>
 
           <Text
@@ -60,7 +60,7 @@ function FooterLanding() {
             color="grayLetter"
             paddingTop={2}
           >
-            Gobernance
+            {t('gobernance')}
           </Text>
 
           <Text
@@ -69,7 +69,7 @@ function FooterLanding() {
             color="grayLetter"
             paddingTop={2}
           >
-            Developers
+            {t('developers')}
           </Text>
         </Box>
 
@@ -80,7 +80,7 @@ function FooterLanding() {
             letterSpacing={'5px'}
             color="#282828"
           >
-            Products
+            {t('products')}
           </Text>
 
           <Text
@@ -118,7 +118,7 @@ function FooterLanding() {
             letterSpacing={'5px'}
             color="#282828"
           >
-            Get in touch
+            {t('touch')}
           </Text>
 
           <Text
@@ -127,15 +127,14 @@ function FooterLanding() {
             color="grayLetter"
             paddingTop={2}
           >
-            If you are interested in learning more about our products, we would
-            love to connect with you.
+            {t('touchMessage')}
           </Text>
 
           <InputGroup paddingTop={2}>
             <Input
               bg="white"
               type={'text'}
-              placeholder="Email address"
+              placeholder={t('email')}
               border={'0'}
               borderRadius={'32px'}
               height={'64px'}
@@ -150,7 +149,7 @@ function FooterLanding() {
                   letterSpacing={'2px'}
                   color="white"
                 >
-                  Suscribe
+                  {t('suscribe')}
                 </Text>
               </Button>
             </InputRightElement>
@@ -192,7 +191,7 @@ function FooterLanding() {
           lineHeight={['19.2px', '28.8px', '28.8px']}
           color="grayLetter"
         >
-          Defi for People 2022 © All rights reserved
+          {t('copyright')}
         </Text>
       </Box>
     </Box>

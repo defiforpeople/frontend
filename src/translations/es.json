@@ -19,6 +19,19 @@
     "title": "Haz crecer tus ahorros 📈",
     "button": "Simular"
   },
+  "FooterLanding": {
+    "info": "Info",
+    "work": "Como funciona?",
+    "gobernance": "Gobernanza",
+    "developers": "Desarrolladores",
+    "products": "Productos",
+    "touch": "Contacto",
+    "touchMessage": "Si estas interesado en aprender más sobre nuestros productos, amariamos que nos contactes.",
+    "email": "Dirección de email",
+    "suscribe": "Suscribirse",
+    "changeLanguage": "DeFi for People disponible en:",
+    "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },
