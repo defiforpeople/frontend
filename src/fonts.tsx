@@ -1,7 +1,5 @@
 import { Global } from '@emotion/react';
 
-import './assets/fonts/Louis-George-Cafe.ttf';
-
 const Fonts = () => (
   <Global
     styles={`
