@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
+import {
+  Flex,
+  Text,
+  Button,
+  HStack,
+  Icon,
+  useDisclosure,
+} from '@chakra-ui/react';
 
 import Logo from '../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -8,13 +15,16 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import DrawerNavbar from './DrawerNavbar';
 
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
-      justify={['space-evenly', 'space-around', 'space-around']}
+      justify={['space-between', 'space-around', 'space-around']}
       bg="#F1F4F6"
       height={'76px'}
       align="center"
@@ -25,7 +35,11 @@ function NavbarLanding() {
         h={6}
         color="grayLetter"
         display={['block', 'none', 'none']}
+        marginLeft={3}
+        onClick={onOpen}
       />
+
+      <DrawerNavbar isOpen={isOpen} onClose={onClose} />
 
       <Flex>
         <Logo w={160} h={10} color="#3A0CA3" />
@@ -68,8 +82,12 @@ function NavbarLanding() {
           {t('enter')}
         </Text>
 
-        <Flex display={'flex'} align="center">
-          <Button bg={'primary'} borderRadius={'70'}>
+        <Flex paddingRight={3}>
+          <Button
+            bg={'primary'}
+            borderRadius={'70'}
+            height={['32px', '50px', '50px']}
+          >
             <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
               {t('begin')}
             </Text>
