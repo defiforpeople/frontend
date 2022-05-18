@@ -5,7 +5,7 @@ const Fonts = () => (
     styles={`
       @font-face {
         font-family: 'Louis George Cafe';
-        src: url('./assets/fonts/Louis-George-Cafe.ttf') format('ttf');
+        src: url('assets/fonts/Louis-George-Cafe.ttf) format('ttf);
       }
       @font-face {
         font-family: 'Louis George Cafe';

@@ -183,7 +183,7 @@ function FooterLanding() {
 
       <Box
         marginTop={['20px', '30px', '30px']}
-        paddingBottom={'10px'}
+        paddingBottom={'20px'}
         paddingLeft={[5, 100, 100]}
       >
         <Text
