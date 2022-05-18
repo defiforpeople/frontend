@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.80af07c0.js",
+    "main.js": "/frontend/static/js/main.c8e5e9db.js",
     "static/media/phone-image.svg": "/frontend/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/chart-mobile-image.svg": "/frontend/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
     "static/media/chart-image.svg": "/frontend/static/media/chart-image.cc6271aa0a80b82a0af8453a64c5fdfd.svg",
-    "static/media/github-logo.svg": "/frontend/static/media/github-logo.33668058dea2bc8910b7eb76d922826c.svg",
+    "static/media/Louis-George-Cafe.ttf": "/frontend/static/media/Louis-George-Cafe.17cd25f83710eb436d1e.ttf",
     "index.html": "/frontend/index.html",
-    "main.80af07c0.js.map": "/frontend/static/js/main.80af07c0.js.map"
+    "main.c8e5e9db.js.map": "/frontend/static/js/main.c8e5e9db.js.map"
   },
   "entrypoints": [
-    "static/js/main.80af07c0.js"
+    "static/js/main.c8e5e9db.js"
   ]
 }
