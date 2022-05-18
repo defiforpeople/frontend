@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Flex, Text, Button, HStack, Icon, Tooltip } from '@chakra-ui/react';
+import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
 
 import Logo from '../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
