@@ -3,15 +3,16 @@ import React from 'react';
 import {
   Box,
   Button,
-  Center,
   Flex,
   Input,
   InputGroup,
   InputRightElement,
+  Link,
   Text,
 } from '@chakra-ui/react';
 
 import Logo from '../components/logo';
+import { ReactComponent as GithubLogo } from '../assets/logos/github-logo.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
@@ -28,7 +29,7 @@ function FooterLanding() {
   };
 
   return (
-    <Box bg="#C4C4C405" height={'410px'}>
+    <Box bg="#C4C4C405" height={'450px'}>
       <Box paddingTop={50} paddingLeft={100}>
         <Logo w={160} h={10} color="#3A0CA3" />
       </Box>
@@ -163,24 +164,31 @@ function FooterLanding() {
         </Box>
       </Flex>
 
-      <Box>
-        <Center>
-          <Text fontWeight={400} fontSize={'14'} color="grayLetter">
-            {t('changeLanguage')}&nbsp;
-          </Text>
-          <Text
-            fontWeight={400}
-            fontSize={'14'}
-            color="sixth"
-            onClick={changeLanguage}
-            _hover={{ cursor: 'pointer' }}
-          >
-            {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
-          </Text>
-        </Center>
+      <Box paddingLeft={100}>
+        <Link
+          href="https://github.com/defiforpeople/chainlink-hackathon"
+          isExternal
+        >
+          <GithubLogo />
+        </Link>
       </Box>
 
-      <Box paddingLeft={100}>
+      <Flex marginTop={5} paddingLeft={100}>
+        <Text fontWeight={400} fontSize={'14'} color="grayLetter">
+          {t('changeLanguage')}&nbsp;
+        </Text>
+        <Text
+          fontWeight={400}
+          fontSize={'14'}
+          color="sixth"
+          onClick={changeLanguage}
+          _hover={{ cursor: 'pointer' }}
+        >
+          {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
+        </Text>
+      </Flex>
+
+      <Box marginTop={'40px'} paddingLeft={100}>
         <Text
           fontSize={'24px'}
           lineHeight={'28.8px'}
