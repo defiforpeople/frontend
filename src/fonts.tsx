@@ -1,13 +1,11 @@
 import { Global } from '@emotion/react';
 
-import './assets/fonts/Louis-George-Cafe.ttf';
-
 const Fonts = () => (
   <Global
     styles={`
       @font-face {
         font-family: 'Louis George Cafe';
-        src: url('./assets/fonts/Louis-George-Cafe.ttf') format('ttf');
+        src: url('assets/fonts/Louis-George-Cafe.ttf) format('ttf);
       }
       @font-face {
         font-family: 'Louis George Cafe';

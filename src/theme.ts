@@ -4,6 +4,7 @@ const theme = extendTheme({
   fonts: {
     heading: 'Louis George Cafe, sans-serif',
     body: 'Louis George Cafe, sans-serif',
+    mono: 'Louis George Cafe, sans-serif',
   },
   colors: {
     primary: '#F72585',

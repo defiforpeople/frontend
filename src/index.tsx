@@ -12,8 +12,8 @@ import { MoralisProvider } from 'react-moralis';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Fonts />
     <ChakraProvider theme={theme}>
+      <Fonts />
       <MoralisProvider
         serverUrl={process.env.REACT_APP_SERVER_URL as string}
         appId={process.env.REACT_APP_APP_ID as string}
