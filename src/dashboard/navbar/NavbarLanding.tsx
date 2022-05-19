@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Flex, Text, Button, HStack, Icon, Tooltip } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+
+import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
 
 import Logo from '../../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -58,15 +60,17 @@ function NavbarLanding() {
       </HStack>
 
       <Flex flexDirection="row" alignItems="center" justifyContent="center">
-        <Text
-          fontSize={'18'}
-          lineHeight={'21.6px'}
-          color="primary"
-          marginRight={10}
-          display={['none', 'block', 'block']}
-        >
-          {t('enter')}
-        </Text>
+        <Link to="/app">
+          <Text
+            fontSize={'18'}
+            lineHeight={'21.6px'}
+            color="primary"
+            marginRight={10}
+            display={['none', 'block', 'block']}
+          >
+            {t('enter')}
+          </Text>
+        </Link>
 
         <Flex display={'flex'} align="center">
           <Button bg={'primary'} borderRadius={'70'}>

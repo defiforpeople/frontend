@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Route, Routes } from 'react-router-dom';
+
 import DefiForPeopleApp from './dashboard/DefiForPeopleApp';
 
 import Landing from './landing/Landing';

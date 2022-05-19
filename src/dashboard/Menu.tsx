@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Box, Button, HStack, Text } from '@chakra-ui/react';
+import { Box, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+import InvesmentModal from './InvesmentModal';
 
 type Props = {
   menuIndex: number;
@@ -8,6 +9,8 @@ type Props = {
 };
 
 function Menu({ menuIndex, setMenuIndex }: Props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box padding={10}>
       <Box boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.1)'} borderRadius={14}>
@@ -89,25 +92,6 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           </Text>
         </Box>
 
-        {/* <Box
-          borderBottom="1px"
-          borderStyle="solid"
-          borderColor="rgba(0, 0, 0, 0.1)"
-          onClick={() => setMenuIndex(4)}
-          bg={menuIndex === 4 ? 'primary' : 'white'}
-        >
-          <Text
-            padding={3}
-            fontWeight={menuIndex === 4 ? 'bold' : 'normal'}
-            fontSize={'16'}
-            lineHeight={'19.2px'}
-            letterSpacing={'-3%'}
-            color={menuIndex === 4 ? 'white' : 'grayLetter'}
-          >
-            AXS Delta Staking
-          </Text>
-        </Box> */}
-
         <Box
           onClick={() => setMenuIndex(4)}
           bg={menuIndex === 4 ? 'primary' : 'white'}
@@ -135,6 +119,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
       >
         What do you want?
       </Text>
+
       <HStack padding={3}>
         <Button
           bg={'primary'}
@@ -142,11 +127,14 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderRadius={53}
           boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
           width={'125px'}
+          onClick={onOpen}
         >
           <Text fontWeight="bold" fontSize={14} lineHeight={'16.8px'}>
             Invest
           </Text>
         </Button>
+
+        <InvesmentModal isOpen={isOpen} onClose={onClose} />
 
         <Button
           bg={'white'}
