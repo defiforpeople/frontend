@@ -4,7 +4,7 @@
     "connectWallet": "Conectar Wallet"
   },
   "NavbarLanding": {
-    "how": "Como funciona?",
+    "how": "¿Cómo funciona?",
     "gobernance": "Gobernanza",
     "more": "Más",
     "enter": "Entrar",
@@ -21,13 +21,13 @@
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "Como funciona?",
+    "work": "¿Cómo funciona?",
     "gobernance": "Gobernanza",
     "developers": "Desarrolladores",
     "products": "Productos",
     "touch": "Contacto",
     "touchMessage": "Si estas interesado en aprender más sobre nuestros productos, amariamos que nos contactes.",
-    "email": "Dirección de email",
+    "email": "Dirección de correo electrónico",
     "suscribe": "Suscribirse",
     "changeLanguage": "DeFi for People disponible en:",
     "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."

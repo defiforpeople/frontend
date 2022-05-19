@@ -30,7 +30,7 @@ function FooterLanding() {
   };
 
   return (
-    <Box bg="#C4C4C405">
+    <Box bg="footerBg">
       <Box paddingTop={50} paddingLeft={[5, 100, 100]}>
         <Logo w={160} h={10} color="#3A0CA3" />
       </Box>

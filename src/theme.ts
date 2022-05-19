@@ -20,6 +20,7 @@ const theme = extendTheme({
     dark: '#191A32',
     gray: '#F1F4F6',
     grayLetter: '#757575',
+    footerBg: '#C4C4C405',
   },
 });
 
