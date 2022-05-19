@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Flex, Text, Button, HStack, Icon, Tooltip } from '@chakra-ui/react';
 
-import Logo from '../components/logo';
+import Logo from '../../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
