@@ -19,7 +19,7 @@ import { ReactComponent as BnbChainLogo } from '../../assets/logos/bnbchain-logo
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as FantomLogo } from '../../assets/logos/fantom-logo.svg';
 
-import Networks from '../../utils/network';
+import { Networks } from '../../utils/network';
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
 

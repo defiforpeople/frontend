@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -30,9 +30,17 @@ import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
 
+import { getNativeToken } from '../utils/network';
+
 type Props = {
   isOpen: any;
   onClose: any;
+};
+
+type Token = {
+  symbol: string;
+  balance: string;
+  decimals: number;
 };
 
 function InvesmentModal({ isOpen, onClose }: Props) {
@@ -42,7 +50,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const initialToken: string = 'Select Token';
   const initialAmount: number = 0;
   const initialMaxAmount: string = '-';
-  const initialTokensBalance: string[] = [];
+  const initialTokensBalance: Token[] = [];
 
   const [strategy, setStrategy] = useState(initialStrategy);
   const [token, setToken] = useState(initialToken);
@@ -50,47 +58,81 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const [maxAmount, setMaxAmount] = useState(initialMaxAmount);
   const [tokensBalance, setTokensBalance] = useState(initialTokensBalance);
 
-  const handleStrategyChange = (strategy: string) => setStrategy(strategy);
+  const handleStrategyChange = async (strategy: string) => {
+    setStrategy(strategy);
+
+    await getMaxTokenAmount();
+  };
 
   const handleTokenChange = (token: string) => {
     setToken(token);
 
-    setMaxAmount(parseFloat(formatEther(tokensBalance[0])).toFixed(2));
+    setAmount(0);
+
+    const tokenSimplified = tokensBalance.find(
+      (t: Token) => t.symbol === token,
+    );
+
+    if (tokenSimplified !== undefined) {
+      setMaxAmount(parseFloat(formatEther(tokenSimplified.balance)).toFixed(3));
+    } else {
+      setMaxAmount('0');
+    }
   };
 
   const handleAmountChange = (event: any) => setAmount(event.target.value);
+
+  const handleButtonMax = () => {
+    setAmount(Number(maxAmount));
+  };
 
   const resetStrategy = () => {
     setStrategy(initialStrategy);
 
     setToken(initialToken);
 
+    setMaxAmount(initialMaxAmount);
+
     onClose();
   };
 
-  useEffect(() => {
-    const getMaxTokenAmount = async () => {
-      const chainId = await Moralis.getChainId();
+  const getMaxTokenAmount = async () => {
+    await Moralis.enableWeb3();
 
-      const nativeBalance = await Moralis.Web3API.account.getNativeBalance({
-        chain: chainId as any,
-        address: user!.attributes.ethAddress,
-      });
+    const chainId = await Moralis.getChainId();
 
-      const tokensBalances = await Moralis.Web3API.account.getTokenBalances({
-        chain: chainId as any,
-        address: user!.attributes.ethAddress,
-      });
+    const nativeBalance = await Moralis.Web3API.account.getNativeBalance({
+      chain: chainId as any,
+      address: user!.attributes.ethAddress,
+    });
 
-      console.log('native balance: ', nativeBalance);
+    const tokensBalances = await Moralis.Web3API.account.getTokenBalances({
+      chain: chainId as any,
+      address: user!.attributes.ethAddress,
+    });
 
-      console.log('token balance: ', tokensBalances);
+    const tokensBalanceArray: Token[] = [];
 
-      setTokensBalance([nativeBalance.balance]);
+    const nativeToken = {
+      symbol: getNativeToken(chainId as string).symbol,
+      balance: nativeBalance.balance,
+      decimals: getNativeToken(chainId as string).decimals,
     };
 
-    getMaxTokenAmount();
-  }, [Moralis, user]);
+    tokensBalanceArray.push(nativeToken);
+
+    tokensBalances.forEach((token: any) => {
+      const tokenSimplified: Token = {
+        symbol: token.symbol,
+        balance: token.balance,
+        decimals: token.decimals,
+      };
+
+      tokensBalanceArray.push(tokenSimplified);
+    });
+
+    setTokensBalance(tokensBalanceArray);
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={resetStrategy} isCentered>
@@ -337,7 +379,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 margin={'auto'}
                 marginRight={'10px'}
                 width={'22%'}
-                // onClick={() => getMaxTokenAmount()}
+                onClick={handleButtonMax}
               >
                 <Text
                   fontWeight={400}
