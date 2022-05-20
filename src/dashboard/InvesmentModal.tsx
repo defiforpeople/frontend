@@ -21,6 +21,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 
+import { useMoralis } from 'react-moralis';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
@@ -52,6 +54,17 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setToken(initialToken);
 
     onClose();
+  };
+
+  const { Moralis } = useMoralis();
+
+  const getMaxTokenAmount = async () => {
+    const balances = await Moralis.Web3API.account.getTokenBalances({
+      chain: 'eth',
+      address: '0x3d6c0e79a1239df0039ec16Cc80f7A343b6C530e',
+    });
+
+    console.log(balances);
   };
 
   return (
@@ -250,17 +263,27 @@ function InvesmentModal({ isOpen, onClose }: Props) {
               </MenuList>
             </Menu>
 
-            <Text
-              fontWeight={700}
-              fontSize={'16px'}
-              lineHeight={'18.75px'}
-              letterSpacing="5%"
-              color={'#282828'}
-              paddingTop={3}
-              paddingBottom={3}
-            >
-              Amount
-            </Text>
+            <HStack justifyContent={'space-between'}>
+              <Text
+                fontWeight={700}
+                fontSize={'16px'}
+                lineHeight={'18.75px'}
+                letterSpacing="5%"
+                color={'#282828'}
+                paddingTop={3}
+                paddingBottom={3}
+              >
+                Amount
+              </Text>
+
+              <Text
+                fontSize={'12px'}
+                lineHeight={'14.06px'}
+                color={'grayLetter'}
+              >
+                Available: {amount}
+              </Text>
+            </HStack>
 
             <InputGroup
               width={'280px'}
@@ -287,6 +310,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 margin={'auto'}
                 marginRight={'10px'}
                 width={'22%'}
+                onClick={() => getMaxTokenAmount()}
               >
                 <Text
                   fontWeight={400}
