@@ -32,6 +32,14 @@
     "changeLanguage": "DeFi for People disponible en:",
     "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
   },
+  "InvesmentModal": {
+    "selectStrategy": "Seleccionar estrategia",
+    "selectToken": "Seleccionar token",
+    "strategy": "Estrategia",
+    "amount": "Monto",
+    "available": "Disponible",
+    "continue": "Continuar"
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },

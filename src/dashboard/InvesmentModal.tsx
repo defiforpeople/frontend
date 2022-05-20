@@ -32,6 +32,9 @@ import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
 
 import { getNativeToken } from '../utils/network';
 
+import { useTranslation } from 'react-i18next';
+import '../i18n';
+
 type Props = {
   isOpen: any;
   onClose: any;
@@ -46,8 +49,10 @@ type Token = {
 function InvesmentModal({ isOpen, onClose }: Props) {
   const { user, Moralis } = useMoralis();
 
-  const initialStrategy: string = 'Select Strategy';
-  const initialToken: string = 'Select Token';
+  const { t } = useTranslation('InvesmentModal');
+
+  const initialStrategy: string = t('selectStrategy');
+  const initialToken: string = t('selectToken');
   const initialAmount: number = 0;
   const initialMaxAmount: string = '-';
   const initialTokensBalance: Token[] = [];
@@ -157,7 +162,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
             paddingTop={3}
             paddingBottom={3}
           >
-            Strategy
+            {t('strategy')}
           </Text>
 
           {/* Menu for strategy */}
@@ -340,7 +345,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 paddingTop={8}
                 paddingBottom={3}
               >
-                Amount
+                {t('amount')}
               </Text>
 
               <Text
@@ -350,7 +355,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 paddingTop={8}
                 paddingBottom={3}
               >
-                Available: {maxAmount}
+                {t('available')}: {maxAmount}
               </Text>
             </HStack>
 
@@ -407,7 +412,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
               )
             }
           >
-            <Text color={'white'}>Continue</Text>
+            <Text color={'white'}>{t('continue')}</Text>
           </Button>
         </ModalFooter>
       </ModalContent>
