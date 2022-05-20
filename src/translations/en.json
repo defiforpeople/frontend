@@ -33,6 +33,7 @@
     "copyright": "DeFi for People 2022 ©. All rights reserved"
   },
   "InvesmentModal": {
+    "title": "Invest",
     "selectStrategy": "Select strategy",
     "selectToken": "Select token",
     "strategy": "Strategy",

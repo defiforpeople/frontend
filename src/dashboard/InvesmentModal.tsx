@@ -146,7 +146,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
         boxShadow="0px 0px 10px rgba(0, 0, 0, 0.25)"
         borderRadius={'15px'}
       >
-        <ModalHeader>Invest</ModalHeader>
+        <ModalHeader>{t('title')}</ModalHeader>
 
         <Center>
           <Divider color={'#E1E1E0'} width={'90%'} />
