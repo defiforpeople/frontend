@@ -6,6 +6,8 @@ import {
   Center,
   Divider,
   HStack,
+  Input,
+  InputGroup,
   Menu,
   MenuButton,
   MenuItem,
@@ -32,17 +34,17 @@ type Props = {
 function InvesmentModal({ isOpen, onClose }: Props) {
   const initialStrategy: string = 'Select Strategy';
   const initialToken: string = 'Select Token';
+  const initialAmount: number = 0;
 
   const [strategy, setStrategy] = useState(initialStrategy);
   const [token, setToken] = useState(initialToken);
+  const [amount, setAmount] = useState(initialAmount);
 
-  const handleStrategyChange = (strategy: string) => {
-    setStrategy(strategy);
-  };
+  const handleStrategyChange = (strategy: string) => setStrategy(strategy);
 
-  const handleTokenChange = (token: string) => {
-    setToken(token);
-  };
+  const handleTokenChange = (token: string) => setToken(token);
+
+  const handleAmountChange = (event: any) => setAmount(event.target.value);
 
   const resetStrategy = () => {
     setStrategy(initialStrategy);
@@ -65,7 +67,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
           <Divider color={'#E1E1E0'} width={'90%'} />
         </Center>
 
-        <ModalBody>
+        <ModalBody margin={'auto'}>
           <Text
             fontWeight={700}
             fontSize={'16px'}
@@ -247,11 +249,71 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 </MenuItem>
               </MenuList>
             </Menu>
+
+            <Text
+              fontWeight={700}
+              fontSize={'16px'}
+              lineHeight={'18.75px'}
+              letterSpacing="5%"
+              color={'#282828'}
+              paddingTop={3}
+              paddingBottom={3}
+            >
+              Amount
+            </Text>
+
+            <InputGroup
+              width={'280px'}
+              height={'60px'}
+              boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+              borderRadius={'8px'}
+            >
+              <Input
+                type="number"
+                border={'0'}
+                margin={'auto'}
+                height={'60px'}
+                width={'70%'}
+                focusBorderColor="white"
+                onChange={handleAmountChange}
+                value={amount}
+              />
+
+              <Button
+                height={'24px'}
+                border="1px"
+                borderColor="primary"
+                borderRadius={'53px'}
+                margin={'auto'}
+                marginRight={'10px'}
+                width={'22%'}
+              >
+                <Text
+                  fontWeight={400}
+                  fontSize={'14px'}
+                  lineHeight={'16.8px'}
+                  color={'primary'}
+                >
+                  Max
+                </Text>
+              </Button>
+            </InputGroup>
           </Box>
         </ModalBody>
 
         <ModalFooter>
-          <Button bg="primary">
+          <Button
+            bg="primary"
+            borderRadius={'70px'}
+            boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+            isDisabled={
+              !(
+                strategy !== initialStrategy &&
+                token !== initialToken &&
+                amount > 0
+              )
+            }
+          >
             <Text color={'white'}>Continue</Text>
           </Button>
         </ModalFooter>
