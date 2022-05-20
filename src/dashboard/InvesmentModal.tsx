@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -23,6 +23,8 @@ import {
 
 import { useMoralis } from 'react-moralis';
 
+import { formatEther } from '@ethersproject/units';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
@@ -34,17 +36,27 @@ type Props = {
 };
 
 function InvesmentModal({ isOpen, onClose }: Props) {
+  const { user, Moralis } = useMoralis();
+
   const initialStrategy: string = 'Select Strategy';
   const initialToken: string = 'Select Token';
   const initialAmount: number = 0;
+  const initialMaxAmount: string = '-';
+  const initialTokensBalance: string[] = [];
 
   const [strategy, setStrategy] = useState(initialStrategy);
   const [token, setToken] = useState(initialToken);
   const [amount, setAmount] = useState(initialAmount);
+  const [maxAmount, setMaxAmount] = useState(initialMaxAmount);
+  const [tokensBalance, setTokensBalance] = useState(initialTokensBalance);
 
   const handleStrategyChange = (strategy: string) => setStrategy(strategy);
 
-  const handleTokenChange = (token: string) => setToken(token);
+  const handleTokenChange = (token: string) => {
+    setToken(token);
+
+    setMaxAmount(parseFloat(formatEther(tokensBalance[0])).toFixed(2));
+  };
 
   const handleAmountChange = (event: any) => setAmount(event.target.value);
 
@@ -56,16 +68,29 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     onClose();
   };
 
-  const { Moralis } = useMoralis();
+  useEffect(() => {
+    const getMaxTokenAmount = async () => {
+      const chainId = await Moralis.getChainId();
 
-  const getMaxTokenAmount = async () => {
-    const balances = await Moralis.Web3API.account.getTokenBalances({
-      chain: 'eth',
-      address: '0x3d6c0e79a1239df0039ec16Cc80f7A343b6C530e',
-    });
+      const nativeBalance = await Moralis.Web3API.account.getNativeBalance({
+        chain: chainId as any,
+        address: user!.attributes.ethAddress,
+      });
 
-    console.log(balances);
-  };
+      const tokensBalances = await Moralis.Web3API.account.getTokenBalances({
+        chain: chainId as any,
+        address: user!.attributes.ethAddress,
+      });
+
+      console.log('native balance: ', nativeBalance);
+
+      console.log('token balance: ', tokensBalances);
+
+      setTokensBalance([nativeBalance.balance]);
+    };
+
+    getMaxTokenAmount();
+  }, [Moralis, user]);
 
   return (
     <Modal isOpen={isOpen} onClose={resetStrategy} isCentered>
@@ -171,7 +196,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
               lineHeight={'18.75px'}
               letterSpacing="5%"
               color={'#282828'}
-              paddingTop={3}
+              paddingTop={8}
               paddingBottom={3}
             >
               Token
@@ -270,7 +295,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 lineHeight={'18.75px'}
                 letterSpacing="5%"
                 color={'#282828'}
-                paddingTop={3}
+                paddingTop={8}
                 paddingBottom={3}
               >
                 Amount
@@ -280,8 +305,10 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 fontSize={'12px'}
                 lineHeight={'14.06px'}
                 color={'grayLetter'}
+                paddingTop={8}
+                paddingBottom={3}
               >
-                Available: {amount}
+                Available: {maxAmount}
               </Text>
             </HStack>
 
@@ -310,7 +337,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 margin={'auto'}
                 marginRight={'10px'}
                 width={'22%'}
-                onClick={() => getMaxTokenAmount()}
+                // onClick={() => getMaxTokenAmount()}
               >
                 <Text
                   fontWeight={400}
