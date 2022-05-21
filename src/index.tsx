@@ -10,6 +10,8 @@ import Fonts from './fonts';
 
 import { MoralisProvider } from 'react-moralis';
 
+import { BrowserRouter } from 'react-router-dom';
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
@@ -18,7 +20,9 @@ ReactDOM.render(
         serverUrl={process.env.REACT_APP_SERVER_URL as string}
         appId={process.env.REACT_APP_APP_ID as string}
       >
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </MoralisProvider>
     </ChakraProvider>
   </React.StrictMode>,

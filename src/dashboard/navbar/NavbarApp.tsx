@@ -5,9 +5,9 @@ import { Flex, useDisclosure } from '@chakra-ui/react';
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
-import Logo from '../components/logo';
+import Logo from '../../components/logo';
 
-function NavBar() {
+function NavbarApp() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -32,4 +32,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default NavbarApp;

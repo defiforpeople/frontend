@@ -22,4 +22,46 @@ function Networks(chainId: string): string {
   return '';
 }
 
-export default Networks;
+function getNativeToken(chainId: string): any {
+  if (chainId === '0x1') {
+    return {
+      symbol: 'ETH',
+      decimals: 18,
+    };
+  }
+
+  if (chainId === '0x89') {
+    return {
+      symbol: 'MATIC',
+      decimals: 18,
+    };
+  }
+
+  if (chainId === '0x38') {
+    return {
+      symbol: 'BNB',
+      decimals: 8,
+    };
+  }
+
+  if (chainId === '0xa86a') {
+    return {
+      symbol: 'AVAX',
+      decimals: 18,
+    };
+  }
+
+  if (chainId === '0xfa') {
+    return {
+      symbol: 'FTM',
+      decimals: 18,
+    };
+  }
+
+  return {
+    symbol: '',
+    decimals: 0,
+  };
+}
+
+export { Networks, getNativeToken };

@@ -8,7 +8,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 
 import MobileConnectWalletModal from './MobileConnectWalletModal';
 
@@ -19,11 +19,9 @@ type Props = {
 function ConnectButton({ handleOpenModal }: Props) {
   const { t } = useTranslation('connectWallet');
 
-  const [balance, setBalance] = useState('');
-
   const [ensName, setEnsName] = useState('');
 
-  const { authenticate, isAuthenticated, user, Moralis } = useMoralis();
+  const { authenticate, isAuthenticated, user } = useMoralis();
 
   const Web3Api = useMoralisWeb3Api();
 
@@ -36,13 +34,6 @@ function ConnectButton({ handleOpenModal }: Props) {
         const { name: ensName } = await Web3Api.resolve.resolveAddress();
 
         setEnsName(ensName);
-
-        const objectBalance = await Moralis.Web3API.account.getNativeBalance({
-          chain: 'eth',
-          address: user!.attributes.ethAddress,
-        });
-
-        setBalance(objectBalance.balance);
       };
 
       fetchBalance();
