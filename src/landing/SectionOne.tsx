@@ -6,6 +6,7 @@ import { ReactComponent as PhoneImage } from '../assets/images/phone-image.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { Link } from 'react-router-dom';
 
 function SectionOne() {
   const { t } = useTranslation('SectionOne');
@@ -36,16 +37,18 @@ function SectionOne() {
             {t('subtitle')}
           </Text>
 
-          <Button
-            bg={'primary'}
-            borderRadius={'70'}
-            width="200px"
-            marginTop={['30px', '50px', '50px']}
-          >
-            <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              {t('button')}
-            </Text>
-          </Button>
+          <Link to="/onboarding">
+            <Button
+              bg={'primary'}
+              borderRadius={'70'}
+              width="200px"
+              marginTop={['30px', '50px', '50px']}
+            >
+              <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
+                {t('button')}
+              </Text>
+            </Button>
+          </Link>
 
           <Box>
             <PhoneImage />
