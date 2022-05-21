@@ -37,6 +37,11 @@ const CustomSteps = {
           opacity: 1.0,
         },
       },
+      labelContainer: {
+        ...StepsStyleConfig.baseStyle(props).labelContainer,
+        // your custom styles here
+        width: '50%',
+      },
     };
   },
 };
