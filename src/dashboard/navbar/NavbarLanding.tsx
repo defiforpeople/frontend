@@ -44,7 +44,9 @@ function NavbarLanding() {
 
       <DrawerNavbar isOpen={isOpen} onClose={onClose} />
 
-      <Logo w={160} h={10} color="#3A0CA3" />
+      <Link to="/">
+        <Logo w={160} h={10} color="#3A0CA3" />
+      </Link>
 
       <Text
         fontSize={'18'}
