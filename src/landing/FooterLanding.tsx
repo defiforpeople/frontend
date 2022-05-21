@@ -7,9 +7,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Text,
-  Wrap,
 } from '@chakra-ui/react';
 
 import Logo from '../components/logo';
@@ -17,6 +15,7 @@ import { ReactComponent as GithubLogo } from '../assets/logos/github-logo.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { Link } from 'react-router-dom';
 
 function FooterLanding() {
   const { t, i18n } = useTranslation('FooterLanding');
@@ -45,32 +44,38 @@ function FooterLanding() {
             {t('info')}
           </Text>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            {t('work')}
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              {t('work')}
+            </Text>
+          </Link>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            {t('gobernance')}
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              {t('gobernance')}
+            </Text>
+          </Link>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            {t('developers')}
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              {t('developers')}
+            </Text>
+          </Link>
         </Box>
 
         <Box width={['45%', '20%', '20%']}>
@@ -83,32 +88,38 @@ function FooterLanding() {
             {t('products')}
           </Text>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            Delta Neutral
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Delta Neutral
+            </Text>
+          </Link>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            Stake Farming
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Stake Farming
+            </Text>
+          </Link>
 
-          <Text
-            fontSize={['16px', '24px', '24px']}
-            lineHeight={['19.2px', '28.8px', '28.8px']}
-            color="grayLetter"
-            paddingTop={2}
-          >
-            Recursive Farming
-          </Text>
+          <Link to="/building">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Recursive Farming
+            </Text>
+          </Link>
         </Box>
 
         <Box width={'40%'} display={['none', 'block', 'block']}>
@@ -158,12 +169,7 @@ function FooterLanding() {
       </Flex>
 
       <Box marginTop={[5, 5, 5]} paddingLeft={[5, 100, 100]} width="20%">
-        <Link
-          href="https://github.com/defiforpeople/chainlink-hackathon"
-          isExternal
-        >
-          <GithubLogo />
-        </Link>
+        <GithubLogo />
       </Box>
 
       <Flex marginTop={5} paddingLeft={[5, 100, 100]}>
