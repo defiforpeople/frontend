@@ -4,15 +4,18 @@ import { Button, Flex, Text } from '@chakra-ui/react';
 
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
-const content = <Flex py={4}>Wena</Flex>;
-
-const steps = [
-  { label: 'Type of investor' },
-  { label: 'Simulate a goal' },
-  { label: 'New let get serious' },
-];
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 
 function DashboardOnboarding() {
+  const { t } = useTranslation('DashboardOnboarding');
+
+  const steps = [
+    { label: t('label1') },
+    { label: t('label2') },
+    { label: t('label3') },
+  ];
+
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
