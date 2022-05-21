@@ -1,8 +1,16 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import {
+  Flex,
+  Text,
+  Button,
+  HStack,
+  Icon,
+  useDisclosure,
+} from '@chakra-ui/react';
 
-import { Flex, Text, Button, HStack, Icon } from '@chakra-ui/react';
+import DrawerNavbar from './DrawerNavbar';
 
 import Logo from '../../components/logo';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -14,9 +22,11 @@ import '../../i18n';
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
-      justify={['space-evenly', 'space-around', 'space-around']}
+      justify={['space-between', 'space-around', 'space-around']}
       bg="#F1F4F6"
       height={'76px'}
       align="center"
@@ -27,7 +37,11 @@ function NavbarLanding() {
         h={6}
         color="grayLetter"
         display={['block', 'none', 'none']}
+        marginLeft={3}
+        onClick={onOpen}
       />
+
+      <DrawerNavbar isOpen={isOpen} onClose={onClose} />
 
       <Flex>
         <Logo w={160} h={10} color="#3A0CA3" />

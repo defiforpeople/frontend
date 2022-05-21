@@ -46,6 +46,13 @@
     "available": "Disponible",
     "continue": "Continuar"
   },
+  "DrawerNavbar": {
+    "how": "¿Cómo funciona?",
+    "strategies": "Estrategias",
+    "gobernance": "Gobernanza",
+    "enter": "Entrar",
+    "begin": "Comenzar"
+  },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."
   },

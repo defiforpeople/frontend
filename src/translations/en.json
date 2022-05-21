@@ -46,6 +46,13 @@
     "available": "Available",
     "continue": "Continue"
   },
+  "DrawerNavbar": {
+    "how": "How we work?",
+    "strategies": "Strategies",
+    "gobernance": "Gobernance",
+    "enter": "Enter",
+    "begin": "Begin"
+  },
   "mobileConnectWalletModal": {
     "message": "Cannot connect to wallet. Please visit this page on your desktop browser to connect to your wallet."
   },
