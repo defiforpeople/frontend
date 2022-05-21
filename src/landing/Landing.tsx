@@ -5,16 +5,14 @@ import { Box } from '@chakra-ui/react';
 import NavbarLanding from '../dashboard/navbar/NavbarLanding';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
-import SectionThree from './SectionThree';
 import FooterLanding from './FooterLanding';
 
 function Landing() {
   return (
-    <Box h="calc(100vh)" bg={'white'}>
+    <Box bg={'white'}>
       <NavbarLanding />
       <SectionOne />
       <SectionTwo />
-      <SectionThree />
       <FooterLanding />
     </Box>
   );

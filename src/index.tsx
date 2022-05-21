@@ -10,7 +10,7 @@ import Fonts from './fonts';
 
 import { MoralisProvider } from 'react-moralis';
 
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,9 +20,9 @@ ReactDOM.render(
         serverUrl={process.env.REACT_APP_SERVER_URL as string}
         appId={process.env.REACT_APP_APP_ID as string}
       >
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </MoralisProvider>
     </ChakraProvider>
   </React.StrictMode>,
