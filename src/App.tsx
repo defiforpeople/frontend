@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import DefiForPeopleApp from './dashboard/DefiForPeopleApp';
 
 import Landing from './landing/Landing';
-import Onboarding from './dashboard/onboarding/onboarding';
+import Onboarding from './onboarding/Onboarding';
 
 function App() {
   return (

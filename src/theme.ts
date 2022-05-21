@@ -1,5 +1,21 @@
 import { extendTheme } from '@chakra-ui/react';
 
+import { StepsStyleConfig } from 'chakra-ui-steps';
+
+const CustomSteps = {
+  ...StepsStyleConfig,
+  baseStyle: (props: any) => {
+    return {
+      ...StepsStyleConfig.baseStyle(props),
+      icon: {
+        // ...StepsStyleConfig.baseStyle(props).icon,
+        // your custom styles here
+        strokeWidth: '1px',
+      },
+    };
+  },
+};
+
 const theme = extendTheme({
   fonts: {
     heading: 'Louis George Cafe, sans-serif',
@@ -21,6 +37,9 @@ const theme = extendTheme({
     gray: '#F1F4F6',
     grayLetter: '#757575',
     footerBg: '#C4C4C405',
+  },
+  components: {
+    Steps: CustomSteps,
   },
 });
 
