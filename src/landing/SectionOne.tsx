@@ -12,7 +12,7 @@ function SectionOne() {
   const { t } = useTranslation('SectionOne');
 
   return (
-    <Box bg={'#F1F4F6'}>
+    <Box bg={'#F1F4F6'} width="100%">
       <Center>
         <Flex flexDirection={'column'} alignItems="center">
           <Text
@@ -50,9 +50,7 @@ function SectionOne() {
             </Button>
           </Link>
 
-          <Box>
-            <PhoneImage />
-          </Box>
+          <PhoneImage width={'100%'} height={'100%'} />
         </Flex>
       </Center>
     </Box>

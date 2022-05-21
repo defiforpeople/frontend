@@ -7,7 +7,7 @@ import theme from './theme';
 import Fonts from './fonts';
 
 import { ChakraProvider } from '@chakra-ui/react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ManagerProvider } from './providers/manager-provider';
 import { Adapters } from './utils/network-manager';
 
@@ -26,9 +26,9 @@ ReactDOM.render(
     <ChakraProvider theme={theme}>
       <Fonts />
       <ManagerProvider adapter={moralisAdapter}>
-        <BrowserRouter>
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </ManagerProvider>
     </ChakraProvider>
   </React.StrictMode>,

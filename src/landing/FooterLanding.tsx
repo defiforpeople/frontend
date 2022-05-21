@@ -30,12 +30,12 @@ function FooterLanding() {
   };
 
   return (
-    <Box bg="footerBg">
+    <Box bg={'#F1F4F6'}>
       <Box paddingTop={50} paddingLeft={[5, 100, 100]}>
         <Logo w={160} h={10} color="#3A0CA3" />
       </Box>
 
-      <Wrap paddingTop={5} paddingLeft={[5, 100, 100]}>
+      <Flex paddingTop={5} paddingLeft={[5, 100, 100]}>
         <Box width={['45%', '20%', '20%']}>
           <Text
             fontSize={['24px', '28px', '28px']}
@@ -155,14 +155,14 @@ function FooterLanding() {
             </InputRightElement>
           </InputGroup>
         </Box>
-      </Wrap>
+      </Flex>
 
       <Box marginTop={[5, 5, 5]} paddingLeft={[5, 100, 100]} width="20%">
         <Link
           href="https://github.com/defiforpeople/chainlink-hackathon"
           isExternal
         >
-          <GithubLogo href="" />
+          <GithubLogo />
         </Link>
       </Box>
 

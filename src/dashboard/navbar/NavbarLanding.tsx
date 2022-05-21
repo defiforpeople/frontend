@@ -31,6 +31,7 @@ function NavbarLanding() {
       height={'76px'}
       align="center"
       alignItems={'center'}
+      width={'100%'}
     >
       <HamburgerIcon
         w={6}
@@ -43,9 +44,7 @@ function NavbarLanding() {
 
       <DrawerNavbar isOpen={isOpen} onClose={onClose} />
 
-      <Flex>
-        <Logo w={160} h={10} color="#3A0CA3" />
-      </Flex>
+      <Logo w={160} h={10} color="#3A0CA3" />
 
       <Text
         fontSize={'18'}
@@ -86,16 +85,23 @@ function NavbarLanding() {
           </Text>
         </Link>
 
-        <Flex paddingRight={3}>
-          <Button
-            bg={'primary'}
-            borderRadius={'70'}
-            height={['32px', '50px', '50px']}
-          >
-            <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              {t('begin')}
-            </Text>
-          </Button>
+        <Flex display={'flex'} align="center">
+          <Link to="/onboarding">
+            <Button
+              bg={'primary'}
+              borderRadius={'70'}
+              width="90px"
+              marginRight={2}
+            >
+              <Text
+                fontSize={['14', '18', '18']}
+                lineHeight={['16px', ' 21.6px', '21.6px']}
+                color="white"
+              >
+                {t('button')}
+              </Text>
+            </Button>
+          </Link>
         </Flex>
       </Flex>
     </Flex>
