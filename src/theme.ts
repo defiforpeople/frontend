@@ -8,9 +8,24 @@ const CustomSteps = {
     return {
       ...StepsStyleConfig.baseStyle(props),
       icon: {
-        // ...StepsStyleConfig.baseStyle(props).icon,
+        ...StepsStyleConfig.baseStyle(props).icon,
         // your custom styles here
         strokeWidth: '1px',
+        color: 'white',
+      },
+      stepIconContainer: {
+        ...StepsStyleConfig.baseStyle(props).stepContainer,
+        // your custom styles here
+        bg: '#757575',
+        borderColor: '#757575',
+        color: 'white',
+        borderRadius: '50%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        _highlighted: {
+          bg: '#F72585',
+          borderColor: '#F72585',
+        },
       },
     };
   },

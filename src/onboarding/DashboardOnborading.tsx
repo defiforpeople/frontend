@@ -6,16 +6,20 @@ import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
 const content = <Flex py={4}>Wena</Flex>;
 
-const steps = [{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }];
+const steps = [
+  { label: 'Type of investor' },
+  { label: 'Simulate a goal' },
+  { label: 'New let get serious' },
+];
 
 function DashboardOnboarding() {
-  const { nextStep, prevStep, setStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
 
   return (
     <Flex flexDir="column" width="50%" margin={'auto'} marginTop={'100px'}>
-      <Steps activeStep={activeStep}>
+      <Steps labelOrientation="vertical" activeStep={activeStep}>
         {steps.map(({ label }) => (
           <Step label={label} key={label}>
             {/* {content} */}
