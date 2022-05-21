@@ -73,11 +73,13 @@ function NavbarLanding() {
         </Link>
 
         <Flex display={'flex'} align="center">
-          <Button bg={'primary'} borderRadius={'70'}>
-            <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              {t('begin')}
-            </Text>
-          </Button>
+          <Link to="/onboarding">
+            <Button bg={'primary'} borderRadius={'70'}>
+              <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
+                {t('button')}
+              </Text>
+            </Button>
+          </Link>
         </Flex>
       </Flex>
     </Flex>
