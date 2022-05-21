@@ -19,6 +19,11 @@
     "title": "Grow your savings 📈",
     "button": "Simulate"
   },
+  "DashboardOnboarding": {
+    "label1": "Type of investor",
+    "label2": "Simulate a goal",
+    "label3": "Now let get serious"
+  },
   "FooterLanding": {
     "info": "Info",
     "work": "How we work?",

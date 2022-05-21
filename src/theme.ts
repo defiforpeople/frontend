@@ -27,6 +27,16 @@ const CustomSteps = {
           borderColor: '#F72585',
         },
       },
+      connector: {
+        ...StepsStyleConfig.baseStyle(props).connector,
+        // your custom styles here
+        borderColor: '#757575',
+        opacity: 0.3,
+        _highlighted: {
+          borderColor: '#F72585',
+          opacity: 1.0,
+        },
+      },
     };
   },
 };

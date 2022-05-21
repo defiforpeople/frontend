@@ -19,6 +19,11 @@
     "title": "Haz crecer tus ahorros 📈",
     "button": "Simular"
   },
+  "DashboardOnboarding": {
+    "label1": "Tipo de inversionista",
+    "label2": "Simula una inversión",
+    "label3": "Vamos a ponernos serios"
+  },
   "FooterLanding": {
     "info": "Info",
     "work": "¿Cómo funciona?",
