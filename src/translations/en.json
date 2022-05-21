@@ -51,7 +51,8 @@
     "strategies": "Strategies",
     "gobernance": "Gobernance",
     "enter": "Enter",
-    "begin": "Begin"
+    "begin": "Begin",
+    "changeLanguage": "DeFi for People is available in: "
   },
   "mobileConnectWalletModal": {
     "message": "Cannot connect to wallet. Please visit this page on your desktop browser to connect to your wallet."
