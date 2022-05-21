@@ -8,7 +8,7 @@ import DashboardOnboarding from './DashboardOnborading';
 
 function Onboarding() {
   return (
-    <Box h="calc(100vh)" bg={'white'}>
+    <Box bg={'white'}>
       <NavbarApp />
       <DashboardOnboarding />
       <FooterApp />

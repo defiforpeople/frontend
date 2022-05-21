@@ -21,8 +21,18 @@ function DashboardOnboarding() {
   });
 
   return (
-    <Flex flexDir="column" width="50%" margin={'auto'} marginTop={'100px'}>
-      <Steps labelOrientation="vertical" activeStep={activeStep}>
+    <Flex
+      flexDir="column"
+      width={['100%', '50%', '50%']}
+      margin={'auto'}
+      marginTop={'100px'}
+    >
+      <Steps
+        labelOrientation="vertical"
+        activeStep={activeStep}
+        responsive={false}
+        size={'sm'}
+      >
         {steps.map(({ label }) => (
           <Step label={label} key={label}>
             {/* {content} */}
