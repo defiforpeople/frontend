@@ -13,6 +13,8 @@ function ConnectWallet() {
 
   const { authenticate, isAuthenticated } = useMoralis();
 
+  // console.log('Its rendering ConnectWallet component');
+
   const login = async () => {
     if (!isAuthenticated) {
       try {
@@ -97,7 +99,7 @@ function ConnectWallet() {
       <Box
         position={'absolute'}
         top={'70%'}
-        left={['16%', '40%', '35%', '43%']}
+        left={['16%', '40%', '35%', '41%']}
       >
         <Center>
           <Text fontWeight={400} fontSize={'14'} color="grayLetter">

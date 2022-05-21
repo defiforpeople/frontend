@@ -17,6 +17,8 @@ type Props = {
 };
 
 function ConnectButton({ handleOpenModal }: Props) {
+  // console.log('Its rendering ConnectButton component');
+
   const { t } = useTranslation('connectWallet');
 
   const [ensName, setEnsName] = useState('');
@@ -40,7 +42,7 @@ function ConnectButton({ handleOpenModal }: Props) {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user]);
 
   const login = async () => {
     if (!isAuthenticated) {

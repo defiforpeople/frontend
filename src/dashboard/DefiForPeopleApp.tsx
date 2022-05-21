@@ -8,6 +8,8 @@ import FooterApp from './footers/Footers-app';
 import NavbarApp from './navbar/NavbarApp';
 
 function DefiForPeopleApp() {
+  // console.log('Its rendering DefiForPeopleApp component');
+
   return (
     <Box w="100%" h="calc(100vh)">
       <NavbarApp />

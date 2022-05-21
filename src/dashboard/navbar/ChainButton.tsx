@@ -24,13 +24,17 @@ import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
 
 function ChainButton() {
+  // console.log('Its rendering ChainButton component');
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { Moralis } = useMoralis();
 
   const { switchNetwork } = useChain();
 
-  const [chain, setChain] = useState('0x1');
+  const [chain, setChain] = useState('-');
+
+  // console.log('chain', chain);
 
   useEffect(() => {
     const getNetwork = async () => {
@@ -42,9 +46,7 @@ function ChainButton() {
     };
 
     getNetwork();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [Moralis, chain]);
 
   const changeNetwork = async (networkId: string) => {
     console.log(`Change network to netkorkId: ${networkId}`);
