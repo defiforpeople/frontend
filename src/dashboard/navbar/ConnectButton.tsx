@@ -16,6 +16,8 @@ type Props = {
 };
 
 function ConnectButton({ handleOpenModal }: Props) {
+  // console.log('Its rendering ConnectButton component');
+
   const { t } = useTranslation('connectWallet');
 
   const { adapter, isAuthenticated, setIsAuthenticated, setProfile, profile } =

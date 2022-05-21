@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 function NavbarApp() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  // console.log('Its rendering NavbarApp component');
+
   return (
     <Flex
       justify="space-between"
