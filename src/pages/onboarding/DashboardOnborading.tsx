@@ -5,7 +5,7 @@ import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 
 function DashboardOnboarding() {
   const { t } = useTranslation('DashboardOnboarding');

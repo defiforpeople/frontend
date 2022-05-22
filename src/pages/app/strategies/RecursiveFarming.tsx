@@ -17,7 +17,6 @@ import {
   Stat,
   StatArrow,
   StatHelpText,
-  StatLabel,
   StatNumber,
   Text,
   useDisclosure,
@@ -25,8 +24,8 @@ import {
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
-import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
+import { ReactComponent as AvalancheLogo } from '../../../assets/logos/avalanche-logo.svg';
+import { ReactComponent as AaveLogo } from '../../../assets/logos/aave-logo.svg';
 
 function RecursiveFarming() {
   const { isOpen, onOpen, onClose } = useDisclosure();

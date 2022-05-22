@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Box, Center, Text } from '@chakra-ui/react';
 
-import NavbarLanding from '../../dashboard/navbar/NavbarLanding';
-import FooterApp from '../../dashboard/footers/FootersApp';
+import NavbarLanding from '../app/navbar/NavbarLanding';
+import FooterApp from '../app/footers/FootersApp';
 
 function Building() {
   return (

@@ -6,10 +6,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useTranslation } from 'react-i18next';
-import '../../i18n';
+import '../../../i18n';
+
 import MobileConnectWalletModal from './MobileConnectWalletModal';
 
-import { useAdapter } from '../../hooks/use-adapter';
+import { useAdapter } from '../../../hooks/use-adapter';
 
 type Props = {
   handleOpenModal: any;

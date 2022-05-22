@@ -24,14 +24,15 @@ import {
 import { formatEther } from '@ethersproject/units';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
-import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
-import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
+import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
+import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
+import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
-import { useAdapter } from '../hooks/use-adapter';
-import { NativeToken, Token } from '../utils/network-manager';
+import '../../i18n';
+
+import { useAdapter } from '../../hooks/use-adapter';
+import { NativeToken, Token } from '../../utils/network-manager';
 
 type Props = {
   isOpen: any;

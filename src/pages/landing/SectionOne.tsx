@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 
-import { ReactComponent as PhoneImage } from '../assets/images/phone-image.svg';
+import { ReactComponent as PhoneImage } from '../../assets/images/phone-image.svg';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 import { Link } from 'react-router-dom';
 
 function SectionOne() {

@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 
-import DefiForPeopleApp from './dashboard/DefiForPeopleApp';
+import DefiForPeopleApp from './pages/app/DefiForPeopleApp';
 
-import Landing from './landing/Landing';
-import Onboarding from './onboarding/Onboarding';
+import Landing from './pages/landing/Landing';
+import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
 
 function App() {

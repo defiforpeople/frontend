@@ -11,16 +11,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { ReactComponent as EthereumLogo } from '../../assets/logos/ethereum-logo.svg';
-import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-logo.svg';
-import { ReactComponent as BnbChainLogo } from '../../assets/logos/bnbchain-logo.svg';
-import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
-import { ReactComponent as FantomLogo } from '../../assets/logos/fantom-logo.svg';
+import { ReactComponent as EthereumLogo } from '../../../assets/logos/ethereum-logo.svg';
+import { ReactComponent as PolygonLogo } from '../../../assets/logos/polygon-logo.svg';
+import { ReactComponent as BnbChainLogo } from '../../../assets/logos/bnbchain-logo.svg';
+import { ReactComponent as AvalancheLogo } from '../../../assets/logos/avalanche-logo.svg';
+import { ReactComponent as FantomLogo } from '../../../assets/logos/fantom-logo.svg';
 
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
-import { useNetworkManager } from '../../hooks/use-manager';
-import { defaultNetwork, ChainName } from '../../utils/network-manager';
+import { useNetworkManager } from '../../../hooks/use-manager';
+import { defaultNetwork, ChainName } from '../../../utils/network-manager';
 
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
