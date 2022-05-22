@@ -1,29 +1,35 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 
-import { ChakraProvider } from '@chakra-ui/react';
-
 import App from './App';
 
 import theme from './theme';
 import Fonts from './fonts';
 
-import { MoralisProvider } from 'react-moralis';
-
+import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
+import { ManagerProvider } from './providers/manager-provider';
+import { Adapters } from './utils/network-manager';
+
+const { REACT_APP_SERVER_URL, REACT_APP_APP_ID } = process.env;
+if (!REACT_APP_SERVER_URL || !REACT_APP_APP_ID) {
+  throw new Error('invalid ENV values');
+}
+
+const moralisAdapter = new Adapters.MoralisAdapter(
+  REACT_APP_SERVER_URL,
+  REACT_APP_APP_ID,
+);
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <Fonts />
-      <MoralisProvider
-        serverUrl={process.env.REACT_APP_SERVER_URL as string}
-        appId={process.env.REACT_APP_APP_ID as string}
-      >
+      <ManagerProvider adapter={moralisAdapter}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </MoralisProvider>
+      </ManagerProvider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),
