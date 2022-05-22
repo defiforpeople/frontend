@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -13,7 +13,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
-import { useMoralis } from 'react-moralis';
+import { useNetworkManager } from '../../hooks/use-manager';
+import { Profile } from '../../utils/network-manager';
 
 type Props = {
   isOpen: any;
@@ -21,10 +22,21 @@ type Props = {
 };
 
 export default function AccountModal({ isOpen, onClose }: Props) {
-  const { isAuthenticated, user, logout } = useMoralis();
+  const { adapter, isAuthenticated, setIsAuthenticated } = useNetworkManager();
+  const [profile, setProfile] = useState({} as Profile);
+
+  useEffect(() => {
+    async function getProfile() {
+      const profile = await adapter.getProfile();
+      setProfile(profile);
+    }
+
+    getProfile();
+  }, [adapter]);
 
   const logOut = async () => {
-    await logout();
+    await adapter.logout();
+    setIsAuthenticated(false);
     console.log('logged out');
   };
 
@@ -73,21 +85,16 @@ export default function AccountModal({ isOpen, onClose }: Props) {
                 lineHeight="1.1"
               >
                 {isAuthenticated &&
-                  `${user!.attributes.ethAddress.slice(
-                    0,
-                    6,
-                  )}...${user!.attributes.ethAddress.slice(
-                    user!.attributes.ethAddress.length - 4,
-                    user!.attributes.ethAddress.length,
+                  `${profile.address.slice(0, 6)}...${profile.address.slice(
+                    profile.address.length - 4,
+                    profile.address.length,
                   )}`}
               </Text>
             </Flex>
             <Flex alignContent="center" m={5}>
               <Button
                 onClick={() =>
-                  navigator.clipboard.writeText(
-                    user!.attributes.ethAddress!.toString(),
-                  )
+                  navigator.clipboard.writeText(profile.address!.toString())
                 }
                 variant="link"
                 color="black"
