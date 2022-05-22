@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import {
   Box,
@@ -21,8 +21,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { useMoralis } from 'react-moralis';
-
 import { formatEther } from '@ethersproject/units';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
@@ -30,24 +28,18 @@ import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
 
-import { getNativeToken } from '../utils/network';
-
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { useNetworkManager } from '../hooks/use-manager';
+import { NativeToken, Token } from '../utils/network-manager';
 
 type Props = {
   isOpen: any;
   onClose: any;
 };
 
-type Token = {
-  symbol: string;
-  balance: string;
-  decimals: number;
-};
-
 function InvesmentModal({ isOpen, onClose }: Props) {
-  const { user, Moralis } = useMoralis();
+  const { adapter } = useNetworkManager();
 
   const { t } = useTranslation('InvesmentModal');
 
@@ -55,7 +47,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const initialToken: string = t('selectToken');
   const initialAmount: number = 0;
   const initialMaxAmount: string = '-';
-  const initialTokensBalance: Token[] = [];
+  const initialTokensBalance: Token | NativeToken[] = [];
 
   const [strategy, setStrategy] = useState(initialStrategy);
   const [token, setToken] = useState(initialToken);
@@ -65,24 +57,21 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
   const handleStrategyChange = async (strategy: string) => {
     setStrategy(strategy);
-
     await getMaxTokenAmount();
   };
 
-  const handleTokenChange = (token: string) => {
-    setToken(token);
-
+  const handleTokenChange = (symbol: string) => {
+    setToken(symbol);
     setAmount(0);
+    setMaxAmount('0');
 
-    const tokenSimplified = tokensBalance.find(
-      (t: Token) => t.symbol === token,
-    );
-
-    if (tokenSimplified !== undefined) {
-      setMaxAmount(parseFloat(formatEther(tokenSimplified.balance)).toFixed(3));
-    } else {
-      setMaxAmount('0');
+    const foundToken = tokensBalance.find((token) => token.symbol === symbol);
+    if (!foundToken?.balance) {
+      console.log(`token balance is not valid with symbol=${symbol}`);
+      return;
     }
+
+    return setMaxAmount(parseFloat(formatEther(foundToken.balance)).toFixed(3));
   };
 
   const handleAmountChange = (event: any) => setAmount(event.target.value);
@@ -93,50 +82,17 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
   const resetStrategy = () => {
     setStrategy(initialStrategy);
-
     setToken(initialToken);
-
     setMaxAmount(initialMaxAmount);
 
     onClose();
   };
 
   const getMaxTokenAmount = async () => {
-    await Moralis.enableWeb3();
+    const nativeToken = await adapter.getNativeToken();
+    const tokens = await adapter.getTokens();
 
-    const chainId = await Moralis.getChainId();
-
-    const nativeBalance = await Moralis.Web3API.account.getNativeBalance({
-      chain: chainId as any,
-      address: user!.attributes.ethAddress,
-    });
-
-    const tokensBalances = await Moralis.Web3API.account.getTokenBalances({
-      chain: chainId as any,
-      address: user!.attributes.ethAddress,
-    });
-
-    const tokensBalanceArray: Token[] = [];
-
-    const nativeToken = {
-      symbol: getNativeToken(chainId as string).symbol,
-      balance: nativeBalance.balance,
-      decimals: getNativeToken(chainId as string).decimals,
-    };
-
-    tokensBalanceArray.push(nativeToken);
-
-    tokensBalances.forEach((token: any) => {
-      const tokenSimplified: Token = {
-        symbol: token.symbol,
-        balance: token.balance,
-        decimals: token.decimals,
-      };
-
-      tokensBalanceArray.push(tokenSimplified);
-    });
-
-    setTokensBalance(tokensBalanceArray);
+    setTokensBalance([nativeToken, ...tokens]);
   };
 
   return (

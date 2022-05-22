@@ -1,13 +1,9 @@
-import React from 'react';
-
-import { useMoralis } from 'react-moralis';
-
+import { useNetworkManager } from '../hooks/use-manager';
 import ConnectWallet from './ConnectWallet';
 import DashboardBody from './DashboardBody';
 
 function Dashboard() {
-  const { isAuthenticated } = useMoralis();
-
+  const { isAuthenticated } = useNetworkManager();
   return isAuthenticated ? <DashboardBody /> : <ConnectWallet />;
 }
 

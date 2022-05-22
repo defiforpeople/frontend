@@ -1,24 +1,19 @@
-import React from 'react';
-import { useMoralis } from 'react-moralis';
-
 import { Box, Button, Center, Text } from '@chakra-ui/react';
-
 import { ReactComponent as WalletIcon } from '../assets/logos/wallet-icon.svg';
-
 import { useTranslation } from 'react-i18next';
 import '../i18n';
+import { useNetworkManager } from '../hooks/use-manager';
 
 function ConnectWallet() {
   const { t, i18n } = useTranslation('connectWallet');
 
-  const { authenticate, isAuthenticated } = useMoralis();
+  const { adapter, isAuthenticated, setIsAuthenticated } = useNetworkManager();
 
   const login = async () => {
     if (!isAuthenticated) {
       try {
-        await authenticate({
-          signingMessage: t('signingMessage'),
-        });
+        await adapter.login(t('signingMessage'));
+        setIsAuthenticated(true);
       } catch (error) {
         console.log(error);
       }
