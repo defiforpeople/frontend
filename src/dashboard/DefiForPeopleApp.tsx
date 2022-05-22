@@ -3,7 +3,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 
 import Dashboard from './Dashboard';
-import FooterApp from './footers/Footers-app';
+import FooterApp from './footers/FootersApp';
 
 import NavbarApp from './navbar/NavbarApp';
 

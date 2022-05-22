@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Center, Text } from '@chakra-ui/react';
 
 import NavbarLanding from '../../dashboard/navbar/NavbarLanding';
-import FooterApp from '../../dashboard/footers/Footers-app';
+import FooterApp from '../../dashboard/footers/FootersApp';
 
 function Building() {
   return (

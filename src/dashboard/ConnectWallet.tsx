@@ -44,7 +44,7 @@ function ConnectWallet() {
         width={['80%', '80%', '800px']}
         position={'absolute'}
         left={'50%'}
-        top={'50%'}
+        top={['30%', '50%', '50%']}
         transform={'translate(-50%, -50%)'}
         boxShadow={[
           '0px 0px 0px rgba(0, 0, 0, 0)',
@@ -98,7 +98,7 @@ function ConnectWallet() {
 
       <Box
         position={'absolute'}
-        top={'70%'}
+        top={['50%', '70%', '70%']}
         left={['16%', '40%', '35%', '41%']}
       >
         <Center>
