@@ -2,8 +2,6 @@
  <a href="https://defiforpeople.github.io/frontend/"><img src="src/assets/logos/dfp.svg" width="400"></a>
 </p>
 
-<hr />
-
 # DeFi for People
 
 <p>
@@ -12,8 +10,6 @@
 </p>
 
 <p align="center">The <i>webapp</i> is <a href='https://defiforpeople.github.io/frontend/'>HERE</a>
-
-<hr>
 
 ## About this project
 

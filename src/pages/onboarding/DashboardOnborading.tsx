@@ -6,6 +6,7 @@ import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
+import Question from './question/Question';
 
 function DashboardOnboarding() {
   const { t } = useTranslation('DashboardOnboarding');
@@ -36,6 +37,10 @@ function DashboardOnboarding() {
           ))}
         </Steps>
       </Box>
+
+      <Center>
+        <Question />
+      </Center>
 
       <Center>
         {activeStep === steps.length ? (
