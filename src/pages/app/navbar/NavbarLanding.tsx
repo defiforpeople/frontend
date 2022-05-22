@@ -94,6 +94,7 @@ function NavbarLanding() {
               borderRadius={'70'}
               width="90px"
               marginRight={2}
+              display={['none', 'block', 'block']}
             >
               <Text
                 fontSize={['14', '18', '18']}
@@ -101,6 +102,25 @@ function NavbarLanding() {
                 color="white"
               >
                 {t('button')}
+              </Text>
+            </Button>
+          </Link>
+
+          <Link to="/app">
+            <Button
+              bg={'white'}
+              borderRadius={'70'}
+              width="90px"
+              marginRight={2}
+              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+              display={['block', 'none', 'none']}
+            >
+              <Text
+                fontSize={['14', '18', '18']}
+                lineHeight={['16px', ' 21.6px', '21.6px']}
+                color="primary"
+              >
+                {t('enter')}
               </Text>
             </Button>
           </Link>
