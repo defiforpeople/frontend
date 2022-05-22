@@ -10,7 +10,7 @@ const CustomSteps = {
       icon: {
         ...StepsStyleConfig.baseStyle(props).icon,
         // your custom styles here
-        strokeWidth: '1px',
+        strokeWidth: '2px',
         color: 'white',
       },
       stepIconContainer: {
@@ -40,7 +40,12 @@ const CustomSteps = {
       labelContainer: {
         ...StepsStyleConfig.baseStyle(props).labelContainer,
         // your custom styles here
-        width: '50%',
+        width: '45%',
+      },
+      label: {
+        ...StepsStyleConfig.baseStyle(props).label,
+        // your custom styles here
+        fontSize: 'sm',
       },
     };
   },
