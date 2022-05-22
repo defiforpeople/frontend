@@ -26,14 +26,14 @@ import { useMoralis } from 'react-moralis';
 import { formatEther } from '@ethersproject/units';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
-import { ReactComponent as EthLogo } from '../assets/logos/eth-logo.svg';
-import { ReactComponent as AvalancheLogo } from '../assets/logos/avalanche-logo.svg';
-import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
+import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
+import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
+import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
 
-import { getNativeToken } from '../utils/network';
+import { getNativeToken } from '../../utils/network';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 
 type Props = {
   isOpen: any;

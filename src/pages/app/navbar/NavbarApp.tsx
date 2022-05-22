@@ -5,7 +5,7 @@ import { Flex, useDisclosure } from '@chakra-ui/react';
 import ConnectButton from './ConnectButton';
 import AccountModal from './AccountModal';
 import ChainButton from './ChainButton';
-import Logo from '../../components/logo';
+import Logo from '../../../components/logo';
 import { Link } from 'react-router-dom';
 
 function NavbarApp() {

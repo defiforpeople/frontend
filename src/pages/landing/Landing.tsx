@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box } from '@chakra-ui/react';
 
-import NavbarLanding from '../dashboard/navbar/NavbarLanding';
+import NavbarLanding from '../app/navbar/NavbarLanding';
 import SectionOne from './SectionOne';
 import SectionTwo from './SectionTwo';
 import FooterLanding from './FooterLanding';

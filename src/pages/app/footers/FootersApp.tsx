@@ -3,7 +3,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 
 import { useTranslation } from 'react-i18next';
-import '../../i18n';
+import '../../../i18n';
 
 function FooterApp() {
   const { t } = useTranslation('footer');

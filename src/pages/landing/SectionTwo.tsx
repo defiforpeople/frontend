@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 
-import { ReactComponent as ChartImage } from '../assets/images/chart-image.svg';
-import { ReactComponent as ChartMobileImage } from '../assets/images/chart-mobile-image.svg';
+import { ReactComponent as ChartImage } from '../../assets/images/chart-image.svg';
+import { ReactComponent as ChartMobileImage } from '../../assets/images/chart-mobile-image.svg';
 
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 
 function SectionTwo() {
   const { t } = useTranslation('SectionTwo');
