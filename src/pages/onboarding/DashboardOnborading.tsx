@@ -11,6 +11,7 @@ import IntroductionQuestions from './question/IntroductionQuestions';
 import Question1 from './question/Question1';
 import Question2 from './question/Question2';
 import Question3 from './question/Question3';
+import Simulate from './simulate/Simulate';
 
 function DashboardOnboarding() {
   const { t } = useTranslation('DashboardOnboarding');
@@ -93,6 +94,10 @@ function DashboardOnboarding() {
               <Text color={'white'}>Skip</Text>
             </Button>
           </Center>
+        </Center>
+
+        <Center display={simulateToggle ? 'block' : 'none'}>
+          <Simulate />
         </Center>
 
         {/* <Center>
