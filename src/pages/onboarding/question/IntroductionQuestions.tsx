@@ -8,7 +8,7 @@ type Props = {
 
 function IntroductionQuestions({ setQuestion }: Props) {
   return (
-    <Box width={'90%'} marginTop={'50px'}>
+    <Box marginTop={'50px'}>
       <Center>
         <Box>
           <Text
