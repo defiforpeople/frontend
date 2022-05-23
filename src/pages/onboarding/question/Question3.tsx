@@ -1,46 +1,56 @@
 import React from 'react';
 
-import { Box, Divider, Text } from '@chakra-ui/react';
+import { Box, Center, Divider, Text } from '@chakra-ui/react';
 
 type Props = {
+  question: number;
+
   setQuestion: any;
 };
 
-function Question3({ setQuestion }: Props) {
+function Question3({ setQuestion, question }: Props) {
   return (
-    <Box
-      border={'2px'}
-      borderColor={'#E5E4E5'}
-      borderRadius={'20px'}
-      width={'90%'}
-      marginTop={'50px'}
-    >
-      <Box>
-        <Text
-          padding={3}
-          fontWeight={'bold'}
-          fontSize={'22px'}
-          marginTop={'30px'}
+    <Box width={'100%'}>
+      <Center>
+        <Box
+          border={'2px'}
+          borderColor={'#E5E4E5'}
+          borderRadius={'20px'}
+          marginTop={'50px'}
         >
-          Quieres invertir todos los meses?
-        </Text>
-      </Box>
+          <Box>
+            <Text padding={3} fontWeight={'bold'} fontSize={'22px'}>
+              Quieres invertir todos los meses?
+            </Text>
+          </Box>
 
-      <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-        <Text padding={3}>Si</Text>
-      </Box>
+          <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
+            <Text padding={3}>Si</Text>
+          </Box>
 
-      <Divider />
+          <Divider />
 
-      <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-        <Text padding={3}>No</Text>
-      </Box>
+          <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
+            <Text padding={3}>No</Text>
+          </Box>
 
-      <Divider />
+          <Divider />
 
-      <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-        <Text padding={3}>No sé</Text>
-      </Box>
+          <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
+            <Text padding={3}>No sé</Text>
+          </Box>
+        </Box>
+      </Center>
+
+      <Text
+        padding={5}
+        fontWeight={'regular'}
+        fontSize={'18px'}
+        color={'grayLetter'}
+        onClick={() => setQuestion(question - 1)}
+      >
+        Anterior
+      </Text>
     </Box>
   );
 }

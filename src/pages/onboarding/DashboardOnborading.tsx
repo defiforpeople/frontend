@@ -17,6 +17,8 @@ function DashboardOnboarding() {
 
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
 
+  const [simulateToggle, setSimulateToggle] = React.useState(false);
+
   const steps = [
     { label: t('label1') },
     { label: t('label2') },
@@ -26,6 +28,12 @@ function DashboardOnboarding() {
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
   });
+
+  const skip = () => {
+    nextStep();
+
+    setSimulateToggle(true);
+  };
 
   return (
     <Center>
@@ -46,7 +54,7 @@ function DashboardOnboarding() {
           </Steps>
         </Box>
 
-        <Center>
+        <Center display={simulateToggle ? 'none' : 'block'}>
           {currentQuestion === 0 ? (
             <IntroductionQuestions setQuestion={setCurrentQuestion} />
           ) : (
@@ -66,38 +74,53 @@ function DashboardOnboarding() {
             ''
           )}
           {currentQuestion === 3 ? (
-            <Question3 setQuestion={setCurrentQuestion} />
+            <Question3
+              question={currentQuestion}
+              setQuestion={setCurrentQuestion}
+            />
           ) : (
             ''
           )}
+
+          <Center marginTop={'30px'}>
+            <Button
+              size="sm"
+              onClick={skip}
+              bg="primary"
+              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+              borderRadius={'10px'}
+            >
+              <Text color={'white'}>Skip</Text>
+            </Button>
+          </Center>
         </Center>
 
         {/* <Center>
-        {activeStep === steps.length ? (
-          <Flex p={4}>
-            <Button mx="auto" size="sm" onClick={reset}>
-              Reset
-            </Button>
-          </Flex>
-        ) : (
-          <Flex margin={'auto'} marginTop={'50px'}>
-            <Button
-              isDisabled={activeStep === 0}
-              mr={4}
-              onClick={prevStep}
-              size="sm"
-              variant="ghost"
-            >
-              Prev
-            </Button>
-            <Button size="sm" onClick={nextStep} bg="primary">
-              <Text color={'white'}>
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Text>
-            </Button>
-          </Flex>
-        )}
-      </Center> */}
+          {activeStep === steps.length ? (
+            <Flex p={4}>
+              <Button mx="auto" size="sm" onClick={reset}>
+                Reset
+              </Button>
+            </Flex>
+          ) : (
+            <Flex margin={'auto'} marginTop={'50px'}>
+              <Button
+                isDisabled={activeStep === 0}
+                mr={4}
+                onClick={prevStep}
+                size="sm"
+                variant="ghost"
+              >
+                Prev
+              </Button>
+              <Button size="sm" onClick={nextStep} bg="primary">
+                <Text color={'white'}>
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Text>
+              </Button>
+            </Flex>
+          )}
+        </Center> */}
       </Box>
     </Center>
   );
