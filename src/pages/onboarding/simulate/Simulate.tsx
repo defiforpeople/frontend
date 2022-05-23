@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
   Box,
+  Button,
+  Center,
   HStack,
   Input,
   Slider,
@@ -12,7 +14,12 @@ import {
 } from '@chakra-ui/react';
 
 function Simulate() {
+  const recommendedMinTime = 3;
+
   const [value, setValue] = React.useState('');
+
+  const [time, setTime] = React.useState(recommendedMinTime);
+
   const handleChange = (event: any) => setValue(event.target.value);
 
   return (
@@ -33,6 +40,7 @@ function Simulate() {
           Si partieras hoy con:
         </Text>
         <Input
+          type={'number'}
           value={value}
           onChange={handleChange}
           placeholder="$ 0 USDT"
@@ -48,18 +56,36 @@ function Simulate() {
           </Text>
 
           <Text fontWeight={'light'} fontSize={'15px'}>
-            7 años
+            {time} años
           </Text>
         </HStack>
-        <Slider aria-label="slider-ex-2" colorScheme="pink" defaultValue={30}>
-          <SliderTrack>
+        <Slider
+          aria-label="slider-ex-2"
+          colorScheme="pink"
+          defaultValue={3}
+          min={0}
+          max={10}
+          step={1}
+          onChangeEnd={(val) => setTime(val)}
+        >
+          <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb>
-            <Box bg="tomato">a</Box>
-          </SliderThumb>
+          <SliderThumb bg="primary"></SliderThumb>
         </Slider>
       </Box>
+
+      <Center marginTop={'50px'}>
+        <Button
+          // onClick={skip}
+          isDisabled={value === ''}
+          bg="primary"
+          boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+          borderRadius={'15px'}
+        >
+          <Text color={'white'}>Continuar</Text>
+        </Button>
+      </Center>
     </Box>
   );
 }
