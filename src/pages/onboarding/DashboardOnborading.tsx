@@ -12,6 +12,7 @@ import Question1 from './question/Question1';
 import Question2 from './question/Question2';
 import Question3 from './question/Question3';
 import Simulate from './simulate/Simulate';
+import SimulationChart from './simulate/SimulationChart';
 
 function DashboardOnboarding() {
   const { t } = useTranslation('DashboardOnboarding');
@@ -96,8 +97,12 @@ function DashboardOnboarding() {
           </Center>
         </Center>
 
-        <Center display={simulateToggle ? 'block' : 'none'}>
+        <Center display={simulateToggle ? 'none' : 'none'}>
           <Simulate />
+        </Center>
+
+        <Center display={simulateToggle ? 'block' : 'none'}>
+          <SimulationChart />
         </Center>
 
         {/* <Center>
