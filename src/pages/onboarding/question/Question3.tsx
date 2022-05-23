@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Box, Divider, Text } from '@chakra-ui/react';
 
-function Question() {
+type Props = {
+  setQuestion: any;
+};
+
+function Question3({ setQuestion }: Props) {
   return (
     <Box
       border={'2px'}
@@ -41,4 +45,4 @@ function Question() {
   );
 }
 
-export default Question;
+export default Question3;

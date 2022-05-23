@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Box, Button, Center, Text } from '@chakra-ui/react';
 
-function IntroductionQuestions() {
+type Props = {
+  setQuestion: any;
+};
+
+function IntroductionQuestions({ setQuestion }: Props) {
   return (
     <Box width={'90%'} marginTop={'50px'}>
       <Center>
@@ -20,7 +24,7 @@ function IntroductionQuestions() {
 
       <Center>
         <Box padding={7}>
-          <Text fontWeight={'regular'} fontSize={'18px'}>
+          <Text fontWeight={'regular'} fontSize={'18px'} textAlign="center">
             Te haremos unas preguntas para descrubrir tu perfil de inversionista
             y te guiaremos en el proceso de entender conceptos de DeFi
           </Text>
@@ -35,6 +39,7 @@ function IntroductionQuestions() {
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'70px'}
           marginTop={'50px'}
+          onClick={() => setQuestion(1)}
         >
           <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
             Comencemos
