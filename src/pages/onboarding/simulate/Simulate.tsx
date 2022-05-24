@@ -13,14 +13,23 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-function Simulate() {
+type Props = {
+  setSimulateState: any;
+};
+
+function Simulate({ setSimulateState }: Props) {
   const recommendedMinTime = 3;
 
   const [value, setValue] = React.useState('');
 
+  const [monthlyAmount, setMonthlyAmount] = React.useState('');
+
   const [time, setTime] = React.useState(recommendedMinTime);
 
-  const handleChange = (event: any) => setValue(event.target.value);
+  const handleChangeValue = (event: any) => setValue(event.target.value);
+
+  const handleChangeMonthlyAmount = (event: any) =>
+    setMonthlyAmount(event.target.value);
 
   return (
     <Box width={'100%'}>
@@ -42,7 +51,7 @@ function Simulate() {
         <Input
           type={'number'}
           value={value}
-          onChange={handleChange}
+          onChange={handleChangeValue}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
           focusBorderColor="primary"
@@ -55,8 +64,8 @@ function Simulate() {
         </Text>
         <Input
           type={'number'}
-          value={value}
-          onChange={handleChange}
+          value={monthlyAmount}
+          onChange={handleChangeMonthlyAmount}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
           focusBorderColor="primary"
@@ -91,7 +100,7 @@ function Simulate() {
 
       <Center marginTop={'50px'}>
         <Button
-          // onClick={skip}
+          onClick={() => setSimulateState('simulate')}
           isDisabled={value === ''}
           bg="primary"
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
