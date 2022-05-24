@@ -11,6 +11,7 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import {
@@ -20,10 +21,10 @@ import {
   PointElement,
   LineElement,
   Title,
-  Tooltip,
   Legend,
   Filler,
   ScriptableContext,
+  Tooltip as TooltipChart,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import calculateInvesment from '../../../utils/calculateInvesment';
@@ -34,7 +35,7 @@ Chart.register(
   PointElement,
   LineElement,
   Title,
-  Tooltip,
+  TooltipChart,
   Legend,
   Filler,
 );
@@ -110,6 +111,8 @@ export function SimulationChart({
       calculateInvesment(time, Number(value), Number(monthlyAmount), 0.1),
     );
   };
+
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
   const data = () => {
     return {
@@ -283,12 +286,25 @@ export function SimulationChart({
           min={0}
           max={40}
           step={1}
-          onChangeEnd={(val) => simulate(val)}
+          onChange={(val) => simulate(val)}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onTouchStart={() => setShowTooltip(true)}
+          onTouchEndCapture={() => setShowTooltip(false)}
         >
           <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb bg="primary"></SliderThumb>
+          <Tooltip
+            hasArrow
+            bg="primary"
+            color="white"
+            placement="top"
+            isOpen={showTooltip}
+            label={`${time}%`}
+          >
+            <SliderThumb bg="primary"></SliderThumb>
+          </Tooltip>
         </Slider>
       </Box>
 
