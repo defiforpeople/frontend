@@ -12,6 +12,7 @@ import {
   SliderTrack,
   Text,
 } from '@chakra-ui/react';
+import calculateInvesment from '../../../utils/calculateInvesment';
 
 type Props = {
   setSimulateState: any;
@@ -30,6 +31,11 @@ function Simulate({ setSimulateState }: Props) {
 
   const handleChangeMonthlyAmount = (event: any) =>
     setMonthlyAmount(event.target.value);
+
+  const simulate = () => {
+    calculateInvesment(time);
+    setSimulateState('simulate');
+  };
 
   return (
     <Box width={'100%'}>
@@ -100,7 +106,7 @@ function Simulate({ setSimulateState }: Props) {
 
       <Center marginTop={'50px'}>
         <Button
-          onClick={() => setSimulateState('simulate')}
+          onClick={simulate}
           isDisabled={value === ''}
           bg="primary"
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
