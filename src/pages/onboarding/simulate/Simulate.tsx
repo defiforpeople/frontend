@@ -50,6 +50,20 @@ function Simulate() {
       </Box>
 
       <Box width={'100%'} padding={5}>
+        <Text fontWeight={'light'} fontSize={'15px'}>
+          Si partieras hoy con:
+        </Text>
+        <Input
+          type={'number'}
+          value={value}
+          onChange={handleChange}
+          placeholder="$ 0 USDT"
+          borderRadius={'12px'}
+          focusBorderColor="primary"
+        />
+      </Box>
+
+      <Box width={'100%'} padding={5}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
             Durante
