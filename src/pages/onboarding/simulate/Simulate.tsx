@@ -33,7 +33,7 @@ function Simulate({ setSimulateState }: Props) {
     setMonthlyAmount(event.target.value);
 
   const simulate = () => {
-    calculateInvesment(time);
+    calculateInvesment(time, Number(value), Number(monthlyAmount));
     setSimulateState('simulate');
   };
 
