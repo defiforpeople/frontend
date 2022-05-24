@@ -15,19 +15,26 @@ import {
 import calculateInvesment from '../../../utils/calculateInvesment';
 
 type Props = {
+  value: string;
+  setValue: any;
+  monthlyAmount: string;
+  setMonthlyAmount: any;
+  time: number;
+  setTime: any;
   setSimulateState: any;
   setSimulationData: any;
 };
 
-function Simulate({ setSimulateState, setSimulationData }: Props) {
-  const recommendedMinTime = 3;
-
-  const [value, setValue] = React.useState('');
-
-  const [monthlyAmount, setMonthlyAmount] = React.useState('');
-
-  const [time, setTime] = React.useState(recommendedMinTime);
-
+function Simulate({
+  value,
+  setValue,
+  monthlyAmount,
+  setMonthlyAmount,
+  time,
+  setTime,
+  setSimulateState,
+  setSimulationData,
+}: Props) {
   const handleChangeValue = (event: any) => setValue(event.target.value);
 
   const handleChangeMonthlyAmount = (event: any) =>

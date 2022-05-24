@@ -23,13 +23,22 @@ function DashboardOnboarding() {
 
   const [simulationData, setSimulationData] = React.useState({});
 
+  // Simulation state
+  const recommendedMinTime = 3;
+
+  const [value, setValue] = React.useState('');
+
+  const [monthlyAmount, setMonthlyAmount] = React.useState('');
+
+  const [time, setTime] = React.useState(recommendedMinTime);
+
   const steps = [
     { label: t('label1') },
     { label: t('label2') },
     { label: t('label3') },
   ];
 
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, activeStep } = useSteps({
     initialStep: 0,
   });
 
@@ -107,6 +116,12 @@ function DashboardOnboarding() {
         <Center>
           {simulateState === 'fistEdit' ? (
             <Simulate
+              value={value}
+              setValue={setValue}
+              monthlyAmount={monthlyAmount}
+              setMonthlyAmount={setMonthlyAmount}
+              time={time}
+              setTime={setTime}
               setSimulateState={setSimulateState}
               setSimulationData={setSimulationData}
             />
@@ -117,7 +132,17 @@ function DashboardOnboarding() {
 
         <Center width={'100%'}>
           {simulateState === 'simulate' ? (
-            <SimulationChart simulationData={simulationData} periods={4} />
+            <SimulationChart
+              value={value}
+              setValue={setValue}
+              monthlyAmount={monthlyAmount}
+              setMonthlyAmount={setMonthlyAmount}
+              time={time}
+              setTime={setTime}
+              setSimulateState={setSimulateState}
+              setSimulationData={setSimulationData}
+              simulationData={simulationData}
+            />
           ) : (
             ' '
           )}

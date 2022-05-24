@@ -62,28 +62,33 @@ export const options = {
 };
 
 type Props = {
-  periods: number;
+  value: string;
+  setValue: any;
+  monthlyAmount: string;
+  setMonthlyAmount: any;
+  time: number;
+  setTime: any;
+  setSimulateState: any;
+  setSimulationData: any;
   simulationData: any;
 };
 
-export function SimulationChart({ periods, simulationData }: Props) {
-  console.log(simulationData);
-
-  const recommendedMinTime = 3;
-
-  const [value, setValue] = React.useState('');
-
-  const [montlyAmount, setMontlyAmount] = React.useState('');
-
-  const [time, setTime] = React.useState(recommendedMinTime);
-
+export function SimulationChart({
+  value,
+  setValue,
+  monthlyAmount,
+  setMonthlyAmount,
+  time,
+  setTime,
+  setSimulateState,
+  simulationData,
+}: Props) {
   const handleChangeValue = (event: any) => setValue(event.target.value);
 
   const handleChangeMonthlyAmount = (event: any) =>
-    setMontlyAmount(event.target.value);
+    setMonthlyAmount(event.target.value);
 
   const data = () => {
-    console.log('aca', simulationData);
     return {
       labels: simulationData.labels,
       datasets: [
@@ -128,7 +133,7 @@ export function SimulationChart({ periods, simulationData }: Props) {
   return (
     <Box width={'100%'}>
       <HStack justifyContent={'space-between'} paddingTop={10}>
-        <Text paddingLeft={5}> En {periods} años podrías tener:</Text>
+        <Text paddingLeft={5}> En {time} años podrías tener:</Text>
         <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
           Cómo se calcula?
         </Text>
@@ -183,7 +188,7 @@ export function SimulationChart({ periods, simulationData }: Props) {
         </Text>
         <Input
           type={'number'}
-          value={montlyAmount}
+          value={monthlyAmount}
           onChange={handleChangeMonthlyAmount}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
