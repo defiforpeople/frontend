@@ -37,7 +37,7 @@ function Simulate() {
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con:
+          Si partieras hoy con
         </Text>
         <Input
           type={'number'}
@@ -51,7 +51,7 @@ function Simulate() {
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con:
+          Y al mes depositaras
         </Text>
         <Input
           type={'number'}
