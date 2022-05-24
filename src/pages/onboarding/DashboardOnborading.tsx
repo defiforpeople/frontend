@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Text } from '@chakra-ui/react';
 
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
@@ -20,6 +20,8 @@ function DashboardOnboarding() {
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
 
   const [simulateState, setSimulateState] = React.useState('notActive');
+
+  const [simulationData, setSimulationData] = React.useState({});
 
   const steps = [
     { label: t('label1') },
@@ -102,12 +104,23 @@ function DashboardOnboarding() {
           </Center>
         </Center>
 
-        <Center display={simulateState === 'fistEdit' ? 'block' : 'none'}>
-          <Simulate setSimulateState={setSimulateState} />
+        <Center>
+          {simulateState === 'fistEdit' ? (
+            <Simulate
+              setSimulateState={setSimulateState}
+              setSimulationData={setSimulationData}
+            />
+          ) : (
+            ''
+          )}
         </Center>
 
-        <Center display={simulateState === 'simulate' ? 'block' : 'none'}>
-          <SimulationChart periods={4} />
+        <Center width={'100%'}>
+          {simulateState === 'simulate' ? (
+            <SimulationChart simulationData={simulationData} periods={4} />
+          ) : (
+            ' '
+          )}
         </Center>
 
         {/* <Center>

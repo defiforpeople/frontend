@@ -63,9 +63,12 @@ export const options = {
 
 type Props = {
   periods: number;
+  simulationData: any;
 };
 
-export function SimulationChart({ periods }: Props) {
+export function SimulationChart({ periods, simulationData }: Props) {
+  console.log(simulationData);
+
   const recommendedMinTime = 3;
 
   const [value, setValue] = React.useState('');
@@ -80,11 +83,12 @@ export function SimulationChart({ periods }: Props) {
     setMontlyAmount(event.target.value);
 
   const data = () => {
+    console.log('aca', simulationData);
     return {
-      labels: ['Hoy', '', '', '', '', '', `${periods} años`],
+      labels: simulationData.labels,
       datasets: [
         {
-          data: [1, 2, 4, 8, 16, 32, 64],
+          data: simulationData.optimisticRevenue,
           borderColor: '#F72585',
           pointRadius: 0,
           borderWidth: 0,
@@ -100,7 +104,7 @@ export function SimulationChart({ periods }: Props) {
           order: 3,
         },
         {
-          data: [1, 1, 2, 4, 12, 25, 50],
+          data: simulationData.pessimisticRevenue,
           borderColor: '#F72585',
           pointRadius: 0,
           borderWidth: 0,
@@ -110,9 +114,9 @@ export function SimulationChart({ periods }: Props) {
           order: 2,
         },
         {
-          data: [1, 2, 3, 4, 5, 6, 7],
+          data: simulationData.invested,
           borderColor: '#3A0CA3',
-          pointRadius: [0, 0, 0, 0, 0, 0, 1],
+          pointRadius: simulationData.borderRadius,
           borderWidth: 2,
           tension: 0.3,
           order: 1,
@@ -124,7 +128,7 @@ export function SimulationChart({ periods }: Props) {
   return (
     <Box>
       <HStack justifyContent={'space-between'} paddingTop={10}>
-        <Text paddingLeft={5}> En 35 años podrías tener:</Text>
+        <Text paddingLeft={5}> En {periods} años podrías tener:</Text>
         <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
           Cómo se calcula?
         </Text>
@@ -136,7 +140,13 @@ export function SimulationChart({ periods }: Props) {
         fontSize={'18px'}
         color={'primary'}
       >
-        $ 274,814,192
+        {(
+          (simulationData.optimisticRevenue[simulationData.labels.length - 1] +
+            simulationData.pessimisticRevenue[
+              simulationData.labels.length - 1
+            ]) /
+          2
+        ).toFixed(2)}
       </Text>
 
       <Text paddingLeft={5} paddingTop={5} fontSize={'14px'}>
@@ -144,7 +154,7 @@ export function SimulationChart({ periods }: Props) {
       </Text>
 
       <Text paddingLeft={5} fontWeight="bold" fontSize={'16px'} color={'sixth'}>
-        $ 50,000,000
+        {simulationData.invested[simulationData.labels.length - 1]}
       </Text>
 
       <Line options={options} data={data()} />

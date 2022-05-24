@@ -16,9 +16,10 @@ import calculateInvesment from '../../../utils/calculateInvesment';
 
 type Props = {
   setSimulateState: any;
+  setSimulationData: any;
 };
 
-function Simulate({ setSimulateState }: Props) {
+function Simulate({ setSimulateState, setSimulationData }: Props) {
   const recommendedMinTime = 3;
 
   const [value, setValue] = React.useState('');
@@ -33,7 +34,9 @@ function Simulate({ setSimulateState }: Props) {
     setMonthlyAmount(event.target.value);
 
   const simulate = () => {
-    calculateInvesment(time, Number(value), Number(monthlyAmount));
+    setSimulationData(
+      calculateInvesment(time, Number(value), Number(monthlyAmount), 0.1),
+    );
     setSimulateState('simulate');
   };
 
@@ -93,7 +96,7 @@ function Simulate({ setSimulateState }: Props) {
           colorScheme="pink"
           defaultValue={3}
           min={0}
-          max={10}
+          max={40}
           step={1}
           onChangeEnd={(val) => setTime(val)}
         >
