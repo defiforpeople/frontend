@@ -5,11 +5,12 @@ import { Box } from '@chakra-ui/react';
 import NavbarApp from '../app/navbar/NavbarApp';
 import FooterApp from '../app/footers/FootersApp';
 import DashboardOnboarding from './DashboardOnborading';
+import NavbarLanding from '../app/navbar/NavbarLanding';
 
 function Onboarding() {
   return (
     <Box bg={'white'}>
-      <NavbarApp />
+      <NavbarLanding />
       <DashboardOnboarding />
       <FooterApp />
     </Box>

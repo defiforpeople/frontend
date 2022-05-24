@@ -1,6 +1,15 @@
 import React from 'react';
 
-import { Box, HStack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  HStack,
+  Input,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+  Text,
+} from '@chakra-ui/react';
 
 import {
   Chart,
@@ -55,6 +64,14 @@ type Props = {
 };
 
 export function SimulationChart({ periods }: Props) {
+  const recommendedMinTime = 3;
+
+  const [value, setValue] = React.useState('');
+
+  const [time, setTime] = React.useState(recommendedMinTime);
+
+  const handleChange = (event: any) => setValue(event.target.value);
+
   const data = () => {
     return {
       labels: ['Hoy', '', '', '', '', '', `${periods} años`],
@@ -98,7 +115,7 @@ export function SimulationChart({ periods }: Props) {
   };
 
   return (
-    <Box height={'300px'} width={'100%'}>
+    <Box>
       <HStack justifyContent={'space-between'} paddingTop={10}>
         <Text paddingLeft={5}> En 35 años podrías tener:</Text>
         <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
@@ -124,6 +141,64 @@ export function SimulationChart({ periods }: Props) {
       </Text>
 
       <Line options={options} data={data()} />
+
+      <Text fontWeight="bold" fontSize={'16px'} paddingLeft={5} paddingTop={5}>
+        ⚖️ Ajusta tu objetivo
+      </Text>
+
+      <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+        <Text fontWeight={'light'} fontSize={'15px'}>
+          Si partieras hoy con
+        </Text>
+        <Input
+          type={'number'}
+          value={value}
+          onChange={handleChange}
+          placeholder="$ 0 USDT"
+          borderRadius={'12px'}
+          focusBorderColor="primary"
+        />
+      </Box>
+
+      <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+        <Text fontWeight={'light'} fontSize={'15px'}>
+          Y al mes depositaras
+        </Text>
+        <Input
+          type={'number'}
+          value={value}
+          onChange={handleChange}
+          placeholder="$ 0 USDT"
+          borderRadius={'12px'}
+          focusBorderColor="primary"
+        />
+      </Box>
+
+      <Box width={'100%'} paddingLeft={5} paddingTop={10} paddingBottom={10}>
+        <HStack justifyContent={'space-between'}>
+          <Text fontWeight={'light'} fontSize={'15px'}>
+            Durante
+          </Text>
+
+          <Text fontWeight={'light'} paddingRight={5} fontSize={'15px'}>
+            {time} años
+          </Text>
+        </HStack>
+        <Slider
+          aria-label="slider-ex-2"
+          colorScheme="pink"
+          defaultValue={3}
+          min={0}
+          max={10}
+          step={1}
+          onChangeEnd={(val) => setTime(val)}
+        >
+          <SliderTrack bg="#E5E4E5">
+            <SliderFilledTrack />
+          </SliderTrack>
+          <SliderThumb bg="primary"></SliderThumb>
+        </Slider>
+      </Box>
     </Box>
   );
 }
