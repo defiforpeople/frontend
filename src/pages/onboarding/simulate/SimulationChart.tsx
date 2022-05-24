@@ -126,7 +126,7 @@ export function SimulationChart({ periods, simulationData }: Props) {
   };
 
   return (
-    <Box>
+    <Box width={'100%'}>
       <HStack justifyContent={'space-between'} paddingTop={10}>
         <Text paddingLeft={5}> En {periods} años podrías tener:</Text>
         <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
