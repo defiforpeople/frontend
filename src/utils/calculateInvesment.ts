@@ -91,14 +91,14 @@ function calculateInvesment(
     periods,
     initialValue,
     monthlyAmount,
-    0.1,
+    0.05,
   );
 
   const optimisticRevenue = calculateEarnedInterest(
     periods,
     initialValue,
     monthlyAmount,
-    0.2,
+    0.1,
   );
 
   const borderRadius = calculateBorderRadius(periods);

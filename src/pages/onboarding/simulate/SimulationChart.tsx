@@ -165,7 +165,7 @@ export function SimulationChart({
       <Text
         paddingLeft={5}
         fontWeight="bold"
-        fontSize={'18px'}
+        fontSize={'26px'}
         color={'primary'}
       >
         {(
@@ -174,10 +174,56 @@ export function SimulationChart({
               simulationData.labels.length - 1
             ]) /
           2
-        ).toFixed(2)}
+        ).toFixed(0)}
       </Text>
 
-      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'}>
+      <HStack>
+        <Box>
+          <Text
+            paddingLeft={5}
+            paddingTop={5}
+            fontSize={'14px'}
+            color={'primary'}
+          >
+            Resultado optimista:
+          </Text>
+
+          <Text
+            paddingLeft={5}
+            fontWeight="bold"
+            fontSize={'16px'}
+            color={'primary'}
+          >
+            {simulationData.optimisticRevenue[
+              simulationData.labels.length - 1
+            ].toFixed(0)}
+          </Text>
+        </Box>
+
+        <Box paddingLeft={30}>
+          <Text
+            paddingTop={5}
+            fontSize={'14px'}
+            color={'primary'}
+            opacity={0.8}
+          >
+            Resultado pesimista:
+          </Text>
+
+          <Text
+            fontWeight="bold"
+            fontSize={'16px'}
+            color={'primary'}
+            opacity={0.8}
+          >
+            {simulationData.pessimisticRevenue[
+              simulationData.labels.length - 1
+            ].toFixed(0)}
+          </Text>
+        </Box>
+      </HStack>
+
+      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'} color={'sixth'}>
         Dinero invertido:
       </Text>
 
