@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Box } from '@chakra-ui/react';
+
 import {
-  Chart as ChartJS,
+  Chart,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -9,10 +11,11 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-ChartJS.register(
+Chart.register(
   CategoryScale,
   LinearScale,
   PointElement,
@@ -20,43 +23,61 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  Filler,
 );
 
 export const options = {
   responsive: true,
+  scales: {
+    x: {
+      grid: {
+        display: false,
+      },
+    },
+    y: {
+      display: false,
+    },
+  },
   plugins: {
     legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
+      display: false,
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [1, 2, 3, 4, 5, 6, 7],
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [1, 2, 3, 4, 0, 4, 112],
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
+type Props = {
+  periods: number;
 };
 
-function SimulationChart() {
-  return <Line options={options} data={data} />;
+export function SimulationChart({ periods }: Props) {
+  const data = {
+    labels: ['Hoy', '', '', '', '', '', `${periods} años`],
+    datasets: [
+      {
+        data: [1, 2, 4, 8, 16, 32, 64],
+        borderColor: '#F72585',
+        pointRadius: 0,
+        borderWidth: 2,
+        tension: 0.4,
+        fill: true,
+        backgroundColor: '#F72585',
+      },
+      // {
+      //   label: 'Dataset 1',
+      //   data: [1, 1, 2, 4, 12, 25, 50],
+      //   borderColor: '#F72585',
+      //   pointRadius: 0,
+      //   borderWidth: 2,
+      //   tension: 0.4,
+      // },
+    ],
+  };
+
+  return (
+    <Box height={'300px'} width={'100%'}>
+      <Line options={options} data={data} />
+    </Box>
+  );
 }
 
 export default SimulationChart;
