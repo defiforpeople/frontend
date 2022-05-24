@@ -102,7 +102,7 @@ function DashboardOnboarding() {
         </Center>
 
         <Center display={simulateToggle ? 'block' : 'none'}>
-          <SimulationChart />
+          <SimulationChart periods={4} />
         </Center>
 
         {/* <Center>
