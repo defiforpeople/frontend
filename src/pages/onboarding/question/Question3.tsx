@@ -4,7 +4,6 @@ import { Box, Center, Divider, Text } from '@chakra-ui/react';
 
 type Props = {
   question: number;
-
   setQuestion: any;
 };
 

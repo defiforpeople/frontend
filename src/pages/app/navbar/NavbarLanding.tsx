@@ -28,7 +28,7 @@ function NavbarLanding() {
     <Flex
       justify={['space-between', 'space-around', 'space-around']}
       bg="#F1F4F6"
-      height={'76px'}
+      height={['70px', '50px', '50px']}
       align="center"
       alignItems={'center'}
       width={'100%'}

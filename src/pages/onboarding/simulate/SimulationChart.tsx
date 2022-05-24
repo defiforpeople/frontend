@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
   Box,
+  Button,
+  Center,
   HStack,
   Input,
   Slider,
@@ -68,9 +70,14 @@ export function SimulationChart({ periods }: Props) {
 
   const [value, setValue] = React.useState('');
 
+  const [montlyAmount, setMontlyAmount] = React.useState('');
+
   const [time, setTime] = React.useState(recommendedMinTime);
 
-  const handleChange = (event: any) => setValue(event.target.value);
+  const handleChangeValue = (event: any) => setValue(event.target.value);
+
+  const handleChangeMonthlyAmount = (event: any) =>
+    setMontlyAmount(event.target.value);
 
   const data = () => {
     return {
@@ -153,7 +160,7 @@ export function SimulationChart({ periods }: Props) {
         <Input
           type={'number'}
           value={value}
-          onChange={handleChange}
+          onChange={handleChangeValue}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
           focusBorderColor="primary"
@@ -166,15 +173,15 @@ export function SimulationChart({ periods }: Props) {
         </Text>
         <Input
           type={'number'}
-          value={value}
-          onChange={handleChange}
+          value={montlyAmount}
+          onChange={handleChangeMonthlyAmount}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
           focusBorderColor="primary"
         />
       </Box>
 
-      <Box width={'100%'} paddingLeft={5} paddingTop={10} paddingBottom={10}>
+      <Box width={'100%'} paddingLeft={5} paddingTop={10}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
             Durante
@@ -199,6 +206,16 @@ export function SimulationChart({ periods }: Props) {
           <SliderThumb bg="primary"></SliderThumb>
         </Slider>
       </Box>
+
+      <Center marginTop={'60px'} marginBottom={'50px'}>
+        <Button
+          bg="primary"
+          boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+          borderRadius={'15px'}
+        >
+          <Text color={'white'}>Me gusta esta simulacion</Text>
+        </Button>
+      </Center>
     </Box>
   );
 }

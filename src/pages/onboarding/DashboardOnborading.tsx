@@ -19,7 +19,7 @@ function DashboardOnboarding() {
 
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
 
-  const [simulateToggle, setSimulateToggle] = React.useState(false);
+  const [simulateState, setSimulateState] = React.useState('notActive');
 
   const steps = [
     { label: t('label1') },
@@ -33,8 +33,7 @@ function DashboardOnboarding() {
 
   const skip = () => {
     nextStep();
-
-    setSimulateToggle(true);
+    setSimulateState('fistEdit');
   };
 
   return (
@@ -56,7 +55,13 @@ function DashboardOnboarding() {
           </Steps>
         </Box>
 
-        <Center display={simulateToggle ? 'none' : 'block'}>
+        <Center
+          display={
+            simulateState === 'fistEdit' || simulateState === 'simulate'
+              ? 'none'
+              : 'block'
+          }
+        >
           {currentQuestion === 0 ? (
             <IntroductionQuestions setQuestion={setCurrentQuestion} />
           ) : (
@@ -97,11 +102,11 @@ function DashboardOnboarding() {
           </Center>
         </Center>
 
-        <Center display={simulateToggle ? 'none' : 'none'}>
-          <Simulate />
+        <Center display={simulateState === 'fistEdit' ? 'block' : 'none'}>
+          <Simulate setSimulateState={setSimulateState} />
         </Center>
 
-        <Center display={simulateToggle ? 'block' : 'none'}>
+        <Center display={simulateState === 'simulate' ? 'block' : 'none'}>
           <SimulationChart periods={4} />
         </Center>
 
