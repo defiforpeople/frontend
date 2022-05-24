@@ -26,6 +26,7 @@ import {
   ScriptableContext,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import calculateInvesment from '../../../utils/calculateInvesment';
 
 Chart.register(
   CategoryScale,
@@ -81,12 +82,34 @@ export function SimulationChart({
   time,
   setTime,
   setSimulateState,
+  setSimulationData,
   simulationData,
 }: Props) {
-  const handleChangeValue = (event: any) => setValue(event.target.value);
+  const handleChangeValue = (event: any) => {
+    setValue(event.target.value);
+    setSimulationData(
+      calculateInvesment(
+        time,
+        Number(event.target.value),
+        Number(monthlyAmount),
+        0.1,
+      ),
+    );
+  };
 
-  const handleChangeMonthlyAmount = (event: any) =>
+  const handleChangeMonthlyAmount = (event: any) => {
     setMonthlyAmount(event.target.value);
+    setSimulationData(
+      calculateInvesment(time, Number(value), Number(event.target.value), 0.1),
+    );
+  };
+
+  const simulate = (time: number) => {
+    setTime(time);
+    setSimulationData(
+      calculateInvesment(time, Number(value), Number(monthlyAmount), 0.1),
+    );
+  };
 
   const data = () => {
     return {
@@ -196,24 +219,25 @@ export function SimulationChart({
         />
       </Box>
 
-      <Box width={'100%'} paddingLeft={5} paddingTop={10}>
+      <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
             Durante
           </Text>
 
-          <Text fontWeight={'light'} paddingRight={5} fontSize={'15px'}>
+          <Text fontWeight={'light'} fontSize={'15px'}>
             {time} años
           </Text>
         </HStack>
+
         <Slider
           aria-label="slider-ex-2"
           colorScheme="pink"
           defaultValue={3}
           min={0}
-          max={10}
+          max={40}
           step={1}
-          onChangeEnd={(val) => setTime(val)}
+          onChangeEnd={(val) => simulate(val)}
         >
           <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />

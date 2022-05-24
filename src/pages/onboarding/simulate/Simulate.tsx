@@ -88,7 +88,7 @@ function Simulate({
         />
       </Box>
 
-      <Box width={'100%'} padding={5}>
+      <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
             Durante

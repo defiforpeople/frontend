@@ -130,7 +130,7 @@ function DashboardOnboarding() {
           )}
         </Center>
 
-        <Center width={'100%'}>
+        <Center>
           {simulateState === 'simulate' ? (
             <SimulationChart
               value={value}
