@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box, HStack, Text } from '@chakra-ui/react';
 
 import {
   Chart,
@@ -29,6 +29,7 @@ Chart.register(
 
 export const options = {
   responsive: true,
+
   scales: {
     x: {
       grid: {
@@ -42,6 +43,9 @@ export const options = {
   plugins: {
     legend: {
       display: false,
+    },
+    tooltip: {
+      enabled: false,
     },
   },
 };
@@ -69,7 +73,7 @@ export function SimulationChart({ periods }: Props) {
             gradient.addColorStop(1, 'rgba(247, 37, 132, 0.6)');
             return gradient;
           },
-          order: 2,
+          order: 3,
         },
         {
           data: [1, 1, 2, 4, 12, 25, 50],
@@ -79,6 +83,14 @@ export function SimulationChart({ periods }: Props) {
           tension: 0.4,
           fill: true,
           backgroundColor: 'white',
+          order: 2,
+        },
+        {
+          data: [1, 2, 3, 4, 5, 6, 7],
+          borderColor: '#3A0CA3',
+          pointRadius: [0, 0, 0, 0, 0, 0, 1],
+          borderWidth: 2,
+          tension: 0.3,
           order: 1,
         },
       ],
@@ -87,6 +99,30 @@ export function SimulationChart({ periods }: Props) {
 
   return (
     <Box height={'300px'} width={'100%'}>
+      <HStack justifyContent={'space-between'} paddingTop={10}>
+        <Text paddingLeft={5}> En 35 años podrías tener:</Text>
+        <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
+          Cómo se calcula?
+        </Text>
+      </HStack>
+
+      <Text
+        paddingLeft={5}
+        fontWeight="bold"
+        fontSize={'18px'}
+        color={'primary'}
+      >
+        $ 274,814,192
+      </Text>
+
+      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'}>
+        Dinero invertido:
+      </Text>
+
+      <Text paddingLeft={5} fontWeight="bold" fontSize={'16px'} color={'sixth'}>
+        $ 50,000,000
+      </Text>
+
       <Line options={options} data={data()} />
     </Box>
   );
