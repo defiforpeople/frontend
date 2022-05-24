@@ -8,7 +8,7 @@
     "gobernance": "Gobernanza",
     "more": "Más",
     "enter": "Entrar",
-    "begin": "Comenzar"
+    "button": "Comenzar"
   },
   "SectionOne": {
     "title": "Invertir es simple",
@@ -18,6 +18,11 @@
   "SectionTwo": {
     "title": "Haz crecer tus ahorros 📈",
     "button": "Simular"
+  },
+  "DashboardOnboarding": {
+    "label1": "Tipo de inversionista",
+    "label2": "Simula una inversión",
+    "label3": "Vamos a invertir"
   },
   "FooterLanding": {
     "info": "Info",
@@ -46,7 +51,8 @@
     "strategies": "Estrategias",
     "gobernance": "Gobernanza",
     "enter": "Entrar",
-    "begin": "Comenzar"
+    "begin": "Comenzar",
+    "changeLanguage": "DeFi for People disponible en:"
   },
   "mobileConnectWalletModal": {
     "message": "No es posible conectar tu wallet. Por favor visita el sitio en un computador para conectarte a tu wallet."

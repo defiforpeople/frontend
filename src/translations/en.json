@@ -8,16 +8,21 @@
     "gobernance": "Gobernance",
     "more": "More",
     "enter": "Enter",
-    "begin": "Begin"
+    "button": "Begin"
   },
   "SectionOne": {
     "title": "Investing is simple",
-    "subtitle": "Transfer from $1 and we diversify it in decentralized finance andcryptocurrencies. Without fine print and for everyone",
+    "subtitle": "Transfer from $1 and we diversify it in decentralized finance and cryptocurrencies. Without fine print and for everyone",
     "button": "Begin"
   },
   "SectionTwo": {
     "title": "Grow your savings 📈",
     "button": "Simulate"
+  },
+  "DashboardOnboarding": {
+    "label1": "Type of investor",
+    "label2": "Simulate a goal",
+    "label3": "Now let get serious"
   },
   "FooterLanding": {
     "info": "Info",
@@ -46,7 +51,8 @@
     "strategies": "Strategies",
     "gobernance": "Gobernance",
     "enter": "Enter",
-    "begin": "Begin"
+    "begin": "Begin",
+    "changeLanguage": "DeFi for People is available in: "
   },
   "mobileConnectWalletModal": {
     "message": "Cannot connect to wallet. Please visit this page on your desktop browser to connect to your wallet."

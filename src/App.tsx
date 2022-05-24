@@ -1,14 +1,18 @@
 import { Route, Routes } from 'react-router-dom';
 
-import DefiForPeopleApp from './dashboard/DefiForPeopleApp';
+import DefiForPeopleApp from './pages/app/DefiForPeopleApp';
 
-import Landing from './landing/Landing';
+import Landing from './pages/landing/Landing';
+import Onboarding from './pages/onboarding/Onboarding';
+import Building from './pages/building/Building';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/app" element={<DefiForPeopleApp />} />
+      <Route path="/onboarding" element={<Onboarding />} />
+      <Route path="/building" element={<Building />} />
     </Routes>
   );
 }
