@@ -97,6 +97,7 @@ export default class MoralisAdapter implements IAdapter {
         await this.initAdapter();
       }
 
+      console.log(3);
       const profile = await this.getProfile();
       const { chainName } = this.network;
 
@@ -180,15 +181,19 @@ export default class MoralisAdapter implements IAdapter {
       const user = Moralis.User.current();
       const address = user!.get('ethAddress');
 
-      // const { name: ensName } = await Moralis.Web3API.resolve.resolveAddress({
-      //   address,
-      // });
-
-      const profile: Profile = {
+      const profile = {
         address,
         ens: '',
-        // ens: ensName,
-      };
+      } as Profile;
+
+      try {
+        const { name: ensName } = await Moralis.Web3API.resolve.resolveAddress({
+          address,
+        });
+        profile.ens = ensName;
+      } catch (err) {
+        console.warn('error ens resolveAddress, err=', err);
+      }
 
       return profile;
     } catch (err) {
