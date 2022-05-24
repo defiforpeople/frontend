@@ -13,8 +13,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
-import { useAdapter } from '../../hooks/use-adapter';
-import { Profile } from '../../utils/network-manager';
+import { useAdapter } from '../../../hooks/use-adapter';
+import { Profile } from '../../../utils/network-manager';
 
 type Props = {
   isOpen: any;

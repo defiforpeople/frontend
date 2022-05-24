@@ -1,7 +1,7 @@
 import { Box, Icon } from '@chakra-ui/react';
 
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import { useAdapter } from '../../hooks/use-adapter';
+import { useAdapter } from '../../../hooks/use-adapter';
 
 function ConnectedNetwork(props: { networkName: string }) {
   const { isAuthenticated } = useAdapter();

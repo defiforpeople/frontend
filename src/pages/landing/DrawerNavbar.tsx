@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 
 import Logo from '../../components/logo';
-import { ReactComponent as GithubLogo } from '../assets/logos/github-logo.svg';
+import { ReactComponent as GithubLogo } from '../../assets/logos/github-logo.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';

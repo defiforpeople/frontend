@@ -1,7 +1,7 @@
 import { Box, Button, Center, Text } from '@chakra-ui/react';
-import { ReactComponent as WalletIcon } from '../assets/logos/wallet-icon.svg';
+import { ReactComponent as WalletIcon } from '../../assets/logos/wallet-icon.svg';
 import { useTranslation } from 'react-i18next';
-import '../i18n';
+import '../../i18n';
 import { useAdapter } from '../../hooks/use-adapter';
 
 function ConnectWallet() {

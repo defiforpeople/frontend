@@ -1,4 +1,4 @@
-import { useAdapter } from '../hooks/use-adapter';
+import { useAdapter } from '../../hooks/use-adapter';
 import ConnectWallet from './ConnectWallet';
 import DashboardBody from './DashboardBody';
 
