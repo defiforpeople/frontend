@@ -1,4 +1,3 @@
-// Return array started with 'Hoy' and finish with 'periods' and of large periods
 function calculateInvesmentLabel(periods: number) {
   const labels = [];
 
@@ -18,7 +17,6 @@ function calculateInvesmentLabel(periods: number) {
   return labels;
 }
 
-// Return array started with initialValue and complete with monthlyAmount and of large periods
 function calculateInvesmentValues(
   periods: number,
   initialValue: number,
@@ -38,15 +36,49 @@ function calculateInvesmentValues(
   return values;
 }
 
+function calculateBorderRadius(periods: number) {
+  const borderRadius = [];
+
+  for (let index = 0; index < periods + 1; index++) {
+    if (index === periods) {
+      borderRadius.push(1);
+      continue;
+    }
+
+    borderRadius.push(0);
+  }
+
+  return borderRadius;
+}
+
+function calculateEarnedInterest(
+  periods: number,
+  initialValue: number,
+  monthlyAmount: number,
+  APY: number,
+) {
+  const revenue = [];
+
+  for (let index = 0; index < periods + 1; index++) {
+    if (index === 0) {
+      revenue.push(initialValue);
+      continue;
+    }
+
+    revenue.push(
+      revenue[index - 1] + monthlyAmount * 12 + revenue[index - 1] * APY,
+    );
+  }
+
+  return revenue;
+}
+
 function calculateInvesment(
   periods: number,
   initialValue: number,
   monthlyAmount: number,
+  APY: number,
 ) {
-  console.log(`periods: ${periods}`);
-  console.log(`initialValue: ${initialValue}`);
-  console.log(`monthlyAmount: ${monthlyAmount}`);
-
   const labels = calculateInvesmentLabel(periods);
 
   const invested = calculateInvesmentValues(
@@ -55,12 +87,29 @@ function calculateInvesment(
     monthlyAmount,
   );
 
+  const pessimisticRevenue = calculateEarnedInterest(
+    periods,
+    initialValue,
+    monthlyAmount,
+    0.1,
+  );
+
+  const optimisticRevenue = calculateEarnedInterest(
+    periods,
+    initialValue,
+    monthlyAmount,
+    0.2,
+  );
+
+  const borderRadius = calculateBorderRadius(periods);
+
   const output = {
     labels: labels,
     invested: invested,
+    pessimisticRevenue: pessimisticRevenue,
+    optimisticRevenue: optimisticRevenue,
+    borderRadius: borderRadius,
   };
-
-  console.log(output);
 
   return output;
 }
