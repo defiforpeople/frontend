@@ -1,10 +1,10 @@
 import { Box, Icon } from '@chakra-ui/react';
 
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import { useNetworkManager } from '../../hooks/use-manager';
+import { useAdapter } from '../../hooks/use-adapter';
 
 function ConnectedNetwork(props: { networkName: string }) {
-  const { isAuthenticated } = useNetworkManager();
+  const { isAuthenticated } = useAdapter();
 
   return (
     <Box width={'100%'}>

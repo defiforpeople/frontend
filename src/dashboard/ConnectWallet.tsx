@@ -2,18 +2,20 @@ import { Box, Button, Center, Text } from '@chakra-ui/react';
 import { ReactComponent as WalletIcon } from '../assets/logos/wallet-icon.svg';
 import { useTranslation } from 'react-i18next';
 import '../i18n';
-import { useNetworkManager } from '../hooks/use-manager';
+import { useAdapter } from '../hooks/use-adapter';
 
 function ConnectWallet() {
   const { t, i18n } = useTranslation('connectWallet');
 
-  const { adapter, isAuthenticated, setIsAuthenticated } = useNetworkManager();
+  const { adapter, isAuthenticated, setIsAuthenticated, setProfile } =
+    useAdapter();
 
   const login = async () => {
     if (!isAuthenticated) {
       try {
-        await adapter.login(t('signingMessage'));
+        const profile = await adapter.login(t('signingMessage'));
         setIsAuthenticated(true);
+        setProfile(profile);
       } catch (error) {
         console.log(error);
       }

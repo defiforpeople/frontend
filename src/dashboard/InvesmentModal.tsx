@@ -30,7 +30,7 @@ import { ReactComponent as DaiLogo } from '../assets/logos/dai-logo.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../i18n';
-import { useNetworkManager } from '../hooks/use-manager';
+import { useAdapter } from '../hooks/use-adapter';
 import { NativeToken, Token } from '../utils/network-manager';
 
 type Props = {
@@ -39,7 +39,7 @@ type Props = {
 };
 
 function InvesmentModal({ isOpen, onClose }: Props) {
-  const { adapter } = useNetworkManager();
+  const { adapter } = useAdapter();
 
   const { t } = useTranslation('InvesmentModal');
 

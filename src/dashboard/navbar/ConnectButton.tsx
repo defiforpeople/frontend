@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Button, Box, Text, Icon, useDisclosure } from '@chakra-ui/react';
 
@@ -9,8 +9,7 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n';
 import MobileConnectWalletModal from './MobileConnectWalletModal';
 
-import { useNetworkManager } from '../../hooks/use-manager';
-import { Profile } from '../../utils/network-manager';
+import { useAdapter } from '../../hooks/use-adapter';
 
 type Props = {
   handleOpenModal: any;
@@ -19,9 +18,8 @@ type Props = {
 function ConnectButton({ handleOpenModal }: Props) {
   const { t } = useTranslation('connectWallet');
 
-  const [profile, setProfile] = useState({} as Profile);
-
-  const { adapter, isAuthenticated, setIsAuthenticated } = useNetworkManager();
+  const { adapter, isAuthenticated, setIsAuthenticated, setProfile, profile } =
+    useAdapter();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -35,7 +33,7 @@ function ConnectButton({ handleOpenModal }: Props) {
     };
 
     fetchProfile();
-  }, [adapter, isAuthenticated, setIsAuthenticated]);
+  }, [adapter, isAuthenticated, setIsAuthenticated, setProfile]);
 
   const login = async () => {
     if (!isAuthenticated) {
