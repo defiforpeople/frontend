@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-import { useChain, useMoralis } from 'react-moralis';
+import { useState } from 'react';
 
 import {
   Button,
@@ -19,41 +17,24 @@ import { ReactComponent as BnbChainLogo } from '../../assets/logos/bnbchain-logo
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as FantomLogo } from '../../assets/logos/fantom-logo.svg';
 
-import { Networks } from '../../utils/network';
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
+import { useNetworkManager } from '../../hooks/use-manager';
+import { defaultNetwork, ChainName } from '../../utils/network-manager';
 
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { Moralis } = useMoralis();
+  const { manager } = useNetworkManager();
 
-  const { switchNetwork } = useChain();
+  const [network, setNetwork] = useState(defaultNetwork);
+  const networks = manager.listNetworks();
 
-  const [chain, setChain] = useState('0x1');
-
-  useEffect(() => {
-    const getNetwork = async () => {
-      await Moralis.enableWeb3();
-
-      const chainId = await Moralis.getChainId();
-
-      setChain(chainId!);
-    };
-
-    getNetwork();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const changeNetwork = async (networkId: string) => {
-    console.log(`Change network to netkorkId: ${networkId}`);
-    await Moralis.enableWeb3();
-
+  const changeNetwork = async (networkName: ChainName) => {
+    console.log(`Change network to networkName: ${networkName}`);
     try {
-      await switchNetwork(networkId);
-
-      setChain(networkId);
+      await manager.switchNetwork(networkName);
+      setNetwork(networks[networkName]);
 
       onClose();
     } catch (error) {
@@ -61,19 +42,11 @@ function ChainButton() {
     }
   };
 
-  const networkDisabled = (networkId: string) => {
-    if (networkId === chain) {
-      return true;
-    }
-
-    return false;
-  };
-
   return (
     <>
       <Button
         marginRight={5}
-        leftIcon={<LogoNetwork chainId={chain} />}
+        leftIcon={<LogoNetwork chainId={network.chainId} />}
         iconSpacing={3}
         onClick={onOpen}
         variant="solid"
@@ -82,7 +55,7 @@ function ChainButton() {
         borderRadius={70}
         display={['none', 'inherit', 'inherit']}
       >
-        <ConnectedNetwork chainId={Networks(chain)} />
+        <ConnectedNetwork networkName={network.name} />
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size={'sm'} isCentered>
@@ -98,8 +71,8 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={networkDisabled('0x1')}
-            onClick={() => changeNetwork('0x1')}
+            isDisabled={'eth' === network.chainName}
+            onClick={() => changeNetwork('eth')}
           >
             Ethereum
           </Button>
@@ -111,8 +84,8 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={networkDisabled('0x89')}
-            onClick={() => changeNetwork('0x89')}
+            isDisabled={'polygon' === network.chainName}
+            onClick={() => changeNetwork('polygon')}
           >
             Polygon
           </Button>
@@ -124,8 +97,8 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={networkDisabled('0x38')}
-            onClick={() => changeNetwork('0x38')}
+            isDisabled={'bsc' === network.chainName}
+            onClick={() => changeNetwork('bsc')}
           >
             BNB Chain
           </Button>
@@ -137,8 +110,8 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={networkDisabled('0xa86a')}
-            onClick={() => changeNetwork('0xa86a')}
+            isDisabled={'avalanche' === network.chainName}
+            onClick={() => changeNetwork('avalanche')}
           >
             Avalanche
           </Button>
@@ -149,8 +122,8 @@ function ChainButton() {
             margin={'auto'}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={networkDisabled('0xfa')}
-            onClick={() => changeNetwork('0xfa')}
+            isDisabled={'fantom' === network.chainName}
+            onClick={() => changeNetwork('fantom')}
           >
             Fantom
           </Button>

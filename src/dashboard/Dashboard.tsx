@@ -1,13 +1,9 @@
-import React from 'react';
-
-import { useMoralis } from 'react-moralis';
-
+import { useAdapter } from '../hooks/use-adapter';
 import ConnectWallet from './ConnectWallet';
 import DashboardBody from './DashboardBody';
 
 function Dashboard() {
-  const { isAuthenticated } = useMoralis();
-
+  const { isAuthenticated } = useAdapter();
   return isAuthenticated ? <DashboardBody /> : <ConnectWallet />;
 }
 

@@ -1,18 +1,14 @@
-import React from 'react';
-
 import { Box, Icon } from '@chakra-ui/react';
 
-import { useMoralis } from 'react-moralis';
-
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import { useAdapter } from '../../hooks/use-adapter';
 
-function ConnectedNetwork(props: any) {
-  const { isAuthenticated } = useMoralis();
+function ConnectedNetwork(props: { networkName: string }) {
+  const { isAuthenticated } = useAdapter();
 
   return (
     <Box width={'100%'}>
-      {props.chainId}
-
+      {props.networkName}
       <Icon
         as={RadioButtonCheckedIcon}
         w={2.5}

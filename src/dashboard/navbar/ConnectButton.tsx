@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
+import { useEffect } from 'react';
 
 import { Button, Box, Text, Icon, useDisclosure } from '@chakra-ui/react';
 
@@ -9,8 +7,9 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
-
 import MobileConnectWalletModal from './MobileConnectWalletModal';
+
+import { useAdapter } from '../../hooks/use-adapter';
 
 type Props = {
   handleOpenModal: any;
@@ -19,37 +18,31 @@ type Props = {
 function ConnectButton({ handleOpenModal }: Props) {
   const { t } = useTranslation('connectWallet');
 
-  const [ensName, setEnsName] = useState('');
-
-  const { authenticate, isAuthenticated, user } = useMoralis();
-
-  const Web3Api = useMoralisWeb3Api();
-
+  const { adapter, isAuthenticated, setIsAuthenticated, setProfile, profile } =
+    useAdapter();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      const fetchBalance = async () => {
-        // get ENS domain of an address
-        const { name: ensName } = await Web3Api.resolve.resolveAddress();
+    const fetchProfile = async () => {
+      if (isAuthenticated) {
+        setIsAuthenticated(true);
 
-        setEnsName(ensName);
-      };
+        const profile = await adapter.getProfile();
+        setProfile(profile);
+      }
+    };
 
-      fetchBalance();
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+    fetchProfile();
+  }, [adapter, isAuthenticated, setIsAuthenticated, setProfile]);
 
   const login = async () => {
     if (!isAuthenticated) {
       try {
-        const user = await authenticate({
-          signingMessage: 'Log in DeFi for People using Moralis',
-        });
-        console.log('Logged in user:', user);
-        console.log(user!.get('ethAddress'));
+        const profile = await adapter.login(t('signingMessage'));
+        setIsAuthenticated(true);
+        setProfile(profile);
+
+        console.log('Logged profile user:', profile);
       } catch (error) {
         console.log(error);
       }
@@ -74,15 +67,12 @@ function ConnectButton({ handleOpenModal }: Props) {
         <Icon as={PersonIcon} marginRight={3} />
 
         <Text fontWeight={700} fontSize={'18'} lineHeight={'21.6px'}>
-          {ensName !== ''
-            ? ensName
-            : user!.attributes.ethAddress &&
-              `${user!.attributes.ethAddress.slice(
-                0,
-                6,
-              )}...${user!.attributes.ethAddress.slice(
-                user!.attributes.ethAddress.length - 4,
-                user!.attributes.ethAddress.length,
+          {profile.ens !== ''
+            ? profile.ens
+            : profile.address &&
+              `${profile.address.slice(0, 6)}...${profile.address.slice(
+                profile.address.length - 4,
+                profile.address.length,
               )}`}
         </Text>
 
