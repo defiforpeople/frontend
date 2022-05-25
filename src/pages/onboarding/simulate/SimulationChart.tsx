@@ -12,6 +12,7 @@ import {
   SliderTrack,
   Text,
   Tooltip,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import {
@@ -28,6 +29,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import calculateInvesment from '../../../utils/calculateInvesment';
+import HowWorksModal from './HowWorksModal';
 
 Chart.register(
   CategoryScale,
@@ -42,7 +44,9 @@ Chart.register(
 
 export const options = {
   responsive: true,
-
+  animation: {
+    duration: 1000,
+  },
   scales: {
     x: {
       grid: {
@@ -114,6 +118,8 @@ export function SimulationChart({
 
   const [showTooltip, setShowTooltip] = React.useState(false);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const data = () => {
     return {
       labels: simulationData.labels,
@@ -159,10 +165,22 @@ export function SimulationChart({
   return (
     <Box width={'100%'}>
       <HStack justifyContent={'space-between'} paddingTop={10}>
-        <Text paddingLeft={5}> En {time} años podrías tener:</Text>
-        <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
+        <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
+          En {time} años podrías tener:
+        </Text>
+        <Text
+          paddingRight={5}
+          fontSize={['12px', '16px', '16px']}
+          color={'primary'}
+          onClick={onOpen}
+          _hover={{
+            cursor: 'pointer',
+          }}
+        >
           Cómo se calcula?
         </Text>
+
+        <HowWorksModal isOpen={isOpen} onClose={onClose} />
       </HStack>
 
       <Text
@@ -282,8 +300,8 @@ export function SimulationChart({
         <Slider
           aria-label="slider-ex-2"
           colorScheme="pink"
-          defaultValue={3}
-          min={0}
+          defaultValue={time}
+          min={1}
           max={40}
           step={1}
           onChange={(val) => simulate(val)}
@@ -301,7 +319,7 @@ export function SimulationChart({
             color="white"
             placement="top"
             isOpen={showTooltip}
-            label={`${time}%`}
+            label={`${time}`}
           >
             <SliderThumb bg="primary"></SliderThumb>
           </Tooltip>

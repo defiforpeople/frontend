@@ -11,6 +11,7 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Tooltip,
 } from '@chakra-ui/react';
 import calculateInvesment from '../../../utils/calculateInvesment';
 
@@ -46,6 +47,8 @@ function Simulate({
     );
     setSimulateState('simulate');
   };
+
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
   return (
     <Box width={'100%'}>
@@ -106,18 +109,31 @@ function Simulate({
           max={40}
           step={1}
           onChangeEnd={(val) => setTime(val)}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onTouchStart={() => setShowTooltip(true)}
+          onTouchEndCapture={() => setShowTooltip(false)}
         >
           <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb bg="primary"></SliderThumb>
+          <Tooltip
+            hasArrow
+            bg="primary"
+            color="white"
+            placement="top"
+            isOpen={showTooltip}
+            label={`${time}`}
+          >
+            <SliderThumb bg="primary"></SliderThumb>
+          </Tooltip>
         </Slider>
       </Box>
 
       <Center marginTop={'50px'}>
         <Button
           onClick={simulate}
-          isDisabled={value === ''}
+          isDisabled={value === '' || monthlyAmount === ''}
           bg="primary"
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'15px'}

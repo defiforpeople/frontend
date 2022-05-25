@@ -56,11 +56,8 @@ export default function AccountModal({ isOpen, onClose }: Props) {
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">
       <ModalOverlay />
       <ModalContent
-        background="white"
-        border="1px"
-        borderStyle="solid"
-        borderColor="gray.700"
-        borderRadius="3xl"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.25)"
+        borderRadius={'15px'}
       >
         <ModalHeader color="white" px={4} fontSize="lg" fontWeight="medium">
           Account
