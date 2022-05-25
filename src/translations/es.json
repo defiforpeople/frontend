@@ -38,7 +38,12 @@
     "optimistic": "Resultado optimista",
     "pessimistic": "Resultado pesimista",
     "investment": "Dinero invertido",
-    "adjust": "Ajusta tu simulación"
+    "adjust": "Ajusta tu simulación",
+    "text1": "Consideramos 2 posibles escenarios, optimista y pesimista",
+    "text2": "El valor de cada año se calcula como:",
+    "calculateValue": "valor = valor del año anterior ( 1 + APY) + inversión recurrente",
+    "APYoptimistic": "Optimista APY: 10%",
+    "APYpessimistic": "Pesimista APY: 5%"
   },
   "FooterLanding": {
     "info": "Info",

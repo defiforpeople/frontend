@@ -38,7 +38,12 @@
     "optimistic": "Optimistic result",
     "pessimistic": "Pessimistic result",
     "investment": "Investment",
-    "adjust": "Adjust your simulation"
+    "adjust": "Adjust your simulation",
+    "text1": "Whe consider two possible scenarios: optimistic and pessimistic",
+    "text2": "The value of each year is calculated by the formula:",
+    "calculateValue": "value = past year valye ( 1 + APY) + recurrent investment",
+    "APYoptimistic": "APY Optimistic: 10%",
+    "APYpessimistic": "APY Pessimistic: 5%"
   },
   "FooterLanding": {
     "info": "Info",
