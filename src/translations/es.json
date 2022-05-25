@@ -24,6 +24,14 @@
     "label2": "Simula una inversión",
     "label3": "Vamos a invertir"
   },
+  "Simulation": {
+    "title": "Cuánto quieres invertir?",
+    "amountMessage": "Si partieras hoy con",
+    "recurringMessage": "Si al año depositaras",
+    "during": "Durante",
+    "years": "años",
+    "continue": "Continuar"
+  },
   "FooterLanding": {
     "info": "Info",
     "work": "¿Cómo funciona?",

@@ -13,7 +13,11 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
+
 import calculateInvesment from '../../../utils/calculateInvesment';
+
+import { useTranslation } from 'react-i18next';
+import '../../../i18n';
 
 type Props = {
   value: string;
@@ -36,6 +40,8 @@ function Simulate({
   setSimulateState,
   setSimulationData,
 }: Props) {
+  const { t } = useTranslation('Simulation');
+
   const handleChangeValue = (event: any) => setValue(event.target.value);
 
   const handleChangeMonthlyAmount = (event: any) =>
@@ -59,13 +65,13 @@ function Simulate({
           fontWeight={'bold'}
           fontSize={'22px'}
         >
-          Cuánto quieres invertir?
+          {t('title')}
         </Text>
       </Box>
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con
+          {t('amountMessage')}
         </Text>
         <Input
           type={'number'}
@@ -79,7 +85,7 @@ function Simulate({
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Y al mes depositaras
+          {t('recurringMessage')}
         </Text>
         <Input
           type={'number'}
@@ -94,11 +100,11 @@ function Simulate({
       <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
-            Durante
+            {t('during')}
           </Text>
 
           <Text fontWeight={'light'} fontSize={'15px'}>
-            {time} años
+            {time} {t('years')}
           </Text>
         </HStack>
         <Slider
@@ -138,7 +144,7 @@ function Simulate({
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'15px'}
         >
-          <Text color={'white'}>Continuar</Text>
+          <Text color={'white'}>{t('continue')}</Text>
         </Button>
       </Center>
     </Box>

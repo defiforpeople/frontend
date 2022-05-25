@@ -24,6 +24,14 @@
     "label2": "Simulate a goal",
     "label3": "Now let get serious"
   },
+  "Simulation": {
+    "title": "How much do you want to invest?",
+    "amountMessage": "If started today with",
+    "recurringMessage": "If every year you will invest",
+    "during": "During",
+    "years": "years",
+    "continue": "Continue"
+  },
   "FooterLanding": {
     "info": "Info",
     "work": "How we work?",
