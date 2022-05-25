@@ -94,7 +94,7 @@ function ConnectWallet() {
       </Box>
 
       <Box
-        position={'absolute'}
+        position={['relative', 'relative', 'absolute']}
         top={['50%', '70%', '70%']}
         left={['16%', '40%', '35%', '41%']}
       >

@@ -13,6 +13,7 @@ import Question2 from './question/Question2';
 import Question3 from './question/Question3';
 import Simulate from './simulate/Simulate';
 import SimulationChart from './simulate/SimulationChart';
+import ConnectWalletOnboarding from './ConnectWalletOnboarding';
 
 function DashboardOnboarding() {
   const { t } = useTranslation('DashboardOnboarding');
@@ -167,6 +168,8 @@ function DashboardOnboarding() {
             ' '
           )}
         </Center>
+
+        {simulateState === 'complete' ? <ConnectWalletOnboarding /> : ' '}
 
         {/* <Center>
           {activeStep === steps.length ? (
