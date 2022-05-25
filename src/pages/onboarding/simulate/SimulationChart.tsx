@@ -27,9 +27,15 @@ import {
   ScriptableContext,
   Tooltip as TooltipChart,
 } from 'chart.js';
+
 import { Line } from 'react-chartjs-2';
+
 import calculateInvesment from '../../../utils/calculateInvesment';
+
 import HowWorksModal from './HowWorksModal';
+
+import { useTranslation } from 'react-i18next';
+import '../../../i18n';
 
 Chart.register(
   CategoryScale,
@@ -90,6 +96,8 @@ export function SimulationChart({
   setSimulationData,
   simulationData,
 }: Props) {
+  const { t } = useTranslation('Simulation');
+
   const handleChangeValue = (event: any) => {
     setValue(event.target.value);
     setSimulationData(
@@ -166,7 +174,7 @@ export function SimulationChart({
     <Box width={'100%'}>
       <HStack justifyContent={'space-between'} paddingTop={10}>
         <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
-          En {time} años podrías tener:
+          {t('in')} {time} {t('tittleChart')}
         </Text>
         <Text
           paddingRight={5}
@@ -177,7 +185,7 @@ export function SimulationChart({
             cursor: 'pointer',
           }}
         >
-          Cómo se calcula?
+          {t('howIsCalculated')}
         </Text>
 
         <HowWorksModal isOpen={isOpen} onClose={onClose} />
@@ -206,7 +214,7 @@ export function SimulationChart({
             fontSize={'14px'}
             color={'primary'}
           >
-            Resultado optimista:
+            {t('optimistic')}
           </Text>
 
           <Text
@@ -228,7 +236,7 @@ export function SimulationChart({
             color={'primary'}
             opacity={0.8}
           >
-            Resultado pesimista:
+            {t('pessimistic')}
           </Text>
 
           <Text
@@ -245,7 +253,7 @@ export function SimulationChart({
       </HStack>
 
       <Text paddingLeft={5} paddingTop={5} fontSize={'14px'} color={'sixth'}>
-        Dinero invertido:
+        {t('invested')}
       </Text>
 
       <Text paddingLeft={5} fontWeight="bold" fontSize={'16px'} color={'sixth'}>
@@ -255,12 +263,12 @@ export function SimulationChart({
       <Line options={options} data={data()} />
 
       <Text fontWeight="bold" fontSize={'16px'} paddingLeft={5} paddingTop={5}>
-        ⚖️ Ajusta tu objetivo
+        ⚖️ {t('adjust')}
       </Text>
 
       <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con
+          {t('amountMessage')}
         </Text>
         <Input
           type={'number'}
@@ -274,7 +282,7 @@ export function SimulationChart({
 
       <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Y al mes depositaras
+          {t('recurringMessage')}
         </Text>
         <Input
           type={'number'}
@@ -289,11 +297,11 @@ export function SimulationChart({
       <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
-            Durante
+            {t('during')}
           </Text>
 
           <Text fontWeight={'light'} fontSize={'15px'}>
-            {time} años
+            {time} {t('years')}
           </Text>
         </HStack>
 
@@ -332,7 +340,7 @@ export function SimulationChart({
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'15px'}
         >
-          <Text color={'white'}>Me gusta esta simulacion</Text>
+          <Text color={'white'}>{t('button')}</Text>
         </Button>
       </Center>
     </Box>

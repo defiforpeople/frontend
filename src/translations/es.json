@@ -30,7 +30,15 @@
     "recurringMessage": "Si al año depositaras",
     "during": "Durante",
     "years": "años",
-    "continue": "Continuar"
+    "continue": "Continuar",
+    "in": "En",
+    "tittleChart": "años podrías tener",
+    "howIsCalculated": "Cómo se calcula?",
+    "optimistic": "Resultado optimista",
+    "pessimistic": "Resultado pesimista",
+    "investment": "Dinero invertido",
+    "adjust": "Ajusta tu simulación",
+    "button": "Me gusta esta simulación"
   },
   "FooterLanding": {
     "info": "Info",

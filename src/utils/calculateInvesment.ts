@@ -3,12 +3,12 @@ function calculateInvesmentLabel(periods: number) {
 
   for (let index = 0; index < periods + 1; index++) {
     if (index === 0) {
-      labels.push('Hoy');
+      labels.push('Today');
       continue;
     }
 
     if (index === periods) {
-      labels.push(`${periods} años`);
+      labels.push(`${periods} years`);
       continue;
     }
 
