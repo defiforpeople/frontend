@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  HStack,
-  Icon,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Center, HStack, Icon, Text } from '@chakra-ui/react';
 
 import { ReactComponent as WalletIcon } from '../../assets/logos/wallet-icon.svg';
 
@@ -18,11 +10,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
 
-function ConnectWalletOnboarding() {
-  const { t, i18n } = useTranslation('connectWallet');
+import { useAdapter } from '../../hooks/use-adapter';
 
-  // TODO: Connect to Moralis to get number of users connected
-  // Moralis.Cloud.run('get_nr_users');
+function ConnectWalletOnboarding() {
+  const { adapter } = useAdapter();
+
+  const { t } = useTranslation('connectWallet');
+
+  const [users, setUsers] = React.useState(0);
+
+  useEffect(() => {
+    async function getUsersConnected() {
+      const users = await adapter.getUsers();
+
+      setUsers(users);
+    }
+
+    getUsersConnected();
+  }, [adapter]);
 
   return (
     <Center>
@@ -93,7 +98,7 @@ function ConnectWalletOnboarding() {
               <Icon as={FavoriteIcon} margin={3} color="sixth" />
 
               <Text color={'grayLetter'} fontSize={'14'}>
-                Trusted by 10 users
+                Trusted by {users} users
               </Text>
             </HStack>
           </Box>

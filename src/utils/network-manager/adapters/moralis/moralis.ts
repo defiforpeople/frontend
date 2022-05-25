@@ -201,4 +201,20 @@ export default class MoralisAdapter implements IAdapter {
       throw err;
     }
   }
+
+  public async getUsers(): Promise<any> {
+    try {
+      if (!this.ready) {
+        await this.initAdapter();
+      }
+
+      const users = await Moralis.Cloud.run('get_nr_users');
+
+      return users;
+    } catch (err) {
+      console.log('entro en el error');
+      console.log(err);
+      throw err;
+    }
+  }
 }

@@ -23,6 +23,7 @@ function ConnectButton({ handleOpenModal }: Props) {
 
   const { adapter, isAuthenticated, setIsAuthenticated, setProfile, profile } =
     useAdapter();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
