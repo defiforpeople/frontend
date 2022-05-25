@@ -47,6 +47,11 @@ function DashboardOnboarding() {
     setSimulateState('fistEdit');
   };
 
+  const goToStep3 = () => {
+    nextStep();
+    setSimulateState('complete');
+  };
+
   return (
     <Center>
       <Box
@@ -68,7 +73,9 @@ function DashboardOnboarding() {
 
         <Center
           display={
-            simulateState === 'fistEdit' || simulateState === 'simulate'
+            simulateState === 'fistEdit' ||
+            simulateState === 'simulate' ||
+            simulateState === 'complete'
               ? 'none'
               : 'block'
           }
@@ -132,17 +139,30 @@ function DashboardOnboarding() {
 
         <Center>
           {simulateState === 'simulate' ? (
-            <SimulationChart
-              value={value}
-              setValue={setValue}
-              monthlyAmount={monthlyAmount}
-              setMonthlyAmount={setMonthlyAmount}
-              time={time}
-              setTime={setTime}
-              setSimulateState={setSimulateState}
-              setSimulationData={setSimulationData}
-              simulationData={simulationData}
-            />
+            <Box width={'100%'}>
+              <SimulationChart
+                value={value}
+                setValue={setValue}
+                monthlyAmount={monthlyAmount}
+                setMonthlyAmount={setMonthlyAmount}
+                time={time}
+                setTime={setTime}
+                setSimulateState={setSimulateState}
+                setSimulationData={setSimulationData}
+                simulationData={simulationData}
+              />
+
+              <Center marginTop={'60px'} marginBottom={'50px'}>
+                <Button
+                  bg="primary"
+                  boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+                  borderRadius={'15px'}
+                  onClick={goToStep3}
+                >
+                  <Text color={'white'}>{t('button')}</Text>
+                </Button>
+              </Center>
+            </Box>
           ) : (
             ' '
           )}

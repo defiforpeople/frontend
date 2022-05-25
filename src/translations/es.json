@@ -22,7 +22,8 @@
   "DashboardOnboarding": {
     "label1": "Tipo de inversionista",
     "label2": "Simula una inversión",
-    "label3": "Vamos a invertir"
+    "label3": "Vamos a invertir",
+    "button": "Me gusta esta simulación"
   },
   "Simulation": {
     "title": "Cuánto quieres invertir?",
@@ -37,8 +38,7 @@
     "optimistic": "Resultado optimista",
     "pessimistic": "Resultado pesimista",
     "investment": "Dinero invertido",
-    "adjust": "Ajusta tu simulación",
-    "button": "Me gusta esta simulación"
+    "adjust": "Ajusta tu simulación"
   },
   "FooterLanding": {
     "info": "Info",

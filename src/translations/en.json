@@ -22,7 +22,8 @@
   "DashboardOnboarding": {
     "label1": "Type of investor",
     "label2": "Simulate a goal",
-    "label3": "Now let get serious"
+    "label3": "Now let get serious",
+    "button": "I like this simulation"
   },
   "Simulation": {
     "title": "How much do you want to invest?",
@@ -37,8 +38,7 @@
     "optimistic": "Optimistic result",
     "pessimistic": "Pessimistic result",
     "investment": "Investment",
-    "adjust": "Adjust your simulation",
-    "button": "I like this simulation"
+    "adjust": "Adjust your simulation"
   },
   "FooterLanding": {
     "info": "Info",

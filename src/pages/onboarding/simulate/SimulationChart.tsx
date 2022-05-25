@@ -333,16 +333,6 @@ export function SimulationChart({
           </Tooltip>
         </Slider>
       </Box>
-
-      <Center marginTop={'60px'} marginBottom={'50px'}>
-        <Button
-          bg="primary"
-          boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-          borderRadius={'15px'}
-        >
-          <Text color={'white'}>{t('button')}</Text>
-        </Button>
-      </Center>
     </Box>
   );
 }
