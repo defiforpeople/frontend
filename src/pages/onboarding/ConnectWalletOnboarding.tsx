@@ -21,13 +21,16 @@ import '../../i18n';
 function ConnectWalletOnboarding() {
   const { t, i18n } = useTranslation('connectWallet');
 
+  // TODO: Connect to Moralis to get number of users connected
+  // Moralis.Cloud.run('get_nr_users');
+
   return (
     <Center>
       <Box
         bg={'white'}
         borderRadius={15}
         height={['300px', '356px', '356px']}
-        width={['80%', '80%', '800px']}
+        width={['80%', '80%', '500px']}
       >
         <Box marginTop={10}>
           <Center>
@@ -77,10 +80,8 @@ function ConnectWalletOnboarding() {
               </Button>
             </Center>
 
-            {/* <Divider paddingTop={5} color="red" /> */}
-
             <HStack margin={'auto'} paddingTop={5}>
-              <Icon as={VisibilityIcon} margin={3} />
+              <Icon as={VisibilityIcon} margin={3} color="sixth" />
 
               <Text color={'grayLetter'} fontSize={'14'} paddingRight={1}>
                 View only permissions. We will never do anything without your
@@ -89,7 +90,7 @@ function ConnectWalletOnboarding() {
             </HStack>
 
             <HStack>
-              <Icon as={FavoriteIcon} margin={3} />
+              <Icon as={FavoriteIcon} margin={3} color="sixth" />
 
               <Text color={'grayLetter'} fontSize={'14'}>
                 Trusted by 10 users
