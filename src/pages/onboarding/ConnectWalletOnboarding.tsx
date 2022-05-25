@@ -1,6 +1,19 @@
-import { Box, Button, Center, Text } from '@chakra-ui/react';
 import React from 'react';
+
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  HStack,
+  Icon,
+  Text,
+} from '@chakra-ui/react';
+
 import { ReactComponent as WalletIcon } from '../../assets/logos/wallet-icon.svg';
+
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
@@ -45,17 +58,44 @@ function ConnectWalletOnboarding() {
           </Text>
         </Center>
 
-        <Center margin={5}>
-          <Button
-            bg={'primary'}
-            color="white"
-            borderRadius={70}
-            // onClick={login}
+        <Center marginTop={5}>
+          <Box
+            width={'100%'}
+            borderRadius={20}
+            boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
           >
-            <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
-              {t('connect')}
-            </Text>
-          </Button>
+            <Center paddingTop={5}>
+              <Button
+                bg={'primary'}
+                color="white"
+                borderRadius={70}
+                // onClick={login}
+              >
+                <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
+                  {t('connect')}
+                </Text>
+              </Button>
+            </Center>
+
+            {/* <Divider paddingTop={5} color="red" /> */}
+
+            <HStack margin={'auto'} paddingTop={5}>
+              <Icon as={VisibilityIcon} margin={3} />
+
+              <Text color={'grayLetter'} fontSize={'14'} paddingRight={1}>
+                View only permissions. We will never do anything without your
+                approval.
+              </Text>
+            </HStack>
+
+            <HStack>
+              <Icon as={FavoriteIcon} margin={3} />
+
+              <Text color={'grayLetter'} fontSize={'14'}>
+                Trusted by 10 users
+              </Text>
+            </HStack>
+          </Box>
         </Center>
       </Box>
     </Center>
