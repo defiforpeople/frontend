@@ -15,7 +15,7 @@ import { useAdapter } from '../../hooks/use-adapter';
 function ConnectWalletOnboarding() {
   const { adapter } = useAdapter();
 
-  const { t } = useTranslation('connectWallet');
+  const { t } = useTranslation('ConnectWalletOnboarding');
 
   const [users, setUsers] = React.useState(0);
 
@@ -50,7 +50,7 @@ function ConnectWalletOnboarding() {
             letterSpacing={'5px'}
             lineHeight={'26.4px'}
           >
-            {t('connectWallet')}
+            {t('title')}
           </Text>
         </Center>
 
@@ -62,7 +62,7 @@ function ConnectWalletOnboarding() {
             color="grayLetter"
             textAlign={'center'}
           >
-            {t('message')}
+            {t('subtitle')}
           </Text>
         </Center>
 
@@ -73,32 +73,26 @@ function ConnectWalletOnboarding() {
             boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
           >
             <Center paddingTop={5}>
-              <Button
-                bg={'primary'}
-                color="white"
-                borderRadius={70}
-                // onClick={login}
-              >
+              <Button bg={'primary'} color="white" borderRadius={70}>
                 <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
-                  {t('connect')}
+                  {t('button')}
                 </Text>
               </Button>
             </Center>
 
             <HStack margin={'auto'} paddingTop={5}>
-              <Icon as={VisibilityIcon} margin={3} color="sixth" />
+              <Icon as={VisibilityIcon} margin={5} color="sixth" />
 
-              <Text color={'grayLetter'} fontSize={'14'} paddingRight={1}>
-                View only permissions. We will never do anything without your
-                approval.
+              <Text color={'grayLetter'} fontSize={'14'} paddingRight={2}>
+                {t('permission')}
               </Text>
             </HStack>
 
             <HStack>
-              <Icon as={FavoriteIcon} margin={3} color="sixth" />
+              <Icon as={FavoriteIcon} margin={5} color="sixth" />
 
               <Text color={'grayLetter'} fontSize={'14'}>
-                Trusted by {users} users
+                {t('trustedBy')} {users} {t('users')}
               </Text>
             </HStack>
           </Box>

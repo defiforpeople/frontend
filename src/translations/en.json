@@ -45,6 +45,14 @@
     "APYoptimistic": "APY Optimistic: 10%",
     "APYpessimistic": "APY Pessimistic: 5%"
   },
+  "ConnectWalletOnboarding": {
+    "title": "Connect Wallet",
+    "subtitle": "Connect your wallet to start to use DeFi for People",
+    "button": "Connect to wallet",
+    "permission": "View only permission. We will never do anything withot your aprproval",
+    "trustedBy": "Trusted by",
+    "users": "users"
+  },
   "FooterLanding": {
     "info": "Info",
     "work": "How we work?",
