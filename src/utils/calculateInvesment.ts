@@ -3,12 +3,12 @@ function calculateInvesmentLabel(periods: number) {
 
   for (let index = 0; index < periods + 1; index++) {
     if (index === 0) {
-      labels.push('Hoy');
+      labels.push('Today');
       continue;
     }
 
     if (index === periods) {
-      labels.push(`${periods} años`);
+      labels.push(`${periods} years`);
       continue;
     }
 
@@ -91,14 +91,14 @@ function calculateInvesment(
     periods,
     initialValue,
     monthlyAmount,
-    0.1,
+    0.05,
   );
 
   const optimisticRevenue = calculateEarnedInterest(
     periods,
     initialValue,
     monthlyAmount,
-    0.2,
+    0.1,
   );
 
   const borderRadius = calculateBorderRadius(periods);

@@ -11,22 +11,36 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Tooltip,
 } from '@chakra-ui/react';
+
 import calculateInvesment from '../../../utils/calculateInvesment';
 
+import { useTranslation } from 'react-i18next';
+import '../../../i18n';
+
 type Props = {
+  value: string;
+  setValue: any;
+  monthlyAmount: string;
+  setMonthlyAmount: any;
+  time: number;
+  setTime: any;
   setSimulateState: any;
   setSimulationData: any;
 };
 
-function Simulate({ setSimulateState, setSimulationData }: Props) {
-  const recommendedMinTime = 3;
-
-  const [value, setValue] = React.useState('');
-
-  const [monthlyAmount, setMonthlyAmount] = React.useState('');
-
-  const [time, setTime] = React.useState(recommendedMinTime);
+function Simulate({
+  value,
+  setValue,
+  monthlyAmount,
+  setMonthlyAmount,
+  time,
+  setTime,
+  setSimulateState,
+  setSimulationData,
+}: Props) {
+  const { t } = useTranslation('Simulation');
 
   const handleChangeValue = (event: any) => setValue(event.target.value);
 
@@ -40,6 +54,8 @@ function Simulate({ setSimulateState, setSimulationData }: Props) {
     setSimulateState('simulate');
   };
 
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
   return (
     <Box width={'100%'}>
       <Box>
@@ -49,13 +65,13 @@ function Simulate({ setSimulateState, setSimulationData }: Props) {
           fontWeight={'bold'}
           fontSize={'22px'}
         >
-          Cuánto quieres invertir?
+          {t('title')}
         </Text>
       </Box>
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con
+          {t('amountMessage')}
         </Text>
         <Input
           type={'number'}
@@ -69,7 +85,7 @@ function Simulate({ setSimulateState, setSimulationData }: Props) {
 
       <Box width={'100%'} padding={5}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Y al mes depositaras
+          {t('recurringMessage')}
         </Text>
         <Input
           type={'number'}
@@ -81,14 +97,14 @@ function Simulate({ setSimulateState, setSimulationData }: Props) {
         />
       </Box>
 
-      <Box width={'100%'} padding={5}>
+      <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
-            Durante
+            {t('during')}
           </Text>
 
           <Text fontWeight={'light'} fontSize={'15px'}>
-            {time} años
+            {time} {t('years')}
           </Text>
         </HStack>
         <Slider
@@ -99,23 +115,36 @@ function Simulate({ setSimulateState, setSimulationData }: Props) {
           max={40}
           step={1}
           onChangeEnd={(val) => setTime(val)}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onTouchStart={() => setShowTooltip(true)}
+          onTouchEndCapture={() => setShowTooltip(false)}
         >
           <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb bg="primary"></SliderThumb>
+          <Tooltip
+            hasArrow
+            bg="primary"
+            color="white"
+            placement="top"
+            isOpen={showTooltip}
+            label={`${time}`}
+          >
+            <SliderThumb bg="primary"></SliderThumb>
+          </Tooltip>
         </Slider>
       </Box>
 
       <Center marginTop={'50px'}>
         <Button
           onClick={simulate}
-          isDisabled={value === ''}
+          isDisabled={value === '' || monthlyAmount === ''}
           bg="primary"
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'15px'}
         >
-          <Text color={'white'}>Continuar</Text>
+          <Text color={'white'}>{t('continue')}</Text>
         </Button>
       </Center>
     </Box>

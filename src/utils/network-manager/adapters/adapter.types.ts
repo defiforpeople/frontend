@@ -18,4 +18,5 @@ export interface IAdapter {
   getNativeToken(): Promise<NativeToken>;
   getTokens(): Promise<Token[]>;
   switchNetwork(name: ChainName): Promise<void>;
+  getUsers(): Promise<number>;
 }

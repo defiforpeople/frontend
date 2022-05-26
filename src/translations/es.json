@@ -22,7 +22,36 @@
   "DashboardOnboarding": {
     "label1": "Tipo de inversionista",
     "label2": "Simula una inversión",
-    "label3": "Vamos a invertir"
+    "label3": "Vamos a invertir",
+    "button": "Me gusta esta simulación"
+  },
+  "Simulation": {
+    "title": "Cuánto quieres invertir?",
+    "amountMessage": "Si partieras hoy con",
+    "recurringMessage": "Si al año depositaras",
+    "during": "Durante",
+    "years": "años",
+    "continue": "Continuar",
+    "in": "En",
+    "tittleChart": "años podrías tener",
+    "howIsCalculated": "Cómo se calcula?",
+    "optimistic": "Resultado optimista",
+    "pessimistic": "Resultado pesimista",
+    "investment": "Dinero invertido",
+    "adjust": "Ajusta tu simulación",
+    "text1": "Consideramos 2 posibles escenarios, optimista y pesimista",
+    "text2": "El valor de cada año se calcula como:",
+    "calculateValue": "valor = valor del año anterior ( 1 + APY) + inversión recurrente",
+    "APYoptimistic": "Optimista APY: 10%",
+    "APYpessimistic": "Pesimista APY: 5%"
+  },
+  "ConnectWalletOnboarding": {
+    "title": "Conectar Wallet",
+    "subtitle": "Conecta tu wallet para empezar a utilizar DeFi for People ",
+    "button": "Conectar a wallet",
+    "permission": "Persmisos solo de vizualicación. Nunca haremos nada sin tu aprobación.",
+    "trustedBy": "Confian en nosotros",
+    "users": "usuarios"
   },
   "FooterLanding": {
     "info": "Info",

@@ -11,6 +11,8 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Tooltip,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import {
@@ -20,12 +22,20 @@ import {
   PointElement,
   LineElement,
   Title,
-  Tooltip,
   Legend,
   Filler,
   ScriptableContext,
+  Tooltip as TooltipChart,
 } from 'chart.js';
+
 import { Line } from 'react-chartjs-2';
+
+import calculateInvesment from '../../../utils/calculateInvesment';
+
+import HowWorksModal from './HowWorksModal';
+
+import { useTranslation } from 'react-i18next';
+import '../../../i18n';
 
 Chart.register(
   CategoryScale,
@@ -33,14 +43,16 @@ Chart.register(
   PointElement,
   LineElement,
   Title,
-  Tooltip,
+  TooltipChart,
   Legend,
   Filler,
 );
 
 export const options = {
   responsive: true,
-
+  animation: {
+    duration: 1000,
+  },
   scales: {
     x: {
       grid: {
@@ -62,28 +74,61 @@ export const options = {
 };
 
 type Props = {
-  periods: number;
+  value: string;
+  setValue: any;
+  monthlyAmount: string;
+  setMonthlyAmount: any;
+  time: number;
+  setTime: any;
+  setSimulateState: any;
+  setSimulationData: any;
   simulationData: any;
 };
 
-export function SimulationChart({ periods, simulationData }: Props) {
-  console.log(simulationData);
+export function SimulationChart({
+  value,
+  setValue,
+  monthlyAmount,
+  setMonthlyAmount,
+  time,
+  setTime,
+  setSimulateState,
+  setSimulationData,
+  simulationData,
+}: Props) {
+  const { t } = useTranslation('Simulation');
 
-  const recommendedMinTime = 3;
+  const handleChangeValue = (event: any) => {
+    setValue(event.target.value);
+    setSimulationData(
+      calculateInvesment(
+        time,
+        Number(event.target.value),
+        Number(monthlyAmount),
+        0.1,
+      ),
+    );
+  };
 
-  const [value, setValue] = React.useState('');
+  const handleChangeMonthlyAmount = (event: any) => {
+    setMonthlyAmount(event.target.value);
+    setSimulationData(
+      calculateInvesment(time, Number(value), Number(event.target.value), 0.1),
+    );
+  };
 
-  const [montlyAmount, setMontlyAmount] = React.useState('');
+  const simulate = (time: number) => {
+    setTime(time);
+    setSimulationData(
+      calculateInvesment(time, Number(value), Number(monthlyAmount), 0.1),
+    );
+  };
 
-  const [time, setTime] = React.useState(recommendedMinTime);
+  const [showTooltip, setShowTooltip] = React.useState(false);
 
-  const handleChangeValue = (event: any) => setValue(event.target.value);
-
-  const handleChangeMonthlyAmount = (event: any) =>
-    setMontlyAmount(event.target.value);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const data = () => {
-    console.log('aca', simulationData);
     return {
       labels: simulationData.labels,
       datasets: [
@@ -128,16 +173,28 @@ export function SimulationChart({ periods, simulationData }: Props) {
   return (
     <Box width={'100%'}>
       <HStack justifyContent={'space-between'} paddingTop={10}>
-        <Text paddingLeft={5}> En {periods} años podrías tener:</Text>
-        <Text paddingRight={5} fontSize={'12px'} color={'primary'}>
-          Cómo se calcula?
+        <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
+          {t('in')} {time} {t('tittleChart')}
         </Text>
+        <Text
+          paddingRight={5}
+          fontSize={['12px', '16px', '16px']}
+          color={'primary'}
+          onClick={onOpen}
+          _hover={{
+            cursor: 'pointer',
+          }}
+        >
+          {t('howIsCalculated')}
+        </Text>
+
+        <HowWorksModal isOpen={isOpen} onClose={onClose} />
       </HStack>
 
       <Text
         paddingLeft={5}
         fontWeight="bold"
-        fontSize={'18px'}
+        fontSize={'26px'}
         color={'primary'}
       >
         {(
@@ -146,11 +203,57 @@ export function SimulationChart({ periods, simulationData }: Props) {
               simulationData.labels.length - 1
             ]) /
           2
-        ).toFixed(2)}
+        ).toFixed(0)}
       </Text>
 
-      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'}>
-        Dinero invertido:
+      <HStack>
+        <Box>
+          <Text
+            paddingLeft={5}
+            paddingTop={5}
+            fontSize={'14px'}
+            color={'primary'}
+          >
+            {t('optimistic')}
+          </Text>
+
+          <Text
+            paddingLeft={5}
+            fontWeight="bold"
+            fontSize={'16px'}
+            color={'primary'}
+          >
+            {simulationData.optimisticRevenue[
+              simulationData.labels.length - 1
+            ].toFixed(0)}
+          </Text>
+        </Box>
+
+        <Box paddingLeft={30}>
+          <Text
+            paddingTop={5}
+            fontSize={'14px'}
+            color={'primary'}
+            opacity={0.8}
+          >
+            {t('pessimistic')}
+          </Text>
+
+          <Text
+            fontWeight="bold"
+            fontSize={'16px'}
+            color={'primary'}
+            opacity={0.8}
+          >
+            {simulationData.pessimisticRevenue[
+              simulationData.labels.length - 1
+            ].toFixed(0)}
+          </Text>
+        </Box>
+      </HStack>
+
+      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'} color={'sixth'}>
+        {t('invested')}
       </Text>
 
       <Text paddingLeft={5} fontWeight="bold" fontSize={'16px'} color={'sixth'}>
@@ -160,12 +263,12 @@ export function SimulationChart({ periods, simulationData }: Props) {
       <Line options={options} data={data()} />
 
       <Text fontWeight="bold" fontSize={'16px'} paddingLeft={5} paddingTop={5}>
-        ⚖️ Ajusta tu objetivo
+        ⚖️ {t('adjust')}
       </Text>
 
       <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Si partieras hoy con
+          {t('amountMessage')}
         </Text>
         <Input
           type={'number'}
@@ -179,11 +282,11 @@ export function SimulationChart({ periods, simulationData }: Props) {
 
       <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
         <Text fontWeight={'light'} fontSize={'15px'}>
-          Y al mes depositaras
+          {t('recurringMessage')}
         </Text>
         <Input
           type={'number'}
-          value={montlyAmount}
+          value={monthlyAmount}
           onChange={handleChangeMonthlyAmount}
           placeholder="$ 0 USDT"
           borderRadius={'12px'}
@@ -191,41 +294,45 @@ export function SimulationChart({ periods, simulationData }: Props) {
         />
       </Box>
 
-      <Box width={'100%'} paddingLeft={5} paddingTop={10}>
+      <Box width={'100%'} padding={8}>
         <HStack justifyContent={'space-between'}>
           <Text fontWeight={'light'} fontSize={'15px'}>
-            Durante
+            {t('during')}
           </Text>
 
-          <Text fontWeight={'light'} paddingRight={5} fontSize={'15px'}>
-            {time} años
+          <Text fontWeight={'light'} fontSize={'15px'}>
+            {time} {t('years')}
           </Text>
         </HStack>
+
         <Slider
           aria-label="slider-ex-2"
           colorScheme="pink"
-          defaultValue={3}
-          min={0}
-          max={10}
+          defaultValue={time}
+          min={1}
+          max={40}
           step={1}
-          onChangeEnd={(val) => setTime(val)}
+          onChange={(val) => simulate(val)}
+          onMouseEnter={() => setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onTouchStart={() => setShowTooltip(true)}
+          onTouchEndCapture={() => setShowTooltip(false)}
         >
           <SliderTrack bg="#E5E4E5">
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb bg="primary"></SliderThumb>
+          <Tooltip
+            hasArrow
+            bg="primary"
+            color="white"
+            placement="top"
+            isOpen={showTooltip}
+            label={`${time}`}
+          >
+            <SliderThumb bg="primary"></SliderThumb>
+          </Tooltip>
         </Slider>
       </Box>
-
-      <Center marginTop={'60px'} marginBottom={'50px'}>
-        <Button
-          bg="primary"
-          boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-          borderRadius={'15px'}
-        >
-          <Text color={'white'}>Me gusta esta simulacion</Text>
-        </Button>
-      </Center>
     </Box>
   );
 }
