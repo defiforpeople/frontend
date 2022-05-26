@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Flex, Text } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 import { useTranslation } from 'react-i18next';
 import '../../../i18n';

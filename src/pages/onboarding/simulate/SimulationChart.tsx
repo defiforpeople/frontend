@@ -313,8 +313,9 @@ export function SimulationChart({
           max={40}
           step={1}
           onChange={(val) => simulate(val)}
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
+          // onMouseEnter={() => setShowTooltip(true)}
+          // onMouseLeave={() => setShowTooltip(false)}
+
           onTouchStart={() => setShowTooltip(true)}
           onTouchEndCapture={() => setShowTooltip(false)}
         >
@@ -329,7 +330,11 @@ export function SimulationChart({
             isOpen={showTooltip}
             label={`${time}`}
           >
-            <SliderThumb bg="primary"></SliderThumb>
+            <SliderThumb
+              bg="primary"
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+            ></SliderThumb>
           </Tooltip>
         </Slider>
       </Box>

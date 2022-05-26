@@ -57,7 +57,7 @@ function Simulate({
   const [showTooltip, setShowTooltip] = React.useState(false);
 
   return (
-    <Box width={'100%'}>
+    <Box width={['100%', '50%', '50%']}>
       <Box>
         <Text
           paddingTop={10}
@@ -114,7 +114,7 @@ function Simulate({
           min={0}
           max={40}
           step={1}
-          onChangeEnd={(val) => setTime(val)}
+          onChange={(val) => setTime(val)}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
           onTouchStart={() => setShowTooltip(true)}
