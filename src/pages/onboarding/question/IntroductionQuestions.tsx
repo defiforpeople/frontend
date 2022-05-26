@@ -8,22 +8,17 @@ type Props = {
 
 function IntroductionQuestions({ setQuestion }: Props) {
   return (
-    <Box marginTop={'50px'}>
+    <Box marginTop={['20px', '50px', '50px']}>
       <Center>
         <Box>
-          <Text
-            padding={5}
-            fontWeight={'bold'}
-            fontSize={'22px'}
-            marginTop={'30px'}
-          >
+          <Text fontWeight={'bold'} fontSize={'22px'} marginTop={'30px'}>
             Una pequeña guía
           </Text>
         </Box>
       </Center>
 
       <Center>
-        <Box padding={7}>
+        <Box padding={5}>
           <Text fontWeight={'regular'} fontSize={'18px'} textAlign="center">
             Te haremos unas preguntas para descrubrir tu perfil de inversionista
             y te guiaremos en el proceso de entender conceptos de DeFi
@@ -38,7 +33,6 @@ function IntroductionQuestions({ setQuestion }: Props) {
           bg={'sixth'}
           boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
           borderRadius={'70px'}
-          marginTop={'50px'}
           onClick={() => setQuestion(1)}
         >
           <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">

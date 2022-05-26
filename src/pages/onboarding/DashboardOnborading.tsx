@@ -57,7 +57,7 @@ function DashboardOnboarding() {
     <Center>
       <Box
         width={['100%', '50%', '50%']}
-        marginTop={['50px', '100px', '100px%']}
+        marginTop={['30px', '100px', '100px']}
       >
         <Box>
           <Steps
