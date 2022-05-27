@@ -11,7 +11,6 @@ import {
   DrawerFooter,
   DrawerOverlay,
   HStack,
-  Link,
   Text,
 } from '@chakra-ui/react';
 
@@ -20,6 +19,7 @@ import { ReactComponent as GithubLogo } from '../../assets/logos/github-logo.svg
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
+import { Link } from 'react-router-dom';
 
 type Props = {
   isOpen: any;
@@ -76,29 +76,33 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
           </Text>
 
           <HStack marginTop={'114px'} justifyContent="space-around">
-            <Button
-              height={'50px'}
-              width={'150px'}
-              bg={'white'}
-              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-              borderRadius={'70px'}
-            >
-              <Text fontSize={'18px'} lineHeight={'21.6px'} color="primary">
-                {t('enter')}
-              </Text>
-            </Button>
+            <Link to="/app">
+              <Button
+                height={'50px'}
+                width={'150px'}
+                bg={'white'}
+                boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+                borderRadius={'70px'}
+              >
+                <Text fontSize={'18px'} lineHeight={'21.6px'} color="primary">
+                  {t('enter')}
+                </Text>
+              </Button>
+            </Link>
 
-            <Button
-              height={'50px'}
-              width={'150px'}
-              bg={'primary'}
-              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-              borderRadius={'70px'}
-            >
-              <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
-                {t('begin')}
-              </Text>
-            </Button>
+            <Link to="/onboarding">
+              <Button
+                height={'50px'}
+                width={'150px'}
+                bg={'primary'}
+                boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+                borderRadius={'70px'}
+              >
+                <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
+                  {t('begin')}
+                </Text>
+              </Button>
+            </Link>
           </HStack>
 
           <Center paddingTop={20}>
@@ -118,12 +122,7 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
         </DrawerBody>
 
         <DrawerFooter margin={'auto'}>
-          <Link
-            href="https://github.com/defiforpeople/chainlink-hackathon"
-            isExternal
-          >
-            <GithubLogo />
-          </Link>
+          <GithubLogo />
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
