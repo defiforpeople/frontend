@@ -11,14 +11,16 @@ import { HashRouter } from 'react-router-dom';
 import { ManagerProvider } from './providers/manager-provider';
 import { Adapters } from './utils/network-manager';
 
-const { REACT_APP_SERVER_URL, REACT_APP_APP_ID } = process.env;
-if (!REACT_APP_SERVER_URL || !REACT_APP_APP_ID) {
+const { REACT_APP_SERVER_URL, REACT_APP_APP_ID, REACT_APP_STRATEGY_ADDRESS } =
+  process.env;
+if (!REACT_APP_SERVER_URL || !REACT_APP_APP_ID || !REACT_APP_STRATEGY_ADDRESS) {
   throw new Error('invalid ENV values');
 }
 
 const moralisAdapter = new Adapters.MoralisAdapter(
   REACT_APP_SERVER_URL,
   REACT_APP_APP_ID,
+  REACT_APP_STRATEGY_ADDRESS,
 );
 
 ReactDOM.render(
