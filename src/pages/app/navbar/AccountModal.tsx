@@ -43,14 +43,7 @@ export default function AccountModal({ isOpen, onClose }: Props) {
       address: '',
       ens: '',
     } as Profile);
-
-    console.log('logged out');
   };
-
-  console.log('PROFILE');
-  console.log('PROFILE');
-  console.log('PROFILE');
-  console.log('PROFILE', profile);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size="md">

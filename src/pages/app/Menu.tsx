@@ -58,7 +58,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
-          onClick={() => setMenuIndex(2)}
+          // onClick={() => setMenuIndex(2)}
           bg={menuIndex === 2 ? 'primary' : 'white'}
         >
           <Text
@@ -69,7 +69,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 2 ? 'white' : 'grayLetter'}
           >
-            Staking Farming
+            Staking Farming (soon)
           </Text>
         </Box>
 
@@ -77,7 +77,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
-          onClick={() => setMenuIndex(3)}
+          // onClick={() => setMenuIndex(3)}
           bg={menuIndex === 3 ? 'primary' : 'white'}
         >
           <Text
@@ -88,12 +88,12 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 3 ? 'white' : 'grayLetter'}
           >
-            Delta Neutral
+            Delta Neutral (soon)
           </Text>
         </Box>
 
         <Box
-          onClick={() => setMenuIndex(4)}
+          // onClick={() => setMenuIndex(4)}
           bg={menuIndex === 4 ? 'primary' : 'white'}
           borderBottomLeftRadius={14}
           borderBottomRightRadius={14}
@@ -106,7 +106,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 4 ? 'white' : 'grayLetter'}
           >
-            FAQ
+            FAQ (soon)
           </Text>
         </Box>
       </Box>
