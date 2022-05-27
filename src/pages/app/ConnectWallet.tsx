@@ -20,13 +20,28 @@ import { useEffect, useState } from 'react';
 import MobileConnectWalletModal from './navbar/MobileConnectWalletModal';
 
 function ConnectWallet() {
-  const { adapter } = useAdapter();
+  const { adapter, isAuthenticated, setIsAuthenticated, setProfile } =
+    useAdapter();
 
   const { t } = useTranslation('ConnectWalletOnboarding');
 
   const [users, setUsers] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const login = async () => {
+    if (!isAuthenticated) {
+      try {
+        const profile = await adapter.login(t('signingMessage'));
+        setIsAuthenticated(true);
+        setProfile(profile);
+
+        console.log('Logged profile user:', profile);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     async function getUsersConnected() {
@@ -100,6 +115,7 @@ function ConnectWallet() {
                 color="white"
                 borderRadius={70}
                 display={['none', 'block', 'block']}
+                onClick={login}
               >
                 <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
                   {t('button')}
