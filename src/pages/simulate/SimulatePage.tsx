@@ -29,7 +29,7 @@ function SimulatePage() {
   return (
     <Flex bg={'white'} flexDirection="column" height={'95vh'}>
       <NavbarLanding />
-      <Center>
+      <Center marginTop={100}>
         <Box width={['100%', '50%', '50%']}>
           <SimulationChart
             value={value}

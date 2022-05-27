@@ -48,7 +48,7 @@
   "ConnectWalletOnboarding": {
     "title": "Conectar Wallet",
     "subtitle": "Conecta tu wallet para empezar a utilizar DeFi for People ",
-    "button": "Conectar a wallet",
+    "button": "Conectar Wallet",
     "permission": "Persmisos solo de vizualicación. Nunca haremos nada sin tu aprobación.",
     "trustedBy": "Confian en nosotros",
     "users": "usuarios"

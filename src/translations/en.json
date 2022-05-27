@@ -48,8 +48,8 @@
   "ConnectWalletOnboarding": {
     "title": "Connect Wallet",
     "subtitle": "Connect your wallet to start to use DeFi for People",
-    "button": "Connect to wallet",
-    "permission": "View only permission. We will never do anything withot your aprproval",
+    "button": "Connect Wallet",
+    "permission": "View only permission. We will never do anything withot your approval",
     "trustedBy": "Trusted by",
     "users": "users"
   },
