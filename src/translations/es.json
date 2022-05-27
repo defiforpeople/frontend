@@ -55,14 +55,14 @@
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "¿Cómo funciona?",
-    "gobernance": "Gobernanza",
-    "developers": "Desarrolladores",
+    "work": "¿Cómo funciona? (Pronto)",
+    "gobernance": "Gobernanza (Pronto)",
+    "developers": "Desarrolladores (Pronto)",
     "products": "Productos",
     "touch": "Contacto",
     "touchMessage": "Si estas interesado en aprender más sobre nuestros productos, amariamos que nos contactes.",
     "email": "Dirección de correo electrónico",
-    "suscribe": "Suscribirse",
+    "suscribe": "Contactar",
     "changeLanguage": "DeFi for People disponible en:",
     "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
   },
