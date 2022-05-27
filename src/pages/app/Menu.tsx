@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import InvesmentModal from './InvesmentModal';
+import WithdrawModal from './WithdrawModal';
 
 type Props = {
   menuIndex: number;
@@ -10,6 +11,12 @@ type Props = {
 
 function Menu({ menuIndex, setMenuIndex }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpen2,
+    onOpen: onOpen2,
+    onClose: onClose2,
+  } = useDisclosure();
 
   return (
     <Box padding={10}>
@@ -142,10 +149,13 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderRadius={53}
           boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
           width={'125px'}
+          onClick={onOpen2}
         >
           <Text fontWeight="bold" fontSize={14} lineHeight={'16.8px'}>
             Withdraw
           </Text>
+
+          <WithdrawModal isOpen={isOpen2} onClose={onClose2} />
         </Button>
       </HStack>
     </Box>
