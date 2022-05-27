@@ -30,7 +30,7 @@ function calculateInvesmentValues(
       continue;
     }
 
-    values.push(values[index - 1] + monthlyAmount * 12);
+    values.push(values[index - 1] + monthlyAmount);
   }
 
   return values;
@@ -65,9 +65,7 @@ function calculateEarnedInterest(
       continue;
     }
 
-    revenue.push(
-      revenue[index - 1] + monthlyAmount * 12 + revenue[index - 1] * APY,
-    );
+    revenue.push(revenue[index - 1] + monthlyAmount + revenue[index - 1] * APY);
   }
 
   return revenue;
@@ -110,8 +108,6 @@ function calculateInvesment(
     optimisticRevenue: optimisticRevenue,
     borderRadius: borderRadius,
   };
-
-  console.log(output);
 
   return output;
 }

@@ -37,7 +37,7 @@
     "howIsCalculated": "Cómo se calcula?",
     "optimistic": "Resultado optimista",
     "pessimistic": "Resultado pesimista",
-    "investment": "Dinero invertido",
+    "invested": "Total invertido",
     "adjust": "Ajusta tu simulación",
     "text1": "Consideramos 2 posibles escenarios, optimista y pesimista",
     "text2": "El valor de cada año se calcula como:",

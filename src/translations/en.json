@@ -37,7 +37,7 @@
     "howIsCalculated": "How is calculated?",
     "optimistic": "Optimistic result",
     "pessimistic": "Pessimistic result",
-    "investment": "Investment",
+    "invested": "Total invested",
     "adjust": "Adjust your simulation",
     "text1": "Whe consider two possible scenarios: optimistic and pessimistic",
     "text2": "The value of each year is calculated by the formula:",

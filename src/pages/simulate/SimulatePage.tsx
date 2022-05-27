@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Box, Center, Flex } from '@chakra-ui/react';
 import React from 'react';
 import FooterApp from '../app/footers/FootersApp';
 import NavbarLanding from '../app/navbar/NavbarLanding';
@@ -27,19 +27,23 @@ function SimulatePage() {
   const [time, setTime] = React.useState(recommendedMinTime);
 
   return (
-    <Flex bg={'white'} display={'flex'} flexDirection="column" height={'95vh'}>
+    <Flex bg={'white'} flexDirection="column" height={'95vh'}>
       <NavbarLanding />
-      <SimulationChart
-        value={value}
-        setValue={setValue}
-        monthlyAmount={monthlyAmount}
-        setMonthlyAmount={setMonthlyAmount}
-        time={time}
-        setTime={setTime}
-        setSimulateState={setSimulateState}
-        setSimulationData={setSimulationData}
-        simulationData={simulationData}
-      />
+      <Center>
+        <Box width={['100%', '50%', '50%']}>
+          <SimulationChart
+            value={value}
+            setValue={setValue}
+            monthlyAmount={monthlyAmount}
+            setMonthlyAmount={setMonthlyAmount}
+            time={time}
+            setTime={setTime}
+            setSimulateState={setSimulateState}
+            setSimulationData={setSimulationData}
+            simulationData={simulationData}
+          />
+        </Box>
+      </Center>
       <FooterApp />
     </Flex>
   );
