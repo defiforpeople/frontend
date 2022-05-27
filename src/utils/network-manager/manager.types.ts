@@ -1,4 +1,5 @@
 import { IAdapter } from './adapters';
+import { ContractTransaction, ContractReceipt } from 'ethers';
 
 //  token_address: string;
 //  name: string;
@@ -20,6 +21,7 @@ export type ChainName =
   | 'polygon'
   | 'bsc'
   | 'avalanche'
+  | 'avalanche testnet'
   | 'fantom';
 
 export type Network = {
@@ -43,4 +45,18 @@ export type Profile = {
   address: string;
   ens: string;
   // networks: Network[];
+};
+
+export type Deposit = {
+  amount: number;
+  timestamp: number;
+  quotas?: number;
+  tx?: ContractTransaction;
+};
+
+export type Withdraw = {};
+
+export type Strategy = {
+  name: string;
+  addr: string;
 };

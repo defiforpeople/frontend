@@ -59,6 +59,16 @@ export const networks: { [name: string]: Network } = {
       decimals: 18,
     },
   },
+  'avalanche testnet': {
+    name: 'Avalanche Testnet',
+    chainName: 'avalanche testnet',
+    chainId: '0xa869',
+    dev: true,
+    nativeToken: {
+      symbol: 'avax',
+      decimals: 18,
+    },
+  },
   fantom: {
     name: 'Fantom',
     chainName: 'fantom',
@@ -84,4 +94,4 @@ export const tokens: { [name: string]: Token } = {
   },
 };
 
-export const defaultNetwork = networks.eth;
+export const defaultNetwork = networks['avalanche testnet'];
