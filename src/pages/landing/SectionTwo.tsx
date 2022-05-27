@@ -7,6 +7,7 @@ import { ReactComponent as ChartMobileImage } from '../../assets/images/chart-mo
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
+import { Link } from 'react-router-dom';
 
 function SectionTwo() {
   const { t } = useTranslation('SectionTwo');
@@ -34,17 +35,19 @@ function SectionTwo() {
             <ChartMobileImage width={'97%'} />
           </Box>
 
-          <Button
-            bg={'primary'}
-            borderRadius={'70'}
-            width="200px"
-            marginTop={['30px', '30px', '30px']}
-            marginBottom={'20px'}
-          >
-            <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-              {t('button')}
-            </Text>
-          </Button>
+          <Link to="/simulate">
+            <Button
+              bg={'primary'}
+              borderRadius={'70'}
+              width="200px"
+              marginTop={['30px', '30px', '30px']}
+              marginBottom={'20px'}
+            >
+              <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
+                {t('button')}
+              </Text>
+            </Button>
+          </Link>
         </Flex>
       </Center>
     </Box>

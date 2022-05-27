@@ -111,6 +111,8 @@ function calculateInvesment(
     borderRadius: borderRadius,
   };
 
+  console.log(output);
+
   return output;
 }
 

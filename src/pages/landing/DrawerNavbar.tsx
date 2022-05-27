@@ -12,6 +12,7 @@ import {
   DrawerOverlay,
   HStack,
   Text,
+  Link as ChakraLink,
 } from '@chakra-ui/react';
 
 import Logo from '../../components/logo';
@@ -122,7 +123,11 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
         </DrawerBody>
 
         <DrawerFooter margin={'auto'}>
-          <GithubLogo />
+          <Box>
+            <ChakraLink href="https://github.com/defiforpeople" isExternal>
+              <GithubLogo />
+            </ChakraLink>
+          </Box>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

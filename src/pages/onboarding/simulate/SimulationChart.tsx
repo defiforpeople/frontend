@@ -2,8 +2,6 @@ import React from 'react';
 
 import {
   Box,
-  Button,
-  Center,
   HStack,
   Input,
   Slider,
@@ -58,9 +56,6 @@ export const options = {
       grid: {
         display: false,
       },
-    },
-    y: {
-      display: false,
     },
   },
   plugins: {
