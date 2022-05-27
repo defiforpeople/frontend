@@ -53,15 +53,10 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
             lineHeight={'43.2px'}
             color="grayLetter"
             marginTop={'30px'}
-          >
-            {t('strategies')}
-          </Text>
-
-          <Text
-            fontSize={'36px'}
-            lineHeight={'43.2px'}
-            color="grayLetter"
-            marginTop={'30px'}
+            _hover={{
+              cursor: 'pointer',
+              color: 'primary',
+            }}
           >
             {t('gobernance')}
           </Text>

@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Box,
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -26,7 +27,15 @@ type Props = {
 };
 
 function DrawerNavbar({ isOpen, onClose }: Props) {
-  const { t } = useTranslation('DrawerNavbar');
+  const { t, i18n } = useTranslation('DrawerNavbar');
+
+  const changeLanguage = () => {
+    if (i18n.language === 'en') {
+      i18n.changeLanguage('es');
+    } else {
+      i18n.changeLanguage('en');
+    }
+  };
 
   return (
     <Drawer placement={'left'} onClose={onClose} isOpen={isOpen} size={'full'}>
@@ -91,6 +100,21 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
               </Text>
             </Button>
           </HStack>
+
+          <Center paddingTop={20}>
+            <Text fontWeight={400} fontSize={'14'} color="grayLetter">
+              {t('changeLanguage')}&nbsp;
+            </Text>
+            <Text
+              fontWeight={400}
+              fontSize={'14'}
+              color="sixth"
+              onClick={changeLanguage}
+              _hover={{ cursor: 'pointer' }}
+            >
+              {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
+            </Text>
+          </Center>
         </DrawerBody>
 
         <DrawerFooter margin={'auto'}>
