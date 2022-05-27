@@ -2,8 +2,6 @@ import React from 'react';
 
 import {
   Box,
-  Button,
-  Center,
   HStack,
   Input,
   Slider,
@@ -59,9 +57,6 @@ export const options = {
         display: false,
       },
     },
-    y: {
-      display: false,
-    },
   },
   plugins: {
     legend: {
@@ -92,7 +87,6 @@ export function SimulationChart({
   setMonthlyAmount,
   time,
   setTime,
-  setSimulateState,
   setSimulationData,
   simulationData,
 }: Props) {
@@ -172,166 +166,270 @@ export function SimulationChart({
 
   return (
     <Box width={'100%'}>
-      <HStack justifyContent={'space-between'} paddingTop={10}>
-        <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
-          {t('in')} {time} {t('tittleChart')}
-        </Text>
-        <Text
-          paddingRight={5}
-          fontSize={['12px', '16px', '16px']}
-          color={'primary'}
-          onClick={onOpen}
-          _hover={{
-            cursor: 'pointer',
-          }}
-        >
-          {t('howIsCalculated')}
-        </Text>
-
-        <HowWorksModal isOpen={isOpen} onClose={onClose} />
-      </HStack>
-
-      <Text
-        paddingLeft={5}
-        fontWeight="bold"
-        fontSize={'26px'}
-        color={'primary'}
-      >
-        {(
-          (simulationData.optimisticRevenue[simulationData.labels.length - 1] +
-            simulationData.pessimisticRevenue[
-              simulationData.labels.length - 1
-            ]) /
-          2
-        ).toFixed(0)}
-      </Text>
-
       <HStack>
-        <Box>
+        <Box width={'30%'} display={['none', 'block', 'block']}>
           <Text
-            paddingLeft={5}
-            paddingTop={5}
-            fontSize={'14px'}
-            color={'primary'}
-          >
-            {t('optimistic')}
-          </Text>
-
-          <Text
-            paddingLeft={5}
             fontWeight="bold"
             fontSize={'16px'}
-            color={'primary'}
+            paddingLeft={5}
+            paddingTop={5}
           >
-            {simulationData.optimisticRevenue[
-              simulationData.labels.length - 1
-            ].toFixed(0)}
+            ⚖️ {t('adjust')}
           </Text>
+
+          <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {t('amountMessage')}
+            </Text>
+            <Input
+              type={'number'}
+              value={value}
+              onChange={handleChangeValue}
+              placeholder="$ 0 USDT"
+              borderRadius={'12px'}
+              focusBorderColor="primary"
+            />
+          </Box>
+
+          <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {t('recurringMessage')}
+            </Text>
+            <Input
+              type={'number'}
+              value={monthlyAmount}
+              onChange={handleChangeMonthlyAmount}
+              placeholder="$ 0 USDT"
+              borderRadius={'12px'}
+              focusBorderColor="primary"
+            />
+          </Box>
+
+          <Box width={'100%'} padding={8}>
+            <HStack justifyContent={'space-between'}>
+              <Text fontWeight={'light'} fontSize={'15px'}>
+                {t('during')}
+              </Text>
+
+              <Text fontWeight={'light'} fontSize={'15px'}>
+                {time} {t('years')}
+              </Text>
+            </HStack>
+
+            <Slider
+              aria-label="slider-ex-2"
+              colorScheme="pink"
+              defaultValue={time}
+              min={1}
+              max={40}
+              step={1}
+              onChange={(val) => simulate(val)}
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              onTouchStart={() => setShowTooltip(true)}
+              onTouchEndCapture={() => setShowTooltip(false)}
+            >
+              <SliderTrack bg="#E5E4E5">
+                <SliderFilledTrack />
+              </SliderTrack>
+              <Tooltip
+                hasArrow
+                bg="primary"
+                color="white"
+                placement="top"
+                isOpen={showTooltip}
+                label={`${time}`}
+              >
+                <SliderThumb bg="primary"></SliderThumb>
+              </Tooltip>
+            </Slider>
+          </Box>
         </Box>
 
-        <Box paddingLeft={30}>
+        <Box width={['100%', '100%', '70%']}>
+          <HStack justifyContent={'space-between'} paddingTop={10}>
+            <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
+              {t('in')} {time} {t('tittleChart')}
+            </Text>
+            <Text
+              paddingRight={5}
+              fontSize={['12px', '16px', '16px']}
+              color={'primary'}
+              onClick={onOpen}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              {t('howIsCalculated')}
+            </Text>
+
+            <HowWorksModal isOpen={isOpen} onClose={onClose} />
+          </HStack>
+
           <Text
+            paddingLeft={5}
+            fontWeight="bold"
+            fontSize={'26px'}
+            color={'primary'}
+          >
+            {(
+              (simulationData.optimisticRevenue[
+                simulationData.labels.length - 1
+              ] +
+                simulationData.pessimisticRevenue[
+                  simulationData.labels.length - 1
+                ]) /
+              2
+            ).toFixed(0)}
+          </Text>
+
+          <HStack>
+            <Box>
+              <Text
+                paddingLeft={5}
+                paddingTop={5}
+                fontSize={'14px'}
+                color={'primary'}
+              >
+                {t('optimistic')}
+              </Text>
+
+              <Text
+                paddingLeft={5}
+                fontWeight="bold"
+                fontSize={'16px'}
+                color={'primary'}
+              >
+                {simulationData.optimisticRevenue[
+                  simulationData.labels.length - 1
+                ].toFixed(0)}
+              </Text>
+            </Box>
+
+            <Box paddingLeft={30}>
+              <Text
+                paddingTop={5}
+                fontSize={'14px'}
+                color={'primary'}
+                opacity={0.8}
+              >
+                {t('pessimistic')}
+              </Text>
+
+              <Text
+                fontWeight="bold"
+                fontSize={'16px'}
+                color={'primary'}
+                opacity={0.8}
+              >
+                {simulationData.pessimisticRevenue[
+                  simulationData.labels.length - 1
+                ].toFixed(0)}
+              </Text>
+            </Box>
+          </HStack>
+
+          <Text
+            paddingLeft={5}
             paddingTop={5}
             fontSize={'14px'}
-            color={'primary'}
-            opacity={0.8}
+            color={'sixth'}
           >
-            {t('pessimistic')}
+            {t('invested')}
           </Text>
 
           <Text
+            paddingLeft={5}
             fontWeight="bold"
             fontSize={'16px'}
-            color={'primary'}
-            opacity={0.8}
+            color={'sixth'}
           >
-            {simulationData.pessimisticRevenue[
-              simulationData.labels.length - 1
-            ].toFixed(0)}
+            {simulationData.invested[simulationData.labels.length - 1]}
           </Text>
+
+          <Box marginTop={10}>
+            <Line options={options} data={data()} />
+          </Box>
         </Box>
       </HStack>
 
-      <Text paddingLeft={5} paddingTop={5} fontSize={'14px'} color={'sixth'}>
-        {t('invested')}
-      </Text>
-
-      <Text paddingLeft={5} fontWeight="bold" fontSize={'16px'} color={'sixth'}>
-        {simulationData.invested[simulationData.labels.length - 1]}
-      </Text>
-
-      <Line options={options} data={data()} />
-
-      <Text fontWeight="bold" fontSize={'16px'} paddingLeft={5} paddingTop={5}>
-        ⚖️ {t('adjust')}
-      </Text>
-
-      <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
-        <Text fontWeight={'light'} fontSize={'15px'}>
-          {t('amountMessage')}
-        </Text>
-        <Input
-          type={'number'}
-          value={value}
-          onChange={handleChangeValue}
-          placeholder="$ 0 USDT"
-          borderRadius={'12px'}
-          focusBorderColor="primary"
-        />
-      </Box>
-
-      <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
-        <Text fontWeight={'light'} fontSize={'15px'}>
-          {t('recurringMessage')}
-        </Text>
-        <Input
-          type={'number'}
-          value={monthlyAmount}
-          onChange={handleChangeMonthlyAmount}
-          placeholder="$ 0 USDT"
-          borderRadius={'12px'}
-          focusBorderColor="primary"
-        />
-      </Box>
-
-      <Box width={'100%'} padding={8}>
-        <HStack justifyContent={'space-between'}>
-          <Text fontWeight={'light'} fontSize={'15px'}>
-            {t('during')}
-          </Text>
-
-          <Text fontWeight={'light'} fontSize={'15px'}>
-            {time} {t('years')}
-          </Text>
-        </HStack>
-
-        <Slider
-          aria-label="slider-ex-2"
-          colorScheme="pink"
-          defaultValue={time}
-          min={1}
-          max={40}
-          step={1}
-          onChange={(val) => simulate(val)}
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-          onTouchStart={() => setShowTooltip(true)}
-          onTouchEndCapture={() => setShowTooltip(false)}
+      <Box display={['block', 'none', 'none']}>
+        <Text
+          fontWeight="bold"
+          fontSize={'16px'}
+          paddingLeft={5}
+          paddingTop={5}
         >
-          <SliderTrack bg="#E5E4E5">
-            <SliderFilledTrack />
-          </SliderTrack>
-          <Tooltip
-            hasArrow
-            bg="primary"
-            color="white"
-            placement="top"
-            isOpen={showTooltip}
-            label={`${time}`}
+          ⚖️ {t('adjust')}
+        </Text>
+
+        <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+          <Text fontWeight={'light'} fontSize={'15px'}>
+            {t('amountMessage')}
+          </Text>
+          <Input
+            type={'number'}
+            value={value}
+            onChange={handleChangeValue}
+            placeholder="$ 0 USDT"
+            borderRadius={'12px'}
+            focusBorderColor="primary"
+          />
+        </Box>
+
+        <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+          <Text fontWeight={'light'} fontSize={'15px'}>
+            {t('recurringMessage')}
+          </Text>
+          <Input
+            type={'number'}
+            value={monthlyAmount}
+            onChange={handleChangeMonthlyAmount}
+            placeholder="$ 0 USDT"
+            borderRadius={'12px'}
+            focusBorderColor="primary"
+          />
+        </Box>
+
+        <Box width={'100%'} padding={8}>
+          <HStack justifyContent={'space-between'}>
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {t('during')}
+            </Text>
+
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {time} {t('years')}
+            </Text>
+          </HStack>
+
+          <Slider
+            aria-label="slider-ex-2"
+            colorScheme="pink"
+            defaultValue={time}
+            min={1}
+            max={40}
+            step={1}
+            onChange={(val) => simulate(val)}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onTouchStart={() => setShowTooltip(true)}
+            onTouchEndCapture={() => setShowTooltip(false)}
           >
-            <SliderThumb bg="primary"></SliderThumb>
-          </Tooltip>
-        </Slider>
+            <SliderTrack bg="#E5E4E5">
+              <SliderFilledTrack />
+            </SliderTrack>
+            <Tooltip
+              hasArrow
+              bg="primary"
+              color="white"
+              placement="top"
+              isOpen={showTooltip}
+              label={`${time}`}
+            >
+              <SliderThumb bg="primary"></SliderThumb>
+            </Tooltip>
+          </Slider>
+        </Box>
       </Box>
     </Box>
   );

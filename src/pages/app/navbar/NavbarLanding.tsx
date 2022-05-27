@@ -18,7 +18,6 @@ import { useTranslation } from 'react-i18next';
 import '../../../i18n';
 import DrawerNavbar from '../../landing/DrawerNavbar';
 
-
 function NavbarLanding() {
   const { t } = useTranslation('NavbarLanding');
 
@@ -53,6 +52,10 @@ function NavbarLanding() {
         lineHeight={'21.6px'}
         color="grayLetter"
         display={['none', 'block', 'block']}
+        _hover={{
+          cursor: 'pointer',
+          color: 'primary',
+        }}
       >
         {t('how')}
       </Text>
@@ -62,22 +65,27 @@ function NavbarLanding() {
         lineHeight={'21.6px'}
         color="grayLetter"
         display={['none', 'block', 'block']}
+        _hover={{
+          cursor: 'pointer',
+          color: 'primary',
+        }}
       >
         {t('gobernance')}
       </Text>
 
-      <HStack display={['none', 'inherit', 'inherit']}>
+      {/* <HStack display={['none', 'inherit', 'inherit']}>
         <Text fontSize={'18'} lineHeight={'21.6px'} color="grayLetter">
           {t('more')}
         </Text>
 
         <Icon as={KeyboardArrowDownIcon} />
-      </HStack>
+      </HStack> */}
 
       <Flex flexDirection="row" alignItems="center" justifyContent="center">
         <Link to="/app">
           <Text
-            fontSize={'18'}
+            fontWeight={700}
+            fontSize={'20'}
             lineHeight={'21.6px'}
             color="primary"
             marginRight={10}
@@ -92,12 +100,12 @@ function NavbarLanding() {
             <Button
               bg={'primary'}
               borderRadius={'70'}
-              width="90px"
+              width="120px"
               marginRight={2}
               display={['none', 'block', 'block']}
             >
               <Text
-                fontSize={['14', '18', '18']}
+                fontSize={['14', '16', '16']}
                 lineHeight={['16px', ' 21.6px', '21.6px']}
                 color="white"
               >
@@ -116,7 +124,8 @@ function NavbarLanding() {
               display={['block', 'none', 'none']}
             >
               <Text
-                fontSize={['14', '18', '18']}
+                fontWeight={'700'}
+                fontSize={'14'}
                 lineHeight={['16px', ' 21.6px', '21.6px']}
                 color="primary"
               >

@@ -5,6 +5,7 @@ import DefiForPeopleApp from './pages/app/DefiForPeopleApp';
 import Landing from './pages/landing/Landing';
 import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
+import SimulatePage from './pages/simulate/SimulatePage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/app" element={<DefiForPeopleApp />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/building" element={<Building />} />
+      <Route path="/simulate" element={<SimulatePage />} />
     </Routes>
   );
 }
