@@ -1,41 +1,35 @@
-import React from 'react';
-
 import { ReactComponent as EthereumLogo } from '../../../assets/logos/ethereum-logo.svg';
 import { ReactComponent as PolygonLogo } from '../../../assets/logos/polygon-logo.svg';
 import { ReactComponent as BnbChainLogo } from '../../../assets/logos/bnbchain-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as FantomLogo } from '../../../assets/logos/fantom-logo.svg';
+import { ChainName } from '../../../utils/network-manager';
 
-function LogoNetwork(props: any) {
-  if (props.chainId === '0x1') {
+function LogoNetwork(props: { chainName: ChainName }) {
+  if (props.chainName === 'eth') {
     return <EthereumLogo width={25} height={25} />;
   }
 
-  if (props.chainId === '0x89') {
+  if (props.chainName === 'polygon') {
     return <PolygonLogo width={25} height={25} />;
   }
 
-  if (props.chainId === '0x38') {
+  if (props.chainName === 'bsc') {
     return <BnbChainLogo width={25} height={25} />;
   }
 
-  if (props.chainId === '0xa86a') {
+  if (
+    props.chainName === 'avalanche' ||
+    props.chainName === 'avalanche testnet'
+  ) {
     return <AvalancheLogo width={25} height={25} />;
   }
 
-  if (props.chainId === '0xfa') {
+  if (props.chainName === 'fantom') {
     return <FantomLogo width={25} height={25} />;
   }
 
   return <EthereumLogo width={25} height={25} />;
 }
-
-// export const LOGO_NETWORK = {
-//   '0x01': <EthereumLogo width={25} height={25} />,
-//   '0x89': <PolygonLogo width={25} height={25} />,
-//   '0x38': <BnbChainLogo width={25} height={25} />,
-//   '0xa86a': <AvalancheLogo width={25} height={25} />,
-//   '0xfa': <FantomLogo width={25} height={25} />,
-// };
 
 export default LogoNetwork;

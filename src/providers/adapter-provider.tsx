@@ -17,7 +17,6 @@ export type AdapterContextType = {
   setIsAuthenticated: (value: boolean) => void;
   profile: Profile;
   setProfile: (p: Profile) => void;
-  // getUsers: () => Promise<number>;
 };
 
 export const AdapterContext = createContext<AdapterContextType | undefined>(

@@ -1,9 +1,13 @@
-import { createContext, useMemo } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { INetworkManager } from '../utils/network-manager/manager.types';
+import {
+  INetworkManager,
+  Network,
+} from '../utils/network-manager/manager.types';
 import { IAdapter } from '../utils/network-manager/adapters';
 import { NetworkManager } from '../utils/network-manager/manager';
 import { AdapterProvider } from './adapter-provider';
+import { defaultNetwork } from '../utils/network-manager';
 
 type ManagerProviderProps = {
   children: ReactNode;
@@ -12,6 +16,8 @@ type ManagerProviderProps = {
 
 export type ManagerContextType = {
   manager: INetworkManager;
+  network: Network;
+  setNetwork: (n: Network) => void;
 };
 
 export const ManagerContext = createContext<ManagerContextType | undefined>(
@@ -23,14 +29,18 @@ export function ManagerProvider({ children, adapter }: ManagerProviderProps) {
     throw new Error('adapter is not defined');
   }
 
+  const [network, setNetwork] = useState(defaultNetwork);
+
   const value: ManagerContextType = useMemo(() => {
     const manager = new NetworkManager();
     manager.switchAdapter(adapter);
 
     return {
       manager,
+      network,
+      setNetwork,
     };
-  }, [adapter]);
+  }, [adapter, network]);
 
   return (
     <ManagerContext.Provider value={value}>

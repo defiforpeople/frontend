@@ -1,10 +1,36 @@
-import React from 'react';
-
 import { Box, HStack, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { useAdapter } from '../../hooks/use-adapter';
 
 function Summary() {
+  const { adapter } = useAdapter();
+
+  const [updatedDate, setUpdatedDate] = useState(new Date());
+  const [deposits, setDeposits] = useState(0);
+  const [depositsLoading, setDepositsLoading] = useState(false);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setSeconds(seconds => seconds + 1);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+  useEffect(() => {
+    const deposits = async () => {
+      const d = await adapter.getDeposits();
+      console.log('deposits', d);
+
+      const sum = d.reduce((s, deposit) => s + deposit.amount, 0);
+      setDeposits(Number((sum / 1e18).toFixed(3)));
+    };
+
+    console.log('KEKEKEKE');
+    deposits();
+  }, []);
+
   return (
-    <Box padding={10} width={'70%'}>
+    <Box padding={10} width={'80%'}>
       <Text
         fontWeight={700}
         fontSize={'26'}
@@ -73,7 +99,7 @@ function Summary() {
               letterSpacing={'-3%'}
               color="#282828"
             >
-              $25,500
+              ${deposits}
             </Text>
           </HStack>
         </Box>
@@ -206,7 +232,7 @@ function Summary() {
               letterSpacing={'-3%'}
               color="#282828"
             >
-              -$12.71
+              $0
             </Text>
           </HStack>
         </Box>

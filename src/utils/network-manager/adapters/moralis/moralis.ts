@@ -6,23 +6,28 @@ import {
   ChainName,
   Profile,
   Token,
+  Withdraw,
+  Deposit,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
+import { Strategy__factory, Strategy } from '../../../../typechain';
 
 export default class MoralisAdapter implements IAdapter {
   private _name: AdapterName;
   private serverUrl: string;
   private appUrl: string;
+  private contractAddr: string;
   private _network: Network;
   private ready: boolean;
 
-  constructor(serverUrl: string, appId: string) {
+  constructor(serverUrl: string, appId: string, contractAddr: string) {
     this._name = 'moralis';
     this._network = undefined!;
     this.ready = false;
 
     this.serverUrl = serverUrl;
     this.appUrl = appId;
+    this.contractAddr = contractAddr;
   }
 
   public async initAdapter(): Promise<void> {
@@ -79,8 +84,6 @@ export default class MoralisAdapter implements IAdapter {
         address: profile.address,
       });
 
-      console.log('getNativeBalance', res);
-
       return {
         balance: Number(res.balance),
         ...nativeToken,
@@ -97,7 +100,6 @@ export default class MoralisAdapter implements IAdapter {
         await this.initAdapter();
       }
 
-      console.log(3);
       const profile = await this.getProfile();
       const { chainName } = this.network;
 
@@ -105,8 +107,6 @@ export default class MoralisAdapter implements IAdapter {
         chain: chainName,
         address: profile.address,
       });
-
-      console.log('getTokenBalances', res);
 
       const tokens = res.map(
         ({ balance, symbol }) =>
@@ -202,13 +202,13 @@ export default class MoralisAdapter implements IAdapter {
     }
   }
 
-  public async getUsers(): Promise<any> {
+  public async getUsers(): Promise<number> {
     try {
       if (!this.ready) {
         await this.initAdapter();
       }
 
-      const users = await Moralis.Cloud.run('get_nr_users');
+      const users: number = await Moralis.Cloud.run('get_nr_users');
 
       return users;
     } catch (err) {
@@ -216,5 +216,65 @@ export default class MoralisAdapter implements IAdapter {
       console.log(err);
       throw err;
     }
+  }
+
+  public async getDeposits(): Promise<Deposit[]> {
+    try {
+      if (!this.ready) {
+        await this.initAdapter();
+      }
+
+      const profile = await this.getProfile();
+
+      const q = new Moralis.Query('DepositEvents');
+      q.equalTo('userAddr', profile.address);
+      const results = await q.find();
+
+      return results.map((res) => {
+        const timestamp = new Date(res.get('block_timestamp')).getTime();
+
+        return {
+          amount: Number(res.get('amount')),
+          timestamp,
+        };
+      });
+    } catch (err) {
+      console.log('entro en el error');
+      console.log(err);
+      throw err;
+    }
+  }
+
+  public async getWithdraw(): Promise<Withdraw[]> {
+    return [];
+  }
+
+  public async deposit(amount: number): Promise<Deposit> {
+    // validate inputs
+    const { balance } = await this.getNativeToken();
+    if (amount < 0 || amount > balance!) {
+      throw new Error('invalid amount');
+    }
+
+    // prepare contract
+    const provider = await Moralis.enableWeb3();
+    const ethers = Moralis.web3Library;
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      this.contractAddr,
+      Strategy__factory.abi,
+      signer,
+    ) as Strategy;
+
+    // make transaction
+    const tx = await contract.deposit(
+      ethers.utils.parseEther(amount.toString()),
+    );
+
+    return {
+      amount,
+      timestamp: new Date().getTime(),
+      tx,
+    };
   }
 }

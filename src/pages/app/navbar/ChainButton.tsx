@@ -20,20 +20,19 @@ import { ReactComponent as FantomLogo } from '../../../assets/logos/fantom-logo.
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
 import { useNetworkManager } from '../../../hooks/use-manager';
-import { defaultNetwork, ChainName } from '../../../utils/network-manager';
+import { ChainName } from '../../../utils/network-manager';
 
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { manager } = useNetworkManager();
-
-  const [network, setNetwork] = useState(defaultNetwork);
-  const networks = manager.listNetworks();
+  const { manager, network, setNetwork } = useNetworkManager();
 
   const changeNetwork = async (networkName: ChainName) => {
     console.log(`Change network to networkName: ${networkName}`);
     try {
       await manager.switchNetwork(networkName);
+
+      const networks = manager.listNetworks();
       setNetwork(networks[networkName]);
 
       onClose();
@@ -42,11 +41,13 @@ function ChainButton() {
     }
   };
 
+  const networks = manager.listNetworks();
+
   return (
     <>
       <Button
         marginRight={5}
-        leftIcon={<LogoNetwork chainId={network.chainId} />}
+        leftIcon={<LogoNetwork chainName={network.chainName} />}
         iconSpacing={3}
         onClick={onOpen}
         variant="solid"
@@ -74,7 +75,7 @@ function ChainButton() {
             isDisabled={'eth' === network.chainName}
             onClick={() => changeNetwork('eth')}
           >
-            Ethereum
+            {networks['eth'].name}
           </Button>
 
           <Button
@@ -87,7 +88,7 @@ function ChainButton() {
             isDisabled={'polygon' === network.chainName}
             onClick={() => changeNetwork('polygon')}
           >
-            Polygon
+            {networks['polygon'].name}
           </Button>
 
           <Button
@@ -100,7 +101,7 @@ function ChainButton() {
             isDisabled={'bsc' === network.chainName}
             onClick={() => changeNetwork('bsc')}
           >
-            BNB Chain
+            {networks['bsc'].name}
           </Button>
 
           <Button
@@ -113,7 +114,20 @@ function ChainButton() {
             isDisabled={'avalanche' === network.chainName}
             onClick={() => changeNetwork('avalanche')}
           >
-            Avalanche
+            {networks['avalanche'].name}
+          </Button>
+
+          <Button
+            leftIcon={<AvalancheLogo width={25} />}
+            width={'75%'}
+            margin={'auto'}
+            marginBottom={3}
+            justifyContent="start"
+            iconSpacing={5}
+            isDisabled={'avalanche testnet' === network.chainName}
+            onClick={() => changeNetwork('avalanche testnet')}
+          >
+            {networks['avalanche testnet'].name}
           </Button>
 
           <Button
@@ -125,7 +139,7 @@ function ChainButton() {
             isDisabled={'fantom' === network.chainName}
             onClick={() => changeNetwork('fantom')}
           >
-            Fantom
+            {networks['fantom'].name}
           </Button>
 
           <ModalFooter>
