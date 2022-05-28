@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.59af8ea3.css",
-    "main.js": "/static/js/main.43d9ebe4.js",
+    "main.js": "/static/js/main.77fca1b4.js",
     "static/media/phone-image.svg": "/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/anek-bangla-all-400-normal.woff": "/static/media/anek-bangla-all-400-normal.ed4914000ea7a76502a1.woff",
     "static/media/chart-mobile-image.svg": "/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
@@ -21,10 +21,10 @@
     "static/media/ethereum-logo.svg": "/static/media/ethereum-logo.df265e367364f285053a1285ad8d418d.svg",
     "static/media/wallet-icon.svg": "/static/media/wallet-icon.015eab59d81d73d58a262071cec2bec1.svg",
     "main.59af8ea3.css.map": "/static/css/main.59af8ea3.css.map",
-    "main.43d9ebe4.js.map": "/static/js/main.43d9ebe4.js.map"
+    "main.77fca1b4.js.map": "/static/js/main.77fca1b4.js.map"
   },
   "entrypoints": [
     "static/css/main.59af8ea3.css",
-    "static/js/main.43d9ebe4.js"
+    "static/js/main.77fca1b4.js"
   ]
 }
