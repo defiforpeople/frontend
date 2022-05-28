@@ -87,7 +87,40 @@ function FooterLanding() {
               color="grayLetter"
               paddingTop={2}
             >
-              Recursive Farming
+              Recursive Farming (Beta)
+            </Text>
+          </Link>
+
+          <Link to="/app">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Neutral Delta (Soon)
+            </Text>
+          </Link>
+
+          <Link to="/app">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Leveraged Farming (Soon)
+            </Text>
+          </Link>
+
+          <Link to="/app">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Options (Soon)
             </Text>
           </Link>
         </Box>

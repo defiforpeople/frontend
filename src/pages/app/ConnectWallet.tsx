@@ -11,6 +11,7 @@ import {
 import { ReactComponent as WalletIcon } from '../../assets/logos/wallet-icon.svg';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
@@ -136,6 +137,14 @@ function ConnectWallet() {
 
               <Text color={'grayLetter'} fontSize={'14'}>
                 {t('trustedBy')} {users} {t('users')}
+              </Text>
+            </HStack>
+
+            <HStack>
+              <Icon as={VerifiedUserIcon} margin={5} color="sixth" />
+
+              <Text color={'grayLetter'} fontSize={'14'}>
+                {t('verified')}
               </Text>
             </HStack>
           </Box>

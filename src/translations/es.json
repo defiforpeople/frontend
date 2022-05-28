@@ -51,7 +51,8 @@
     "button": "Conectar Wallet",
     "permission": "Persmisos solo de vizualicación. Nunca haremos nada sin tu aprobación.",
     "trustedBy": "Confian en nosotros",
-    "users": "usuarios"
+    "users": "usuarios",
+    "verified": "Contrato verificado"
   },
   "FooterLanding": {
     "info": "Info",

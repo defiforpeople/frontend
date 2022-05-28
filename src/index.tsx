@@ -1,10 +1,13 @@
 import * as React from 'react';
+
+import '@fontsource/anek-bangla';
+
 import ReactDOM from 'react-dom';
 
 import App from './App';
 
-import theme from './theme';
 import Fonts from './fonts';
+import theme from './theme';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import { HashRouter } from 'react-router-dom';

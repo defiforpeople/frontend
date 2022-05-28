@@ -4,7 +4,7 @@
     "connectWallet": "Connect Wallet"
   },
   "NavbarLanding": {
-    "how": "How we work? (Soon)",
+    "how": "How do we work? (Soon)",
     "gobernance": "Governance (Soon)",
     "more": "More",
     "enter": "Enter",
@@ -12,7 +12,7 @@
   },
   "SectionOne": {
     "title": "Investing is simple",
-    "subtitle": "Transfer from $1 and we diversify it in decentralized finance and cryptocurrencies. Without fine print and for everyone",
+    "subtitle": "Transfer from $1 and we diversify it in decentralized finance and cryptocurrencies. In a clear way and for everyone.",
     "button": "Begin"
   },
   "SectionTwo": {
@@ -51,12 +51,13 @@
     "button": "Connect Wallet",
     "permission": "View only permission. We will never do anything withot your approval",
     "trustedBy": "Trusted by",
-    "users": "users"
+    "users": "users",
+    "verified": "Contract verified"
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "How we work? (Soon)",
-    "gobernance": "Gobernance (Soon)",
+    "work": "How do we work? (Soon)",
+    "gobernance": "Governance (Soon)",
     "developers": "Developers (Soon)",
     "products": "Products",
     "touch": "Get in touch",
@@ -76,7 +77,7 @@
     "continue": "Continue"
   },
   "DrawerNavbar": {
-    "how": "How we work? (Soon)",
+    "how": "How do we work? (Soon)",
     "strategies": "Strategies (Soon)",
     "gobernance": "Governance (Soon)",
     "enter": "Enter",

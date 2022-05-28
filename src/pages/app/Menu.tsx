@@ -95,7 +95,45 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 3 ? 'white' : 'grayLetter'}
           >
-            Delta Neutral (soon)
+            Neutral Delta (soon)
+          </Text>
+        </Box>
+
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          // onClick={() => setMenuIndex(3)}
+          bg={menuIndex === 3 ? 'primary' : 'white'}
+        >
+          <Text
+            padding={3}
+            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
+            fontSize={'16'}
+            lineHeight={'19.2px'}
+            letterSpacing={'-3%'}
+            color={menuIndex === 3 ? 'white' : 'grayLetter'}
+          >
+            Leveraged Farming (soon)
+          </Text>
+        </Box>
+
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          // onClick={() => setMenuIndex(3)}
+          bg={menuIndex === 3 ? 'primary' : 'white'}
+        >
+          <Text
+            padding={3}
+            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
+            fontSize={'16'}
+            lineHeight={'19.2px'}
+            letterSpacing={'-3%'}
+            color={menuIndex === 3 ? 'white' : 'grayLetter'}
+          >
+            Options (soon)
           </Text>
         </Box>
 
@@ -124,7 +162,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
         lineHeight={'26.4px'}
         color="black"
       >
-        What do you want?
+        What do you want to do?
       </Text>
 
       <HStack padding={3}>

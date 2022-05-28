@@ -48,10 +48,13 @@ function RecursiveFarming() {
         lineHeight={'24px'}
         color="grayLetter"
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris orci
-        lorem, molestie eu enim eget, sollicitudin blandit nulla. Aliquam
-        cursus, sem a elementum auctor, felis leo dictum eros, id pellentesque
-        nulla velit ut erat.
+        In Avalanche, if you supply liquidity in the protocol, you earn more
+        money than what you have to pay for borrowing. So you can supply
+        liquidity, ask for a borrow, and supply liquidity with that amount
+        borrowed. By doing that, you can end up supplying a greater quantity
+        that you have, and you'll be earning money thanks of the WAVAX rewards
+        that makes possible for this loop of supplying and borrowing to be
+        profitable.
       </Text>
 
       <HStack paddingTop={10} justifyContent="space-around">
@@ -123,7 +126,7 @@ function RecursiveFarming() {
                 lineHeight={'26px'}
                 color="black"
               >
-                $27,223
+                -
               </Text>
             </GridItem>
           </Grid>
@@ -209,7 +212,7 @@ function RecursiveFarming() {
                 lineHeight={'26.4px'}
                 color="black"
               >
-                -$465.73
+                -
               </Text>
             </GridItem>
           </Grid>
@@ -223,110 +226,133 @@ function RecursiveFarming() {
         color="black"
         paddingTop={10}
       >
-        Strategy assets
+        Blockchains supported for this strategy:
       </Text>
 
-      <HStack paddingTop={10} gap={5}>
-        <Box
-          width={310}
-          height={100}
-          borderRadius={15}
-          border="1px"
-          borderColor={'#F1F4F6'}
-          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+      <Box
+        width={200}
+        height={100}
+        borderRadius={15}
+        border="1px"
+        borderColor={'#F1F4F6'}
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        marginTop={'20px'}
+      >
+        <Grid
+          height={'100%'}
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(4, 1fr)"
         >
-          <Grid
-            height={'100%'}
-            templateRows="repeat(2, 1fr)"
-            templateColumns="repeat(4, 1fr)"
-          >
-            <GridItem rowSpan={2} colSpan={1}>
-              <Box marginTop={'24px'} marginLeft={'25px'}>
-                <AvalancheLogo width={40} height={40} />
-              </Box>
-            </GridItem>
+          <GridItem rowSpan={2} colSpan={1}>
+            <Box marginTop={'24px'} marginLeft={'25px'}>
+              <AvalancheLogo width={40} height={40} />
+            </Box>
+          </GridItem>
 
-            <GridItem rowSpan={2} colSpan={1}>
-              <Text
-                fontWeight={700}
-                fontSize={'18'}
-                lineHeight={'21.6px'}
-                color="black"
-                marginTop={'35px'}
-              >
-                AVAX
-              </Text>
-            </GridItem>
+          <GridItem rowSpan={2} colSpan={1}>
+            <Text
+              fontWeight={700}
+              fontSize={'18'}
+              lineHeight={'21.6px'}
+              color="black"
+              marginTop={'35px'}
+              marginLeft={'20px'}
+            >
+              AVALANCHE
+            </Text>
+          </GridItem>
+        </Grid>
+      </Box>
 
-            <GridItem rowSpan={2} colSpan={2}>
-              <Stat margin={6}>
-                <StatNumber
-                  fontWeight={700}
-                  fontSize={'18'}
-                  lineHeight={'21.6px'}
-                  color="#7A8AA0"
-                >
-                  $47.3
-                </StatNumber>
-                <StatHelpText>
-                  <StatArrow type="decrease" />
-                  14.54%
-                </StatHelpText>
-              </Stat>
-            </GridItem>
-          </Grid>
-        </Box>
+      <Text
+        fontWeight={700}
+        fontSize={'22'}
+        lineHeight={'26.4px'}
+        color="black"
+        paddingTop={10}
+      >
+        Assets used in this strategy
+      </Text>
 
-        <Box
-          width={310}
-          height={100}
-          borderRadius={15}
-          border="1px"
-          borderColor={'#F1F4F6'}
-          boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+      <Box
+        width={200}
+        height={100}
+        borderRadius={15}
+        border="1px"
+        borderColor={'#F1F4F6'}
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        marginTop={'20px'}
+      >
+        <Grid
+          height={'100%'}
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(4, 1fr)"
         >
-          <Grid
-            height={'100%'}
-            templateRows="repeat(2, 1fr)"
-            templateColumns="repeat(4, 1fr)"
-          >
-            <GridItem rowSpan={2} colSpan={1}>
-              <Box marginTop={'24px'} marginLeft={'25px'}>
-                <AaveLogo width={40} height={40} />
-              </Box>
-            </GridItem>
+          <GridItem rowSpan={2} colSpan={1}>
+            <Box marginTop={'24px'} marginLeft={'25px'}>
+              <AvalancheLogo width={40} height={40} />
+            </Box>
+          </GridItem>
 
-            <GridItem rowSpan={2} colSpan={1}>
-              <Text
-                fontWeight={700}
-                fontSize={'18'}
-                lineHeight={'21.6px'}
-                color="black"
-                marginTop={'35px'}
-              >
-                AAVE
-              </Text>
-            </GridItem>
+          <GridItem rowSpan={2} colSpan={1}>
+            <Text
+              fontWeight={700}
+              fontSize={'18'}
+              lineHeight={'21.6px'}
+              color="black"
+              marginTop={'35px'}
+              marginLeft={'20px'}
+            >
+              AVAX
+            </Text>
+          </GridItem>
+        </Grid>
+      </Box>
 
-            <GridItem rowSpan={2} colSpan={2}>
-              <Stat margin={6}>
-                <StatNumber
-                  fontWeight={700}
-                  fontSize={'18'}
-                  lineHeight={'21.6px'}
-                  color="#7A8AA0"
-                >
-                  $345.670
-                </StatNumber>
-                <StatHelpText>
-                  <StatArrow type="increase" />
-                  23.36%
-                </StatHelpText>
-              </Stat>
-            </GridItem>
-          </Grid>
-        </Box>
-      </HStack>
+      <Text
+        fontWeight={700}
+        fontSize={'22'}
+        lineHeight={'26.4px'}
+        color="black"
+        paddingTop={10}
+      >
+        Protocols interacted with in this strategy
+      </Text>
+
+      <Box
+        width={200}
+        height={100}
+        borderRadius={15}
+        border="1px"
+        borderColor={'#F1F4F6'}
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        marginTop={'20px'}
+      >
+        <Grid
+          height={'100%'}
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(4, 1fr)"
+        >
+          <GridItem rowSpan={2} colSpan={1}>
+            <Box marginTop={'24px'} marginLeft={'25px'}>
+              <AaveLogo width={40} height={40} />
+            </Box>
+          </GridItem>
+
+          <GridItem rowSpan={2} colSpan={1}>
+            <Text
+              fontWeight={700}
+              fontSize={'18'}
+              lineHeight={'21.6px'}
+              color="black"
+              marginTop={'35px'}
+              marginLeft={'20px'}
+            >
+              AAVE
+            </Text>
+          </GridItem>
+        </Grid>
+      </Box>
     </Box>
   );
 }

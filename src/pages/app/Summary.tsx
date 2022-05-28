@@ -48,7 +48,7 @@ function Summary() {
         color="grayLetter"
         paddingTop={3}
       >
-        You have been investing from 420 days ago
+        You have been investing for 420 days
       </Text>
 
       <Box
