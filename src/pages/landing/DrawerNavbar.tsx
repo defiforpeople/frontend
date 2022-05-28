@@ -20,6 +20,7 @@ import { ReactComponent as GithubLogo } from '../../assets/logos/github-logo.svg
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
+
 import { Link } from 'react-router-dom';
 
 type Props = {
