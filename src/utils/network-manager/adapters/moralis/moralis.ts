@@ -230,7 +230,7 @@ export default class MoralisAdapter implements IAdapter {
 
       const profile = await this.getProfile();
 
-      const q = new Moralis.Query('DepositEventss');
+      const q = new Moralis.Query('DepositEventssss');
       q.equalTo('userAddr', profile.address);
       const results = await q.find();
 
@@ -257,7 +257,7 @@ export default class MoralisAdapter implements IAdapter {
 
       const profile = await this.getProfile();
 
-      const q = new Moralis.Query('WithdrawEventss');
+      const q = new Moralis.Query('WithdrawEventssss');
       q.equalTo('userAddr', profile.address);
       const results = await q.find();
 
