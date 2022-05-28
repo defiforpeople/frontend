@@ -121,13 +121,13 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     setShowAlertSuccess(false);
 
     try {
-      const deposit = await adapter.deposit(amount);
+      // const deposit = await adapter.deposit(amount);
       console.log(deposit);
 
       setDeposit(deposit);
       setShowAlertConfirm(true);
-      const a = await deposit.tx!.wait();
-      console.log(a);
+      // const a = await deposit.tx!.wait();
+      // console.log(a);
 
       setTransactionLoading(false);
       setShowAlertConfirm(false);

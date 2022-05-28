@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n';
 
 import { useAdapter } from '../../hooks/use-adapter';
-import { ChainName, Deposit } from '../../utils/network-manager';
+import { ChainName, Deposit, TokenSymbol } from '../../utils/network-manager';
 import { useNetworkManager } from '../../hooks/use-manager';
 
 import { Spinner } from '@chakra-ui/react';
@@ -61,12 +61,12 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   // const initialTokensBalance: Token | NativeToken[] = [];
 
   const [strategy, setStrategy] = useState(initialStrategy);
+  const [symbol, setSymbol] = useState('weth' as TokenSymbol);
   const [text, setText] = useState(initialToken);
   const [amount, setAmount] = useState(initialAmount);
   const [maxAmount, setMaxAmount] = useState(initialAmount);
   const [transactionLoading, setTransactionLoading] = useState(false);
   const [balanceLoading, setBalanceLoading] = useState(false);
-  const [deposit, setDeposit] = useState({} as Deposit);
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertConfirm, setShowAlertConfirm] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
@@ -78,14 +78,16 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setStrategy(strategy);
   };
 
-  const handleTokenChange = async (chainName: ChainName) => {
-    const text = `${networks[chainName].nativeToken.symbol.toUpperCase()} (${
-      networks[chainName].name
-    })`;
+  const handleTokenChange = async (
+    chainName: ChainName,
+    symbol: TokenSymbol,
+  ) => {
+    const text = `${symbol.toUpperCase()} (${networks[chainName].name})`;
 
     setText(text);
     setAmount(0);
     setMaxAmount(0);
+    setSymbol(symbol);
 
     await manager.switchNetwork(chainName);
     setNetwork(networks[chainName]);
@@ -117,6 +119,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setShowAlertConfirm(false);
     setShowAlertError(false);
     setTransactionLoading(false);
+    setSymbol('weth');
 
     onClose();
   };
@@ -128,13 +131,23 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setShowAlertSuccess(false);
 
     try {
-      const deposit = await adapter.deposit(amount);
-      console.log(deposit);
-
-      setDeposit(deposit);
+      const approveDeposit = await adapter.approveDeposit(amount, symbol);
       setShowAlertConfirm(true);
-      const a = await deposit.tx!.wait();
-      console.log(a);
+      const approveTx = await approveDeposit.approveTx!.wait();
+      console.log('approveTx');
+      console.log('approveTx');
+      console.log('approveTx');
+      console.log('approveTx');
+      console.log(approveTx);
+
+      setShowAlertConfirm(false);
+      const deposit = await adapter.deposit(approveDeposit);
+      setShowAlertConfirm(true);
+      const depositTx = await deposit.depositTx!.wait();
+      console.log('depositTx');
+      console.log('depositTx');
+      console.log('depositTx');
+      console.log(depositTx);
 
       setTransactionLoading(false);
       setShowAlertConfirm(false);
@@ -149,10 +162,11 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   };
 
   const handleExplorerButton = async () => {
-    window.open(
-      `https://testnet.snowtrace.io/address/${REACT_APP_STRATEGY_ADDRESS}`,
-      '_blank',
-    );
+    const { chainName } = adapter.network;
+    const { strategies } = networks[chainName];
+    const { address } = strategies['recursive_farming'];
+
+    window.open(`https://testnet.snowtrace.io/address/${address}`, '_blank');
 
     resetStrategy();
   };
@@ -311,24 +325,10 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                     </HStack>
                   </MenuButton>
                   <MenuList border={'0'} width={'280px'}>
-                    {/* <MenuItem onClick={() => handleTokenChange("eth")}>
-                  <EthLogo width={25} height={25} />
-
-                  <Text
-                    fontSize={'16px'}
-                    lineHeight={'18.75px'}
-                    letterSpacing="5%"
-                    color={'black'}
-                    padding={3}
-                  >
-                    ETH
-                  </Text>
-                </MenuItem> */}
-
                     <MenuItem
-                      onClick={async () => await handleTokenChange('avalanche')}
+                      onClick={() => handleTokenChange('rinkeby', 'weth')}
                     >
-                      <AvalancheLogo width={25} height={25} />
+                      <EthLogo width={25} height={25} />
 
                       <Text
                         fontSize={'16px'}
@@ -337,15 +337,13 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         color={'black'}
                         padding={3}
                       >
-                        {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
-                        ({networks['avalanche'].name})
+                        {networks['rinkeby'].nativeToken.symbol.toUpperCase()} (
+                        {networks['rinkeby'].name})
                       </Text>
                     </MenuItem>
 
                     <MenuItem
-                      onClick={async () =>
-                        await handleTokenChange('avalanche testnet')
-                      }
+                    // onClick={async () => await handleTokenChange('avalanche', 'wavax')}
                     >
                       <AvalancheLogo width={25} height={25} />
 
@@ -353,7 +351,26 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         fontSize={'16px'}
                         lineHeight={'18.75px'}
                         letterSpacing="5%"
-                        color={'black'}
+                        color={'#757575'}
+                        padding={3}
+                      >
+                        {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
+                        ({networks['avalanche'].name})
+                      </Text>
+                    </MenuItem>
+
+                    <MenuItem
+                    // onClick={async () =>
+                    //   await handleTokenChange('avalanche testnet', 'wavax')
+                    // }
+                    >
+                      <AvalancheLogo width={25} height={25} />
+
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'#757575'}
                         padding={3}
                       >
                         {networks[

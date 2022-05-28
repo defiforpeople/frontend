@@ -21,6 +21,7 @@
     "@types/react-dom": "^16.9.15",
     "chakra-ui-steps": "^1.7.3",
     "chart.js": "^3.7.1",
+    "dayjs": "^1.11.2",
     "framer-motion": "^6.3.3",
     "i18next": "^21.8.2",
     "i18next-browser-languagedetector": "^6.1.4",
