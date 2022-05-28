@@ -162,10 +162,11 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   };
 
   const handleExplorerButton = async () => {
-    window.open(
-      `https://testnet.snowtrace.io/address/${REACT_APP_STRATEGY_ADDRESS}`,
-      '_blank',
-    );
+    const { chainName } = adapter.network;
+    const { strategies } = networks[chainName];
+    const { address } = strategies['recursive_farming'];
+
+    window.open(`https://testnet.snowtrace.io/address/${address}`, '_blank');
 
     resetStrategy();
   };
