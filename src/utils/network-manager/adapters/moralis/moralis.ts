@@ -1,5 +1,5 @@
 import Moralis from 'moralis';
-import { networks } from '../../manager.constants';
+import { networks, tokens } from '../../manager.constants';
 import {
   NativeToken,
   Network,
@@ -8,26 +8,30 @@ import {
   Token,
   Withdraw,
   Deposit,
+  TokenSymbol,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
-import { Strategy__factory, Strategy } from '../../../../typechain';
+import {
+  StrategyRecursiveFarming__factory,
+  StrategyRecursiveFarming,
+  IWETH__factory,
+  IWETH,
+} from '../../../../typechain';
 
 export default class MoralisAdapter implements IAdapter {
   private _name: AdapterName;
   private serverUrl: string;
   private appUrl: string;
-  private contractAddr: string;
   private _network: Network;
   private ready: boolean;
 
-  constructor(serverUrl: string, appId: string, contractAddr: string) {
+  constructor(serverUrl: string, appId: string) {
     this._name = 'moralis';
     this._network = undefined!;
     this.ready = false;
 
     this.serverUrl = serverUrl;
     this.appUrl = appId;
-    this.contractAddr = contractAddr;
   }
 
   public async initAdapter(): Promise<void> {
@@ -226,7 +230,7 @@ export default class MoralisAdapter implements IAdapter {
 
       const profile = await this.getProfile();
 
-      const q = new Moralis.Query('DepositEvents');
+      const q = new Moralis.Query('DepositEventss');
       q.equalTo('userAddr', profile.address);
       const results = await q.find();
 
@@ -245,36 +249,117 @@ export default class MoralisAdapter implements IAdapter {
     }
   }
 
-  public async getWithdraw(): Promise<Withdraw[]> {
-    return [];
+  public async getWithdrawals(): Promise<Withdraw[]> {
+    try {
+      if (!this.ready) {
+        await this.initAdapter();
+      }
+
+      const profile = await this.getProfile();
+
+      const q = new Moralis.Query('WithdrawEventss');
+      q.equalTo('userAddr', profile.address);
+      const results = await q.find();
+
+      return results.map((res) => {
+        const timestamp = new Date(res.get('block_timestamp')).getTime();
+
+        return {
+          amount: Number(res.get('amount')),
+          timestamp,
+        };
+      });
+    } catch (err) {
+      console.log('entro en el error');
+      console.log(err);
+      throw err;
+    }
   }
 
-  public async deposit(amount: number): Promise<Deposit> {
+  public async approveDeposit(
+    amount: number,
+    symbol: TokenSymbol,
+  ): Promise<Deposit> {
     // validate inputs
     const { balance } = await this.getNativeToken();
     if (amount < 0 || amount > balance!) {
       throw new Error('invalid amount');
     }
 
-    // prepare contract
+    // get token address
+    const tokenAddr = tokens[this.network.chainName][symbol].address;
+
+    // prepare provider
     const provider = await Moralis.enableWeb3();
     const ethers = Moralis.web3Library;
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      this.contractAddr,
-      Strategy__factory.abi,
-      signer,
-    ) as Strategy;
 
-    // make transaction
-    const tx = await contract.deposit(
-      ethers.utils.parseEther(amount.toString()),
-    );
+    // prepare weth contract
+    const wrapContract = new ethers.Contract(
+      tokenAddr,
+      IWETH__factory.abi,
+      signer,
+    ) as IWETH;
+
+    console.log(1111111);
+    console.log(1111111);
+    console.log(1111111);
+    console.log(1111111);
+    console.log(1111111, tokenAddr);
+
+    // get strategy address
+    const contractAddr = this.network.strategies['recursive_farming'].address;
+
+    // parse amount to bignumber
+    const parsedAmount = ethers.utils.parseEther(amount.toString());
+
+    // make approve weth contract to strategy addres
+    const tx = await wrapContract.approve(contractAddr, parsedAmount);
+
+    console.log(222222);
+    console.log(222222);
+    console.log(222222);
+    console.log(222222);
+    console.log(222222, contractAddr, parsedAmount);
 
     return {
       amount,
       timestamp: new Date().getTime(),
-      tx,
+      approveTx: tx,
+    };
+  }
+
+  public async deposit(deposit: Deposit): Promise<Deposit> {
+    // get strategy address
+    const contractAddr = this.network.strategies['recursive_farming'].address;
+
+    // prepare provider
+    const provider = await Moralis.enableWeb3();
+    const ethers = Moralis.web3Library;
+    const signer = provider.getSigner();
+
+    // parse amount to bignumber
+    const parsedAmount = ethers.utils.parseEther(deposit.amount.toString());
+
+    console.log('PARSED AMOUNT');
+    console.log('PARSED AMOUNT');
+    console.log('PARSED AMOUNT');
+    console.log('PARSED AMOUNT');
+    console.log('PARSED AMOUNT', parsedAmount, contractAddr);
+
+    // prepare strategy contract
+    const strategyContract = new ethers.Contract(
+      contractAddr,
+      StrategyRecursiveFarming__factory.abi,
+      signer,
+    ) as StrategyRecursiveFarming;
+
+    // make transaction
+    const tx = await strategyContract.deposit(parsedAmount);
+
+    return {
+      ...deposit,
+      depositTx: tx,
     };
   }
 }

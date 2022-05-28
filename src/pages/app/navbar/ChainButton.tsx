@@ -79,6 +79,19 @@ function ChainButton() {
           </Button>
 
           <Button
+            leftIcon={<EthereumLogo width={25} />}
+            width={'75%'}
+            margin={'auto'}
+            marginBottom={3}
+            justifyContent="start"
+            iconSpacing={5}
+            isDisabled={'rinkeby' === network.chainName}
+            onClick={() => changeNetwork('rinkeby')}
+          >
+            {networks['rinkeby'].name}
+          </Button>
+
+          <Button
             leftIcon={<PolygonLogo width={25} />}
             width={'75%'}
             margin={'auto'}
