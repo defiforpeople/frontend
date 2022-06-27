@@ -1,13 +1,18 @@
 import { IAdapter } from './adapters';
-import { ContractTransaction, ContractReceipt } from 'ethers';
+import { ContractTransaction } from 'ethers';
 
-//  token_address: string;
-//  name: string;
-//  logo?: string;
-//  thumbnail?: string;
+export type TokenSymbol =
+  | 'weth'
+  | 'eth'
+  | 'avax'
+  | 'wavax'
+  | 'bnb'
+  | 'ftm'
+  | 'matic';
+
 export type NativeToken = {
   balance?: number;
-  symbol: string;
+  symbol: TokenSymbol;
   decimals: number;
 };
 
@@ -18,6 +23,7 @@ export type Token = NativeToken & {
 export type ChainName =
   | 'eth'
   | 'goerli'
+  | 'rinkeby'
   | 'polygon'
   | 'bsc'
   | 'avalanche'
@@ -30,6 +36,12 @@ export type Network = {
   chainId: string;
   dev: boolean;
   nativeToken: NativeToken;
+  strategies: {
+    [name: string]: {
+      name: string;
+      address: string;
+    };
+  };
 };
 
 export interface INetworkManager {
@@ -38,23 +50,29 @@ export interface INetworkManager {
   switchAdapter(adapter: IAdapter): void;
   switchNetwork(name: ChainName): Promise<void>;
   listNetworks(): { [name: string]: Network };
-  listTokens(): { [name: string]: Token };
+  listTokens(): { [name: string]: { [name: string]: Token } };
 }
 
 export type Profile = {
   address: string;
   ens: string;
-  // networks: Network[];
 };
 
 export type Deposit = {
   amount: number;
   timestamp: number;
+  symbol?: string;
+  quotas?: number;
+  approveTx?: ContractTransaction;
+  depositTx?: ContractTransaction;
+};
+
+export type Withdraw = {
+  amount: number;
+  timestamp: number;
   quotas?: number;
   tx?: ContractTransaction;
 };
-
-export type Withdraw = {};
 
 export type Strategy = {
   name: string;

@@ -8,6 +8,15 @@
 
 import { Network, Token } from './manager.types';
 
+const {
+  REACT_APP_RINKEBY_STRATEGY_ADDRESS,
+  REACT_APP_RINKEBY_WETH_ADDRESS,
+  REACT_APP_AVAX_STRATEGY_ADDRESS,
+  REACT_APP_AVAX_TESTNET_STRATEGY_ADDRESS,
+  REACT_APP_AVAX_WAVAX_ADDRESS,
+  REACT_APP_AVAX_TESTNET_WAVAX_ADDRESS,
+} = process.env;
+
 export const networks: { [name: string]: Network } = {
   eth: {
     name: 'Ethereum',
@@ -18,15 +27,43 @@ export const networks: { [name: string]: Network } = {
       symbol: 'eth',
       decimals: 18,
     },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: '',
+      },
+    },
+  },
+  rinkeby: {
+    name: 'Ethereum Rinkeby',
+    chainName: 'rinkeby',
+    chainId: '0x4',
+    dev: true,
+    nativeToken: {
+      symbol: 'eth',
+      decimals: 18,
+    },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: REACT_APP_RINKEBY_STRATEGY_ADDRESS!,
+      },
+    },
   },
   goerli: {
-    name: 'Goerli',
+    name: 'Ethereum Goerli',
     chainName: 'goerli',
     chainId: '0x5',
     dev: true,
     nativeToken: {
       symbol: 'eth',
       decimals: 18,
+    },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: '',
+      },
     },
   },
   polygon: {
@@ -38,6 +75,12 @@ export const networks: { [name: string]: Network } = {
       symbol: 'matic',
       decimals: 18,
     },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: '',
+      },
+    },
   },
   bsc: {
     name: 'Binance Smart Chain',
@@ -47,6 +90,12 @@ export const networks: { [name: string]: Network } = {
     nativeToken: {
       symbol: 'bnb',
       decimals: 8,
+    },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: '',
+      },
     },
   },
   avalanche: {
@@ -58,6 +107,12 @@ export const networks: { [name: string]: Network } = {
       symbol: 'avax',
       decimals: 18,
     },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: REACT_APP_AVAX_STRATEGY_ADDRESS!,
+      },
+    },
   },
   'avalanche testnet': {
     name: 'Avalanche Testnet',
@@ -67,6 +122,12 @@ export const networks: { [name: string]: Network } = {
     nativeToken: {
       symbol: 'avax',
       decimals: 18,
+    },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: REACT_APP_AVAX_TESTNET_STRATEGY_ADDRESS!,
+      },
     },
   },
   fantom: {
@@ -78,20 +139,37 @@ export const networks: { [name: string]: Network } = {
       symbol: 'ftm',
       decimals: 18,
     },
+    strategies: {
+      recursive_farming: {
+        name: 'Recursive Farming',
+        address: '',
+      },
+    },
   },
 };
 
-export const tokens: { [name: string]: Token } = {
-  weth: {
-    symbol: 'weth',
-    decimals: 18,
-    address: '',
+export const tokens: { [name: string]: { [name: string]: Token } } = {
+  avalanche: {
+    wavax: {
+      symbol: 'wavax',
+      decimals: 18,
+      address: REACT_APP_AVAX_WAVAX_ADDRESS!,
+    },
   },
-  dai: {
-    symbol: 'dai',
-    decimals: 18,
-    address: '',
+  'avalanche testnet': {
+    wavax: {
+      symbol: 'wavax',
+      decimals: 18,
+      address: REACT_APP_AVAX_TESTNET_WAVAX_ADDRESS!,
+    },
+  },
+  rinkeby: {
+    weth: {
+      symbol: 'weth',
+      decimals: 18,
+      address: REACT_APP_RINKEBY_WETH_ADDRESS!,
+    },
   },
 };
 
-export const defaultNetwork = networks['avalanche testnet'];
+export const defaultNetwork = networks['rinkeby'];

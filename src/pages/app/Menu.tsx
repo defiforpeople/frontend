@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
 import InvesmentModal from './InvesmentModal';
+import WithdrawModal from './WithdrawModal';
 
 type Props = {
   menuIndex: number;
@@ -10,6 +11,12 @@ type Props = {
 
 function Menu({ menuIndex, setMenuIndex }: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const {
+    isOpen: isOpen2,
+    onOpen: onOpen2,
+    onClose: onClose2,
+  } = useDisclosure();
 
   return (
     <Box padding={10}>
@@ -88,7 +95,45 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 3 ? 'white' : 'grayLetter'}
           >
-            Delta Neutral (soon)
+            Neutral Delta (soon)
+          </Text>
+        </Box>
+
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          // onClick={() => setMenuIndex(3)}
+          bg={menuIndex === 3 ? 'primary' : 'white'}
+        >
+          <Text
+            padding={3}
+            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
+            fontSize={'16'}
+            lineHeight={'19.2px'}
+            letterSpacing={'-3%'}
+            color={menuIndex === 3 ? 'white' : 'grayLetter'}
+          >
+            Leveraged Farming (soon)
+          </Text>
+        </Box>
+
+        <Box
+          borderBottom="1px"
+          borderStyle="solid"
+          borderColor="rgba(0, 0, 0, 0.1)"
+          // onClick={() => setMenuIndex(3)}
+          bg={menuIndex === 3 ? 'primary' : 'white'}
+        >
+          <Text
+            padding={3}
+            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
+            fontSize={'16'}
+            lineHeight={'19.2px'}
+            letterSpacing={'-3%'}
+            color={menuIndex === 3 ? 'white' : 'grayLetter'}
+          >
+            Options (soon)
           </Text>
         </Box>
 
@@ -117,7 +162,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
         lineHeight={'26.4px'}
         color="black"
       >
-        What do you want?
+        What do you want to do?
       </Text>
 
       <HStack padding={3}>
@@ -142,10 +187,13 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderRadius={53}
           boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
           width={'125px'}
+          onClick={onOpen2}
         >
           <Text fontWeight="bold" fontSize={14} lineHeight={'16.8px'}>
             Withdraw
           </Text>
+
+          <WithdrawModal isOpen={isOpen2} onClose={onClose2} />
         </Button>
       </HStack>
     </Box>

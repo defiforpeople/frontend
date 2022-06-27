@@ -1,7 +1,6 @@
 {
   "name": "frontend-defipeople",
   "version": "0.0.0",
-  "homepage": "https://defipeople.github.io/frontend",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
@@ -9,6 +8,7 @@
     "@chakra-ui/transition": "^2.0.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/anek-bangla": "^4.5.1",
     "@fontsource/gowun-dodum": "^4.5.8",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.3",
@@ -21,6 +21,7 @@
     "@types/react-dom": "^16.9.15",
     "chakra-ui-steps": "^1.7.3",
     "chart.js": "^3.7.1",
+    "dayjs": "^1.11.2",
     "framer-motion": "^6.3.3",
     "i18next": "^21.8.2",
     "i18next-browser-languagedetector": "^6.1.4",

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 import Dashboard from './Dashboard';
 import FooterApp from './footers/FootersApp';
@@ -8,14 +8,12 @@ import FooterApp from './footers/FootersApp';
 import NavbarApp from './navbar/NavbarApp';
 
 function DefiForPeopleApp() {
-  // console.log('Its rendering DefiForPeopleApp component');
-
   return (
-    <Box w="100%" h="calc(100vh)">
+    <Flex bg={'white'} display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
       <Dashboard />
       <FooterApp />
-    </Box>
+    </Flex>
   );
 }
 

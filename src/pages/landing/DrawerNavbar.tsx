@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Box,
   Button,
+  Center,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -10,8 +11,8 @@ import {
   DrawerFooter,
   DrawerOverlay,
   HStack,
-  Link,
   Text,
+  Link as ChakraLink,
 } from '@chakra-ui/react';
 
 import Logo from '../../components/logo';
@@ -20,13 +21,23 @@ import { ReactComponent as GithubLogo } from '../../assets/logos/github-logo.svg
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
 
+import { Link } from 'react-router-dom';
+
 type Props = {
   isOpen: any;
   onClose: any;
 };
 
 function DrawerNavbar({ isOpen, onClose }: Props) {
-  const { t } = useTranslation('DrawerNavbar');
+  const { t, i18n } = useTranslation('DrawerNavbar');
+
+  const changeLanguage = () => {
+    if (i18n.language === 'en') {
+      i18n.changeLanguage('es');
+    } else {
+      i18n.changeLanguage('en');
+    }
+  };
 
   return (
     <Drawer placement={'left'} onClose={onClose} isOpen={isOpen} size={'full'}>
@@ -67,39 +78,57 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
           </Text>
 
           <HStack marginTop={'114px'} justifyContent="space-around">
-            <Button
-              height={'50px'}
-              width={'150px'}
-              bg={'white'}
-              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-              borderRadius={'70px'}
-            >
-              <Text fontSize={'18px'} lineHeight={'21.6px'} color="primary">
-                {t('enter')}
-              </Text>
-            </Button>
+            <Link to="/app">
+              <Button
+                height={'50px'}
+                width={'150px'}
+                bg={'white'}
+                boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+                borderRadius={'70px'}
+              >
+                <Text fontSize={'18px'} lineHeight={'21.6px'} color="primary">
+                  {t('enter')}
+                </Text>
+              </Button>
+            </Link>
 
-            <Button
-              height={'50px'}
-              width={'150px'}
-              bg={'primary'}
-              boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
-              borderRadius={'70px'}
-            >
-              <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
-                {t('begin')}
-              </Text>
-            </Button>
+            <Link to="/onboarding">
+              <Button
+                height={'50px'}
+                width={'150px'}
+                bg={'primary'}
+                boxShadow="0px 2px 3px rgba(0, 0, 0, 0.15)"
+                borderRadius={'70px'}
+              >
+                <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
+                  {t('begin')}
+                </Text>
+              </Button>
+            </Link>
           </HStack>
+
+          <Center paddingTop={20}>
+            <Text fontWeight={400} fontSize={'14'} color="grayLetter">
+              {t('changeLanguage')}&nbsp;
+            </Text>
+            <Text
+              fontWeight={400}
+              fontSize={'14'}
+              color="sixth"
+              onClick={changeLanguage}
+              _hover={{ cursor: 'pointer' }}
+            >
+              {i18n.language === 'en' ? 'Español 🇪🇸' : 'English 🇺🇸'}
+            </Text>
+          </Center>
         </DrawerBody>
 
         <DrawerFooter margin={'auto'}>
-          <Link
-            href="https://github.com/defiforpeople/chainlink-hackathon"
-            isExternal
-          >
-            <GithubLogo />
-          </Link>
+          <Box>
+            <ChakraLink href="https://github.com/defiforpeople" isExternal>
+              <GithubLogo />
+            </ChakraLink>
+          </Box>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -87,7 +87,6 @@ export function SimulationChart({
   setMonthlyAmount,
   time,
   setTime,
-  setSimulateState,
   setSimulationData,
   simulationData,
 }: Props) {
@@ -266,6 +265,95 @@ export function SimulationChart({
             <HowWorksModal isOpen={isOpen} onClose={onClose} />
           </HStack>
 
+          <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {t('amountMessage')}
+            </Text>
+            <Input
+              type={'number'}
+              value={value}
+              onChange={handleChangeValue}
+              placeholder="$ 0 USDT"
+              borderRadius={'12px'}
+              focusBorderColor="primary"
+            />
+          </Box>
+
+          <Box width={'100%'} paddingLeft={5} paddingRight={5} paddingTop={3}>
+            <Text fontWeight={'light'} fontSize={'15px'}>
+              {t('recurringMessage')}
+            </Text>
+            <Input
+              type={'number'}
+              value={monthlyAmount}
+              onChange={handleChangeMonthlyAmount}
+              placeholder="$ 0 USDT"
+              borderRadius={'12px'}
+              focusBorderColor="primary"
+            />
+          </Box>
+
+          <Box width={'100%'} padding={8}>
+            <HStack justifyContent={'space-between'}>
+              <Text fontWeight={'light'} fontSize={'15px'}>
+                {t('during')}
+              </Text>
+
+              <Text fontWeight={'light'} fontSize={'15px'}>
+                {time} {t('years')}
+              </Text>
+            </HStack>
+
+            <Slider
+              aria-label="slider-ex-2"
+              colorScheme="pink"
+              defaultValue={time}
+              min={1}
+              max={40}
+              step={1}
+              onChange={(val) => simulate(val)}
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              onTouchStart={() => setShowTooltip(true)}
+              onTouchEndCapture={() => setShowTooltip(false)}
+            >
+              <SliderTrack bg="#E5E4E5">
+                <SliderFilledTrack />
+              </SliderTrack>
+              <Tooltip
+                hasArrow
+                bg="primary"
+                color="white"
+                placement="top"
+                isOpen={showTooltip}
+                label={`${time}`}
+              >
+                <SliderThumb bg="primary"></SliderThumb>
+              </Tooltip>
+            </Slider>
+          </Box>
+        </Box>
+
+        <Box width={['100%', '100%', '70%']}>
+          <HStack justifyContent={'space-between'} paddingTop={10}>
+            <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
+              {t('in')} {time} {t('tittleChart')}
+            </Text>
+            <Text
+              paddingRight={5}
+              fontSize={['12px', '16px', '16px']}
+              color={'primary'}
+              onClick={onOpen}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
+              {t('howIsCalculated')}
+            </Text>
+
+            <HowWorksModal isOpen={isOpen} onClose={onClose} />
+          </HStack>
+
           <Text
             paddingLeft={5}
             fontWeight="bold"
@@ -335,7 +423,7 @@ export function SimulationChart({
             fontSize={'14px'}
             color={'sixth'}
           >
-            {t('investment')}
+            {t('invested')}
           </Text>
 
           <Text
@@ -347,7 +435,7 @@ export function SimulationChart({
             {simulationData.invested[simulationData.labels.length - 1]}
           </Text>
 
-          <Box paddingTop={5}>
+          <Box marginTop={10}>
             <Line options={options} data={data()} />
           </Box>
         </Box>
@@ -410,6 +498,10 @@ export function SimulationChart({
             max={40}
             step={1}
             onChange={(val) => simulate(val)}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onTouchStart={() => setShowTooltip(true)}
+            onTouchEndCapture={() => setShowTooltip(false)}
           >
             <SliderTrack bg="#E5E4E5">
               <SliderFilledTrack />
@@ -421,13 +513,8 @@ export function SimulationChart({
               placement="top"
               isOpen={showTooltip}
               label={`${time}`}
-              display={['block', 'none', 'none']}
             >
-              <SliderThumb
-                bg="primary"
-                onMouseEnter={() => setShowTooltip(true)}
-                onMouseLeave={() => setShowTooltip(false)}
-              ></SliderThumb>
+              <SliderThumb bg="primary"></SliderThumb>
             </Tooltip>
           </Slider>
         </Box>

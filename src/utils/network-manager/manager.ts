@@ -38,7 +38,7 @@ export class NetworkManager implements INetworkManager {
     return networks;
   }
 
-  public listTokens(): { [name: string]: Token } {
+  public listTokens(): { [name: string]: { [name: string]: Token } } {
     return tokens;
   }
 }

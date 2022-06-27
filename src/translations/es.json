@@ -4,8 +4,8 @@
     "connectWallet": "Conectar Wallet"
   },
   "NavbarLanding": {
-    "how": "¿Cómo funciona?",
-    "gobernance": "Gobernanza",
+    "how": "¿Cómo funciona? (Pronto)",
+    "gobernance": "Gobernanza (Pronto)",
     "more": "Más",
     "enter": "Entrar",
     "button": "Comenzar"
@@ -37,7 +37,7 @@
     "howIsCalculated": "Cómo se calcula?",
     "optimistic": "Resultado optimista",
     "pessimistic": "Resultado pesimista",
-    "investment": "Dinero invertido",
+    "invested": "Total invertido",
     "adjust": "Ajusta tu simulación",
     "text1": "Consideramos 2 posibles escenarios, optimista y pesimista",
     "text2": "El valor de cada año se calcula como:",
@@ -48,21 +48,22 @@
   "ConnectWalletOnboarding": {
     "title": "Conectar Wallet",
     "subtitle": "Conecta tu wallet para empezar a utilizar DeFi for People ",
-    "button": "Conectar a wallet",
+    "button": "Conectar Wallet",
     "permission": "Persmisos solo de vizualicación. Nunca haremos nada sin tu aprobación.",
     "trustedBy": "Confian en nosotros",
-    "users": "usuarios"
+    "users": "usuarios",
+    "verified": "Contrato verificado"
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "¿Cómo funciona?",
-    "gobernance": "Gobernanza",
-    "developers": "Desarrolladores",
+    "work": "¿Cómo funciona? (Pronto)",
+    "gobernance": "Gobernanza (Pronto)",
+    "developers": "Desarrolladores (Pronto)",
     "products": "Productos",
     "touch": "Contacto",
     "touchMessage": "Si estas interesado en aprender más sobre nuestros productos, amariamos que nos contactes.",
     "email": "Dirección de correo electrónico",
-    "suscribe": "Suscribirse",
+    "suscribe": "Contactar",
     "changeLanguage": "DeFi for People disponible en:",
     "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
   },
@@ -76,9 +77,9 @@
     "continue": "Continuar"
   },
   "DrawerNavbar": {
-    "how": "¿Cómo funciona?",
-    "strategies": "Estrategias",
-    "gobernance": "Gobernanza",
+    "how": "¿Cómo funciona? (Pronto)",
+    "strategies": "Estrategias (Pronto)",
+    "gobernance": "Gobernanza (Pronto)",
     "enter": "Entrar",
     "begin": "Comenzar",
     "changeLanguage": "DeFi for People disponible en:"

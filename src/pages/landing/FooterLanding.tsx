@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  Flex,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Link as ChakraLink, Text } from '@chakra-ui/react';
 
 import Logo from '../../components/logo';
 import { ReactComponent as GithubLogo } from '../../assets/logos/github-logo.svg';
@@ -46,7 +38,7 @@ function FooterLanding() {
 
           <Link to="/building">
             <Text
-              fontSize={['16px', '24px', '24px']}
+              fontSize={['12px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
@@ -57,7 +49,7 @@ function FooterLanding() {
 
           <Link to="/building">
             <Text
-              fontSize={['16px', '24px', '24px']}
+              fontSize={['12px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
@@ -68,7 +60,7 @@ function FooterLanding() {
 
           <Link to="/building">
             <Text
-              fontSize={['16px', '24px', '24px']}
+              fontSize={['12px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
@@ -88,36 +80,47 @@ function FooterLanding() {
             {t('products')}
           </Text>
 
-          <Link to="/building">
+          <Link to="/app">
             <Text
               fontSize={['16px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
             >
-              Delta Neutral
+              Recursive Farming (Beta)
             </Text>
           </Link>
 
-          <Link to="/building">
+          <Link to="/app">
             <Text
               fontSize={['16px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
             >
-              Stake Farming
+              Neutral Delta (Soon)
             </Text>
           </Link>
 
-          <Link to="/building">
+          <Link to="/app">
             <Text
               fontSize={['16px', '24px', '24px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
             >
-              Recursive Farming
+              Leveraged Farming (Soon)
+            </Text>
+          </Link>
+
+          <Link to="/app">
+            <Text
+              fontSize={['16px', '24px', '24px']}
+              lineHeight={['19.2px', '28.8px', '28.8px']}
+              color="grayLetter"
+              paddingTop={2}
+            >
+              Options (Soon)
             </Text>
           </Link>
         </Box>
@@ -141,35 +144,25 @@ function FooterLanding() {
             {t('touchMessage')}
           </Text>
 
-          <InputGroup paddingTop={2}>
-            <Input
-              bg="white"
-              type={'text'}
-              placeholder={t('email')}
-              border={'0'}
-              borderRadius={'32px'}
-              height={'64px'}
-              boxShadow={'0px 0px 55px rgba(0, 0, 0, 0.1)'}
-            />
-
-            <InputRightElement width={'148px'} paddingTop={10} marginRight={2}>
-              <Button bg="primary" borderRadius={'24px'}>
-                <Text
-                  fontSize={'22px'}
-                  lineHeight={'26.4px'}
-                  letterSpacing={'2px'}
-                  color="white"
-                >
-                  {t('suscribe')}
-                </Text>
-              </Button>
-            </InputRightElement>
-          </InputGroup>
+          <ChakraLink href="mailto:defiforpeople@gmail.com" isExternal>
+            <Button bg="primary" borderRadius={'24px'} marginTop={10}>
+              <Text
+                fontSize={'22px'}
+                lineHeight={'26.4px'}
+                letterSpacing={'2px'}
+                color="white"
+              >
+                {t('suscribe')}
+              </Text>
+            </Button>
+          </ChakraLink>
         </Box>
       </Flex>
 
       <Box marginTop={[5, 5, 5]} paddingLeft={[5, 100, 100]} width="20%">
-        <GithubLogo />
+        <ChakraLink href="https://github.com/defiforpeople" isExternal>
+          <GithubLogo />
+        </ChakraLink>
       </Box>
 
       <Flex marginTop={5} paddingLeft={[5, 100, 100]}>

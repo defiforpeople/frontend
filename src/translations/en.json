@@ -4,8 +4,8 @@
     "connectWallet": "Connect Wallet"
   },
   "NavbarLanding": {
-    "how": "How we work?",
-    "gobernance": "Gobernance",
+    "how": "How do we work? (Soon)",
+    "gobernance": "Governance (Soon)",
     "more": "More",
     "enter": "Enter",
     "button": "Begin"
@@ -22,7 +22,7 @@
   "DashboardOnboarding": {
     "label1": "Type of investor",
     "label2": "Simulate a goal",
-    "label3": "Now let get serious",
+    "label3": "Start investing",
     "button": "I like this simulation"
   },
   "Simulation": {
@@ -37,7 +37,7 @@
     "howIsCalculated": "How is calculated?",
     "optimistic": "Optimistic result",
     "pessimistic": "Pessimistic result",
-    "investment": "Investment",
+    "invested": "Total invested",
     "adjust": "Adjust your simulation",
     "text1": "Whe consider two possible scenarios: optimistic and pessimistic",
     "text2": "The value of each year is calculated by the formula:",
@@ -48,21 +48,22 @@
   "ConnectWalletOnboarding": {
     "title": "Connect Wallet",
     "subtitle": "Connect your wallet to start to use DeFi for People",
-    "button": "Connect to wallet",
-    "permission": "View only permission. We will never do anything withot your aprproval",
+    "button": "Connect Wallet",
+    "permission": "View only permission. We will never do anything withot your approval",
     "trustedBy": "Trusted by",
-    "users": "users"
+    "users": "users",
+    "verified": "Contract verified"
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "How we work?",
-    "gobernance": "Gobernance",
-    "developers": "Developers",
+    "work": "How do we work? (Soon)",
+    "gobernance": "Governance (Soon)",
+    "developers": "Developers (Soon)",
     "products": "Products",
     "touch": "Get in touch",
     "touchMessage": "If you are interested in learning more about our products, we would love to connect with you",
     "email": "Email address",
-    "suscribe": "Suscribe",
+    "suscribe": "Contact us",
     "changeLanguage": "DeFi for People is available in: ",
     "copyright": "DeFi for People 2022 ©. All rights reserved"
   },
@@ -76,9 +77,9 @@
     "continue": "Continue"
   },
   "DrawerNavbar": {
-    "how": "How we work?",
-    "strategies": "Strategies",
-    "gobernance": "Gobernance",
+    "how": "How do we work? (Soon)",
+    "strategies": "Strategies (Soon)",
+    "gobernance": "Governance (Soon)",
     "enter": "Enter",
     "begin": "Begin",
     "changeLanguage": "DeFi for People is available in: "
