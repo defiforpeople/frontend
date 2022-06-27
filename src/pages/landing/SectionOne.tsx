@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Box, Button, Center, Flex, Text } from '@chakra-ui/react';
 
-import { ReactComponent as PhoneImage } from '../../assets/images/phone-image.svg';
-
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
 import { Link } from 'react-router-dom';
@@ -35,7 +33,7 @@ function SectionOne() {
             width={['90%', '600px', '600px']}
           >
             En DeFi for People buscamos ayudar a los usuarios a enteder DeFi y
-            sus funciones.
+            sus funciones
           </Text>
 
           <Link to="/onboarding">
