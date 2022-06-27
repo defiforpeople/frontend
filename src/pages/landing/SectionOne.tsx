@@ -12,7 +12,7 @@ function SectionOne() {
   const { t } = useTranslation('SectionOne');
 
   return (
-    <Box bg={'#F1F4F6'} width="100%">
+    <Box bgGradient="linear(to-t, #FF99C8, #A9DEF9)" width="100%">
       <Center>
         <Flex flexDirection={'column'} alignItems="center">
           <Text
@@ -22,7 +22,7 @@ function SectionOne() {
             marginTop={['20px', '100px', '100px']}
             textAlign="center"
           >
-            {t('title')}
+            DeFi es simple
           </Text>
 
           <Text
@@ -34,7 +34,8 @@ function SectionOne() {
             padding={['10px', '0px', '0px']}
             width={['90%', '600px', '600px']}
           >
-            {t('subtitle')}
+            En DeFi for People buscamos ayudar a los usuarios a enteder DeFi y
+            sus funciones.
           </Text>
 
           <Link to="/onboarding">
@@ -43,6 +44,7 @@ function SectionOne() {
               borderRadius={'70'}
               width="200px"
               marginTop={['30px', '50px', '50px']}
+              marginBottom={['30px', '50px', '50px']}
             >
               <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
                 {t('button')}
@@ -50,7 +52,7 @@ function SectionOne() {
             </Button>
           </Link>
 
-          <PhoneImage width={'100%'} height={'100%'} />
+          {/* <PhoneImage width={'100%'} height={'100%'} /> */}
         </Flex>
       </Center>
     </Box>

@@ -10,8 +10,6 @@ function ConnectWallet() {
   const { adapter, isAuthenticated, setIsAuthenticated, setProfile } =
     useAdapter();
 
-  // console.log('Its rendering ConnectWallet component');
-
   const login = async () => {
     if (!isAuthenticated) {
       try {
