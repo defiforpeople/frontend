@@ -2189,16 +2189,6 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.0"
 
-"@fontsource/anek-bangla@^4.5.1":
-  "integrity" "sha512-0m2SZpIwTzWPKaTTpk55NWMdmy6u/vJYLFkSk+iiDZ0DmTmTMKW/1m5RsA7sq69PLc4iT0q1h1SFSkLO1N+CXg=="
-  "resolved" "https://registry.npmjs.org/@fontsource/anek-bangla/-/anek-bangla-4.5.1.tgz"
-  "version" "4.5.1"
-
-"@fontsource/gowun-dodum@^4.5.8":
-  "integrity" "sha512-k/R6sXSiPQtwT3eBeUzZb5pAR4pwqv2onCoOVJRrD7wNryt34Yw/TMN5xbyR/qx1X1N4AdV6OfCqbpOCbBxOsg=="
-  "resolved" "https://registry.npmjs.org/@fontsource/gowun-dodum/-/gowun-dodum-4.5.8.tgz"
-  "version" "4.5.8"
-
 "@humanwhocodes/config-array@^0.9.2":
   "integrity" "sha512-ObyMyWxZiCu/yTisA7uzx81s40xR2fD5Cg/2Kq7G02ajkNubJf6BopgDTmDyc3U7sXpNKM8cYOw7s7Tyr+DnCw=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.9.5.tgz"
