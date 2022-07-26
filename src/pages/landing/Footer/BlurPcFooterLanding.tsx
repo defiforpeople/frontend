@@ -5,7 +5,7 @@ export const BlurPc = (props: IconProps) => {
   return (
     <Icon
       width="100%"
-      zIndex="0"
+      zIndex="-1"
       height="400px"
       viewBox="0 0 300 100"
       fill="none"
@@ -14,11 +14,11 @@ export const BlurPc = (props: IconProps) => {
       {...props}
     >
       {/* pink-dfp */}
-      <circle cx="0" cy="10" r="15" fill="#F72585" />
+      <circle cx="0" cy="30" r="10" fill="#F72585" />
       {/* blue-dfp */}
-      <circle cx="250" cy="70" r="15" fill="#4895EF" />
+      <circle cx="250" cy="70" r="10" fill="#4895EF" />
       {/* purple-dfp */}
-      <circle cx="100" cy="90" r="15" fill="#3A0CA3" />
+      <circle cx="100" cy="90" r="10" fill="#3A0CA3" />
     </Icon>
   );
 };

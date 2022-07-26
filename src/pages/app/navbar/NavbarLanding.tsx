@@ -1,17 +1,9 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import {
-  Flex,
-  Text,
-  Button,
-  HStack,
-  Icon,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Flex, Text, Button, useDisclosure } from '@chakra-ui/react';
 
 import Logo from '../../../components/logo';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
 import { useTranslation } from 'react-i18next';
@@ -26,8 +18,8 @@ function NavbarLanding() {
   return (
     <Flex
       justify={['space-between', 'space-around', 'space-around']}
-      bg="#F1F4F6"
-      height={['70px', '50px', '50px']}
+      bg="white"
+      height={['70px', '76px', '76px']}
       align="center"
       alignItems={'center'}
       width={'100%'}

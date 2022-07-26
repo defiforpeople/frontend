@@ -77,9 +77,9 @@
     "continue": "Continue"
   },
   "DrawerNavbar": {
-    "how": "How do we work? (Soon)",
-    "strategies": "Strategies (Soon)",
-    "gobernance": "Governance (Soon)",
+    "how": "How do we work?",
+    "strategies": "Strategies",
+    "gobernance": "Governance",
     "enter": "Enter",
     "begin": "Begin",
     "changeLanguage": "DeFi for People is available in: "

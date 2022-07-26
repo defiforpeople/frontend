@@ -5,6 +5,7 @@ import { ReactComponent as GithubLogo } from '../../../assets/logos/github-logo.
 
 import { useTranslation } from 'react-i18next';
 import '../../../i18n';
+
 import { Link } from 'react-router-dom';
 
 import BlurFooterLanding from './BlurFooterLanding';
@@ -21,7 +22,7 @@ function FooterLanding() {
   };
 
   return (
-    <Box bg={'#FDFDFD'}>
+    <Box bg={'red'} height={'0px'}>
       <BlurFooterLanding />
 
       <Box paddingTop={50} paddingLeft={[5, 100, 100]}>
