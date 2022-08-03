@@ -56,9 +56,9 @@
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "How do we work? (Soon)",
-    "gobernance": "Governance (Soon)",
-    "developers": "Developers (Soon)",
+    "work": "How do we work?",
+    "gobernance": "Governance",
+    "developers": "Developers",
     "products": "Products",
     "touch": "Get in touch",
     "touchMessage": "If you are interested in learning more about our products, we would love to connect with you",
@@ -77,9 +77,9 @@
     "continue": "Continue"
   },
   "DrawerNavbar": {
-    "how": "How do we work? (Soon)",
-    "strategies": "Strategies (Soon)",
-    "gobernance": "Governance (Soon)",
+    "how": "How do we work?",
+    "strategies": "Strategies",
+    "gobernance": "Governance",
     "enter": "Enter",
     "begin": "Begin",
     "changeLanguage": "DeFi for People is available in: "

@@ -53,9 +53,9 @@ const CustomSteps = {
 
 const theme = extendTheme({
   fonts: {
-    heading: 'Anek Bangla, sans-serif',
-    body: 'Anek Bangla, sans-serif',
-    mono: 'Anek Bangla, sans-serif',
+    heading: 'Louis George Cafe, sans-serif',
+    body: 'Louis George Cafe, sans-serif',
+    mono: 'Louis George Cafe, sans-serif',
   },
   colors: {
     primary: '#F72585',

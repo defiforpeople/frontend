@@ -56,9 +56,9 @@
   },
   "FooterLanding": {
     "info": "Info",
-    "work": "¿Cómo funciona? (Pronto)",
-    "gobernance": "Gobernanza (Pronto)",
-    "developers": "Desarrolladores (Pronto)",
+    "work": "¿Cómo funciona?",
+    "gobernance": "Gobernanza",
+    "developers": "Desarrolladores",
     "products": "Productos",
     "touch": "Contacto",
     "touchMessage": "Si estas interesado en aprender más sobre nuestros productos, amariamos que nos contactes.",
@@ -77,9 +77,9 @@
     "continue": "Continuar"
   },
   "DrawerNavbar": {
-    "how": "¿Cómo funciona? (Pronto)",
-    "strategies": "Estrategias (Pronto)",
-    "gobernance": "Gobernanza (Pronto)",
+    "how": "¿Cómo funciona?",
+    "strategies": "Estrategias",
+    "gobernance": "Gobernanza",
     "enter": "Entrar",
     "begin": "Comenzar",
     "changeLanguage": "DeFi for People disponible en:"

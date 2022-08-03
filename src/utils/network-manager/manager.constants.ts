@@ -172,4 +172,4 @@ export const tokens: { [name: string]: { [name: string]: Token } } = {
   },
 };
 
-export const defaultNetwork = networks['rinkeby'];
+export const defaultNetwork = networks['polygon'];

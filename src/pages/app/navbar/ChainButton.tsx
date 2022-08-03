@@ -65,7 +65,7 @@ function ChainButton() {
           <ModalHeader>Select a Blockchain</ModalHeader>
           <ModalCloseButton />
 
-          <Button
+          {/* <Button
             leftIcon={<EthereumLogo width={25} />}
             width={'75%'}
             margin={'auto'}
@@ -89,7 +89,7 @@ function ChainButton() {
             onClick={() => changeNetwork('rinkeby')}
           >
             {networks['rinkeby'].name}
-          </Button>
+          </Button> */}
 
           <Button
             leftIcon={<PolygonLogo width={25} />}
@@ -104,7 +104,7 @@ function ChainButton() {
             {networks['polygon'].name}
           </Button>
 
-          <Button
+          {/* <Button
             leftIcon={<BnbChainLogo width={25} />}
             width={'75%'}
             margin={'auto'}
@@ -128,9 +128,9 @@ function ChainButton() {
             onClick={() => changeNetwork('avalanche')}
           >
             {networks['avalanche'].name}
-          </Button>
+          </Button> */}
 
-          <Button
+          {/* <Button
             leftIcon={<AvalancheLogo width={25} />}
             width={'75%'}
             margin={'auto'}
@@ -153,7 +153,7 @@ function ChainButton() {
             onClick={() => changeNetwork('fantom')}
           >
             {networks['fantom'].name}
-          </Button>
+          </Button> */}
 
           <ModalFooter>
             <Button onClick={onClose} bg="third" color="white" variant="solid">

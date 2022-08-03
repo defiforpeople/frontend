@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import '@fontsource/anek-bangla';
-
 import ReactDOM from 'react-dom';
 
 import App from './App';
