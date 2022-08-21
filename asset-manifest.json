@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.81ba81d7.js",
+    "main.js": "/frontend/static/js/main.257d7cbb.js",
     "static/media/phone-image.svg": "/frontend/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/chart-mobile-image.svg": "/frontend/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
     "static/media/chart-image.svg": "/frontend/static/media/chart-image.cc6271aa0a80b82a0af8453a64c5fdfd.svg",
@@ -16,9 +16,9 @@
     "static/media/fantom-logo.svg": "/frontend/static/media/fantom-logo.3f8c71bb709ec37d4e3bb072c25d75b7.svg",
     "static/media/ethereum-logo.svg": "/frontend/static/media/ethereum-logo.df265e367364f285053a1285ad8d418d.svg",
     "static/media/wallet-icon.svg": "/frontend/static/media/wallet-icon.015eab59d81d73d58a262071cec2bec1.svg",
-    "main.81ba81d7.js.map": "/frontend/static/js/main.81ba81d7.js.map"
+    "main.257d7cbb.js.map": "/frontend/static/js/main.257d7cbb.js.map"
   },
   "entrypoints": [
-    "static/js/main.81ba81d7.js"
+    "static/js/main.257d7cbb.js"
   ]
 }
