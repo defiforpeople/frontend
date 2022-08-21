@@ -102,7 +102,7 @@
     "presentation": "We offer different strategies to get you started with DeFi in a simple way.",
     "button": "Get started",
     "message": "Starting at $1",
-    "strategy1": "Borrowing/Lending",
+    "strategy1": "Lending protocol",
     "strategy1_description": "This strategy allows the user to lend or borrow tokens in the Aave protocol",
     "strategy2": "Liquidity provider",
     "strategy2_description": "This strategy allows the user to provide liquidity in the Uniswap V3 protocol"
