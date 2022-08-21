@@ -31,6 +31,8 @@ export function ManagerProvider({ children, adapter }: ManagerProviderProps) {
 
   const [network, setNetwork] = useState(defaultNetwork);
 
+  // adapter.switchNetwork(defaultNetwork.chainName);
+
   const value: ManagerContextType = useMemo(() => {
     const manager = new NetworkManager();
     manager.switchAdapter(adapter);
