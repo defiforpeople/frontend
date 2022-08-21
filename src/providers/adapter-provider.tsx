@@ -1,6 +1,7 @@
 import { createContext, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import {
+  DFPStrategy,
   INetworkManager,
   Profile,
 } from '../utils/network-manager/manager.types';
@@ -17,6 +18,8 @@ export type AdapterContextType = {
   setIsAuthenticated: (value: boolean) => void;
   profile: Profile;
   setProfile: (p: Profile) => void;
+  strategies: DFPStrategy[];
+  setStrategies: (ss: DFPStrategy[]) => void;
 };
 
 export const AdapterContext = createContext<AdapterContextType | undefined>(
@@ -33,6 +36,7 @@ export function AdapterProvider({ children, manager }: AdapterProviderProps) {
     address: '',
     ens: '',
   } as Profile);
+  const [strategies, setStrategies] = useState([] as DFPStrategy[]);
 
   const value: AdapterContextType = useMemo(() => {
     return {
@@ -41,8 +45,10 @@ export function AdapterProvider({ children, manager }: AdapterProviderProps) {
       setIsAuthenticated,
       profile,
       setProfile,
+      strategies,
+      setStrategies,
     };
-  }, [isAuthenticated, profile, manager]);
+  }, [isAuthenticated, profile, manager, strategies]);
 
   return (
     <AdapterContext.Provider value={value}>{children}</AdapterContext.Provider>

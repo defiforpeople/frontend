@@ -1,1 +1,3 @@
-export type MoralisNetwork = 'eth' | 'bsc';
+// export type MoralisNetwork = 'eth' | 'bsc';
+
+export {};

@@ -10,38 +10,30 @@ export type TokenSymbol =
   | 'ftm'
   | 'matic';
 
-export type NativeToken = {
-  balance?: number;
+export type Token = {
+  balance: string;
   symbol: TokenSymbol;
   decimals: number;
-};
-
-export type Token = NativeToken & {
-  address: string;
+  address?: string;
+  isNative: boolean;
 };
 
 export type ChainName =
-  | 'eth'
-  | 'goerli'
-  | 'rinkeby'
-  | 'polygon'
-  | 'bsc'
-  | 'avalanche'
-  | 'avalanche testnet'
-  | 'fantom';
+  // | 'eth'
+  // | 'goerli'
+  // | 'rinkeby'
+  'matic' | 'maticmum';
+// | 'bsc'
+// | 'avalanche'
+// | 'avalanche testnet'
+// | 'fantom';
 
 export type Network = {
   name: string;
   chainName: ChainName;
   chainId: string;
   dev: boolean;
-  nativeToken: NativeToken;
-  strategies: {
-    [name: string]: {
-      name: string;
-      address: string;
-    };
-  };
+  nativeToken: Token;
 };
 
 export interface INetworkManager {
@@ -50,13 +42,18 @@ export interface INetworkManager {
   switchAdapter(adapter: IAdapter): void;
   switchNetwork(name: ChainName): Promise<void>;
   listNetworks(): { [name: string]: Network };
-  listTokens(): { [name: string]: { [name: string]: Token } };
+  // listTokens(): { [name: string]: { [name: string]: Token } };
 }
 
 export type Profile = {
   address: string;
   ens: string;
 };
+
+export enum EventType {
+  Deposit = 'deposit',
+  Withdraw = 'withdraw',
+}
 
 export type Deposit = {
   amount: number;
@@ -75,6 +72,50 @@ export type Withdraw = {
 };
 
 export type Strategy = {
+  id: number;
   name: string;
-  addr: string;
+  network: Network;
+  contract: string;
+  data: unknown;
+};
+
+export type Event = {
+  id?: number;
+  strategyId: number;
+  hash: string;
+  block: number;
+  type: EventType;
+  wallet: string;
+  createdAt?: number;
+  data: unknown;
+};
+
+export type SupplyAaveStrategy = Strategy & {
+  data: {
+    token: {
+      symbol: TokenSymbol;
+      address: string;
+    };
+  };
+};
+
+export type SupplyUniswapStrategy = Strategy & {
+  data: {
+    poolId: string;
+    poolFee: string;
+    token0: {
+      symbol: TokenSymbol;
+      address: string;
+    };
+    token1: {
+      symbol: TokenSymbol;
+      address: string;
+    };
+  };
+};
+
+export type DFPStrategy = SupplyAaveStrategy | SupplyUniswapStrategy;
+
+export type StrategiesByNetworks = {
+  [name: string]: DFPStrategy[];
 };

@@ -51,7 +51,7 @@ type Props = {
 
 function InvesmentModal({ isOpen, onClose }: Props) {
   const { manager, setNetwork } = useNetworkManager();
-  const { adapter } = useAdapter();
+  const { adapter, strategies } = useAdapter();
 
   const { t } = useTranslation('InvesmentModal');
 
@@ -94,14 +94,14 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
     setBalanceLoading(true);
     const nativeToken = await adapter.getNativeToken();
-    if (!nativeToken || nativeToken.balance === 0) {
+    if (!nativeToken || Number(nativeToken.balance) === 0) {
       setMaxAmount(0);
       setBalanceLoading(false);
       return;
     }
 
     setBalanceLoading(false);
-    const amount = (nativeToken.balance! / 1e18).toFixed(3);
+    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
     setMaxAmount(Number(amount));
   };
 
@@ -163,10 +163,13 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
   const handleExplorerButton = async () => {
     const { chainName } = adapter.network;
-    const { strategies } = networks[chainName];
-    const { address } = strategies['recursive_farming'];
+    // const { strategies } = networks[chainName];
 
-    window.open(`https://testnet.snowtrace.io/address/${address}`, '_blank');
+    console.log('strategies', strategies);
+
+    // const { address } = strategies['recursive_farming'];
+
+    window.open(`https://testnet.snowtrace.io/address/{address}`, '_blank');
 
     resetStrategy();
   };
@@ -325,7 +328,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                     </HStack>
                   </MenuButton>
                   <MenuList border={'0'} width={'280px'}>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={() => handleTokenChange('rinkeby', 'weth')}
                     >
                       <EthLogo width={25} height={25} />
@@ -340,9 +343,9 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         {networks['rinkeby'].nativeToken.symbol.toUpperCase()} (
                         {networks['rinkeby'].name})
                       </Text>
-                    </MenuItem>
+                    </MenuItem> */}
 
-                    <MenuItem
+                    {/* <MenuItem
                     // onClick={async () => await handleTokenChange('avalanche', 'wavax')}
                     >
                       <AvalancheLogo width={25} height={25} />
@@ -357,8 +360,8 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
                         ({networks['avalanche'].name})
                       </Text>
-                    </MenuItem>
-
+                    </MenuItem> */}
+                    {/* 
                     <MenuItem
                     // onClick={async () =>
                     //   await handleTokenChange('avalanche testnet', 'wavax')
@@ -378,7 +381,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         ].nativeToken.symbol.toUpperCase()}{' '}
                         ({networks['avalanche testnet'].name})
                       </Text>
-                    </MenuItem>
+                    </MenuItem> */}
 
                     {/* 
                 <MenuItem onClick={() => handleTokenChange('DAI')}>
