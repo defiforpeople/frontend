@@ -50,32 +50,16 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
         </Box>
 
         <DrawerBody textAlign={'center'}>
-          <Text
-            fontSize={'36px'}
-            lineHeight={'43.2px'}
-            color="grayLetter"
-            marginTop={'50px'}
-          >
-            {t('how')}
-          </Text>
-
-          <Text
-            fontSize={'36px'}
-            lineHeight={'43.2px'}
-            color="grayLetter"
-            marginTop={'30px'}
-          >
-            {t('strategies')}
-          </Text>
-
-          <Text
-            fontSize={'36px'}
-            lineHeight={'43.2px'}
-            color="grayLetter"
-            marginTop={'30px'}
-          >
-            {t('gobernance')}
-          </Text>
+          <Link to="/strategies">
+            <Text
+              fontSize={'36px'}
+              lineHeight={'43.2px'}
+              color="grayLetter"
+              marginTop={'30px'}
+            >
+              {t('strategies')}
+            </Text>
+          </Link>
 
           <HStack marginTop={'114px'} justifyContent="space-around">
             <Link to="/app">

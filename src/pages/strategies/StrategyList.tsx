@@ -16,7 +16,7 @@ interface FeatureProps {
 
 const Feature = ({ title, text, icon }: FeatureProps) => {
   return (
-    <Stack align={'center'}>
+    <Stack align={'center'} pl={10} pr={10}>
       <Flex w={16} h={16} align={'center'} justify={'center'} color={'white'}>
         {icon}
       </Flex>
@@ -30,7 +30,7 @@ function StrategyList() {
   const { t } = useTranslation('strategies');
 
   return (
-    <Box maxW={'4xl'} margin={'auto'}>
+    <Box maxW={'4xl'} margin={'auto'} padding={10}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={20}>
         <Feature
           icon={<Icon as={AaveLogo} w={14} h={14} />}

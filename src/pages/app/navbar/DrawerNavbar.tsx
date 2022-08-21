@@ -48,18 +48,7 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
         </Box>
 
         <DrawerBody textAlign={'center'}>
-          <Link to="/building">
-            <Text
-              fontSize={'36px'}
-              lineHeight={'43.2px'}
-              color="grayLetter"
-              marginTop={'50px'}
-            >
-              {t('how')}
-            </Text>
-          </Link>
-
-          <Link to="/building">
+          <Link to="/strategies">
             <Text
               fontSize={'36px'}
               lineHeight={'43.2px'}
@@ -67,17 +56,6 @@ function DrawerNavbar({ isOpen, onClose }: Props) {
               marginTop={'30px'}
             >
               {t('strategies')}
-            </Text>
-          </Link>
-
-          <Link to="/building">
-            <Text
-              fontSize={'36px'}
-              lineHeight={'43.2px'}
-              color="grayLetter"
-              marginTop={'30px'}
-            >
-              {t('gobernance')}
             </Text>
           </Link>
 

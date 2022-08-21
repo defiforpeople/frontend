@@ -25,6 +25,7 @@ function StrategyPresentation() {
           textAlign={'center'}
           spacing={{ base: 8, md: 14 }}
           py={{ base: 20, md: 36 }}
+          p={{ base: 12, md: 8 }}
         >
           <Heading
             fontWeight={600}
@@ -58,7 +59,7 @@ function StrategyPresentation() {
               </Button>
             </Link>
 
-            <Box>
+            <Box display={['none', 'block', 'block', 'block']}>
               <Icon
                 as={Arrow}
                 color={useColorModeValue('gray.800', 'gray.300')}
