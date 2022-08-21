@@ -19,8 +19,16 @@ import '../../i18n';
 import { useAdapter } from '../../hooks/use-adapter';
 import { useEffect, useState } from 'react';
 import MobileConnectWalletModal from './navbar/MobileConnectWalletModal';
+import { useNetworkManager } from '../../hooks/use-manager';
 
 function ConnectWallet() {
+  const { manager, network } = useNetworkManager();
+  console.log('POPPOPOPO');
+  console.log('POPPOPOPO');
+  console.log('POPPOPOPO');
+  console.log('POPPOPOPO');
+  console.log('POPPOPOPO');
+  console.log('POPPOPOPO', network);
   const { adapter, isAuthenticated, setIsAuthenticated, setProfile } =
     useAdapter();
 
@@ -47,13 +55,14 @@ function ConnectWallet() {
 
   useEffect(() => {
     async function getUsersConnected() {
+      await manager.switchNetwork(network.chainName);
       const users = await adapter.getUsers();
 
       setUsers(users);
     }
 
     getUsersConnected();
-  }, [adapter]);
+  }, [adapter, manager, network.chainName]);
 
   return (
     <Center>

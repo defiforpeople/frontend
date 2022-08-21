@@ -1,5 +1,5 @@
-import { Strategy } from '../../../../typechain';
-// import { networks, tokens } from '../../manager.constants';
+// import { Strategy } from '../../../../typechain';
+import { networks } from '../../manager.constants';
 import {
   Network,
   ChainName,
@@ -60,18 +60,22 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async switchNetwork(name: ChainName): Promise<void> {
-    // try {
-    //   if (!this._ready) {
-    //     await this.initAdapter();
-    //   }
-    //   await Moralis.enableWeb3();
-    //   const network = networks[name];
-    //   await Moralis.switchNetwork(network.chainId);
-    //   this._network = network;
-    // } catch (err) {
-    //   console.log(err);
-    //   throw err;
-    // }
+    try {
+      if (!this._ready) {
+        await this.initAdapter();
+      }
+
+      // await Moralis.enableWeb3();
+
+      const network = networks[name];
+
+      // await Moralis.switchNetwork(network.chainId);
+
+      this._network = network;
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   }
 
   public get network(): Network {
@@ -220,7 +224,7 @@ export default class DfpAdapter implements IAdapter {
       }
 
       const response = await fetch(
-        `${this._apiURL}/api/v1/wallets?network=${this._network}`,
+        `${this._apiURL}/api/v1/wallets?network=${this._network.chainName}`,
       );
 
       const { meta }: { meta: { count: number } } = await response.json();

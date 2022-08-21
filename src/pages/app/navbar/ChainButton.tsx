@@ -20,28 +20,41 @@ import { ReactComponent as PolygonLogo } from '../../../assets/logos/polygon-log
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
 import { useNetworkManager } from '../../../hooks/use-manager';
-import { ChainName } from '../../../utils/network-manager';
+import { ChainName, DFPStrategy } from '../../../utils/network-manager';
+import { useAdapter } from '../../../hooks/use-adapter';
 
 function ChainButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { manager, network, setNetwork } = useNetworkManager();
+  const { strategies } = useAdapter();
 
   console.log('network', network);
+  console.log('strategies', strategies);
+
+  const nn: { [key: string]: DFPStrategy[] } = {};
+  for (let i = 0; i < strategies.length; i++) {
+    const s = strategies[i];
+
+    if (!nn[s.network]) {
+      nn[s.network] = [];
+    }
+
+    nn[s.network].push(s);
+  }
+
+  console.log('kakakaka');
+  console.log('kakakaka');
+  console.log('kakakaka');
+  console.log('kakakaka', nn);
 
   const changeNetwork = async (networkName: ChainName) => {
     console.log(`Change network to networkName: ${networkName}`);
 
     try {
       await manager.switchNetwork(networkName);
-
       const networks = manager.listNetworks();
 
-      console.log('AJAJJAAJ');
-      console.log('AJAJJAAJ');
-      console.log('AJAJJAAJ');
-      console.log('AJAJJAAJ');
-      console.log('AJAJJAAJ', networks[networkName]);
       setNetwork(networks[networkName]);
 
       onClose();

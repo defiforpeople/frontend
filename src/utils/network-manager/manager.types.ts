@@ -74,7 +74,7 @@ export type Withdraw = {
 export type Strategy = {
   id: number;
   name: string;
-  network: Network;
+  network: string;
   contract: string;
   data: unknown;
 };
