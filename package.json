@@ -2,6 +2,7 @@
   "name": "frontend-defipeople",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://defiforpeople.github.io/frontend",
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
