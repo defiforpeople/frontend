@@ -6,7 +6,7 @@ function BlurFooterLanding() {
     <>
       <BlurPc position="absolute" style={{ filter: 'blur(50px)' }} />
 
-      <BlurMobile position="absolute" style={{ filter: 'blur(70px)' }} />
+      <BlurMobile position="absolute" style={{ filter: 'blur(80px)' }} />
     </>
   );
 }

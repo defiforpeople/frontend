@@ -4,8 +4,7 @@
     "connectWallet": "Conectar Wallet"
   },
   "NavbarLanding": {
-    "how": "¿Cómo funciona? (Pronto)",
-    "gobernance": "Gobernanza (Pronto)",
+    "strategies": "Estrategias",
     "more": "Más",
     "enter": "Entrar",
     "button": "Comenzar"
@@ -96,5 +95,16 @@
   },
   "footer": {
     "copyright": "DeFi for People 2022 ©. Todos los derechos reservados."
+  },
+  "strategies": {
+    "title": "Diferentes",
+    "subtitle": "estrategias DeFi para invertir",
+    "presentation": "Ofrecemos diferentes estrategias para que puedas empezar a utilizar DeFi de manera simple",
+    "button": "Comenzar",
+    "message": "Comienza con $1",
+    "strategy1": "Préstamos",
+    "strategy1_description": "Esta estrategia permite al usuario prestar o pedir prestado tokens en el protocolo Aave",
+    "strategy2": "Proveedor de liquidez",
+    "strategy2_description": "Esta estrategia provee liquidez de un par de tokens en el protocolo Uniswap V3"
   }
 }

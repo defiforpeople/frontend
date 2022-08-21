@@ -6,6 +6,7 @@ import Landing from './pages/landing/Landing';
 import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
 import SimulatePage from './pages/simulate/SimulatePage';
+import Strategies from './pages/strategies/Strategies';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/building" element={<Building />} />
       <Route path="/simulate" element={<SimulatePage />} />
+      <Route path="/strategies" element={<Strategies />} />
     </Routes>
   );
 }

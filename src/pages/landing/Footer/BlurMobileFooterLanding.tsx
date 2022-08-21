@@ -12,7 +12,7 @@ export const BlurMobile = (props: IconProps) => {
       {...props}
     >
       {/* blue */}
-      <circle cx="0" cy="0" r="50" fill="#4A64A8" />
+      <circle cx="0" cy="0" r="10" fill="#4A64A8" />
     </Icon>
   );
 };

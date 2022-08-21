@@ -39,19 +39,22 @@ function NavbarLanding() {
         <Logo w={160} h={10} color="#3A0CA3" />
       </Link>
 
-      <Text
-        fontSize={'18'}
-        lineHeight={'21.6px'}
-        color="grayLetter"
-        display={['none', 'block', 'block']}
-        _hover={{
-          cursor: 'pointer',
-          color: 'primary',
-        }}
-      >
-        {t('how')}
-      </Text>
+      <Link to="strategies">
+        <Text
+          fontSize={'18'}
+          lineHeight={'21.6px'}
+          color="grayLetter"
+          display={['none', 'block', 'block']}
+          _hover={{
+            cursor: 'pointer',
+            color: 'primary',
+          }}
+        >
+          {t('strategies')}
+        </Text>
+      </Link>
 
+      {/* 
       <Text
         fontSize={'18'}
         lineHeight={'21.6px'}
@@ -63,7 +66,7 @@ function NavbarLanding() {
         }}
       >
         {t('gobernance')}
-      </Text>
+      </Text> */}
 
       {/* <HStack display={['none', 'inherit', 'inherit']}>
         <Text fontSize={'18'} lineHeight={'21.6px'} color="grayLetter">

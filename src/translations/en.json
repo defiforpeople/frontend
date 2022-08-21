@@ -4,8 +4,7 @@
     "connectWallet": "Connect Wallet"
   },
   "NavbarLanding": {
-    "how": "How do we work? (Soon)",
-    "gobernance": "Governance (Soon)",
+    "strategies": "Strategies",
     "more": "More",
     "enter": "Enter",
     "button": "Begin"
@@ -96,5 +95,16 @@
   },
   "footer": {
     "copyright": "DeFi for People 2022 ©. All rights reserved."
+  },
+  "strategies": {
+    "title": "Different",
+    "subtitle": "strategies",
+    "presentation": "We offer different strategies to get you started with DeFi in a simple way.",
+    "button": "Get started",
+    "message": "Starting at $1",
+    "strategy1": "Borrowing/Lending",
+    "strategy1_description": "This strategy allows the user to lend or borrow tokens in the Aave protocol",
+    "strategy2": "Liquidity provider",
+    "strategy2_description": "This strategy allows the user to provide liquidity in the Uniswap V3 protocol"
   }
 }
