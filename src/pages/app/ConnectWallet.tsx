@@ -51,8 +51,8 @@ function ConnectWallet() {
 
   useEffect(() => {
     async function getUsersConnected() {
-      // const users = await adapter.getUsers();
-      const users = 18;
+      const users = await adapter.getUsers();
+      // const users = 18;
 
       setUsers(users);
     }
