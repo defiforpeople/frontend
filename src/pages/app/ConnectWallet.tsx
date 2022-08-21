@@ -31,6 +31,7 @@ function ConnectWallet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const login = async () => {
+    console.log('here in login');
     if (!isAuthenticated) {
       try {
         // const profile = await adapter.login(t('signingMessage'));

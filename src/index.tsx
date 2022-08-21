@@ -12,21 +12,18 @@ import { HashRouter } from 'react-router-dom';
 import { ManagerProvider } from './providers/manager-provider';
 import { Adapters } from './utils/network-manager';
 
-const { REACT_APP_SERVER_URL, REACT_APP_APP_ID } = process.env;
-if (!REACT_APP_SERVER_URL || !REACT_APP_APP_ID) {
+const { REACT_APP_API_URL } = process.env;
+if (!REACT_APP_API_URL) {
   throw new Error('invalid ENV values');
 }
 
-const moralisAdapter = new Adapters.MoralisAdapter(
-  REACT_APP_SERVER_URL,
-  REACT_APP_APP_ID,
-);
+const dfpAdapter = new Adapters.DfpAdapter(REACT_APP_API_URL);
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <Fonts />
-      <ManagerProvider adapter={moralisAdapter}>
+      <ManagerProvider adapter={dfpAdapter}>
         <HashRouter>
           <App />
         </HashRouter>

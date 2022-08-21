@@ -1,6 +1,6 @@
 import { IAdapter } from './adapters';
-import { networks, tokens } from './manager.constants';
-import { INetworkManager, Network, ChainName, Token } from './manager.types';
+import { networks } from './manager.constants';
+import { INetworkManager, Network, ChainName } from './manager.types';
 
 export class NetworkManager implements INetworkManager {
   private adapter: IAdapter;
@@ -38,7 +38,7 @@ export class NetworkManager implements INetworkManager {
     return networks;
   }
 
-  public listTokens(): { [name: string]: { [name: string]: Token } } {
-    return tokens;
-  }
+  // public listTokens(): { [name: string]: { [name: string]: Token } } {
+  //   return {};
+  // }
 }

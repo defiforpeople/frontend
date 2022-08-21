@@ -11,11 +11,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
-import { ReactComponent as EthereumLogo } from '../../../assets/logos/ethereum-logo.svg';
+// import { ReactComponent as EthereumLogo } from '../../../assets/logos/ethereum-logo.svg';
 import { ReactComponent as PolygonLogo } from '../../../assets/logos/polygon-logo.svg';
-import { ReactComponent as BnbChainLogo } from '../../../assets/logos/bnbchain-logo.svg';
-import { ReactComponent as AvalancheLogo } from '../../../assets/logos/avalanche-logo.svg';
-import { ReactComponent as FantomLogo } from '../../../assets/logos/fantom-logo.svg';
+// import { ReactComponent as BnbChainLogo } from '../../../assets/logos/bnbchain-logo.svg';
+// import { ReactComponent as AvalancheLogo } from '../../../assets/logos/avalanche-logo.svg';
+// import { ReactComponent as FantomLogo } from '../../../assets/logos/fantom-logo.svg';
 
 import LogoNetwork from './LogoNetwork';
 import ConnectedNetwork from './ConnectedNetwork';
@@ -27,12 +27,21 @@ function ChainButton() {
 
   const { manager, network, setNetwork } = useNetworkManager();
 
+  console.log('network', network);
+
   const changeNetwork = async (networkName: ChainName) => {
     console.log(`Change network to networkName: ${networkName}`);
+
     try {
       await manager.switchNetwork(networkName);
 
       const networks = manager.listNetworks();
+
+      console.log('AJAJJAAJ');
+      console.log('AJAJJAAJ');
+      console.log('AJAJJAAJ');
+      console.log('AJAJJAAJ');
+      console.log('AJAJJAAJ', networks[networkName]);
       setNetwork(networks[networkName]);
 
       onClose();
@@ -98,10 +107,23 @@ function ChainButton() {
             marginBottom={3}
             justifyContent="start"
             iconSpacing={5}
-            isDisabled={'polygon' === network.chainName}
-            onClick={() => changeNetwork('polygon')}
+            isDisabled={'matic' === network.chainName}
+            onClick={() => changeNetwork('matic')}
           >
-            {networks['polygon'].name}
+            {networks['matic'].name}
+          </Button>
+
+          <Button
+            leftIcon={<PolygonLogo width={25} />}
+            width={'75%'}
+            margin={'auto'}
+            marginBottom={3}
+            justifyContent="start"
+            iconSpacing={5}
+            isDisabled={'maticmum' === network.chainName}
+            onClick={() => changeNetwork('maticmum')}
+          >
+            {networks['maticmum'].name}
           </Button>
 
           {/* <Button

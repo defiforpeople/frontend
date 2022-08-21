@@ -1,5 +1,4 @@
 import {
-  NativeToken,
   Network,
   ChainName,
   Profile,
@@ -7,9 +6,11 @@ import {
   Deposit,
   Withdraw,
   TokenSymbol,
+  DFPStrategy,
+  StrategiesByNetworks,
 } from '../manager.types';
 
-export type AdapterName = 'moralis' | 'web3' | 'ethers.js' | 'none';
+export type AdapterName = 'moralis' | 'web3' | 'ethers.js' | 'dfp' | 'none';
 
 export interface IAdapter {
   get network(): Network;
@@ -18,7 +19,7 @@ export interface IAdapter {
   login(signMessage: string): Promise<Profile>;
   logout(): Promise<void>;
   getProfile(): Promise<Profile>;
-  getNativeToken(): Promise<NativeToken>;
+  getNativeToken(): Promise<Token>;
   getTokens(): Promise<Token[]>;
   switchNetwork(name: ChainName): Promise<void>;
   getUsers(): Promise<number>;
@@ -26,4 +27,6 @@ export interface IAdapter {
   getWithdrawals(): Promise<Withdraw[]>;
   approveDeposit(amount: number, symbol: TokenSymbol): Promise<Deposit>;
   deposit(deposit: Deposit): Promise<Deposit>;
+  listStrategies(): Promise<DFPStrategy[]>;
+  listStrategiesByNetworks(): Promise<StrategiesByNetworks>;
 }

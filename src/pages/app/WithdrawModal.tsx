@@ -85,14 +85,14 @@ function WithdrawModal({ isOpen, onClose }: Props) {
 
     setBalanceLoading(true);
     const nativeToken = await adapter.getNativeToken();
-    if (!nativeToken || nativeToken.balance === 0) {
+    if (!nativeToken || Number(nativeToken.balance) === 0) {
       setMaxAmount(0);
       setBalanceLoading(false);
       return;
     }
 
     setBalanceLoading(false);
-    const amount = (nativeToken.balance! / 1e18).toFixed(3);
+    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
     setMaxAmount(Number(amount));
   };
 
@@ -309,7 +309,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                 </Text>
               </MenuItem> */}
 
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={async () => await handleTokenChange('avalanche')}
                     >
                       <AvalancheLogo width={25} height={25} />
@@ -324,9 +324,9 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                         {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
                         ({networks['avalanche'].name})
                       </Text>
-                    </MenuItem>
+                    </MenuItem> */}
 
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={async () =>
                         await handleTokenChange('avalanche testnet')
                       }
@@ -345,7 +345,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                         ].nativeToken.symbol.toUpperCase()}{' '}
                         ({networks['avalanche testnet'].name})
                       </Text>
-                    </MenuItem>
+                    </MenuItem> */}
 
                     {/* 
               <MenuItem onClick={() => handleTokenChange('DAI')}>
