@@ -1,24 +1,22 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.257d7cbb.js",
+    "main.js": "/frontend/static/js/main.c66bce68.js",
     "static/media/phone-image.svg": "/frontend/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/chart-mobile-image.svg": "/frontend/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
     "static/media/chart-image.svg": "/frontend/static/media/chart-image.cc6271aa0a80b82a0af8453a64c5fdfd.svg",
     "static/media/uniswap-logo.svg": "/frontend/static/media/uniswap-logo.dbe6034cd96602e3e20a6bb066fddc48.svg",
     "static/media/dai-logo.svg": "/frontend/static/media/dai-logo.1cfa000a47e49b140ccfc85f35590382.svg",
     "static/media/avalanche-logo.svg": "/frontend/static/media/avalanche-logo.a3f3731d51c2cd33df24e55af1f23844.svg",
-    "static/media/bnbchain-logo.svg": "/frontend/static/media/bnbchain-logo.797868eb94521320b78e3967134febbe.svg",
     "static/media/aave-logo.svg": "/frontend/static/media/aave-logo.0a64aa4995ba06351b348cd954ce1e8d.svg",
     "static/media/github-logo.svg": "/frontend/static/media/github-logo.f6736f1e612cf83d1ad8b2c034d102e2.svg",
     "static/media/polygon-logo.svg": "/frontend/static/media/polygon-logo.97ff139cc7379a42cf141d74a6595fff.svg",
     "static/media/eth-logo.svg": "/frontend/static/media/eth-logo.31c217a869801fc47ecc235960c03e6c.svg",
     "index.html": "/frontend/index.html",
-    "static/media/fantom-logo.svg": "/frontend/static/media/fantom-logo.3f8c71bb709ec37d4e3bb072c25d75b7.svg",
     "static/media/ethereum-logo.svg": "/frontend/static/media/ethereum-logo.df265e367364f285053a1285ad8d418d.svg",
     "static/media/wallet-icon.svg": "/frontend/static/media/wallet-icon.015eab59d81d73d58a262071cec2bec1.svg",
-    "main.257d7cbb.js.map": "/frontend/static/js/main.257d7cbb.js.map"
+    "main.c66bce68.js.map": "/frontend/static/js/main.c66bce68.js.map"
   },
   "entrypoints": [
-    "static/js/main.257d7cbb.js"
+    "static/js/main.c66bce68.js"
   ]
 }
