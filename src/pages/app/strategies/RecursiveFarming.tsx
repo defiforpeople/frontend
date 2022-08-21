@@ -14,10 +14,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Stat,
-  StatArrow,
-  StatHelpText,
-  StatNumber,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';

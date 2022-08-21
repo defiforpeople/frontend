@@ -33,7 +33,11 @@ function ConnectWallet() {
   const login = async () => {
     if (!isAuthenticated) {
       try {
-        const profile = await adapter.login(t('signingMessage'));
+        // const profile = await adapter.login(t('signingMessage'));
+        const profile = {
+          address: '0x0',
+          ens: 'cristianvaldivia.eth',
+        };
         setIsAuthenticated(true);
         setProfile(profile);
 
@@ -46,7 +50,8 @@ function ConnectWallet() {
 
   useEffect(() => {
     async function getUsersConnected() {
-      const users = await adapter.getUsers();
+      // const users = await adapter.getUsers();
+      const users = 18;
 
       setUsers(users);
     }

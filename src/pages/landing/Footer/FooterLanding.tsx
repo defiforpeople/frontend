@@ -41,36 +41,14 @@ function FooterLanding() {
             {t('info')}
           </Text>
 
-          <Link to="/building">
+          <Link to="/strategies">
             <Text
               fontSize={['12px', '22px', '22px']}
               lineHeight={['19.2px', '28.8px', '28.8px']}
               color="grayLetter"
               paddingTop={2}
             >
-              {t('work')}
-            </Text>
-          </Link>
-
-          <Link to="/building">
-            <Text
-              fontSize={['12px', '22px', '22px']}
-              lineHeight={['19.2px', '28.8px', '28.8px']}
-              color="grayLetter"
-              paddingTop={2}
-            >
-              {t('gobernance')}
-            </Text>
-          </Link>
-
-          <Link to="/building">
-            <Text
-              fontSize={['12px', '22px', '22px']}
-              lineHeight={['19.2px', '28.8px', '28.8px']}
-              color="grayLetter"
-              paddingTop={2}
-            >
-              {t('developers')}
+              {t('strategies')}
             </Text>
           </Link>
         </Box>
@@ -93,7 +71,7 @@ function FooterLanding() {
               color="grayLetter"
               paddingTop={2}
             >
-              Recursive Farming
+              {t('strategy1')}
             </Text>
           </Link>
 
@@ -104,7 +82,7 @@ function FooterLanding() {
               color="grayLetter"
               paddingTop={2}
             >
-              Options
+              {t('strategy2')}
             </Text>
           </Link>
         </Box>

@@ -56,7 +56,9 @@
   "FooterLanding": {
     "info": "Info",
     "work": "¿Cómo funciona?",
-    "gobernance": "Gobernanza",
+    "strategies": "Estrategias",
+    "strategy1": "Protocolo de préstamo",
+    "strategy2": "Proveedor de liquidez",
     "developers": "Desarrolladores",
     "products": "Productos",
     "touch": "Contacto",

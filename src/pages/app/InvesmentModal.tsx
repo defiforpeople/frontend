@@ -32,6 +32,8 @@ import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
+import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
+import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
@@ -232,39 +234,33 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                   <MenuItem
                     onClick={() => handleStrategyChange('Recursive Farming')}
                   >
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'black'}
-                      padding={3}
-                    >
-                      Recursive Farming
-                    </Text>
+                    <HStack>
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        Lending protocol
+                      </Text>
+                      <AaveLogo width={30} height={30} />
+                    </HStack>
                   </MenuItem>
 
                   <MenuItem>
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'#757575'}
-                      padding={3}
-                    >
-                      Staking Farming (soon)
-                    </Text>
-                  </MenuItem>
-
-                  <MenuItem>
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'#757575'}
-                      padding={3}
-                    >
-                      Delta Neutral (soon)
-                    </Text>
+                    <HStack>
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        Proveer liquidez
+                      </Text>
+                      <UniswapLogo width={40} height={40} />
+                    </HStack>
                   </MenuItem>
                 </MenuList>
               </Menu>

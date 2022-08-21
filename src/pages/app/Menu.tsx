@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Box, Button, HStack, Text, useDisclosure } from '@chakra-ui/react';
+
 import InvesmentModal from './InvesmentModal';
 import WithdrawModal from './WithdrawModal';
 
@@ -57,7 +56,7 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 1 ? 'white' : 'grayLetter'}
           >
-            Recursive Farming
+            Proveer liquidez
           </Text>
         </Box>
 
@@ -65,7 +64,6 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
           borderBottom="1px"
           borderStyle="solid"
           borderColor="rgba(0, 0, 0, 0.1)"
-          // onClick={() => setMenuIndex(2)}
           bg={menuIndex === 2 ? 'primary' : 'white'}
         >
           <Text
@@ -76,69 +74,11 @@ function Menu({ menuIndex, setMenuIndex }: Props) {
             letterSpacing={'-3%'}
             color={menuIndex === 2 ? 'white' : 'grayLetter'}
           >
-            Staking Farming (soon)
+            Prestar token
           </Text>
         </Box>
 
         <Box
-          borderBottom="1px"
-          borderStyle="solid"
-          borderColor="rgba(0, 0, 0, 0.1)"
-          // onClick={() => setMenuIndex(3)}
-          bg={menuIndex === 3 ? 'primary' : 'white'}
-        >
-          <Text
-            padding={3}
-            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
-            fontSize={'16'}
-            lineHeight={'19.2px'}
-            letterSpacing={'-3%'}
-            color={menuIndex === 3 ? 'white' : 'grayLetter'}
-          >
-            Neutral Delta (soon)
-          </Text>
-        </Box>
-
-        <Box
-          borderBottom="1px"
-          borderStyle="solid"
-          borderColor="rgba(0, 0, 0, 0.1)"
-          // onClick={() => setMenuIndex(3)}
-          bg={menuIndex === 3 ? 'primary' : 'white'}
-        >
-          <Text
-            padding={3}
-            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
-            fontSize={'16'}
-            lineHeight={'19.2px'}
-            letterSpacing={'-3%'}
-            color={menuIndex === 3 ? 'white' : 'grayLetter'}
-          >
-            Leveraged Farming (soon)
-          </Text>
-        </Box>
-
-        <Box
-          borderBottom="1px"
-          borderStyle="solid"
-          borderColor="rgba(0, 0, 0, 0.1)"
-          // onClick={() => setMenuIndex(3)}
-          bg={menuIndex === 3 ? 'primary' : 'white'}
-        >
-          <Text
-            padding={3}
-            fontWeight={menuIndex === 3 ? 'bold' : 'normal'}
-            fontSize={'16'}
-            lineHeight={'19.2px'}
-            letterSpacing={'-3%'}
-            color={menuIndex === 3 ? 'white' : 'grayLetter'}
-          >
-            Options (soon)
-          </Text>
-        </Box>
-
-        <Box
-          // onClick={() => setMenuIndex(4)}
           bg={menuIndex === 4 ? 'primary' : 'white'}
           borderBottomLeftRadius={14}
           borderBottomRightRadius={14}

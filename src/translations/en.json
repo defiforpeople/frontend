@@ -56,9 +56,10 @@
   "FooterLanding": {
     "info": "Info",
     "work": "How do we work?",
-    "gobernance": "Governance",
-    "developers": "Developers",
+    "strategies": "Strategies",
     "products": "Products",
+    "strategy1": "Lending protocol",
+    "strategy2": "Liquidity provider",
     "touch": "Get in touch",
     "touchMessage": "If you are interested in learning more about our products, we would love to connect with you",
     "email": "Email address",

@@ -7,6 +7,7 @@ import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
 import SimulatePage from './pages/simulate/SimulatePage';
 import Strategies from './pages/strategies/Strategies';
+import Lending from './pages/strategies/lending/Lending';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/building" element={<Building />} />
       <Route path="/simulate" element={<SimulatePage />} />
       <Route path="/strategies" element={<Strategies />} />
+      <Route path="/lending" element={<Lending />} />
     </Routes>
   );
 }
