@@ -43,10 +43,6 @@ function ConnectButton({ handleOpenModal }: Props) {
     if (!isAuthenticated) {
       try {
         const profile = await adapter.login(t('signingMessage'));
-        // const profile = {
-        //   address: '0x0',
-        //   ens: 'cristianvaldivia.eth',
-        // };
 
         setIsAuthenticated(true);
         setProfile(profile);

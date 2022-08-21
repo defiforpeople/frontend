@@ -159,6 +159,7 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async login(signMessage: string): Promise<Profile> {
+    console.log('Adapter: login()');
     try {
       if (!this._ready) {
         await this.initAdapter();
@@ -177,7 +178,7 @@ export default class DfpAdapter implements IAdapter {
       }
 
       const response = await fetch(
-        `${this._apiURL}/api/v1/wallets/${wallet}/login?network=${this._network}`,
+        `${this._apiURL}/api/v1/wallets/${wallet}/login?network=${this._network.chainName}`,
         {
           headers: {
             Accept: 'application/json',
@@ -186,6 +187,7 @@ export default class DfpAdapter implements IAdapter {
           method: 'POST',
         },
       );
+
       const { data }: { data: Profile } = await response.json();
       this._profile = data;
 

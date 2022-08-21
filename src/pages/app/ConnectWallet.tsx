@@ -23,12 +23,7 @@ import { useNetworkManager } from '../../hooks/use-manager';
 
 function ConnectWallet() {
   const { manager, network } = useNetworkManager();
-  console.log('POPPOPOPO');
-  console.log('POPPOPOPO');
-  console.log('POPPOPOPO');
-  console.log('POPPOPOPO');
-  console.log('POPPOPOPO');
-  console.log('POPPOPOPO', network);
+
   const { adapter, isAuthenticated, setIsAuthenticated, setProfile } =
     useAdapter();
 
@@ -42,11 +37,8 @@ function ConnectWallet() {
     console.log('here in login');
     if (!isAuthenticated) {
       try {
-        // const profile = await adapter.login(t('signingMessage'));
-        const profile = {
-          address: '0x0',
-          ens: 'cristianvaldivia.eth',
-        };
+        const profile = await adapter.login(t('signingMessage'));
+
         setIsAuthenticated(true);
         setProfile(profile);
 
