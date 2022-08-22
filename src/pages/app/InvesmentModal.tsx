@@ -130,6 +130,8 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   };
 
   const handleContinueButton = async () => {
+    console.log('Starting approved  ...');
+
     setTransactionLoading(true);
     setShowAlertError(false);
     setShowAlertConfirm(false);
@@ -140,7 +142,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       setShowAlertConfirm(true);
       const approveTx = await approveDeposit.wait();
 
-      console.log(approveTx);
+      console.log('approvedTx', approveTx);
 
       setShowAlertConfirm(false);
       setTransactionLoading(false);
@@ -168,11 +170,13 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   };
 
   const depositAave = async () => {
-    setTransactionLoading(true);
+    console.log('Starting deposit ...');
 
     try {
       const depositAave = await adapter.depositAave(amount, symbol);
       setShowAlertConfirm(true);
+      setTransactionLoading(true);
+
       const depositTx = await depositAave.wait();
 
       console.log(depositTx);
@@ -356,59 +360,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         {networks['matic'].name})
                       </Text>
                     </MenuItem>
-
-                    {/* <MenuItem
-                    // onClick={async () => await handleTokenChange('avalanche', 'wavax')}
-                    >
-                      <AvalancheLogo width={25} height={25} />
-
-                      <Text
-                        fontSize={'16px'}
-                        lineHeight={'18.75px'}
-                        letterSpacing="5%"
-                        color={'#757575'}
-                        padding={3}
-                      >
-                        {networks['matic'].nativeToken.symbol.toUpperCase()} (
-                        {networks['matic'].name})
-                      </Text>
-                    </MenuItem> */}
-                    {/* 
-                    <MenuItem
-                    // onClick={async () =>
-                    //   await handleTokenChange('avalanche testnet', 'wavax')
-                    // }
-                    >
-                      <AvalancheLogo width={25} height={25} />
-
-                      <Text
-                        fontSize={'16px'}
-                        lineHeight={'18.75px'}
-                        letterSpacing="5%"
-                        color={'#757575'}
-                        padding={3}
-                      >
-                        {networks[
-                          'avalanche testnet'
-                        ].nativeToken.symbol.toUpperCase()}{' '}
-                        ({networks['avalanche testnet'].name})
-                      </Text>
-                    </MenuItem> */}
-
-                    {/* 
-                <MenuItem onClick={() => handleTokenChange('DAI')}>
-                  <DaiLogo width={25} height={25} />
-
-                  <Text
-                    fontSize={'16px'}
-                    lineHeight={'18.75px'}
-                    letterSpacing="5%"
-                    color={'black'}
-                    padding={3}
-                  >
-                    DAI
-                  </Text>
-                </MenuItem> */}
                   </MenuList>
                 </Menu>
 
@@ -519,7 +470,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
             </Alert>
           ) : null}
 
-          {approvedAave ? (
+          {approvedAave && !transactionLoading ? (
             <VStack>
               <Alert marginBottom={5} status="success" borderRadius={15}>
                 <AlertIcon />

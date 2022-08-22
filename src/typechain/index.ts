@@ -48,5 +48,3 @@ export { IStrategy__factory } from './factories/IStrategy__factory';
 export { Main__factory } from './factories/Main__factory';
 export { Strategy__factory } from './factories/Strategy__factory';
 export { StrategyRecursiveFarming__factory } from './factories/StrategyRecursiveFarming__factory';
-
-export { SupplyAave__factory } from './factories/SupplyAave__factory';
