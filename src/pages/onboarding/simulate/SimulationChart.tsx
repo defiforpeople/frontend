@@ -167,7 +167,7 @@ export function SimulationChart({
   return (
     <Box width={'100%'}>
       <HStack>
-        <Box width={'30%'} display={['none', 'block', 'block']}>
+        <Box width={'30%'} display={['none', 'block', 'block', 'block']}>
           <Text
             fontWeight="bold"
             fontSize={'16px'}
@@ -245,7 +245,10 @@ export function SimulationChart({
             </Slider>
           </Box>
         </Box>
-        <Box width={['100%', '70%', '70%']}>
+        <Box
+          width={['100%', '70%', '70%']}
+          display={['none', 'none', 'none', 'none']}
+        >
           <HStack justifyContent={'space-between'} paddingTop={10}>
             <Text paddingLeft={5} fontSize={['18px', '20px', '20px']}>
               {t('in')} {time} {t('tittleChart')}
@@ -441,7 +444,7 @@ export function SimulationChart({
         </Box>
       </HStack>
 
-      <Box display={['block', 'none', 'none']}>
+      <Box display={['block', 'none', 'none', 'none']}>
         <Text
           fontWeight="bold"
           fontSize={'16px'}

@@ -12,8 +12,14 @@ import '../../i18n';
 
 import { useAdapter } from '../../hooks/use-adapter';
 
+import { Link } from 'react-router-dom';
+
+import { useNetworkManager } from '../../hooks/use-manager';
+
 function ConnectWalletOnboarding() {
   const { adapter } = useAdapter();
+
+  const { manager, network } = useNetworkManager();
 
   const { t } = useTranslation('ConnectWalletOnboarding');
 
@@ -21,6 +27,8 @@ function ConnectWalletOnboarding() {
 
   useEffect(() => {
     async function getUsersConnected() {
+      await manager.switchNetwork(network.chainName);
+
       const users = await adapter.getUsers();
 
       setUsers(users);
@@ -73,11 +81,17 @@ function ConnectWalletOnboarding() {
             boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
           >
             <Center paddingTop={5}>
-              <Button bg={'primary'} color="white" borderRadius={70}>
-                <Text fontWeight={400} fontSize={'18px'} lineHeight={'21.6px'}>
-                  {t('button')}
-                </Text>
-              </Button>
+              <Link to={'/app'}>
+                <Button bg={'primary'} color="white" borderRadius={70}>
+                  <Text
+                    fontWeight={400}
+                    fontSize={'18px'}
+                    lineHeight={'21.6px'}
+                  >
+                    {t('button')}
+                  </Text>
+                </Button>
+              </Link>
             </Center>
 
             <HStack margin={'auto'} paddingTop={5}>

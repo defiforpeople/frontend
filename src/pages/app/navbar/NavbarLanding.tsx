@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Link } from 'react-router-dom';
 import { Flex, Text, Button, useDisclosure } from '@chakra-ui/react';
 
@@ -39,7 +37,7 @@ function NavbarLanding() {
         <Logo w={160} h={10} color="#3A0CA3" />
       </Link>
 
-      <Link to="strategies">
+      <Link to="/strategies">
         <Text
           fontSize={'18'}
           lineHeight={'21.6px'}

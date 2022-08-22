@@ -1,6 +1,6 @@
 import { ethers, BigNumber } from 'ethers';
 
-import { networks, tokens } from '../../manager.constants';
+import { networks } from '../../manager.constants';
 import {
   Network,
   ChainName,
@@ -19,7 +19,6 @@ import { AdapterName, IAdapter } from '../adapter.types';
 import { ERC20__factory } from '../../../../typechain';
 import { SupplyAave__factory } from '../../../../typechain-types';
 import { SupplyUni__factory } from '../../../../typechain-types-uni';
-import { token } from '../../../../typechain-types/@openzeppelin/contracts';
 
 declare global {
   interface Window {
@@ -772,8 +771,8 @@ export default class DfpAdapter implements IAdapter {
       try {
         const supplyTx = await supplyUniContract.mintNewPosition(
           strategy.data.poolId,
-          amount1,
-          amount2,
+          ethers.utils.parseEther(amount1.toFixed(18).toString()),
+          ethers.utils.parseEther(amount2.toFixed(18).toString()),
           BigNumber.from(100),
           {
             gasLimit: GAS_LIMIT,

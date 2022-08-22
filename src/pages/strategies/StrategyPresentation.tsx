@@ -12,6 +12,7 @@ import {
 
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
+
 import { Link } from 'react-router-dom';
 
 function StrategyPresentation() {
