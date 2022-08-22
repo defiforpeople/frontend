@@ -30,6 +30,8 @@ import {
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
+import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-matic-icon.svg';
+import { ReactComponent as MaticLogo } from '../../assets/logos/matic-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
 import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
@@ -90,9 +92,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setAmount(0);
     setMaxAmount(0);
     setSymbol(symbol);
-
-    await manager.switchNetwork(chainName);
-    setNetwork(networks[chainName]);
 
     setBalanceLoading(true);
     const nativeToken = await adapter.getNativeToken();
@@ -235,7 +234,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 </MenuButton>
                 <MenuList border={'0'} width={'280px'}>
                   <MenuItem
-                    onClick={() => handleStrategyChange('Recursive Farming')}
+                    onClick={() => handleStrategyChange(t('strategy1'))}
                   >
                     <HStack>
                       <Text
@@ -245,13 +244,15 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         color={'black'}
                         padding={3}
                       >
-                        Lending protocol
+                        {t('strategy1')}
                       </Text>
                       <AaveLogo width={30} height={30} />
                     </HStack>
                   </MenuItem>
 
-                  <MenuItem>
+                  <MenuItem
+                    onClick={() => handleStrategyChange(t('strategy2'))}
+                  >
                     <HStack>
                       <Text
                         fontSize={'16px'}
@@ -260,7 +261,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         color={'black'}
                         padding={3}
                       >
-                        Proveer liquidez
+                        {t('strategy2')}
                       </Text>
                       <UniswapLogo width={40} height={40} />
                     </HStack>
@@ -299,6 +300,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                   >
                     <HStack>
                       <Box
+                        // onClick={() => handleTokenChange('matic', 'matic')}
                         display={text === 'ETH' ? 'block' : 'none'}
                         marginLeft={2}
                       >
@@ -324,10 +326,10 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                     </HStack>
                   </MenuButton>
                   <MenuList border={'0'} width={'280px'}>
-                    {/* <MenuItem
-                      onClick={() => handleTokenChange('rinkeby', 'weth')}
+                    <MenuItem
+                      onClick={() => handleTokenChange('matic', 'matic')}
                     >
-                      <EthLogo width={25} height={25} />
+                      <PolygonLogo width={25} height={25} />
 
                       <Text
                         fontSize={'16px'}
@@ -336,10 +338,10 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         color={'black'}
                         padding={3}
                       >
-                        {networks['rinkeby'].nativeToken.symbol.toUpperCase()} (
-                        {networks['rinkeby'].name})
+                        {networks['matic'].nativeToken.symbol.toUpperCase()} (
+                        {networks['matic'].name})
                       </Text>
-                    </MenuItem> */}
+                    </MenuItem>
 
                     {/* <MenuItem
                     // onClick={async () => await handleTokenChange('avalanche', 'wavax')}
@@ -353,8 +355,8 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                         color={'#757575'}
                         padding={3}
                       >
-                        {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
-                        ({networks['avalanche'].name})
+                        {networks['matic'].nativeToken.symbol.toUpperCase()} (
+                        {networks['matic'].name})
                       </Text>
                     </MenuItem> */}
                     {/* 

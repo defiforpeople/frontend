@@ -75,7 +75,9 @@
     "strategy": "Estrategia",
     "amount": "Monto",
     "available": "Disponible",
-    "continue": "Continuar"
+    "continue": "Continuar",
+    "strategy1": "Lending protocol",
+    "strategy2": "Liquidity provider"
   },
   "DrawerNavbar": {
     "how": "¿Cómo funciona?",

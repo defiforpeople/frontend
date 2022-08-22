@@ -139,7 +139,7 @@ export default class DfpAdapter implements IAdapter {
       }
 
       const response = await fetch(
-        `${this._apiURL}/api/v1/native-token/${wallet}?network=${this._network}`,
+        `${this._apiURL}/api/v1/native-token/${wallet}?network=${this._network.chainName}`,
       );
       const {
         data: { token },
