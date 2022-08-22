@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/frontend/static/js/main.93502dee.js",
+    "main.js": "/frontend/static/js/main.b9a8ee5d.js",
     "static/media/phone-image.svg": "/frontend/static/media/phone-image.7624ac3ed999a69e40d99d2fa6701910.svg",
     "static/media/chart-mobile-image.svg": "/frontend/static/media/chart-mobile-image.8c70ed2f5a02b1974ea83bf18c99e6b5.svg",
     "static/media/chart-image.svg": "/frontend/static/media/chart-image.cc6271aa0a80b82a0af8453a64c5fdfd.svg",
@@ -10,13 +10,14 @@
     "static/media/aave-logo.svg": "/frontend/static/media/aave-logo.0a64aa4995ba06351b348cd954ce1e8d.svg",
     "static/media/github-logo.svg": "/frontend/static/media/github-logo.f6736f1e612cf83d1ad8b2c034d102e2.svg",
     "static/media/polygon-logo.svg": "/frontend/static/media/polygon-logo.97ff139cc7379a42cf141d74a6595fff.svg",
+    "static/media/polygon-matic-icon.svg": "/frontend/static/media/polygon-matic-icon.48bd63d3135c740f1b010f6fcdda3644.svg",
     "static/media/eth-logo.svg": "/frontend/static/media/eth-logo.31c217a869801fc47ecc235960c03e6c.svg",
     "index.html": "/frontend/index.html",
     "static/media/ethereum-logo.svg": "/frontend/static/media/ethereum-logo.df265e367364f285053a1285ad8d418d.svg",
     "static/media/wallet-icon.svg": "/frontend/static/media/wallet-icon.015eab59d81d73d58a262071cec2bec1.svg",
-    "main.93502dee.js.map": "/frontend/static/js/main.93502dee.js.map"
+    "main.b9a8ee5d.js.map": "/frontend/static/js/main.b9a8ee5d.js.map"
   },
   "entrypoints": [
-    "static/js/main.93502dee.js"
+    "static/js/main.b9a8ee5d.js"
   ]
 }
