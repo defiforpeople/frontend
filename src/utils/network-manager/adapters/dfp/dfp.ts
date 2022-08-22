@@ -1,5 +1,6 @@
-// import { Strategy } from '../../../../typechain';
-import { networks } from '../../manager.constants';
+import { ethers, BigNumber } from 'ethers';
+
+import { networks, tokens } from '../../manager.constants';
 import {
   Network,
   ChainName,
@@ -12,12 +13,8 @@ import {
   StrategiesByNetworks,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
-// import {
-//   StrategyRecursiveFarming__factory,
-//   StrategyRecursiveFarming,
-//   IWETH__factory,
-//   IWETH,
-// } from '../../../../typechain';
+
+import { ERC20__factory } from '../../../../typechain';
 
 declare global {
   interface Window {
@@ -65,8 +62,6 @@ export default class DfpAdapter implements IAdapter {
         await this.initAdapter();
       }
 
-      // await Moralis.enableWeb3();
-
       console.log('Adapter: switchNetwork()');
       console.log('Adapter: switchNetwork(): name: ', name);
 
@@ -98,8 +93,6 @@ export default class DfpAdapter implements IAdapter {
         // handle other "switch" errors
         console.log(switchError);
       }
-
-      // await Moralis.switchNetwork(network.chainId);
 
       this._network = network;
     } catch (err) {
@@ -370,56 +363,129 @@ export default class DfpAdapter implements IAdapter {
   public async approveDepositAave(
     amount: number,
     symbol: TokenSymbol,
-  ): Promise<Deposit> {
+  ): Promise<any> {
     // validate inputs
     const { balance } = await this.getNativeToken();
-    console.log(balance);
-    console.log(amount);
-    // if (amount < 0 || amount > balance!) {
-    // throw new Error('invalid amount');
-    // }
-    // // get token address
-    // const tokenAddr = tokens[this.network.chainName][symbol].address;
-    // // prepare provider
-    // const provider = await Moralis.enableWeb3();
-    // const ethers = Moralis.web3Library;
-    // const signer = provider.getSigner();
-    // // prepare weth contract
-    // const wrapContract = new ethers.Contract(
-    //   tokenAddr,
-    //   IWETH__factory.abi,
-    //   signer,
-    // ) as IWETH;
-    // console.log(1111111);
-    // console.log(1111111);
-    // console.log(1111111);
-    // console.log(1111111);
-    // console.log(1111111, tokenAddr);
-    // // get strategy address
-    // const contractAddr = this.network.strategies['recursive_farming'].address;
-    // // parse amount to bignumber
-    // const parsedAmount = ethers.utils.parseEther(amount.toString());
-    // // make approve weth contract to strategy addres
-    // const tx = await wrapContract.approve(contractAddr, parsedAmount);
-    // console.log(222222);
-    // console.log(222222);
-    // console.log(222222);
-    // console.log(222222);
-    // console.log(222222, contractAddr, parsedAmount);
-    // return {
-    //   amount,
-    //   timestamp: new Date().getTime(),
-    //   approveTx: tx,
-    // };
 
-    return {} as Deposit;
+    // format amount and balance
+    const balanceFormated = ethers.utils.parseEther(balance);
+    const amountFormated = ethers.utils.parseEther((amount * 1e18).toString());
+
+    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
+      throw new Error('invalid amount');
+    }
+    // get token address
+    // TODO: change for API response
+    const tokenAddr = tokens[this.network.chainName][symbol].address;
+
+    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: DFPStrategy[];
+      };
+    } = await response.json();
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const erc20Contract = new ethers.Contract(
+        tokenAddr as string,
+        ERC20__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const transaction = await erc20Contract.approve(
+          '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+          amountFormated,
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return transaction;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return;
   }
 
-  public async depositAave(
-    amount: number,
-    symbol: TokenSymbol,
-  ): Promise<Deposit> {
-    return {} as Deposit;
+  public async depositAave(amount: number, symbol: TokenSymbol): Promise<any> {
+    // validate inputs
+    const { balance } = await this.getNativeToken();
+
+    // format amount and balance
+    const balanceFormated = ethers.utils.parseEther(balance);
+    const amountFormated = ethers.utils.parseEther((amount * 1e18).toString());
+
+    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
+      throw new Error('invalid amount');
+    }
+    // get token address
+    // TODO: change for API response
+    const tokenAddr = tokens[this.network.chainName][symbol].address;
+
+    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: DFPStrategy[];
+      };
+    } = await response.json();
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const supplyAaveContract = new ethers.Contract(
+        tokenAddr as string,
+        ERC20__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const transaction = await supplyAaveContract.approve(
+          '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+          amountFormated,
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return transaction;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return;
+  }
+
+  public listenForTransactionMine(transactionResponse: any, provider: any) {
+    console.log(`Mining ${transactionResponse.hash} ...`);
+
+    return new Promise<void>((resolve, reject) => {
+      provider.once(transactionResponse.hash, (transactionReceipt: any) => {
+        console.log(
+          `Completed with ${transactionReceipt.confirmations} confirmations`,
+        );
+        resolve();
+      });
+    });
   }
 
   public async deposit(deposit: Deposit): Promise<Deposit> {

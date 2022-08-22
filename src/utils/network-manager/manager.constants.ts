@@ -1,6 +1,4 @@
-import { Network } from './manager.types';
-
-const {} = process.env;
+import { Network, Token } from './manager.types';
 
 export const networks: { [name: string]: Network } = {
   matic: {
@@ -29,29 +27,38 @@ export const networks: { [name: string]: Network } = {
   },
 };
 
-// export const tokens: { [name: string]: { [name: string]: Token } } = {
-//   avalanche: {
-//     wavax: {
-//       symbol: 'wavax',
-//       decimals: 18,
-//       address: REACT_APP_AVAX_WAVAX_ADDRESS!,
-//     },
-//   },
-//   'avalanche testnet': {
-//     wavax: {
-//       symbol: 'wavax',
-//       decimals: 18,
-//       address: REACT_APP_AVAX_TESTNET_WAVAX_ADDRESS!,
-//     },
-//   },
-//   rinkeby: {
-//     weth: {
-//       symbol: 'weth',
-//       decimals: 18,
-//       address: REACT_APP_RINKEBY_WETH_ADDRESS!,
-//     },
-//   },
-// };
+export const tokens: { [name: string]: { [name: string]: Token } } = {
+  maticmum: {
+    matic: {
+      symbol: 'matic',
+      decimals: 18,
+      address: '0xb685400156cF3CBE8725958DeAA61436727A30c3',
+      isNative: true,
+      balance: '0',
+    },
+  },
+  // avalanche: {
+  //   wavax: {
+  //     symbol: 'wavax',
+  //     decimals: 18,
+  //     address: REACT_APP_AVAX_WAVAX_ADDRESS!,
+  //   },
+  // },
+  // 'avalanche testnet': {
+  //   wavax: {
+  //     symbol: 'wavax',
+  //     decimals: 18,
+  //     address: REACT_APP_AVAX_TESTNET_WAVAX_ADDRESS!,
+  //   },
+  // },
+  // rinkeby: {
+  //   weth: {
+  //     symbol: 'weth',
+  //     decimals: 18,
+  //     address: REACT_APP_RINKEBY_WETH_ADDRESS!,
+  //   },
+  // },
+};
 
 // export const ToNetwork = {
 //   matic: 'polygon',

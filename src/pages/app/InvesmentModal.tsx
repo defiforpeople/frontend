@@ -19,6 +19,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  VStack,
 } from '@chakra-ui/react';
 
 import {
@@ -74,6 +75,9 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertConfirm, setShowAlertConfirm] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
+
+  // Aave
+  const [approvedAave, setApprovedAave] = useState(false);
   // const [tokensBalance, setTextsBalance] = useState(initialTokensBalance);
 
   const networks = manager.listNetworks();
@@ -133,32 +137,20 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
     try {
       const approveDeposit = await adapter.approveDepositAave(amount, symbol);
-      // setShowAlertConfirm(true);
-      // const approveTx = await approveDeposit.approveTx!.wait();
-      // console.log('approveTx');
-      // console.log('approveTx');
-      // console.log('approveTx');
-      // console.log('approveTx');
-      // console.log(approveTx);
+      setShowAlertConfirm(true);
+      const approveTx = await approveDeposit.wait();
 
-      // setShowAlertConfirm(false);
-      // const deposit = await adapter.deposit(approveDeposit);
-      // setShowAlertConfirm(true);
-      // const depositTx = await deposit.depositTx!.wait();
-      // console.log('depositTx');
-      // console.log('depositTx');
-      // console.log('depositTx');
-      // console.log(depositTx);
+      console.log(approveTx);
 
-      // setTransactionLoading(false);
-      // setShowAlertConfirm(false);
-      // setShowAlertSuccess(true);
+      setShowAlertConfirm(false);
+      setTransactionLoading(false);
+      setApprovedAave(true);
     } catch (err) {
-      // console.error(err);
-      // setTransactionLoading(false);
-      // setShowAlertConfirm(false);
-      // setShowAlertError(true);
-      // setShowAlertSuccess(false);
+      console.error(err);
+      setTransactionLoading(false);
+      setShowAlertConfirm(false);
+      setShowAlertError(true);
+      setShowAlertSuccess(false);
     }
   };
 
@@ -173,6 +165,28 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     window.open(`https://testnet.snowtrace.io/address/{address}`, '_blank');
 
     resetStrategy();
+  };
+
+  const depositAave = async () => {
+    setTransactionLoading(true);
+
+    try {
+      const depositAave = await adapter.depositAave(amount, symbol);
+      setShowAlertConfirm(true);
+      const depositTx = await depositAave.wait();
+
+      console.log(depositTx);
+
+      setShowAlertConfirm(false);
+      setTransactionLoading(false);
+      setApprovedAave(true);
+    } catch (err) {
+      console.error(err);
+      setTransactionLoading(false);
+      setShowAlertConfirm(false);
+      setShowAlertError(true);
+      setShowAlertSuccess(false);
+    }
   };
 
   return (
@@ -505,11 +519,34 @@ function InvesmentModal({ isOpen, onClose }: Props) {
             </Alert>
           ) : null}
 
+          {approvedAave ? (
+            <VStack>
+              <Alert marginBottom={5} status="success" borderRadius={15}>
+                <AlertIcon />
+                <AlertTitle fontWeight={'light'}>
+                  You have approved our contract to lend your tokens to the Aave
+                  protocol. Now finish the process by approving the lending.
+                </AlertTitle>
+              </Alert>
+
+              <Button
+                bg="fourth"
+                borderRadius={'70px'}
+                boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+                color={'white'}
+                onClick={depositAave}
+              >
+                Finish
+              </Button>
+            </VStack>
+          ) : null}
+
           {!showAlertSuccess ? (
             <Button
               bg="primary"
               borderRadius={'70px'}
               boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+              display={approvedAave ? 'none' : 'block'}
               isDisabled={
                 !(
                   strategy !== initialStrategy &&
