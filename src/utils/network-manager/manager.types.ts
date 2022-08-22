@@ -2,7 +2,7 @@ import { IAdapter } from './adapters';
 import { ContractTransaction } from 'ethers';
 
 export type TokenSymbol =
-  | 'weth'
+  | 'WETH'
   | 'eth'
   | 'avax'
   | 'wavax'

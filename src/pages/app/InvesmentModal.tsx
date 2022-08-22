@@ -117,12 +117,20 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       return;
     }
 
+    const tokens = await adapter.getTokens();
+
+    const WETH = tokens.find((token) => token.symbol === 'WETH');
+
+    const amount2 = (Number(WETH!.balance!) / 1e18).toFixed(12);
+    console.log('amount2', amount2);
+    setMaxAmount2(Number(amount2));
+
     if (symbol === 'matic') {
       setToken2('ETH');
     }
 
     setBalanceLoading(false);
-    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
+    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(12);
     setMaxAmount(Number(amount));
   };
 
