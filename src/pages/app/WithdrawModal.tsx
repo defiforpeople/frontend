@@ -145,7 +145,11 @@ function WithdrawModal({ isOpen, onClose }: Props) {
   const handleExplorerButton = async () => {
     const address = txCompletedAave;
 
-    window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
+    if (manager.chainName === 'maticmum') {
+      window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
+    } else if (manager.chainName === 'matic') {
+      window.open(`https://polygonscan.com/tx/${address}`, '_blank');
+    }
   };
 
   return (
