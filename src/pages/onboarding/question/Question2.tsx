@@ -20,7 +20,7 @@ function Question2({ setQuestion, question }: Props) {
         >
           <Box>
             <Text padding={3} fontWeight={'bold'} fontSize={'22px'}>
-              Conoces la estrategia delta neutral?
+              Do you know the neutral delta strategy? 
             </Text>
           </Box>
 
@@ -32,7 +32,7 @@ function Question2({ setQuestion, question }: Props) {
             onClick={() => setQuestion(3)}
           >
             <Text padding={3} fontWeight={'regular'} fontSize={'18px'}>
-              Si
+              Yes
             </Text>
           </Box>
 
