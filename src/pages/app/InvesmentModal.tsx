@@ -80,6 +80,12 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const [txCompletedAave, setTxCompletedAave] = useState('');
 
   // Uniswap
+  const [token2, setToken2] = useState(initialToken);
+  const [amount2, setAmount2] = useState(initialAmount);
+  const [maxAmount2, setMaxAmount2] = useState(initialAmount);
+  const [firstApproveComplete, setFirstApproveComplete] = useState(false);
+  const [secondApproveComplete, setSecondApproveComplete] = useState(false);
+
   // const [approvedUniswap, setApprovedUniswap] = useState(false);
   // const [depositUniswap, setDepositUniswap] = useState(false);
 
@@ -111,12 +117,18 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       return;
     }
 
+    if (symbol === 'matic') {
+      setToken2('ETH');
+    }
+
     setBalanceLoading(false);
     const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
     setMaxAmount(Number(amount));
   };
 
   const handleAmountChange = (event: any) => setAmount(event.target.value);
+
+  const handleAmountChange2 = (event: any) => setAmount2(event.target.value);
 
   const handleButtonMax = () => {
     setAmount(Number(maxAmount));
@@ -130,21 +142,75 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setShowAlertConfirm(false);
     setShowAlertError(false);
     setTransactionLoading(false);
-    // setSymbol('weth');
+    setCompleteStrategy(false);
 
     onClose();
   };
 
   const handleContinueButton = async () => {
-    console.log('Starting approved  ...');
+    console.log('Starting approve  ...');
 
     setTransactionLoading(true);
     setShowAlertError(false);
     setShowAlertConfirm(false);
     setShowAlertSuccess(false);
 
+    if (strategy === t('strategy1')) {
+      try {
+        const approveDeposit = await adapter.approveDepositAave(amount, symbol);
+        setShowAlertConfirm(true);
+        const approveTx = await approveDeposit.wait();
+
+        console.log('approvedTx', approveTx);
+
+        setShowAlertConfirm(false);
+        setTransactionLoading(false);
+        setApprovedAave(true);
+      } catch (err) {
+        console.error(err);
+        setTransactionLoading(false);
+        setShowAlertConfirm(false);
+        setShowAlertError(true);
+        setShowAlertSuccess(false);
+      }
+    } else if (strategy === t('strategy2')) {
+      try {
+        const approveDeposit = await adapter.approveDepositUniswap(
+          amount,
+          symbol,
+        );
+        setShowAlertConfirm(true);
+        const approveTx = await approveDeposit.wait();
+
+        console.log('approvedTx', approveTx);
+
+        setShowAlertConfirm(false);
+        setTransactionLoading(false);
+        setFirstApproveComplete(true);
+      } catch (err) {
+        console.error(err);
+        setTransactionLoading(false);
+        setShowAlertConfirm(false);
+        setShowAlertError(true);
+        setShowAlertSuccess(false);
+      }
+    }
+  };
+
+  const handleApprove2 = async () => {
+    console.log('Starting second approve  ...');
+
+    setTransactionLoading(true);
+    setShowAlertError(false);
+    setShowAlertConfirm(false);
+    setShowAlertSuccess(false);
+    setFirstApproveComplete(false);
+
     try {
-      const approveDeposit = await adapter.approveDepositAave(amount, symbol);
+      const approveDeposit = await adapter.approveDepositUniswap(
+        amount2,
+        'eth',
+      );
       setShowAlertConfirm(true);
       const approveTx = await approveDeposit.wait();
 
@@ -152,7 +218,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
       setShowAlertConfirm(false);
       setTransactionLoading(false);
-      setApprovedAave(true);
+      setSecondApproveComplete(true);
     } catch (err) {
       console.error(err);
       setTransactionLoading(false);
@@ -166,8 +232,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     const address = txCompletedAave;
 
     window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
-
-    resetStrategy();
   };
 
   const handleDepositAave = async () => {
@@ -193,6 +257,15 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       setShowAlertConfirm(false);
       setShowAlertError(true);
       setShowAlertSuccess(false);
+    }
+  };
+
+  const handleMintPosition = async () => {
+    console.log('Starting mint position ...');
+
+    try {
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -444,6 +517,270 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                   </Button>
                 </InputGroup>
               </Box>
+
+              {/* Uniswap protocol */}
+              <Box display={strategy === t('strategy2') ? 'block' : 'none'}>
+                <Text
+                  fontWeight={700}
+                  fontSize={'16px'}
+                  lineHeight={'18.75px'}
+                  letterSpacing="5%"
+                  color={'#282828'}
+                  paddingTop={8}
+                  paddingBottom={3}
+                >
+                  Token 1
+                </Text>
+
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rightIcon={
+                      strategy === initialStrategy ? (
+                        <ChevronDownIcon />
+                      ) : (
+                        <ChevronUpIcon />
+                      )
+                    }
+                    width={'280px'}
+                    height={'60px'}
+                    boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+                    borderRadius={'8px'}
+                  >
+                    <HStack>
+                      <Box
+                        display={text === 'MATIC (Polygon)' ? 'block' : 'none'}
+                      >
+                        <PolygonLogo width={25} height={25} />
+                      </Box>
+
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={text === initialToken ? '#666666' : 'black'}
+                      >
+                        {text}
+                      </Text>
+                    </HStack>
+                  </MenuButton>
+                  <MenuList border={'0'} width={'280px'}>
+                    <MenuItem
+                      onClick={() => handleTokenChange('matic', 'matic')}
+                    >
+                      <PolygonLogo width={25} height={25} />
+
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        {networks['matic'].nativeToken.symbol.toUpperCase()} (
+                        {networks['matic'].name})
+                      </Text>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
+                <Text
+                  fontWeight={700}
+                  fontSize={'16px'}
+                  lineHeight={'18.75px'}
+                  letterSpacing="5%"
+                  color={'#282828'}
+                  paddingTop={8}
+                  paddingBottom={3}
+                >
+                  Token 2
+                </Text>
+
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rightIcon={
+                      strategy === initialStrategy ? (
+                        <ChevronDownIcon />
+                      ) : (
+                        <ChevronUpIcon />
+                      )
+                    }
+                    width={'280px'}
+                    height={'60px'}
+                    boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+                    borderRadius={'8px'}
+                  >
+                    <HStack>
+                      <Box
+                        display={text === 'MATIC (Polygon)' ? 'block' : 'none'}
+                      >
+                        <EthLogo width={25} height={25} />
+                      </Box>
+
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={text === initialToken ? '#666666' : 'black'}
+                      >
+                        {token2}
+                      </Text>
+                    </HStack>
+                  </MenuButton>
+                  <MenuList border={'0'} width={'280px'}>
+                    <MenuItem
+                    // onClick={() => handleToken2Change('matic', 'matic')}
+                    >
+                      <EthLogo width={25} height={25} />
+
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        ETH
+                      </Text>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+
+                <HStack justifyContent={'space-between'}>
+                  <Text
+                    fontWeight={700}
+                    fontSize={'16px'}
+                    lineHeight={'18.75px'}
+                    letterSpacing="5%"
+                    color={'#282828'}
+                    paddingTop={8}
+                    paddingBottom={3}
+                  >
+                    Amount token 1
+                  </Text>
+
+                  {!balanceLoading ? (
+                    <Text
+                      fontSize={'12px'}
+                      lineHeight={'14.06px'}
+                      color={'grayLetter'}
+                      paddingTop={8}
+                      paddingBottom={3}
+                    >
+                      {t('available')}: {maxAmount}
+                    </Text>
+                  ) : (
+                    <Spinner marginTop={25} color="#E33E84" size={'xs'} />
+                  )}
+                </HStack>
+
+                <InputGroup
+                  width={'280px'}
+                  height={'60px'}
+                  boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+                  borderRadius={'8px'}
+                >
+                  <Input
+                    type="number"
+                    border={'0'}
+                    margin={'auto'}
+                    height={'60px'}
+                    width={'70%'}
+                    focusBorderColor="white"
+                    onChange={handleAmountChange}
+                    value={amount}
+                  />
+
+                  <Button
+                    height={'24px'}
+                    border="1px"
+                    borderColor="primary"
+                    borderRadius={'53px'}
+                    margin={'auto'}
+                    marginRight={'10px'}
+                    width={'22%'}
+                    onClick={handleButtonMax}
+                    disabled={balanceLoading}
+                  >
+                    <Text
+                      fontWeight={400}
+                      fontSize={'14px'}
+                      lineHeight={'16.8px'}
+                      color={'primary'}
+                    >
+                      Max
+                    </Text>
+                  </Button>
+                </InputGroup>
+
+                <HStack justifyContent={'space-between'}>
+                  <Text
+                    fontWeight={700}
+                    fontSize={'16px'}
+                    lineHeight={'18.75px'}
+                    letterSpacing="5%"
+                    color={'#282828'}
+                    paddingTop={8}
+                    paddingBottom={3}
+                  >
+                    Amount token 2
+                  </Text>
+
+                  {!balanceLoading ? (
+                    <Text
+                      fontSize={'12px'}
+                      lineHeight={'14.06px'}
+                      color={'grayLetter'}
+                      paddingTop={8}
+                      paddingBottom={3}
+                    >
+                      {t('available')}: {maxAmount2}
+                    </Text>
+                  ) : (
+                    <Spinner marginTop={25} color="#E33E84" size={'xs'} />
+                  )}
+                </HStack>
+
+                <InputGroup
+                  width={'280px'}
+                  height={'60px'}
+                  boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+                  borderRadius={'8px'}
+                >
+                  <Input
+                    type="number"
+                    border={'0'}
+                    margin={'auto'}
+                    height={'60px'}
+                    width={'70%'}
+                    focusBorderColor="white"
+                    onChange={handleAmountChange2}
+                    value={amount2}
+                  />
+
+                  <Button
+                    height={'24px'}
+                    border="1px"
+                    borderColor="primary"
+                    borderRadius={'53px'}
+                    margin={'auto'}
+                    marginRight={'10px'}
+                    width={'22%'}
+                    onClick={handleButtonMax}
+                    disabled={balanceLoading}
+                  >
+                    <Text
+                      fontWeight={400}
+                      fontSize={'14px'}
+                      lineHeight={'16.8px'}
+                      color={'primary'}
+                    >
+                      Max
+                    </Text>
+                  </Button>
+                </InputGroup>
+              </Box>
             </>
           ) : (
             <Alert
@@ -507,12 +844,57 @@ function InvesmentModal({ isOpen, onClose }: Props) {
             </VStack>
           ) : null}
 
+          {firstApproveComplete && !transactionLoading ? (
+            <VStack>
+              <Alert marginBottom={5} status="success" borderRadius={15}>
+                <AlertIcon />
+                <AlertTitle fontWeight={'light'}>
+                  You have approved our contract to use your tokens to provide
+                  liquidity to Uniswap protocol. Completes the process by
+                  approving the use of token 2.
+                </AlertTitle>
+              </Alert>
+
+              <Button
+                bg="fourth"
+                borderRadius={'70px'}
+                boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+                color={'white'}
+                onClick={handleApprove2}
+              >
+                Approve second token
+              </Button>
+            </VStack>
+          ) : null}
+
+          {secondApproveComplete && !transactionLoading ? (
+            <VStack>
+              <Alert marginBottom={5} status="success" borderRadius={15}>
+                <AlertIcon />
+                <AlertTitle fontWeight={'light'}>
+                  You have approved our contract to use your tokens to provide
+                  liquidity to Uniswap protocol. Now finish the proccess
+                </AlertTitle>
+              </Alert>
+
+              <Button
+                bg="fourth"
+                borderRadius={'70px'}
+                boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+                color={'white'}
+                onClick={handleMintPosition}
+              >
+                Finish
+              </Button>
+            </VStack>
+          ) : null}
+
           {!completeStrategy ? (
             <Button
               bg="primary"
               borderRadius={'70px'}
               boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
-              display={approvedAave ? 'none' : 'block'}
+              display={approvedAave || firstApproveComplete ? 'none' : 'block'}
               isDisabled={
                 !(
                   strategy !== initialStrategy &&

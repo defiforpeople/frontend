@@ -151,8 +151,6 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     const address = txCompletedAave;
 
     window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
-
-    resetStrategy();
   };
 
   return (

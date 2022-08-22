@@ -525,6 +525,65 @@ export default class DfpAdapter implements IAdapter {
     }
   }
 
+  public async approveDepositUniswap(
+    amount: number,
+    symbol: TokenSymbol,
+  ): Promise<any> {
+    // validate inputs
+    const { balance } = await this.getNativeToken();
+
+    // format amount and balance
+    const balanceFormated = ethers.utils.parseEther(balance);
+    const amountFormated = ethers.utils.parseEther(amount.toString());
+
+    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
+      throw new Error('invalid amount');
+    }
+    // get token address
+    // TODO: change for API response
+    const tokenAddr = tokens[this.network.chainName][symbol].address;
+
+    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: DFPStrategy[];
+      };
+    } = await response.json();
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const erc20Contract = new ethers.Contract(
+        tokenAddr as string,
+        ERC20__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const transaction = await erc20Contract.approve(
+          '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+          amountFormated,
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return transaction;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return;
+  }
+
   public async deposit(deposit: Deposit): Promise<Deposit> {
     return {} as Deposit;
     // // get strategy address

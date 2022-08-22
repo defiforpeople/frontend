@@ -36,6 +36,13 @@ export const tokens: { [name: string]: { [name: string]: Token } } = {
       isNative: true,
       balance: '0',
     },
+    eth: {
+      symbol: 'eth',
+      decimals: 18,
+      address: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
+      isNative: false,
+      balance: '0',
+    },
   },
   // avalanche: {
   //   wavax: {

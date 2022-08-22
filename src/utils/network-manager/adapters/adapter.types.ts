@@ -32,6 +32,8 @@ export interface IAdapter {
   withdrawAave(amount: number): Promise<any>;
   getBalanceAave(): Promise<number>;
 
+  approveDepositUniswap(amount: number, symbol: TokenSymbol): Promise<any>;
+
   deposit(deposit: Deposit): Promise<Deposit>;
   listStrategies(): Promise<DFPStrategy[]>;
   listStrategiesByNetworks(): Promise<StrategiesByNetworks>;
