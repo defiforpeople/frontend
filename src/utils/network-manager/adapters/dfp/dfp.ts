@@ -11,12 +11,14 @@ import {
   TokenSymbol,
   DFPStrategy,
   StrategiesByNetworks,
+  SupplyAaveStrategy,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
 
 import { ERC20__factory } from '../../../../typechain';
 import { SupplyAave__factory } from '../../../../typechain-types';
 import { SupplyUni__factory } from '../../../../typechain-types-uni';
+import { token } from '../../../../typechain-types/@openzeppelin/contracts';
 
 declare global {
   interface Window {
@@ -387,19 +389,29 @@ export default class DfpAdapter implements IAdapter {
     if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
       throw new Error('invalid amount');
     }
-    // get token address
-    // TODO: change for API response
-    const tokenAddr = tokens[this.network.chainName][symbol].address;
 
-    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
 
     const {
       data,
     }: {
       data: {
-        strategies: DFPStrategy[];
+        strategies: { [key: string]: DFPStrategy[] };
       };
     } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-aave',
+    ) as SupplyAaveStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -407,22 +419,26 @@ export default class DfpAdapter implements IAdapter {
       const signer = provider.getSigner();
 
       const erc20Contract = new ethers.Contract(
-        tokenAddr as string,
+        strategy.data.token.address,
         ERC20__factory.abi,
         signer,
       );
 
-      const GAS_LIMIT = BigNumber.from('2074000');
+      // const GAS_LIMIT = BigNumber.from('20740000');
+
+      console.log('contrato:', strategy.contract);
+      console.log('address token:', strategy.data.token.address);
 
       try {
-        const transaction = await erc20Contract.approve(
-          '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
-          amountFormated,
-          {
-            gasLimit: GAS_LIMIT,
-          },
-        );
+        console.log(signer);
 
+        const transaction = await erc20Contract.connect(signer).approve(
+          strategy.contract,
+          amountFormated,
+          // {
+          //   gasLimit: GAS_LIMIT,
+          // },
+        );
         return transaction;
       } catch (error) {
         console.log(error);
@@ -443,8 +459,33 @@ export default class DfpAdapter implements IAdapter {
     if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
       throw new Error('invalid amount');
     }
-    // get token address
-    // TODO: change for API response
+
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: { [key: string]: DFPStrategy[] };
+      };
+    } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-aave',
+    ) as SupplyAaveStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
+
+    console.log('network:', this._network);
+    console.log('contrato:', strategy.contract);
+    console.log('address token:', strategy.data.token.address);
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -452,7 +493,7 @@ export default class DfpAdapter implements IAdapter {
       const signer = provider.getSigner();
 
       const supplyAaveContract = new ethers.Contract(
-        '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+        strategy.contract,
         SupplyAave__factory.abi,
         signer,
       );
@@ -460,13 +501,13 @@ export default class DfpAdapter implements IAdapter {
       const GAS_LIMIT = BigNumber.from('2074000');
 
       try {
-        const supplyTx = await supplyAaveContract.deposit(
-          '0xb685400156cF3CBE8725958DeAA61436727A30c3',
-          amountFormated,
-          {
+        console.log(signer);
+
+        const supplyTx = await supplyAaveContract
+          .connect(signer)
+          .deposit(strategy.data.token.address, amountFormated, {
             gasLimit: GAS_LIMIT,
-          },
-        );
+          });
 
         return supplyTx;
       } catch (error) {
@@ -483,8 +524,31 @@ export default class DfpAdapter implements IAdapter {
 
       const signer = provider.getSigner();
 
+      // get token address and contract from API
+      const response = await fetch(
+        `${this._apiURL}/api/v1/strategies-by-networks`,
+      );
+
+      const {
+        data,
+      }: {
+        data: {
+          strategies: { [key: string]: DFPStrategy[] };
+        };
+      } = await response.json();
+
+      const networkName = this._network.chainName;
+
+      const strategy = data.strategies[networkName].find(
+        (strategy) => strategy.type === 'supply-aave',
+      ) as SupplyAaveStrategy;
+
+      if (!strategy) {
+        throw new Error('strategy not found');
+      }
+
       const supplyAaveContract = new ethers.Contract(
-        '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+        strategy.contract,
         SupplyAave__factory.abi,
         signer,
       );
@@ -505,7 +569,6 @@ export default class DfpAdapter implements IAdapter {
 
   public async withdrawAave(amount: number): Promise<any> {
     // validate inputs
-    // TODO: get balance from API
     const balance = await this.getBalanceAave();
 
     // format amount and balance
@@ -516,8 +579,28 @@ export default class DfpAdapter implements IAdapter {
       throw new Error('invalid amount');
     }
 
-    // get token address
-    // TODO: change for API response
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: { [key: string]: DFPStrategy[] };
+      };
+    } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-aave',
+    ) as SupplyAaveStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -525,7 +608,7 @@ export default class DfpAdapter implements IAdapter {
       const signer = provider.getSigner();
 
       const supplyAaveContract = new ethers.Contract(
-        '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+        strategy.contract,
         SupplyAave__factory.abi,
         signer,
       );
@@ -534,7 +617,7 @@ export default class DfpAdapter implements IAdapter {
 
       try {
         const supplyTx = await supplyAaveContract.withdraw(
-          '0xb685400156cF3CBE8725958DeAA61436727A30c3',
+          strategy.data.token.address,
           amountFormated,
           {
             gasLimit: GAS_LIMIT,

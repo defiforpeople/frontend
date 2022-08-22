@@ -77,6 +77,7 @@ export type Strategy = {
   network: string;
   contract: string;
   data: unknown;
+  type: string;
 };
 
 export type Event = {
