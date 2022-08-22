@@ -478,7 +478,29 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async getBalanceAave(): Promise<number> {
-    return 0.02;
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const supplyAaveContract = new ethers.Contract(
+        '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+        SupplyAave__factory.abi,
+        signer,
+      );
+
+      try {
+        const balance = await supplyAaveContract
+          .connect(provider)
+          .balances(this._profile.address);
+
+        return parseFloat(ethers.utils.formatEther(balance));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return 0;
   }
 
   public async withdrawAave(amount: number): Promise<any> {

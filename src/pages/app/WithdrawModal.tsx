@@ -89,14 +89,9 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     setMaxAmount(0);
 
     setBalanceLoading(true);
-    const depositArray = await adapter.getDeposits();
+    const balanceAave = await adapter.getBalanceAave();
 
-    // TODO: get max amount from API
-    const maxAmount = depositArray.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.amount,
-      0,
-    );
-    setMaxAmount(maxAmount);
+    setMaxAmount(balanceAave);
 
     setBalanceLoading(false);
   };
