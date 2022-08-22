@@ -634,19 +634,12 @@ export default class DfpAdapter implements IAdapter {
   public async approveDepositUniswap(
     amount: number,
     symbol: TokenSymbol,
+    tokenNumber: number,
   ): Promise<any> {
-    // validate inputs
-    const { balance } = await this.getNativeToken();
-
-    // format amount and balance
-    const balanceFormated = ethers.utils.parseEther(balance);
+    // format amount
     const amountFormated = ethers.utils.parseEther(
       amount.toFixed(18).toString(),
     );
-
-    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
-      throw new Error('invalid amount');
-    }
 
     // get token address and contract from API
     const response = await fetch(
@@ -667,6 +660,8 @@ export default class DfpAdapter implements IAdapter {
       (strategy) => strategy.type === 'supply-uniswap',
     ) as SupplyUniswapStrategy;
 
+    console.log(symbol);
+
     if (!strategy) {
       throw new Error('strategy not found');
     }
@@ -676,8 +671,17 @@ export default class DfpAdapter implements IAdapter {
 
       const signer = provider.getSigner();
 
+      let tokenContract;
+      if (tokenNumber === 0) {
+        tokenContract = strategy.data.token0.address;
+      } else if (tokenNumber === 1) {
+        tokenContract = strategy.data.token1.address;
+      }
+
+      console.log(tokenContract);
+
       const erc20Contract = new ethers.Contract(
-        strategy.data.token0.address,
+        tokenContract as string,
         ERC20__factory.abi,
         signer,
       );

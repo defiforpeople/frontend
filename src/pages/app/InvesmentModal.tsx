@@ -201,6 +201,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
         const approveDeposit = await adapter.approveDepositUniswap(
           amount,
           symbol,
+          0,
         );
         setShowAlertConfirm(true);
         const approveTx = await approveDeposit.wait();
@@ -233,6 +234,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       const approveDeposit = await adapter.approveDepositUniswap(
         amount2,
         'eth',
+        1,
       );
       setShowAlertConfirm(true);
       const approveTx = await approveDeposit.wait();
@@ -292,6 +294,17 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
     try {
       const mintPosition = await adapter.mintNewPosition(amount, amount2);
+
+      setTxCompletedAave(mintPosition.transactionHash);
+
+      setShowAlertConfirm(true);
+      setTransactionLoading(true);
+
+      const mintTx = await mintPosition.wait();
+
+      setShowAlertConfirm(false);
+      setTransactionLoading(false);
+      setCompleteStrategy(true);
     } catch (err) {
       console.error(err);
     }
