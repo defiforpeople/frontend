@@ -122,7 +122,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     const WETH = tokens.find((token) => token.symbol === 'WETH');
 
     const amount2 = (Number(WETH!.balance!) / 1e18).toFixed(12);
-    console.log('amount2', amount2);
     setMaxAmount2(Number(amount2));
 
     if (symbol === 'matic') {
@@ -139,7 +138,23 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   const handleAmountChange2 = (event: any) => setAmount2(event.target.value);
 
   const handleButtonMax = () => {
-    setAmount(Number(maxAmount));
+    if (maxAmount >= maxAmount2) {
+      setAmount(maxAmount2);
+      setAmount2(maxAmount2);
+    } else {
+      setAmount(maxAmount);
+      setAmount2(maxAmount);
+    }
+  };
+
+  const handleButtonMax2 = () => {
+    if (maxAmount >= maxAmount2) {
+      setAmount(maxAmount2);
+      setAmount2(maxAmount2);
+    } else {
+      setAmount(maxAmount);
+      setAmount2(maxAmount);
+    }
   };
 
   const resetStrategy = () => {
@@ -276,7 +291,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     console.log('Starting mint position ...');
 
     try {
-      // const mintPosition = await adapter.mintNewPosition(amount, amount2, );
+      const mintPosition = await adapter.mintNewPosition(amount, amount2);
     } catch (err) {
       console.error(err);
     }
@@ -780,7 +795,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                     margin={'auto'}
                     marginRight={'10px'}
                     width={'22%'}
-                    onClick={handleButtonMax}
+                    onClick={handleButtonMax2}
                     disabled={balanceLoading}
                   >
                     <Text
@@ -810,7 +825,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 Investment submitted
               </AlertTitle>
               <AlertDescription maxWidth="sm">
-                The transaction has been sended. Your deposit {amount} in Aave
+                The transaction has been sended. Your deposit {amount}
                 Protocol, it will be reflected in your dashboard soon. This may
                 take a few moments to process.
               </AlertDescription>
@@ -907,7 +922,11 @@ function InvesmentModal({ isOpen, onClose }: Props) {
               bg="primary"
               borderRadius={'70px'}
               boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
-              display={approvedAave || firstApproveComplete ? 'none' : 'block'}
+              display={
+                approvedAave || firstApproveComplete || secondApproveComplete
+                  ? 'none'
+                  : 'block'
+              }
               isDisabled={
                 !(
                   strategy !== initialStrategy &&
@@ -921,7 +940,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
               onClick={handleContinueButton}
             >
               {!transactionLoading ? (
-                <Text color={'white'}>{t('continue')}</Text>
+                <Text color={'white'}>Continue</Text>
               ) : (
                 <Spinner color="white" size={'xs'} />
               )}

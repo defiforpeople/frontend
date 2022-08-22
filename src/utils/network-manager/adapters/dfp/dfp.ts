@@ -12,6 +12,7 @@ import {
   DFPStrategy,
   StrategiesByNetworks,
   SupplyAaveStrategy,
+  SupplyUniswapStrategy,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
 
@@ -640,24 +641,36 @@ export default class DfpAdapter implements IAdapter {
 
     // format amount and balance
     const balanceFormated = ethers.utils.parseEther(balance);
-    const amountFormated = ethers.utils.parseEther(amount.toString());
+    const amountFormated = ethers.utils.parseEther(
+      amount.toFixed(18).toString(),
+    );
 
     if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
       throw new Error('invalid amount');
     }
-    // get token address
-    // TODO: change for API response
-    const tokenAddr = tokens[this.network.chainName][symbol].address;
 
-    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
 
     const {
       data,
     }: {
       data: {
-        strategies: DFPStrategy[];
+        strategies: { [key: string]: DFPStrategy[] };
       };
     } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-uniswap',
+    ) as SupplyUniswapStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -665,7 +678,7 @@ export default class DfpAdapter implements IAdapter {
       const signer = provider.getSigner();
 
       const erc20Contract = new ethers.Contract(
-        tokenAddr as string,
+        strategy.data.token0.address,
         ERC20__factory.abi,
         signer,
       );
@@ -674,7 +687,7 @@ export default class DfpAdapter implements IAdapter {
 
       try {
         const transaction = await erc20Contract.approve(
-          '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+          strategy.contract,
           amountFormated,
           {
             gasLimit: GAS_LIMIT,
@@ -719,21 +732,29 @@ export default class DfpAdapter implements IAdapter {
     // };
   }
 
-  public async mintNewPosition(
-    amount1: number,
-    amount2: number,
-    token1: string,
-    token2: string,
-  ): Promise<any> {
-    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+  public async mintNewPosition(amount1: number, amount2: number): Promise<any> {
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
 
     const {
       data,
     }: {
       data: {
-        strategies: DFPStrategy[];
+        strategies: { [key: string]: DFPStrategy[] };
       };
     } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-uniswap',
+    ) as SupplyUniswapStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -741,8 +762,8 @@ export default class DfpAdapter implements IAdapter {
       const signer = provider.getSigner();
 
       const supplyUniContract = new ethers.Contract(
-        '0x7F855BDcb03bCb6e3b66Ecbd028363397174481a',
-        SupplyAave__factory.abi,
+        strategy.contract,
+        SupplyUni__factory.abi,
         signer,
       );
 
@@ -750,10 +771,10 @@ export default class DfpAdapter implements IAdapter {
 
       try {
         const supplyTx = await supplyUniContract.mintNewPosition(
-          '1',
+          strategy.data.poolId,
           amount1,
           amount2,
-          BigNumber.from(0.02),
+          BigNumber.from(100),
           {
             gasLimit: GAS_LIMIT,
           },
