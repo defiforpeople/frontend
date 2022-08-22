@@ -53,7 +53,6 @@ function ConnectWallet() {
     async function getUsersConnected() {
       await manager.switchNetwork(network.chainName);
       const users = await adapter.getUsers();
-      // const users = 18;
 
       setUsers(users);
     }

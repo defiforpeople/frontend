@@ -67,7 +67,37 @@ export default class DfpAdapter implements IAdapter {
 
       // await Moralis.enableWeb3();
 
+      console.log('Adapter: switchNetwork()');
+      console.log('Adapter: switchNetwork(): name: ', name);
+
       const network = networks[name];
+
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: network.chainId }],
+        });
+      } catch (switchError: any) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [
+                {
+                  chainId: network.chainId,
+                  chainName: network.chainName,
+                  rpcUrls: ['https://...'],
+                },
+              ],
+            });
+          } catch (addError) {
+            console.log(addError);
+          }
+        }
+        // handle other "switch" errors
+        console.log(switchError);
+      }
 
       // await Moralis.switchNetwork(network.chainId);
 

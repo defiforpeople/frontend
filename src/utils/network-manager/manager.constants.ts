@@ -1,11 +1,3 @@
-// TODO(ca): add support to below networks
-// ropsten 0x3
-// rinkeby 0x4
-// kovan 0x2a
-// mumbai 0x13881
-// bsc testnet 0x61
-// avalanche testnet 0xa869
-
 import { Network } from './manager.types';
 
 const {} = process.env;
@@ -26,7 +18,7 @@ export const networks: { [name: string]: Network } = {
   maticmum: {
     name: 'Mumbai',
     chainName: 'maticmum',
-    chainId: '0x89',
+    chainId: '0x13881',
     dev: false,
     nativeToken: {
       balance: '0',

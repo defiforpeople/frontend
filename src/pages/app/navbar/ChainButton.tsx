@@ -29,8 +29,8 @@ function ChainButton() {
   const { manager, network, setNetwork } = useNetworkManager();
   const { strategies } = useAdapter();
 
-  console.log('network', network);
-  console.log('strategies', strategies);
+  // console.log('network', network);
+  // console.log('strategies', strategies);
 
   const nn: { [key: string]: DFPStrategy[] } = {};
   for (let i = 0; i < strategies.length; i++) {
@@ -43,10 +43,10 @@ function ChainButton() {
     nn[s.network].push(s);
   }
 
-  console.log('kakakaka');
-  console.log('kakakaka');
-  console.log('kakakaka');
-  console.log('kakakaka', nn);
+  // console.log('kakakaka');
+  // console.log('kakakaka');
+  // console.log('kakakaka');
+  // console.log('kakakaka', nn);
 
   const changeNetwork = async (networkName: ChainName) => {
     console.log(`Change network to networkName: ${networkName}`);
