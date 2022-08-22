@@ -26,6 +26,8 @@ export interface IAdapter {
   getDeposits(): Promise<Deposit[]>;
   getWithdrawals(): Promise<Withdraw[]>;
   approveDeposit(amount: number, symbol: TokenSymbol): Promise<Deposit>;
+  approveDepositAave(amount: number, symbol: TokenSymbol): Promise<Deposit>;
+  depositAave(amount: number, symbol: TokenSymbol): Promise<Deposit>;
   deposit(deposit: Deposit): Promise<Deposit>;
   listStrategies(): Promise<DFPStrategy[]>;
   listStrategiesByNetworks(): Promise<StrategiesByNetworks>;

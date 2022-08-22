@@ -132,33 +132,33 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setShowAlertSuccess(false);
 
     try {
-      const approveDeposit = await adapter.approveDeposit(amount, symbol);
-      setShowAlertConfirm(true);
-      const approveTx = await approveDeposit.approveTx!.wait();
-      console.log('approveTx');
-      console.log('approveTx');
-      console.log('approveTx');
-      console.log('approveTx');
-      console.log(approveTx);
+      const approveDeposit = await adapter.approveDepositAave(amount, symbol);
+      // setShowAlertConfirm(true);
+      // const approveTx = await approveDeposit.approveTx!.wait();
+      // console.log('approveTx');
+      // console.log('approveTx');
+      // console.log('approveTx');
+      // console.log('approveTx');
+      // console.log(approveTx);
 
-      setShowAlertConfirm(false);
-      const deposit = await adapter.deposit(approveDeposit);
-      setShowAlertConfirm(true);
-      const depositTx = await deposit.depositTx!.wait();
-      console.log('depositTx');
-      console.log('depositTx');
-      console.log('depositTx');
-      console.log(depositTx);
+      // setShowAlertConfirm(false);
+      // const deposit = await adapter.deposit(approveDeposit);
+      // setShowAlertConfirm(true);
+      // const depositTx = await deposit.depositTx!.wait();
+      // console.log('depositTx');
+      // console.log('depositTx');
+      // console.log('depositTx');
+      // console.log(depositTx);
 
-      setTransactionLoading(false);
-      setShowAlertConfirm(false);
-      setShowAlertSuccess(true);
+      // setTransactionLoading(false);
+      // setShowAlertConfirm(false);
+      // setShowAlertSuccess(true);
     } catch (err) {
-      console.error(err);
-      setTransactionLoading(false);
-      setShowAlertConfirm(false);
-      setShowAlertError(true);
-      setShowAlertSuccess(false);
+      // console.error(err);
+      // setTransactionLoading(false);
+      // setShowAlertConfirm(false);
+      // setShowAlertError(true);
+      // setShowAlertSuccess(false);
     }
   };
 

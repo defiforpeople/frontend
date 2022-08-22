@@ -367,6 +367,61 @@ export default class DfpAdapter implements IAdapter {
     // };
   }
 
+  public async approveDepositAave(
+    amount: number,
+    symbol: TokenSymbol,
+  ): Promise<Deposit> {
+    // validate inputs
+    const { balance } = await this.getNativeToken();
+    console.log(balance);
+    console.log(amount);
+    // if (amount < 0 || amount > balance!) {
+    // throw new Error('invalid amount');
+    // }
+    // // get token address
+    // const tokenAddr = tokens[this.network.chainName][symbol].address;
+    // // prepare provider
+    // const provider = await Moralis.enableWeb3();
+    // const ethers = Moralis.web3Library;
+    // const signer = provider.getSigner();
+    // // prepare weth contract
+    // const wrapContract = new ethers.Contract(
+    //   tokenAddr,
+    //   IWETH__factory.abi,
+    //   signer,
+    // ) as IWETH;
+    // console.log(1111111);
+    // console.log(1111111);
+    // console.log(1111111);
+    // console.log(1111111);
+    // console.log(1111111, tokenAddr);
+    // // get strategy address
+    // const contractAddr = this.network.strategies['recursive_farming'].address;
+    // // parse amount to bignumber
+    // const parsedAmount = ethers.utils.parseEther(amount.toString());
+    // // make approve weth contract to strategy addres
+    // const tx = await wrapContract.approve(contractAddr, parsedAmount);
+    // console.log(222222);
+    // console.log(222222);
+    // console.log(222222);
+    // console.log(222222);
+    // console.log(222222, contractAddr, parsedAmount);
+    // return {
+    //   amount,
+    //   timestamp: new Date().getTime(),
+    //   approveTx: tx,
+    // };
+
+    return {} as Deposit;
+  }
+
+  public async depositAave(
+    amount: number,
+    symbol: TokenSymbol,
+  ): Promise<Deposit> {
+    return {} as Deposit;
+  }
+
   public async deposit(deposit: Deposit): Promise<Deposit> {
     return {} as Deposit;
     // // get strategy address
