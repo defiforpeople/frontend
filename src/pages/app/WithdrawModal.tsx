@@ -30,9 +30,14 @@ import { useTranslation } from 'react-i18next';
 import '../../i18n';
 
 import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
+import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-matic-icon.svg';
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
+import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
+import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
+
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+
 import { useNetworkManager } from '../../hooks/use-manager';
 import { useAdapter } from '../../hooks/use-adapter';
 import { ChainName, Deposit } from '../../utils/network-manager';
@@ -65,6 +70,9 @@ function WithdrawModal({ isOpen, onClose }: Props) {
   const [showAlertError, setShowAlertError] = useState(false);
   // const [tokensBalance, setTextsBalance] = useState(initialTokensBalance);
 
+  const [completeWithdraw, setCompleteWithdraw] = useState(false);
+  const [txCompletedAave, setTxCompletedAave] = useState(false);
+
   const networks = manager.listNetworks();
 
   const handleStrategyChange = async (strategy: string) => {
@@ -80,20 +88,17 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     setAmount(0);
     setMaxAmount(0);
 
-    await manager.switchNetwork(chainName);
-    setNetwork(networks[chainName]);
-
     setBalanceLoading(true);
-    const nativeToken = await adapter.getNativeToken();
-    if (!nativeToken || Number(nativeToken.balance) === 0) {
-      setMaxAmount(0);
-      setBalanceLoading(false);
-      return;
-    }
+    const depositArray = await adapter.getDeposits();
+
+    // TODO: get max amount from API
+    const maxAmount = depositArray.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.amount,
+      0,
+    );
+    setMaxAmount(maxAmount);
 
     setBalanceLoading(false);
-    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
-    setMaxAmount(Number(amount));
   };
 
   const handleAmountChange = (event: any) => setAmount(event.target.value);
@@ -110,6 +115,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     setShowAlertConfirm(false);
     setShowAlertError(false);
     setTransactionLoading(false);
+    setCompleteWithdraw(false);
 
     onClose();
   };
@@ -121,17 +127,17 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     setShowAlertSuccess(false);
 
     try {
-      // const deposit = await adapter.deposit(amount);
-      console.log(deposit);
-
-      setDeposit(deposit);
+      const withdrawTx = await adapter.withdrawAave(amount);
       setShowAlertConfirm(true);
-      // const a = await deposit.tx!.wait();
-      // console.log(a);
+      const withdrawTxResponse = await withdrawTx.wait();
 
-      setTransactionLoading(false);
+      console.log('withdrawTx', withdrawTxResponse);
+
+      setTxCompletedAave(withdrawTxResponse.transactionHash);
+
       setShowAlertConfirm(false);
-      setShowAlertSuccess(true);
+      setTransactionLoading(false);
+      setCompleteWithdraw(true);
     } catch (err) {
       console.error(err);
       setTransactionLoading(false);
@@ -141,6 +147,14 @@ function WithdrawModal({ isOpen, onClose }: Props) {
     }
   };
 
+  const handleExplorerButton = async () => {
+    const address = txCompletedAave;
+
+    window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
+
+    resetStrategy();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -148,7 +162,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
         boxShadow="0px 0px 10px rgba(0, 0, 0, 0.25)"
         borderRadius={'15px'}
       >
-        <ModalHeader>{t('title')}</ModalHeader>
+        <ModalHeader>Withdraw investment</ModalHeader>
 
         <Center>
           <Divider color={'#E1E1E0'} width={'90%'} />
@@ -156,7 +170,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
 
         <ModalBody margin={'auto'}>
           {/* Menu for strategy */}
-          {!showAlertSuccess ? (
+          {!completeWithdraw ? (
             <>
               <Text
                 fontWeight={700}
@@ -200,47 +214,43 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                 </MenuButton>
                 <MenuList border={'0'} width={'280px'}>
                   <MenuItem
-                    onClick={() => handleStrategyChange('Recursive Farming')}
+                    onClick={() => handleStrategyChange(t('strategy1'))}
                   >
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'black'}
-                      padding={3}
-                    >
-                      Recursive Farming
-                    </Text>
+                    <HStack>
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        {t('strategy1')}
+                      </Text>
+                      <AaveLogo width={30} height={30} />
+                    </HStack>
                   </MenuItem>
 
-                  <MenuItem>
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'#757575'}
-                      padding={3}
-                    >
-                      Staking Farming (soon)
-                    </Text>
-                  </MenuItem>
-
-                  <MenuItem>
-                    <Text
-                      fontSize={'16px'}
-                      lineHeight={'18.75px'}
-                      letterSpacing="5%"
-                      color={'#757575'}
-                      padding={3}
-                    >
-                      Delta Neutral (soon)
-                    </Text>
+                  <MenuItem
+                    onClick={() => handleStrategyChange(t('strategy2'))}
+                  >
+                    <HStack>
+                      <Text
+                        fontSize={'16px'}
+                        lineHeight={'18.75px'}
+                        letterSpacing="5%"
+                        color={'black'}
+                        padding={3}
+                      >
+                        {t('strategy2')}
+                      </Text>
+                      <UniswapLogo width={40} height={40} />
+                    </HStack>
                   </MenuItem>
                 </MenuList>
               </Menu>
 
-              {/* Menu for tokens */}
-              <Box display={strategy === initialStrategy ? 'none' : 'block'}>
+              {/* Menu for Aave withdraw */}
+              <Box display={strategy === t('strategy1') ? 'block' : 'none'}>
                 <Text
                   fontWeight={700}
                   fontSize={'16px'}
@@ -295,24 +305,8 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                     </HStack>
                   </MenuButton>
                   <MenuList border={'0'} width={'280px'}>
-                    {/* <MenuItem onClick={() => handleTokenChange("eth")}>
-                <EthLogo width={25} height={25} />
-
-                <Text
-                  fontSize={'16px'}
-                  lineHeight={'18.75px'}
-                  letterSpacing="5%"
-                  color={'black'}
-                  padding={3}
-                >
-                  ETH
-                </Text>
-              </MenuItem> */}
-
-                    {/* <MenuItem
-                      onClick={async () => await handleTokenChange('avalanche')}
-                    >
-                      <AvalancheLogo width={25} height={25} />
+                    <MenuItem onClick={() => handleTokenChange('matic')}>
+                      <PolygonLogo width={25} height={25} />
 
                       <Text
                         fontSize={'16px'}
@@ -321,46 +315,10 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                         color={'black'}
                         padding={3}
                       >
-                        {networks['avalanche'].nativeToken.symbol.toUpperCase()}{' '}
-                        ({networks['avalanche'].name})
+                        {networks['matic'].nativeToken.symbol.toUpperCase()} (
+                        {networks['matic'].name})
                       </Text>
-                    </MenuItem> */}
-
-                    {/* <MenuItem
-                      onClick={async () =>
-                        await handleTokenChange('avalanche testnet')
-                      }
-                    >
-                      <AvalancheLogo width={25} height={25} />
-
-                      <Text
-                        fontSize={'16px'}
-                        lineHeight={'18.75px'}
-                        letterSpacing="5%"
-                        color={'black'}
-                        padding={3}
-                      >
-                        {networks[
-                          'avalanche testnet'
-                        ].nativeToken.symbol.toUpperCase()}{' '}
-                        ({networks['avalanche testnet'].name})
-                      </Text>
-                    </MenuItem> */}
-
-                    {/* 
-              <MenuItem onClick={() => handleTokenChange('DAI')}>
-                <DaiLogo width={25} height={25} />
-
-                <Text
-                  fontSize={'16px'}
-                  lineHeight={'18.75px'}
-                  letterSpacing="5%"
-                  color={'black'}
-                  padding={3}
-                >
-                  DAI
-                </Text>
-              </MenuItem> */}
+                    </MenuItem>
                   </MenuList>
                 </Menu>
 
@@ -444,7 +402,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
             >
               <AlertIcon boxSize="40px" mr={0} />
               <AlertTitle mt={4} mb={1} fontSize="lg">
-                Investment submitted
+                Withdraw submitted
               </AlertTitle>
               <AlertDescription maxWidth="sm">
                 The transaction has been sended, it will be reflected in your
@@ -471,7 +429,7 @@ function WithdrawModal({ isOpen, onClose }: Props) {
             </Alert>
           ) : null}
 
-          {!showAlertSuccess ? (
+          {!showAlertSuccess && !completeWithdraw ? (
             <Button
               bg="primary"
               borderRadius={'70px'}
@@ -507,6 +465,15 @@ function WithdrawModal({ isOpen, onClose }: Props) {
                 width={150}
               >
                 <Text color={'white'}>Close</Text>
+              </Button>
+              <Button
+                bg="white"
+                borderRadius={'70px'}
+                boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
+                onClick={handleExplorerButton}
+                width={150}
+              >
+                <Text color={'primary'}>View on Explorer</Text>
               </Button>
             </Box>
           )}

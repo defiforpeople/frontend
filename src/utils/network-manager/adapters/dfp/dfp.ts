@@ -266,7 +266,18 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async getDeposits(): Promise<Deposit[]> {
-    return [];
+    // TODO: implement get deposits from API
+    const deposits: Deposit[] = [
+      {
+        amount: 100,
+        timestamp: 10000,
+      },
+      {
+        amount: 300,
+        timestamp: 1000000,
+      },
+    ];
+    return deposits;
 
     // try {
     //   if (!this._ready) {
@@ -447,9 +458,6 @@ export default class DfpAdapter implements IAdapter {
 
       const GAS_LIMIT = BigNumber.from('2074000');
 
-      console.log(amount);
-      console.log(amountFormated);
-
       try {
         const supplyTx = await supplyAaveContract.deposit(
           '0xb685400156cF3CBE8725958DeAA61436727A30c3',
@@ -468,17 +476,53 @@ export default class DfpAdapter implements IAdapter {
     return;
   }
 
-  public listenForTransactionMine(transactionResponse: any, provider: any) {
-    console.log(`Mining ${transactionResponse.hash} ...`);
+  public async getBalanceAave(): Promise<number> {
+    return 0.02;
+  }
 
-    return new Promise<void>((resolve, reject) => {
-      provider.once(transactionResponse.hash, (transactionReceipt: any) => {
-        console.log(
-          `Completed with ${transactionReceipt.confirmations} confirmations`,
+  public async withdrawAave(amount: number): Promise<any> {
+    // validate inputs
+    // TODO: get balance from API
+    const balance = await this.getBalanceAave();
+
+    // format amount and balance
+    const balanceFormated = ethers.utils.parseEther(balance.toString());
+    const amountFormated = ethers.utils.parseEther(amount.toString());
+
+    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
+      throw new Error('invalid amount');
+    }
+
+    // get token address
+    // TODO: change for API response
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const supplyAaveContract = new ethers.Contract(
+        '0x125dF0B4Ab64Bf6AeD9Fdac6FbaBc4Cf441614B7',
+        SupplyAave__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const supplyTx = await supplyAaveContract.withdraw(
+          '0xb685400156cF3CBE8725958DeAA61436727A30c3',
+          amountFormated,
+          {
+            gasLimit: GAS_LIMIT,
+          },
         );
-        resolve();
-      });
-    });
+
+        return supplyTx;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   public async deposit(deposit: Deposit): Promise<Deposit> {

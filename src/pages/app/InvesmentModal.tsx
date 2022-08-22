@@ -29,25 +29,23 @@ import {
   AlertDescription,
 } from '@chakra-ui/react';
 
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import { ReactComponent as EthLogo } from '../../assets/logos/eth-logo.svg';
 import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-matic-icon.svg';
-import { ReactComponent as MaticLogo } from '../../assets/logos/matic-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 import { ReactComponent as DaiLogo } from '../../assets/logos/dai-logo.svg';
 import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
 import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
 
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
+
 import { useTranslation } from 'react-i18next';
 import '../../i18n';
 
 import { useAdapter } from '../../hooks/use-adapter';
-import { ChainName, Deposit, TokenSymbol } from '../../utils/network-manager';
+import { ChainName, TokenSymbol } from '../../utils/network-manager';
 import { useNetworkManager } from '../../hooks/use-manager';
 
 import { Spinner } from '@chakra-ui/react';
-
-const { REACT_APP_STRATEGY_ADDRESS } = process.env;
 
 type Props = {
   isOpen: any;
@@ -78,7 +76,15 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
   // Aave
   const [approvedAave, setApprovedAave] = useState(false);
-  // const [tokensBalance, setTextsBalance] = useState(initialTokensBalance);
+  const [depositAave, setDepositAave] = useState(false);
+  const [txCompletedAave, setTxCompletedAave] = useState('');
+
+  // Uniswap
+  // const [approvedUniswap, setApprovedUniswap] = useState(false);
+  // const [depositUniswap, setDepositUniswap] = useState(false);
+
+  // complete strategy
+  const [completeStrategy, setCompleteStrategy] = useState(false);
 
   const networks = manager.listNetworks();
 
@@ -124,7 +130,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     setShowAlertConfirm(false);
     setShowAlertError(false);
     setTransactionLoading(false);
-    setSymbol('weth');
+    // setSymbol('weth');
 
     onClose();
   };
@@ -157,33 +163,30 @@ function InvesmentModal({ isOpen, onClose }: Props) {
   };
 
   const handleExplorerButton = async () => {
-    const { chainName } = adapter.network;
-    // const { strategies } = networks[chainName];
+    const address = txCompletedAave;
 
-    console.log('strategies', strategies);
-
-    // const { address } = strategies['recursive_farming'];
-
-    window.open(`https://testnet.snowtrace.io/address/{address}`, '_blank');
+    window.open(`https://mumbai.polygonscan.com/tx/${address}`, '_blank');
 
     resetStrategy();
   };
 
-  const depositAave = async () => {
+  const handleDepositAave = async () => {
     console.log('Starting deposit ...');
 
     try {
       const depositAave = await adapter.depositAave(amount, symbol);
+      setApprovedAave(false);
+
       setShowAlertConfirm(true);
       setTransactionLoading(true);
 
       const depositTx = await depositAave.wait();
 
-      console.log(depositTx);
-
+      setTxCompletedAave(depositTx.transactionHash);
       setShowAlertConfirm(false);
       setTransactionLoading(false);
-      setApprovedAave(true);
+      setDepositAave(true);
+      setCompleteStrategy(true);
     } catch (err) {
       console.error(err);
       setTransactionLoading(false);
@@ -206,9 +209,9 @@ function InvesmentModal({ isOpen, onClose }: Props) {
           <Divider color={'#E1E1E0'} width={'90%'} />
         </Center>
 
-        <ModalBody margin={'auto'}>
+        <ModalBody margin={'auto'} alignItems="center">
           {/* Menu for strategy */}
-          {!showAlertSuccess ? (
+          {!completeStrategy ? (
             <>
               <Text
                 fontWeight={700}
@@ -287,8 +290,20 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 </MenuList>
               </Menu>
 
-              {/* Menu for tokens */}
-              <Box display={strategy === initialStrategy ? 'none' : 'block'}>
+              {/* Aave protocol */}
+              <Box display={strategy === t('strategy1') ? 'block' : 'none'}>
+                <Text
+                  fontWeight={700}
+                  fontSize={'16px'}
+                  lineHeight={'18.75px'}
+                  letterSpacing="5%"
+                  color={'#282828'}
+                  paddingTop={8}
+                  paddingBottom={3}
+                >
+                  Lending in Aave Protocol
+                </Text>
+
                 <Text
                   fontWeight={700}
                   fontSize={'16px'}
@@ -318,7 +333,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                   >
                     <HStack>
                       <Box
-                        // onClick={() => handleTokenChange('matic', 'matic')}
                         display={text === 'ETH' ? 'block' : 'none'}
                         marginLeft={2}
                       >
@@ -446,8 +460,9 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 Investment submitted
               </AlertTitle>
               <AlertDescription maxWidth="sm">
-                The transaction has been sended, it will be reflected in your
-                dashboard soon. This may take a few moments to process.
+                The transaction has been sended. Your deposit {amount} in Aave
+                Protocol, it will be reflected in your dashboard soon. This may
+                take a few moments to process.
               </AlertDescription>
             </Alert>
           )}
@@ -485,14 +500,14 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                 borderRadius={'70px'}
                 boxShadow={'0px 2px 3px rgba(0, 0, 0, 0.15)'}
                 color={'white'}
-                onClick={depositAave}
+                onClick={handleDepositAave}
               >
                 Finish
               </Button>
             </VStack>
           ) : null}
 
-          {!showAlertSuccess ? (
+          {!completeStrategy ? (
             <Button
               bg="primary"
               borderRadius={'70px'}
@@ -504,7 +519,9 @@ function InvesmentModal({ isOpen, onClose }: Props) {
                   text !== initialToken &&
                   amount > 0 &&
                   amount <= Number(maxAmount)
-                ) || transactionLoading
+                ) ||
+                transactionLoading ||
+                depositAave
               }
               onClick={handleContinueButton}
             >
