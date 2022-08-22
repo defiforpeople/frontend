@@ -33,6 +33,12 @@ export interface IAdapter {
   getBalanceAave(): Promise<number>;
 
   approveDepositUniswap(amount: number, symbol: TokenSymbol): Promise<any>;
+  mintNewPosition(
+    amount1: number,
+    amount2: number,
+    token1: string,
+    token2: string,
+  ): Promise<any>;
 
   deposit(deposit: Deposit): Promise<Deposit>;
   listStrategies(): Promise<DFPStrategy[]>;

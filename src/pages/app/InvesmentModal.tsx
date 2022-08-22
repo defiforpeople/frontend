@@ -264,6 +264,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     console.log('Starting mint position ...');
 
     try {
+      // const mintPosition = await adapter.mintNewPosition(amount, amount2, );
     } catch (err) {
       console.error(err);
     }

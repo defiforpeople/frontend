@@ -16,6 +16,7 @@ import { AdapterName, IAdapter } from '../adapter.types';
 
 import { ERC20__factory } from '../../../../typechain';
 import { SupplyAave__factory } from '../../../../typechain-types';
+import { SupplyUni__factory } from '../../../../typechain-types-uni';
 
 declare global {
   interface Window {
@@ -611,6 +612,53 @@ export default class DfpAdapter implements IAdapter {
     //   ...deposit,
     //   depositTx: tx,
     // };
+  }
+
+  public async mintNewPosition(
+    amount1: number,
+    amount2: number,
+    token1: string,
+    token2: string,
+  ): Promise<any> {
+    const response = await fetch(`${this._apiURL}/api/v1/strategies`);
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: DFPStrategy[];
+      };
+    } = await response.json();
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      const supplyUniContract = new ethers.Contract(
+        '0x7F855BDcb03bCb6e3b66Ecbd028363397174481a',
+        SupplyAave__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const supplyTx = await supplyUniContract.mintNewPosition(
+          '1',
+          amount1,
+          amount2,
+          BigNumber.from(0.02),
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return supplyTx;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   public async listStrategies(): Promise<DFPStrategy[]> {
