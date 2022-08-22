@@ -19,7 +19,7 @@ function Question1({ setQuestion }: Props) {
         >
           <Box>
             <Text padding={3} fontWeight={'bold'} fontSize={'22px'}>
-              Tienes experiencia invirtiendo en criptomonedas?
+              Do you have some experience investing in cryptocurrencies?
             </Text>
           </Box>
 
@@ -32,7 +32,7 @@ function Question1({ setQuestion }: Props) {
             }}
             onClick={() => setQuestion(2)}
           >
-            <Text padding={3}>Si</Text>
+            <Text padding={3}>Yes</Text>
           </Box>
 
           <Divider />
@@ -61,7 +61,7 @@ function Question1({ setQuestion }: Props) {
             }}
             onClick={() => setQuestion(2)}
           >
-            <Text padding={3}>Solo holdeando </Text>
+            <Text padding={3}>Only holding</Text>
           </Box>
         </Box>
       </Center>

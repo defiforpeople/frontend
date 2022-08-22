@@ -19,12 +19,12 @@ function Question3({ setQuestion, question }: Props) {
         >
           <Box>
             <Text padding={3} fontWeight={'bold'} fontSize={'22px'}>
-              Quieres invertir todos los meses?
+              Do you want to invest monthly?
             </Text>
           </Box>
 
           <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-            <Text padding={3}>Si</Text>
+            <Text padding={3}>Yes</Text>
           </Box>
 
           <Divider />
@@ -36,7 +36,7 @@ function Question3({ setQuestion, question }: Props) {
           <Divider />
 
           <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-            <Text padding={3}>No sé</Text>
+            <Text padding={3}>I don't know yet</Text>
           </Box>
         </Box>
       </Center>

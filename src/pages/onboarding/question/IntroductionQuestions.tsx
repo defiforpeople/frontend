@@ -12,7 +12,7 @@ function IntroductionQuestions({ setQuestion }: Props) {
       <Center>
         <Box>
           <Text fontWeight={'bold'} fontSize={'22px'} marginTop={'30px'}>
-            Una pequeña guía
+            A short guide
           </Text>
         </Box>
       </Center>
@@ -20,8 +20,8 @@ function IntroductionQuestions({ setQuestion }: Props) {
       <Center>
         <Box padding={5}>
           <Text fontWeight={'regular'} fontSize={'18px'} textAlign="center">
-            Te haremos unas preguntas para descrubrir tu perfil de inversionista
-            y te guiaremos en el proceso de entender conceptos de DeFi
+            We will make some questions in order to disover your investments profile, 
+            meanwhile we will help you understand some Defi and financial
           </Text>
         </Box>
       </Center>
@@ -36,14 +36,14 @@ function IntroductionQuestions({ setQuestion }: Props) {
           onClick={() => setQuestion(1)}
         >
           <Text fontSize={'18px'} lineHeight={'21.6px'} color="white">
-            Comencemos
+            Let's begin!
           </Text>
         </Button>
       </Center>
 
       <Center marginTop={'20px'}>
         <Text fontSize={'14px'} lineHeight={'21.6px'} color="grayLetter">
-          🕓&nbsp; 4 mins aprox.
+          🕓&nbsp; 1 min aprox.
         </Text>
       </Center>
     </Box>
