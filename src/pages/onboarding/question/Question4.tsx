@@ -18,12 +18,12 @@ function Question4() {
           fontSize={'22px'}
           marginTop={'30px'}
         >
-          Quieres invertir todos los meses?
+          Do you want to invest monthly?
         </Text>
       </Box>
 
       <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-        <Text padding={3}>Si</Text>
+        <Text padding={3}>Yes</Text>
       </Box>
 
       <Divider />
@@ -35,7 +35,7 @@ function Question4() {
       <Divider />
 
       <Box height={'50px'} fontWeight={'regular'} fontSize={'18px'}>
-        <Text padding={3}>No sé</Text>
+        <Text padding={3}>I don't know yet</Text>
       </Box>
     </Box>
   );
