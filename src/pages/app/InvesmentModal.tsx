@@ -121,7 +121,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
     const WETH = tokens.find((token) => token.symbol === 'WETH');
 
-    const amount2 = (Number(WETH!.balance!) / 1e18).toFixed(12);
+    const amount2 = (parseFloat(WETH!.balance!) / 1e18).toFixed(6);
     setMaxAmount2(Number(amount2));
 
     if (symbol === 'matic') {
@@ -129,7 +129,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     }
 
     setBalanceLoading(false);
-    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(12);
+    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(6);
     setMaxAmount(Number(amount));
   };
 

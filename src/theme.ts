@@ -72,9 +72,7 @@ const theme = extendTheme({
     gray: '#F1F4F6',
     grayLetter: '#757575',
     footerBg: '#C4C4C405',
-  },
-  components: {
-    Steps: CustomSteps,
+    box: '#F2F4F5',
   },
 });
 

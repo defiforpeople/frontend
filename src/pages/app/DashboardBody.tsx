@@ -1,44 +1,168 @@
-import React from 'react';
+import {
+  Box,
+  Button,
+  Center,
+  HStack,
+  Icon,
+  SimpleGrid,
+  Text,
+} from '@chakra-ui/react';
 
-import { Grid, GridItem } from '@chakra-ui/react';
+import DashboardHeader from './new-version/DashboardHeader';
 
-import Menu from './Menu';
-import Summary from './Summary';
-import StakingFarming from './strategies/StakingFarming';
-import RecursiveFarming from './strategies/RecursiveFarming';
-import DeltaNeutral from './strategies/DeltaNeutral';
-import Faq from './Faq';
+import { ReactComponent as AaveLogo } from '../../assets/logos/aave-logo.svg';
+import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-matic-icon.svg';
+import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
+import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 
 function DashboardBody(this: any) {
-  const [menuIndex, setMenuIndex] = React.useState(0);
-
-  const renderStrategy = (index: number) => {
-    switch (index) {
-      case 0:
-        return <Summary />;
-      case 1:
-        return <RecursiveFarming />;
-      case 2:
-        return <StakingFarming />;
-      case 3:
-        return <DeltaNeutral />;
-      case 4:
-        return <Faq />;
-      default:
-        return <Summary />;
-    }
-  };
+  // const [menuIndex, setMenuIndex] = React.useState(0);
 
   return (
-    <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)">
-      <GridItem rowSpan={2} colSpan={1}>
-        <Menu menuIndex={menuIndex} setMenuIndex={setMenuIndex} />
-      </GridItem>
+    // <p>Hello</p>
+    <Box>
+      <DashboardHeader />
 
-      <GridItem rowSpan={2} colSpan={4}>
-        {renderStrategy(menuIndex)}
-      </GridItem>
-    </Grid>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} padding={10}>
+        <Box width={'100%'} bg={'box'} borderRadius={30}>
+          <HStack>
+            <Text padding={6} fontWeight={700} fontSize={22}>
+              Lending
+            </Text>
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Protocol
+            </Text>
+            <Icon as={AaveLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Chain
+            </Text>
+            <Icon as={PolygonLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <Text paddingTop={4} paddingLeft={6} paddingRight={6}>
+            This strategy allows the user to lend tokens in the Aave protocol
+          </Text>
+
+          <Center padding={6}>
+            <Button
+              bg={'primary'}
+              width={'100px'}
+              color="white"
+              borderRadius={10}
+            >
+              Invest
+            </Button>
+          </Center>
+        </Box>
+
+        <Box width={'100%'} bg={'box'} borderRadius={30}>
+          <HStack>
+            <Text padding={6} fontWeight={700} fontSize={22}>
+              Liquidity provider
+            </Text>
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Protocol
+            </Text>
+            <Icon as={UniswapLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Chain
+            </Text>
+            <Icon as={PolygonLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <Text paddingTop={4} paddingLeft={6} paddingRight={6}>
+            This strategy allows the user to provide liquidity in the Uniswap
+            protocol
+          </Text>
+
+          <Center padding={6}>
+            <Button
+              bg={'primary'}
+              width={'100px'}
+              color="white"
+              borderRadius={10}
+              disabled={true}
+            >
+              Invest
+            </Button>
+          </Center>
+        </Box>
+
+        <Box width={'100%'} bg={'box'} borderRadius={30}>
+          <HStack>
+            <Text padding={6} fontWeight={700} fontSize={22}>
+              Recursive farming
+            </Text>
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Protocol
+            </Text>
+            <Icon as={AaveLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <HStack
+            justifyContent={'space-between'}
+            paddingLeft={6}
+            paddingRight={6}
+          >
+            <Text fontWeight={600} color={'sixth'}>
+              Chain
+            </Text>
+            <Icon as={AvalancheLogo} width={8} height={8} color={'white'} />
+          </HStack>
+
+          <Text paddingTop={4} paddingLeft={6} paddingRight={6}>
+            This strategy allows the user to lend tokens in the Aave protocol
+          </Text>
+
+          <Center padding={6}>
+            <Button
+              bg={'primary'}
+              width={'100px'}
+              color="white"
+              borderRadius={10}
+              disabled={true}
+            >
+              Invest
+            </Button>
+          </Center>
+        </Box>
+      </SimpleGrid>
+    </Box>
   );
 }
 

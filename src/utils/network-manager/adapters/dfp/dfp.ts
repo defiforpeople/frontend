@@ -637,9 +637,7 @@ export default class DfpAdapter implements IAdapter {
     tokenNumber: number,
   ): Promise<any> {
     // format amount
-    const amountFormated = ethers.utils.parseEther(
-      amount.toFixed(18).toString(),
-    );
+    const amountFormated = ethers.utils.parseEther(amount.toString());
 
     // get token address and contract from API
     const response = await fetch(
@@ -775,8 +773,8 @@ export default class DfpAdapter implements IAdapter {
       try {
         const supplyTx = await supplyUniContract.mintNewPosition(
           strategy.data.poolId,
-          ethers.utils.parseEther(amount1.toFixed(18).toString()),
-          ethers.utils.parseEther(amount2.toFixed(18).toString()),
+          ethers.utils.parseEther(amount1.toString()),
+          ethers.utils.parseEther(amount2.toString()),
           BigNumber.from(100),
           {
             gasLimit: GAS_LIMIT,
