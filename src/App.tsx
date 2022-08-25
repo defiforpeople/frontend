@@ -7,7 +7,7 @@ import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
 import SimulatePage from './pages/simulate/SimulatePage';
 import Strategies from './pages/strategies/Strategies';
-import Lending from './pages/strategies/lending/Lending';
+import Lending from './pages/app/new-version/lending.tsx';
 
 function App() {
   return (

@@ -7,12 +7,7 @@ import NavbarApp from './navbar/NavbarApp';
 
 function DefiForPeopleApp() {
   return (
-    <Flex
-      // bg={'white'}
-      display={'flex'}
-      flexDirection="column"
-      height={'100vh'}
-    >
+    <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
       <Dashboard />
       <FooterApp />

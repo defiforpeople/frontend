@@ -15,11 +15,10 @@ import { ReactComponent as PolygonLogo } from '../../assets/logos/polygon-matic-
 import { ReactComponent as UniswapLogo } from '../../assets/logos/uniswap-logo.svg';
 import { ReactComponent as AvalancheLogo } from '../../assets/logos/avalanche-logo.svg';
 
-function DashboardBody(this: any) {
-  // const [menuIndex, setMenuIndex] = React.useState(0);
+import { Link } from 'react-router-dom';
 
+function DashboardBody(this: any) {
   return (
-    // <p>Hello</p>
     <Box>
       <DashboardHeader />
 
@@ -58,14 +57,16 @@ function DashboardBody(this: any) {
           </Text>
 
           <Center padding={6}>
-            <Button
-              bg={'primary'}
-              width={'100px'}
-              color="white"
-              borderRadius={10}
-            >
-              Invest
-            </Button>
+            <Link to="/lending">
+              <Button
+                bg={'primary'}
+                width={'100px'}
+                color="white"
+                borderRadius={10}
+              >
+                Invest
+              </Button>
+            </Link>
           </Center>
         </Box>
 
