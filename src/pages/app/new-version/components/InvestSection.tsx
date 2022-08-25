@@ -14,12 +14,26 @@ import { useState } from 'react';
 import TokenSelector from './TokenSelector';
 
 function InvestSection() {
+  const initialToken = 'Select token';
+
+  const [token, setToken] = useState(initialToken);
+
   const [amount, setAmount] = useState(0);
+
+  const [maxAmount, setMaxAmount] = useState(0);
+
+  const [balanceLoading, setBalanceLoading] = useState(false);
 
   return (
     <Box width={'600px'}>
       <HStack>
-        <TokenSelector />
+        <TokenSelector
+          selectedToken={token}
+          setselectedToken={setToken}
+          setAmount={setAmount}
+          setMaxAmount={setMaxAmount}
+          setBalanceLoading={setBalanceLoading}
+        />
 
         <Box>
           <HStack justifyContent={'space-between'} width={'100%'}>
@@ -33,13 +47,13 @@ function InvestSection() {
               Amount
             </Text>
 
-            {!false ? (
+            {!balanceLoading ? (
               <Text
                 fontSize={'12px'}
                 lineHeight={'14.06px'}
                 color={'grayLetter'}
               >
-                Available: {0.0}
+                Available: {maxAmount}
               </Text>
             ) : (
               <Spinner marginTop={25} color="#E33E84" size={'xs'} />
@@ -60,12 +74,13 @@ function InvestSection() {
               margin={'auto'}
               size={'lg'}
             />
-            <InputRightElement width="30">
+            <InputRightElement width="30" paddingRight={'5px'} paddingTop={2}>
               <Button
                 height={'24px'}
-                border="1px"
+                border="2px"
                 borderColor="primary"
                 borderRadius={'53px'}
+                onClick={() => setAmount(maxAmount)}
               >
                 <Text
                   fontWeight={400}

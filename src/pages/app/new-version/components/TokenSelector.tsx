@@ -17,13 +17,33 @@ import { ReactComponent as EthLogo } from '../../../../assets/logos/eth-logo.svg
 import { ReactComponent as PolygonLogo } from '../../../../assets/logos/polygon-matic-icon.svg';
 import { ReactComponent as DaiLogo } from '../../../../assets/logos/dai-logo.svg';
 
-function TokenSelector() {
-  const initialToken = 'MATIC';
+import { useAdapter } from '../../../../hooks/use-adapter';
 
-  const [selectedToken, setSelectedToken] = useState(initialToken);
+function TokenSelector({
+  selectedToken,
+  setselectedToken,
+  setAmount,
+  setMaxAmount,
+  setBalanceLoading,
+}: any) {
+  const { adapter } = useAdapter();
 
-  const handleTokenChange = (token: string) => {
-    setSelectedToken(token);
+  const initialToken = 'Select token';
+
+  const handleTokenChange = async (token: string) => {
+    setselectedToken(token);
+    setBalanceLoading(true);
+
+    const nativeToken = await adapter.getNativeToken();
+    if (!nativeToken || Number(nativeToken.balance) === 0) {
+      setMaxAmount(0);
+      setBalanceLoading(false);
+      return;
+    }
+
+    setBalanceLoading(false);
+    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
+    setMaxAmount(Number(amount));
   };
 
   return (
@@ -88,7 +108,7 @@ function TokenSelector() {
             </Text>
           </MenuItem>
 
-          <MenuItem onClick={() => handleTokenChange('DAI')}>
+          {/* <MenuItem onClick={() => handleTokenChange('DAI')}>
             <DaiLogo width={25} height={25} />
 
             <Text
@@ -100,9 +120,9 @@ function TokenSelector() {
             >
               DAI
             </Text>
-          </MenuItem>
-
-          <MenuItem onClick={() => handleTokenChange('DAI')}>
+          </MenuItem> */}
+          {/* 
+          <MenuItem onClick={() => handleTokenChange('ETH')}>
             <EthLogo width={25} height={25} />
 
             <Text
@@ -114,7 +134,7 @@ function TokenSelector() {
             >
               ETH
             </Text>
-          </MenuItem>
+          </MenuItem> */}
         </MenuList>
       </Menu>
     </Box>
