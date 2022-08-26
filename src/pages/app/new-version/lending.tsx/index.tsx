@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import FooterApp from '../../footers/FootersApp';
@@ -13,8 +14,10 @@ import NavbarApp from '../../navbar/NavbarApp';
 import InvestSection from '../components/InvestSection';
 
 import { ReactComponent as AaveStrategy } from '../../../../assets/images/aave_strategy.svg';
+import InvestAaveModal from './InvestAaveModal';
 
 function Lending() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
@@ -75,9 +78,11 @@ function Lending() {
         </Center>
 
         <Center marginTop={'50px'}>
-          <InvestSection />
+          <InvestSection onOpen={onOpen} />
         </Center>
       </Container>
+
+      <InvestAaveModal isOpen={isOpen} onClose={onClose} />
 
       <FooterApp />
     </Flex>

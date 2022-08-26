@@ -13,7 +13,11 @@ import { useState } from 'react';
 
 import TokenSelector from './TokenSelector';
 
-function InvestSection() {
+type Props = {
+  onOpen: any;
+};
+
+function InvestSection({ onOpen }: Props) {
   const initialToken = 'Select token';
 
   const [token, setToken] = useState(initialToken);
@@ -102,6 +106,8 @@ function InvestSection() {
           borderRadius={'10'}
           width="120px"
           marginTop={'20px'}
+          onClick={onOpen}
+          disabled={token === initialToken || amount === 0}
         >
           <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
             Invest
