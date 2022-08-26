@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 
 function DashboardBody(this: any) {
   return (
-    <Box>
+    <Box marginTop={'76px'}>
       <DashboardHeader />
 
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10} padding={10}>

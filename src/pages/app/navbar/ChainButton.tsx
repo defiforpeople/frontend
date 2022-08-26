@@ -73,7 +73,7 @@ function ChainButton() {
         iconSpacing={3}
         onClick={onOpen}
         variant="solid"
-        bg={'gray'}
+        bg={'white'}
         size="md"
         borderRadius={70}
         display={['none', 'inherit', 'inherit']}
@@ -86,32 +86,6 @@ function ChainButton() {
         <ModalContent>
           <ModalHeader>Select a Blockchain</ModalHeader>
           <ModalCloseButton />
-
-          {/* <Button
-            leftIcon={<EthereumLogo width={25} />}
-            width={'75%'}
-            margin={'auto'}
-            marginBottom={3}
-            justifyContent="start"
-            iconSpacing={5}
-            isDisabled={'eth' === network.chainName}
-            onClick={() => changeNetwork('eth')}
-          >
-            {networks['eth'].name}
-          </Button>
-
-          <Button
-            leftIcon={<EthereumLogo width={25} />}
-            width={'75%'}
-            margin={'auto'}
-            marginBottom={3}
-            justifyContent="start"
-            iconSpacing={5}
-            isDisabled={'rinkeby' === network.chainName}
-            onClick={() => changeNetwork('rinkeby')}
-          >
-            {networks['rinkeby'].name}
-          </Button> */}
 
           <Button
             leftIcon={<PolygonLogo width={25} />}

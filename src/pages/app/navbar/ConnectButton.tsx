@@ -68,6 +68,7 @@ function ConnectButton({ handleOpenModal }: Props) {
         px={3}
         height="38px"
         color="grayLetter"
+        bg={'white'}
       >
         <Icon as={PersonIcon} marginRight={3} />
 

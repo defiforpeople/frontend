@@ -74,6 +74,9 @@ const theme = extendTheme({
     footerBg: '#C4C4C405',
     box: '#F2F4F5',
   },
+  components: {
+    Steps: CustomSteps,
+  },
 });
 
 export default theme;

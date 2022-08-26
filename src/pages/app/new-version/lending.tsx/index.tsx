@@ -19,7 +19,7 @@ function Lending() {
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
 
-      <Container maxW={'3xl'} textAlign="justify">
+      <Container maxW={'3xl'} textAlign="justify" marginTop={'50px'}>
         <Heading
           fontWeight={600}
           fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}

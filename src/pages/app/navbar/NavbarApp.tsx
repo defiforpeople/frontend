@@ -11,14 +11,15 @@ import { Link } from 'react-router-dom';
 function NavbarApp() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // console.log('Its rendering NavbarApp component');
-
   return (
     <Flex
       justify="space-between"
-      bg="white"
-      height={['70px', '50px', '50px']}
+      height={'60px'}
       boxShadow={'0px 0px 10px rgba(0, 0, 0, 0.15)'}
+      position="fixed"
+      width={'100%'}
+      zIndex={1}
+      backgroundColor="box"
     >
       <Flex align="center">
         <Link to="/">

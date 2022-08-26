@@ -1,19 +1,7 @@
-import {
-  Box,
-  Heading,
-  Container,
-  Text,
-  Button,
-  Stack,
-  Icon,
-  useColorModeValue,
-  createIcon,
-} from '@chakra-ui/react';
+import { Box, Heading, Container, Text, Stack } from '@chakra-ui/react';
 
 import { useTranslation } from 'react-i18next';
 import '../../../i18n';
-
-import { Link } from 'react-router-dom';
 
 function DashboardHeader() {
   const { t } = useTranslation('strategies');
