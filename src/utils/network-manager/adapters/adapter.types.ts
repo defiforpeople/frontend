@@ -27,8 +27,8 @@ export interface IAdapter {
   getWithdrawals(): Promise<Withdraw[]>;
   approveDeposit(amount: number, symbol: TokenSymbol): Promise<Deposit>;
   // TODO change any
-  approveDepositAave(amount: number, symbol: TokenSymbol): Promise<any>;
-  depositAave(amount: number, symbol: TokenSymbol): Promise<any>;
+  approveDepositAave(amount: number): Promise<any>;
+  depositAave(amount: number): Promise<any>;
   withdrawAave(amount: number): Promise<any>;
   getBalanceAave(): Promise<number>;
 

@@ -14,10 +14,15 @@ import NavbarApp from '../../navbar/NavbarApp';
 import InvestSection from '../components/InvestSection';
 
 import { ReactComponent as AaveStrategy } from '../../../../assets/images/aave_strategy.svg';
+
 import InvestAaveModal from './InvestAaveModal';
+import { useState } from 'react';
 
 function Lending() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [amount, setAmount] = useState(0);
+
   return (
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
@@ -78,11 +83,15 @@ function Lending() {
         </Center>
 
         <Center marginTop={'50px'}>
-          <InvestSection onOpen={onOpen} />
+          <InvestSection
+            onOpen={onOpen}
+            amount={amount}
+            setAmount={setAmount}
+          />
         </Center>
       </Container>
 
-      <InvestAaveModal isOpen={isOpen} onClose={onClose} />
+      <InvestAaveModal isOpen={isOpen} onClose={onClose} amount={amount} />
 
       <FooterApp />
     </Flex>

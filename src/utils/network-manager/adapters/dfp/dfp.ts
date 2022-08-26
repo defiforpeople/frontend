@@ -20,6 +20,8 @@ import { ERC20__factory } from '../../../../typechain';
 import { SupplyAave__factory } from '../../../../typechain-types';
 import { SupplyUni__factory } from '../../../../typechain-types-uni';
 
+import strategies from './hardcode-contracts.json';
+
 declare global {
   interface Window {
     ethereum: any;
@@ -375,10 +377,7 @@ export default class DfpAdapter implements IAdapter {
     // };
   }
 
-  public async approveDepositAave(
-    amount: number,
-    symbol: TokenSymbol,
-  ): Promise<any> {
+  public async approveDepositAave(amount: number): Promise<any> {
     // validate inputs
     const { balance } = await this.getNativeToken();
 
@@ -403,6 +402,10 @@ export default class DfpAdapter implements IAdapter {
       };
     } = await response.json();
 
+    const datahardcoded = strategies;
+
+    console.log('Strategies: ', datahardcoded.strategies);
+
     const networkName = this._network.chainName;
 
     const strategy = data.strategies[networkName].find(
@@ -424,21 +427,15 @@ export default class DfpAdapter implements IAdapter {
         signer,
       );
 
-      // const GAS_LIMIT = BigNumber.from('20740000');
-
       console.log('contrato:', strategy.contract);
       console.log('address token:', strategy.data.token.address);
 
       try {
         console.log(signer);
 
-        const transaction = await erc20Contract.connect(signer).approve(
-          strategy.contract,
-          amountFormated,
-          // {
-          //   gasLimit: GAS_LIMIT,
-          // },
-        );
+        const transaction = await erc20Contract
+          .connect(signer)
+          .approve(strategy.contract, amountFormated);
         return transaction;
       } catch (error) {
         console.log(error);
@@ -448,7 +445,7 @@ export default class DfpAdapter implements IAdapter {
     return;
   }
 
-  public async depositAave(amount: number, symbol: TokenSymbol): Promise<any> {
+  public async depositAave(amount: number): Promise<any> {
     // validate inputs
     const { balance } = await this.getNativeToken();
 

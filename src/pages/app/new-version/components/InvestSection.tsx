@@ -15,14 +15,14 @@ import TokenSelector from './TokenSelector';
 
 type Props = {
   onOpen: any;
+  amount: any;
+  setAmount: any;
 };
 
-function InvestSection({ onOpen }: Props) {
+function InvestSection({ onOpen, amount, setAmount }: Props) {
   const initialToken = 'Select token';
 
   const [token, setToken] = useState(initialToken);
-
-  const [amount, setAmount] = useState(0);
 
   const [maxAmount, setMaxAmount] = useState(0);
 

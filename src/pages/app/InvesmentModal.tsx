@@ -180,7 +180,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
 
     if (strategy === t('strategy1')) {
       try {
-        const approveDeposit = await adapter.approveDepositAave(amount, symbol);
+        const approveDeposit = await adapter.approveDepositAave(amount);
         setShowAlertConfirm(true);
         const approveTx = await approveDeposit.wait();
 
@@ -267,7 +267,7 @@ function InvesmentModal({ isOpen, onClose }: Props) {
     console.log('Starting deposit ...');
 
     try {
-      const depositAave = await adapter.depositAave(amount, symbol);
+      const depositAave = await adapter.depositAave(amount);
       setApprovedAave(false);
 
       setShowAlertConfirm(true);
