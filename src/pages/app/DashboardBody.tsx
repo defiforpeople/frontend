@@ -105,15 +105,16 @@ function DashboardBody(this: any) {
           </Text>
 
           <Center padding={6}>
-            <Button
-              bg={'primary'}
-              width={'100px'}
-              color="white"
-              borderRadius={10}
-              disabled={true}
-            >
-              Invest
-            </Button>
+            <Link to="/liquidity-provider">
+              <Button
+                bg={'primary'}
+                width={'100px'}
+                color="white"
+                borderRadius={10}
+              >
+                Invest
+              </Button>
+            </Link>
           </Center>
         </Box>
 

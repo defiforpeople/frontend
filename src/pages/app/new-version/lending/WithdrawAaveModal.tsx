@@ -77,16 +77,16 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
     setShowAlertError(false);
 
     try {
-      const approveDeposit = await adapter.withdrawAave(amount);
+      const withdraw = await adapter.withdrawAave(amount);
 
       setIsLoading(false);
       setSigned(true);
 
-      const approveTx = await approveDeposit.wait();
+      const withdrawTx = await withdraw.wait();
 
       console.log(
-        '[dfp][ui][InvestAaveModal][handleApprove] handleApprove() approveTx:',
-        approveTx,
+        '[dfp][ui][InvestAaveModal][handleApprove] handleApprove() withdrawTx:',
+        withdrawTx,
       );
 
       setShowAlertError(false);

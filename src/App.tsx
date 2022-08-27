@@ -7,7 +7,8 @@ import Onboarding from './pages/onboarding/Onboarding';
 import Building from './pages/building/Building';
 import SimulatePage from './pages/simulate/SimulatePage';
 import Strategies from './pages/strategies/Strategies';
-import Lending from './pages/app/new-version/lending.tsx';
+import Lending from './pages/app/new-version/lending';
+import LiquidityProvider from './pages/app/new-version/liquidityProvider';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/simulate" element={<SimulatePage />} />
       <Route path="/strategies" element={<Strategies />} />
       <Route path="/lending" element={<Lending />} />
+      <Route path="/liquidity-provider" element={<LiquidityProvider />} />
     </Routes>
   );
 }

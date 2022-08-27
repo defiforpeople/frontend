@@ -19,7 +19,7 @@ type Props = {
   setAmount: any;
 };
 
-function InvestSection({ onOpen, amount, setAmount }: Props) {
+function InvestAaveSection({ onOpen, amount, setAmount }: Props) {
   const initialToken = 'Select token';
 
   const [token, setToken] = useState(initialToken);
@@ -122,4 +122,4 @@ function InvestSection({ onOpen, amount, setAmount }: Props) {
   );
 }
 
-export default InvestSection;
+export default InvestAaveSection;

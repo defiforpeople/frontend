@@ -12,12 +12,12 @@ import {
 import FooterApp from '../../footers/FootersApp';
 import NavbarApp from '../../navbar/NavbarApp';
 
-import InvestSection from '../components/InvestSection';
-import BalanceAndWitdraw from '../components/BalanceAndWithdraw';
+import InvestUniSection from '../components/InvestUniSection';
 
-import InvestAaveModal from './InvestAaveModal';
+import InvestAaveModal from './InvestUniModal';
+import BalanceUni from './BalanceUni';
 
-function Lending() {
+function LiquidityProvider() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [amount, setAmount] = useState(0);
@@ -34,44 +34,49 @@ function Lending() {
           paddingTop={10}
           color="third"
         >
-          Lending protocol
+          Liquidity provider
         </Heading>
 
         <Text color={'gray.500'} paddingTop={10}>
-          This strategy provides liquidity in Aave protocol. This protocol
-          matches lenders and borrowers.
+          This strategy provides liquidity in pool ETH/MATIC in Uniswap
+          protocol. This protocol keeps to the users swap tokens in a
+          descentralized way.
         </Text>
 
         <Text color={'gray.500'} paddingTop={5}>
-          It means you provide some asset for someone who needs a borrow of it,
+          It means you provide two assets for someone who needs a swap of it,
           and you earn a fee by what the
           <Text as={'span'} color="#F72585" fontWeight={700}>
             {' '}
-            borrower{' '}
+            swaper{' '}
           </Text>
           pays. You become a{' '}
           <Text as={'span'} color="#F72585" fontWeight={700}>
             {' '}
-            lender.{' '}
+            liquidity provider{' '}
           </Text>
           You can withdraw the amount of the liquidity (plus the earned fees)
           whenever you want.
         </Text>
 
         <Text color={'gray.500'} paddingTop={10}>
-          This strategy requires you to make 2 transactions:
+          This strategy requires you to make 3 transactions:
         </Text>
 
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
-          1. Allow our contract to move your tokens.
+          1. Allow our contract to move your first token.
         </Text>
 
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
-          2. Deposit your tokens in the Aave protocol.
+          1. Allow our contract to move your seconds token.
+        </Text>
+
+        <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
+          2. Deposit your tokens Uniswap pool ETH/MATIC to provide liquidity.
         </Text>
 
         <Center marginTop={'50px'}>
-          <InvestSection
+          <InvestUniSection
             onOpen={onOpen}
             amount={amount}
             setAmount={setAmount}
@@ -79,7 +84,7 @@ function Lending() {
         </Center>
 
         <Center marginTop={'50px'}>
-          <BalanceAndWitdraw />
+          <BalanceUni />
         </Center>
       </Container>
 
@@ -90,4 +95,4 @@ function Lending() {
   );
 }
 
-export default Lending;
+export default LiquidityProvider;

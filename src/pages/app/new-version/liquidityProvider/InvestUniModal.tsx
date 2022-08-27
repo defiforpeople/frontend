@@ -33,7 +33,7 @@ type Props = {
   amount: any;
 };
 
-function InvestAaveModal({ isOpen, onClose, amount }: Props) {
+function InvestUniModal({ isOpen, onClose, amount }: Props) {
   const { adapter } = useAdapter();
 
   const steps = [
@@ -49,13 +49,11 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [signed, setSigned] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
-  const [showAlertSuccess, setShowAlertSuccess] = useState(false);
 
   const handleApprove = async () => {
     setIsLoading(true);
     setShowAlertError(false);
     setSigned(false);
-    setShowAlertSuccess(false);
 
     try {
       const approveDeposit = await adapter.approveDepositAave(amount);
@@ -66,13 +64,12 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
       const approveTx = await approveDeposit.wait();
 
       console.log(
-        '[dfp][ui][InvestAaveModal][handleApprove] handleApprove() approveTx:',
+        '[dfp][ui][InvestUniSection][handleApprove] handleApprove() approveTx:',
         approveTx,
       );
 
       setShowAlertError(false);
       setSigned(false);
-      setShowAlertSuccess(true);
 
       nextStep();
     } catch (error) {
@@ -81,7 +78,6 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
       setIsLoading(false);
       setShowAlertError(true);
       setSigned(false);
-      setShowAlertSuccess(false);
     }
   };
 
@@ -89,7 +85,6 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
     setIsLoading(true);
     setShowAlertError(false);
     setSigned(false);
-    setShowAlertSuccess(false);
 
     try {
       const deposit = await adapter.depositAave(amount);
@@ -101,7 +96,6 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
 
       setShowAlertError(false);
       setSigned(false);
-      setShowAlertSuccess(true);
 
       nextStep();
       nextStep();
@@ -113,7 +107,6 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
       setIsLoading(false);
       setShowAlertError(true);
       setSigned(false);
-      setShowAlertSuccess(false);
     }
   };
 
@@ -345,4 +338,4 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
   );
 }
 
-export default InvestAaveModal;
+export default InvestUniModal;
