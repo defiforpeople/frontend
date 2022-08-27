@@ -71,13 +71,6 @@ function Lending() {
           2. Deposit your tokens in the Aave protocol.
         </Text>
 
-        <Center>
-          <Alert status="warning" borderRadius={10}>
-            <AlertIcon />
-            Remember, you are going to do two transacctions.
-          </Alert>
-        </Center>
-
         <Center marginTop={'50px'}>
           <InvestSection
             onOpen={onOpen}

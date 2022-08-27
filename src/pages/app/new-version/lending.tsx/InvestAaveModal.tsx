@@ -159,11 +159,33 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
                 </Text>
                 <PolygonLogo width={40} height={40} />
               </HStack>
+
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="warning" borderRadius={10}>
+                  <AlertIcon />
+                  Remember, you are going to do two transacctions.
+                </Alert>
+              </Center>
+
+              <Center padding={10}>
+                <Alert status="warning" borderRadius={10}>
+                  <AlertIcon />
+                  Remember, you are need to have some MATIC in your wallet to
+                  pay the gas fees.
+                </Alert>
+              </Center>
             </Box>
           )}
 
           {activeStep === 1 && !signed && !showAlertError && (
             <>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="success" borderRadius={10}>
+                  <AlertIcon />
+                  Approved successfully!
+                </Alert>
+              </Center>
+
               <Text padding={10}>
                 Thanks for allowing us to move your tokens to Aave protocol 🙌
               </Text>
@@ -192,12 +214,19 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
 
           {activeStep === 3 && !signed && !showAlertError && (
             <>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="success" borderRadius={10}>
+                  <AlertIcon />
+                  Deposit successfully!
+                </Alert>
+              </Center>
+
               <Text padding={10}>
                 Congratulations, you have just deposited{' '}
                 <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
                   {amount} WMATIC{' '}
                 </Text>{' '}
-                in the Aave protocol 🎉
+                in the Aave protocol 🎉.
               </Text>
 
               <HStack>
