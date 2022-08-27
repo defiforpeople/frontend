@@ -20,7 +20,9 @@ import BalanceUni from './BalanceUni';
 function LiquidityProvider() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [amount, setAmount] = useState(0);
+  const [amount1, setAmount1] = useState(0);
+
+  const [amount2, setAmount2] = useState(0);
 
   return (
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
@@ -78,8 +80,10 @@ function LiquidityProvider() {
         <Center marginTop={'50px'}>
           <InvestUniSection
             onOpen={onOpen}
-            amount={amount}
-            setAmount={setAmount}
+            amount1={amount1}
+            amount2={amount2}
+            setAmount1={setAmount1}
+            setAmount2={setAmount2}
           />
         </Center>
 
@@ -88,7 +92,7 @@ function LiquidityProvider() {
         </Center>
       </Container>
 
-      <InvestAaveModal isOpen={isOpen} onClose={onClose} amount={amount} />
+      <InvestAaveModal isOpen={isOpen} onClose={onClose} amount={amount1} />
 
       <FooterApp />
     </Flex>

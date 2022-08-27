@@ -21,6 +21,7 @@ import { ReactComponent as DaiLogo } from '../../../../assets/logos/dai-logo.svg
 import { useAdapter } from '../../../../hooks/use-adapter';
 
 function TokenSelector({
+  tokenNumber,
   selectedToken,
   setselectedToken,
   setAmount,
@@ -64,7 +65,7 @@ function TokenSelector({
         letterSpacing="5%"
         color={'#282828'}
       >
-        Token
+        Token {tokenNumber}
       </Text>
       <Menu>
         <MenuButton
@@ -111,6 +112,20 @@ function TokenSelector({
               padding={3}
             >
               WMATIC
+            </Text>
+          </MenuItem>
+
+          <MenuItem onClick={() => handleTokenChange('WMATIC')}>
+            <Image src="./frontend/weth-logo.png" width={'15%'} />
+
+            <Text
+              fontSize={'16px'}
+              lineHeight={'18.75px'}
+              letterSpacing="5%"
+              color={'black'}
+              padding={3}
+            >
+              WETH
             </Text>
           </MenuItem>
 

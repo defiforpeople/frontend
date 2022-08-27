@@ -15,14 +15,22 @@ import TokenSelector from './TokenSelector';
 
 type Props = {
   onOpen: any;
-  amount: any;
-  setAmount: any;
+  amount1: any;
+  amount2: any;
+  setAmount1: any;
+  setAmount2: any;
 };
 
-function InvestUniSection({ onOpen, amount, setAmount }: Props) {
+function InvestUniSection({
+  onOpen,
+  amount1,
+  amount2,
+  setAmount1,
+  setAmount2,
+}: Props) {
   const initialToken = 'Select token';
 
-  const [token, setToken] = useState(initialToken);
+  const [token1, setToken1] = useState(initialToken);
 
   const [maxAmount, setMaxAmount] = useState(0);
 
@@ -36,9 +44,10 @@ function InvestUniSection({ onOpen, amount, setAmount }: Props) {
 
       <HStack>
         <TokenSelector
-          selectedToken={token}
-          setselectedToken={setToken}
-          setAmount={setAmount}
+          tokenNumber={1}
+          selectedToken={token1}
+          setselectedToken={setToken1}
+          setAmount={setAmount1}
           setMaxAmount={setMaxAmount}
           setBalanceLoading={setBalanceLoading}
         />
@@ -77,8 +86,8 @@ function InvestUniSection({ onOpen, amount, setAmount }: Props) {
               type="number"
               border={'0'}
               focusBorderColor="white"
-              value={amount}
-              onChange={(event: any) => setAmount(event.target.value)}
+              value={amount1}
+              onChange={(event: any) => setAmount1(event.target.value)}
               margin={'auto'}
               size={'lg'}
             />
@@ -88,7 +97,78 @@ function InvestUniSection({ onOpen, amount, setAmount }: Props) {
                 border="2px"
                 borderColor="primary"
                 borderRadius={'53px'}
-                onClick={() => setAmount(maxAmount)}
+                onClick={() => setAmount1(maxAmount)}
+              >
+                <Text
+                  fontWeight={400}
+                  fontSize={'14px'}
+                  lineHeight={'16.8px'}
+                  color={'primary'}
+                >
+                  Max
+                </Text>
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+      </HStack>
+
+      <HStack paddingTop={5}>
+        <TokenSelector
+          tokenNumber={2}
+          selectedToken={token1}
+          setselectedToken={setToken1}
+          setAmount={setAmount1}
+          setMaxAmount={setMaxAmount}
+          setBalanceLoading={setBalanceLoading}
+        />
+
+        <Box>
+          <HStack justifyContent={'space-between'} width={'100%'}>
+            <Text
+              fontWeight={700}
+              fontSize={'16px'}
+              lineHeight={'18.75px'}
+              letterSpacing="5%"
+              color={'#282828'}
+            >
+              Amount
+            </Text>
+
+            {!balanceLoading ? (
+              <Text
+                fontSize={'12px'}
+                lineHeight={'14.06px'}
+                color={'grayLetter'}
+              >
+                Available: {maxAmount}
+              </Text>
+            ) : (
+              <Spinner marginTop={25} color="#E33E84" size={'xs'} />
+            )}
+          </HStack>
+
+          <InputGroup
+            boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+            borderRadius={'8px'}
+            height={'50px'}
+          >
+            <Input
+              type="number"
+              border={'0'}
+              focusBorderColor="white"
+              value={amount1}
+              onChange={(event: any) => setAmount1(event.target.value)}
+              margin={'auto'}
+              size={'lg'}
+            />
+            <InputRightElement width="30" paddingRight={'5px'} paddingTop={2}>
+              <Button
+                height={'24px'}
+                border="2px"
+                borderColor="primary"
+                borderRadius={'53px'}
+                onClick={() => setAmount1(maxAmount)}
               >
                 <Text
                   fontWeight={400}
@@ -106,15 +186,16 @@ function InvestUniSection({ onOpen, amount, setAmount }: Props) {
 
       <Center>
         <Button
-          bg={'third'}
-          borderRadius={'10'}
-          width="120px"
+          bg={'eighth'}
+          borderRadius={'15'}
+          width="250px"
+          height="50px"
           marginTop={'20px'}
           onClick={onOpen}
-          disabled={token === initialToken || amount === 0}
+          disabled={token1 === initialToken || amount1 === 0}
         >
           <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-            Deposit
+            Provide liquidity
           </Text>
         </Button>
       </Center>

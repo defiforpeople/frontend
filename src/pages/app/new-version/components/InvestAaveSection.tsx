@@ -36,6 +36,78 @@ function InvestAaveSection({ onOpen, amount, setAmount }: Props) {
 
       <HStack>
         <TokenSelector
+          tokenNumber={''}
+          selectedToken={token}
+          setselectedToken={setToken}
+          setAmount={setAmount}
+          setMaxAmount={setMaxAmount}
+          setBalanceLoading={setBalanceLoading}
+        />
+
+        <Box>
+          <HStack justifyContent={'space-between'} width={'100%'}>
+            <Text
+              fontWeight={700}
+              fontSize={'16px'}
+              lineHeight={'18.75px'}
+              letterSpacing="5%"
+              color={'#282828'}
+            >
+              Amount
+            </Text>
+
+            {!balanceLoading ? (
+              <Text
+                fontSize={'12px'}
+                lineHeight={'14.06px'}
+                color={'grayLetter'}
+              >
+                Available: {maxAmount}
+              </Text>
+            ) : (
+              <Spinner marginTop={25} color="#E33E84" size={'xs'} />
+            )}
+          </HStack>
+
+          <InputGroup
+            boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
+            borderRadius={'8px'}
+            height={'50px'}
+          >
+            <Input
+              type="number"
+              border={'0'}
+              focusBorderColor="white"
+              value={amount}
+              onChange={(event: any) => setAmount(event.target.value)}
+              margin={'auto'}
+              size={'lg'}
+            />
+            <InputRightElement width="30" paddingRight={'5px'} paddingTop={2}>
+              <Button
+                height={'24px'}
+                border="2px"
+                borderColor="primary"
+                borderRadius={'53px'}
+                onClick={() => setAmount(maxAmount)}
+              >
+                <Text
+                  fontWeight={400}
+                  fontSize={'14px'}
+                  lineHeight={'16.8px'}
+                  color={'primary'}
+                >
+                  Max
+                </Text>
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+        </Box>
+      </HStack>
+
+      <HStack>
+        <TokenSelector
+          tokenNumber={''}
           selectedToken={token}
           setselectedToken={setToken}
           setAmount={setAmount}

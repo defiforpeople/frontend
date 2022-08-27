@@ -177,7 +177,7 @@ function BalanceUni() {
                     </HStack>
                   </Td>
                   <Td isNumeric>
-                    {isLoading ? <Spinner color="primary" /> : 0}
+                    {isLoading ? <Spinner color="primary" /> : 'Not available'}
                   </Td>
                 </Tr>
 
@@ -189,7 +189,7 @@ function BalanceUni() {
                     </HStack>
                   </Td>
                   <Td isNumeric>
-                    {isLoading ? <Spinner color="primary" /> : 0}
+                    {isLoading ? <Spinner color="primary" /> : 'Not available'}
                   </Td>
                 </Tr>
 
