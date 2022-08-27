@@ -13,7 +13,6 @@ function Landing() {
   const { adapter, setStrategies, strategies } = useAdapter();
 
   useEffect(() => {
-    console.log(111, 'list strategies');
     async function listStrategies() {
       const s = await adapter.listStrategies();
       setStrategies(s);
@@ -22,7 +21,6 @@ function Landing() {
     listStrategies();
   }, [adapter, setStrategies]);
 
-  console.log('HERE IN LANDING', strategies);
   return (
     <Box bg={'white'}>
       <NavbarLanding />

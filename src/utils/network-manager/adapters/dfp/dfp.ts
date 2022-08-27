@@ -116,6 +116,7 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async getTokens(): Promise<Token[]> {
+    console.log(`[dfp][adapter][getTokens] getTokens()`);
     try {
       if (!this._ready) {
         await this.initAdapter();
@@ -140,7 +141,7 @@ export default class DfpAdapter implements IAdapter {
         data: { tokens },
       }: { data: { tokens: Token[] } } = await response.json();
 
-      console.log('GetTokens(): ', tokens);
+      console.log(`[dfp][adapter][getTokens] getTokens(): `, tokens);
 
       return tokens;
     } catch (err) {
@@ -150,6 +151,7 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async getNativeToken(): Promise<Token> {
+    console.log(`[dfp][adapter][getNativeToken] getNativeToken()`);
     try {
       if (!this._ready) {
         await this.initAdapter();
@@ -174,7 +176,7 @@ export default class DfpAdapter implements IAdapter {
         data: { token },
       }: { data: { token: Token } } = await response.json();
 
-      console.log('GetNativeToken(): ', token);
+      console.log(`[dfp][adapter][getNativeToken] getNativeToken(): `, token);
 
       return token;
     } catch (err) {
@@ -188,7 +190,7 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async login(signMessage: string): Promise<Profile> {
-    console.log('Adapter: login()');
+    console.log(`[dfp][adapter][login] login()`);
     try {
       if (!this._ready) {
         await this.initAdapter();
@@ -220,9 +222,9 @@ export default class DfpAdapter implements IAdapter {
       const { data }: { data: Profile } = await response.json();
       this._profile = data;
 
-      console.log('Login: ', data);
+      console.log(`[dfp][adapter][login] login(): profile: `, this._profile);
 
-      return data;
+      return this._profile;
     } catch (err) {
       console.log(err);
       throw err;
@@ -245,6 +247,7 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async getUsers(): Promise<number> {
+    console.log(`[dfp][adapter][getUsers] getUsers()`);
     try {
       if (!this._ready) {
         await this.initAdapter();
@@ -260,7 +263,7 @@ export default class DfpAdapter implements IAdapter {
 
       const { meta }: { meta: { count: number } } = await response.json();
 
-      console.log('Get Users: ', meta);
+      console.log(`[dfp][adapter][getUsers] getUsers(): ${meta.count}`);
 
       return meta?.count;
     } catch (err) {
@@ -378,6 +381,12 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async approveDepositAave(amount: number): Promise<any> {
+    console.log('');
+    console.log(
+      `[dfp][adapter][approveDepositAave] approveDepositAave(amount: number)`,
+    );
+    console.log(`[dfp][adapter][approveDepositAave] amount: ${amount}`);
+
     // validate inputs
     const { balance } = await this.getNativeToken();
 
@@ -402,9 +411,7 @@ export default class DfpAdapter implements IAdapter {
       };
     } = await response.json();
 
-    const datahardcoded = strategies;
-
-    console.log('Strategies: ', datahardcoded.strategies);
+    // const datahardcoded = strategies;
 
     const networkName = this._network.chainName;
 
@@ -416,29 +423,55 @@ export default class DfpAdapter implements IAdapter {
       throw new Error('strategy not found');
     }
 
+    console.log(
+      `[dfp][adapter][approveDepositAave] networkName: ${networkName}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositAave] amountFormated: ${amountFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositAave] balanceFormated: ${balanceFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositAave] contractAddress: ${strategy.contract}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositAave] tokenAddress: ${strategy.data.token.address}`,
+    );
+
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const signer = provider.getSigner();
 
-      const erc20Contract = new ethers.Contract(
+      const token = new ethers.Contract(
         strategy.data.token.address,
         ERC20__factory.abi,
         signer,
       );
 
-      console.log('contrato:', strategy.contract);
-      console.log('address token:', strategy.data.token.address);
-
       try {
+        console.log(`[dfp][adapter][approveDepositAave] signer: `);
         console.log(signer);
 
-        const transaction = await erc20Contract
+        const userAddress = await signer.getAddress();
+
+        console.log(
+          `[dfp][adapter][approveDepositAave] userAddress: ${userAddress}`,
+        );
+
+        const transaction = await token
           .connect(signer)
           .approve(strategy.contract, amountFormated);
+
         return transaction;
       } catch (error) {
-        console.log(error);
+        console.log(`[dfp][adapter][approveDepositAave] error: ${error}`);
+        throw error;
       }
     }
 
@@ -446,6 +479,10 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async depositAave(amount: number): Promise<any> {
+    console.log('');
+    console.log(`[dfp][adapter][depositAave] depositAave(amount: number)`);
+    console.log(`[dfp][adapter][depositAave] amount: ${amount}`);
+
     // validate inputs
     const { balance } = await this.getNativeToken();
 
@@ -480,14 +517,35 @@ export default class DfpAdapter implements IAdapter {
       throw new Error('strategy not found');
     }
 
-    console.log('network:', this._network);
-    console.log('contrato:', strategy.contract);
-    console.log('address token:', strategy.data.token.address);
+    console.log(`[dfp][adapter][depositAave] networkName: ${networkName}`);
+
+    console.log(
+      `[dfp][adapter][depositAave] amountFormated: ${amountFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][depositAave] balanceFormated: ${balanceFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][depositAave] contractAddress: ${strategy.contract}`,
+    );
+
+    console.log(
+      `[dfp][adapter][depositAave] tokenAddress: ${strategy.data.token.address}`,
+    );
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const signer = provider.getSigner();
+
+      console.log(`[dfp][adapter][depositAave] signer: `);
+      console.log(signer);
+
+      const userAddress = await signer.getAddress();
+
+      console.log(`[dfp][adapter][depositAave] userAddress: ${userAddress}`);
 
       const supplyAaveContract = new ethers.Contract(
         strategy.contract,
@@ -500,11 +558,13 @@ export default class DfpAdapter implements IAdapter {
       try {
         console.log(signer);
 
-        const supplyTx = await supplyAaveContract
-          .connect(signer)
-          .deposit(strategy.data.token.address, amountFormated, {
+        const supplyTx = await supplyAaveContract.deposit(
+          strategy.data.token.address,
+          amountFormated,
+          {
             gasLimit: GAS_LIMIT,
-          });
+          },
+        );
 
         return supplyTx;
       } catch (error) {

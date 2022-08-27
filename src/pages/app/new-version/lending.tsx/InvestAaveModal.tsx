@@ -65,13 +65,16 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
 
       const approveTx = await approveDeposit.wait();
 
+      console.log(
+        '[dfp][ui][InvestAaveModal][handleApprove] handleApprove() approveTx:',
+        approveTx,
+      );
+
       setShowAlertError(false);
       setSigned(false);
       setShowAlertSuccess(true);
 
       nextStep();
-
-      console.log('approvedTx', approveTx);
     } catch (error) {
       console.log(error);
 
@@ -123,7 +126,7 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={'4xl'}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent borderRadius={20}>
         <ModalHeader>Deposit tokens in Aave</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -150,9 +153,9 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
                 <Text paddingLeft={10}>
                   You are going to allow us to move{' '}
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount} MATIC{' '}
+                    {amount} WMATIC{' '}
                   </Text>{' '}
-                  MATIC to the Aave protocol. In the polygon network
+                  to the Aave protocol. In the polygon network
                 </Text>
                 <PolygonLogo width={40} height={40} />
               </HStack>
@@ -178,9 +181,9 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
                 <Text paddingLeft={10}>
                   You are going to deposit{' '}
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount} MATIC{' '}
+                    {amount} WMATIC{' '}
                   </Text>{' '}
-                  to the aave protocol. In the Polygon network.
+                  to the Aave protocol. In the Polygon network.
                 </Text>
                 <PolygonLogo width={40} height={40} />
               </HStack>
@@ -189,10 +192,10 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
 
           {activeStep === 3 && !signed && !showAlertError && (
             <>
-              <Text padding={10} fontSize={22}>
+              <Text padding={10}>
                 Congratulations, you have just deposited{' '}
                 <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                  {amount} MATIC{' '}
+                  {amount} WMATIC{' '}
                 </Text>{' '}
                 in the Aave protocol 🎉
               </Text>

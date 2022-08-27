@@ -34,7 +34,6 @@ function ConnectWallet() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const login = async () => {
-    console.log('here in login');
     if (!isAuthenticated) {
       try {
         const profile = await adapter.login(t('signingMessage'));
@@ -42,7 +41,7 @@ function ConnectWallet() {
         setIsAuthenticated(true);
         setProfile(profile);
 
-        console.log('Logged profile user:', profile);
+        console.log(`[dfp][ui][ConnectWallet][login] profile:`, profile);
       } catch (error) {
         console.log(error);
       }

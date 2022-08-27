@@ -72,10 +72,6 @@ function Lending() {
         </Text>
 
         <Center>
-          <AaveStrategy width={'50%'} />
-        </Center>
-
-        <Center>
           <Alert status="warning" borderRadius={10}>
             <AlertIcon />
             Remember, you are going to do two transacctions.

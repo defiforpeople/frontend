@@ -41,9 +41,23 @@ function TokenSelector({
       return;
     }
 
+    console.log(token);
+
+    const tokens = await adapter.getTokens();
+
+    const tokenFound = tokens.find((t: any) => t.symbol === token);
+
+    if (tokenFound) {
+      setMaxAmount((Number(tokenFound.balance) / 1e18).toFixed(3));
+    }
+
     setBalanceLoading(false);
-    const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
-    setMaxAmount(Number(amount));
+
+    // console.log(tokens);
+
+    // setBalanceLoading(false);
+    // const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
+    // setMaxAmount(Number(amount));
   };
 
   return (
@@ -68,7 +82,7 @@ function TokenSelector({
         >
           <HStack>
             <Box
-              display={selectedToken === 'MATIC' ? 'block' : 'none'}
+              display={selectedToken === 'WMATIC' ? 'block' : 'none'}
               marginLeft={2}
             >
               <PolygonLogo width={25} height={25} />
@@ -94,7 +108,7 @@ function TokenSelector({
         </MenuButton>
 
         <MenuList border={'0'} minW="0" w={'200px'}>
-          <MenuItem onClick={() => handleTokenChange('MATIC')}>
+          <MenuItem onClick={() => handleTokenChange('WMATIC')}>
             <PolygonLogo width={25} height={25} />
 
             <Text
@@ -104,7 +118,7 @@ function TokenSelector({
               color={'black'}
               padding={3}
             >
-              MATIC
+              WMATIC
             </Text>
           </MenuItem>
 
