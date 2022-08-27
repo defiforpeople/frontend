@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   HStack,
+  Image,
   Menu,
   MenuButton,
   MenuItem,
@@ -75,11 +76,8 @@ function TokenSelector({
           height={'50px'}
         >
           <HStack>
-            <Box
-              display={selectedToken === 'WMATIC' ? 'block' : 'none'}
-              marginLeft={2}
-            >
-              <PolygonLogo width={25} height={25} />
+            <Box display={selectedToken === 'WMATIC' ? 'block' : 'none'}>
+              <Image src="./frontend/wmatic-logo.png" width={'30px'} />
             </Box>
 
             <Box display={selectedToken === 'DAI' ? 'block' : 'none'}>
@@ -103,7 +101,7 @@ function TokenSelector({
 
         <MenuList border={'0'} minW="0" w={'200px'}>
           <MenuItem onClick={() => handleTokenChange('WMATIC')}>
-            <PolygonLogo width={25} height={25} />
+            <Image src="./frontend/wmatic-logo.png" width={'20%'} />
 
             <Text
               fontSize={'16px'}

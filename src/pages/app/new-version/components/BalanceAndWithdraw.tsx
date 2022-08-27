@@ -16,14 +16,16 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { ReactComponent as PolygonLogo } from '../../../../assets/logos/polygon-logo.svg';
-
 import { FaWallet } from 'react-icons/fa';
-
 import { AiFillBank } from 'react-icons/ai';
+
 import { useAdapter } from '../../../../hooks/use-adapter';
+
+import WithdrawAaveModal from '../lending.tsx/WithdrawAaveModal';
 
 function BalanceAndWitdraw() {
   const { adapter } = useAdapter();
@@ -35,6 +37,8 @@ function BalanceAndWitdraw() {
   const [aaveBalance, setAaveBalance] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -146,13 +150,13 @@ function BalanceAndWitdraw() {
                     </HStack>
                   </Td>
                   <Td isNumeric>
-                    {isLoading ? <Spinner color="third" /> : aaveBalance}
+                    {isLoading ? <Spinner color="primary" /> : aaveBalance}
                   </Td>
                 </Tr>
                 <Tr>
                   <Td colSpan={2}>
                     <Center>
-                      <Button color={'white'} bg="sixth">
+                      <Button color={'white'} bg="sixth" onClick={onOpen}>
                         Witdraw
                       </Button>
                     </Center>
@@ -167,6 +171,8 @@ function BalanceAndWitdraw() {
       <Text paddingTop={5} fontSize={14} color="grey">
         * We only show tokens used in this strategy dApp
       </Text>
+
+      <WithdrawAaveModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 }
