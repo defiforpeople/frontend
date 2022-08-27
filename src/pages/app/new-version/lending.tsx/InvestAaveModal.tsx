@@ -231,7 +231,13 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
 
               <HStack>
                 <Text paddingLeft={10}>
-                  You can withdraw them at any time with the withdraw button.
+                  Your balance update will be available in a few seconds.
+                </Text>
+              </HStack>
+
+              <HStack>
+                <Text paddingLeft={10}>
+                  You can withdraw them at any time with the claim button.
                 </Text>
               </HStack>
             </>

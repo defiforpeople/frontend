@@ -130,7 +130,7 @@ function BalanceAndWitdraw() {
               fontWeight={700}
               letterSpacing={'2px'}
             >
-              Deposit
+              Deposited
             </Text>
           </HStack>
           <TableContainer>
@@ -157,7 +157,7 @@ function BalanceAndWitdraw() {
                   <Td colSpan={2}>
                     <Center>
                       <Button color={'white'} bg="sixth" onClick={onOpen}>
-                        Witdraw
+                        Claim
                       </Button>
                     </Center>
                   </Td>
@@ -172,7 +172,11 @@ function BalanceAndWitdraw() {
         * We only show tokens used in this strategy dApp
       </Text>
 
-      <WithdrawAaveModal isOpen={isOpen} onClose={onClose} />
+      <WithdrawAaveModal
+        isOpen={isOpen}
+        onClose={onClose}
+        tokenBalance={aaveBalance}
+      />
     </Box>
   );
 }

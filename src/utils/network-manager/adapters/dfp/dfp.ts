@@ -556,8 +556,6 @@ export default class DfpAdapter implements IAdapter {
       const GAS_LIMIT = BigNumber.from('2074000');
 
       try {
-        console.log(signer);
-
         const supplyTx = await supplyAaveContract.deposit(
           strategy.data.token.address,
           amountFormated,
@@ -625,6 +623,9 @@ export default class DfpAdapter implements IAdapter {
   }
 
   public async withdrawAave(amount: number): Promise<any> {
+    console.log('');
+    console.log(`[dfp][adapter][withdrawAave] withdrawAave(amount: number)`);
+    console.log(`[dfp][adapter][withdrawAave] amount: ${amount}`);
     // validate inputs
     const balance = await this.getBalanceAave();
 
@@ -659,10 +660,35 @@ export default class DfpAdapter implements IAdapter {
       throw new Error('strategy not found');
     }
 
+    console.log(`[dfp][adapter][withdrawAave] networkName: ${networkName}`);
+
+    console.log(
+      `[dfp][adapter][withdrawAave] amountFormated: ${amountFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][withdrawAave] balanceFormated: ${balanceFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][withdrawAave] contractAddress: ${strategy.contract}`,
+    );
+
+    console.log(
+      `[dfp][adapter][withdrawAave] tokenAddress: ${strategy.data.token.address}`,
+    );
+
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const signer = provider.getSigner();
+
+      console.log(`[dfp][adapter][withdrawAave] signer: `);
+      console.log(signer);
+
+      const userAddress = await signer.getAddress();
+
+      console.log(`[dfp][adapter][withdrawAave] userAddress: ${userAddress}`);
 
       const supplyAaveContract = new ethers.Contract(
         strategy.contract,
