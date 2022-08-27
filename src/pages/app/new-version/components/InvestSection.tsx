@@ -30,6 +30,10 @@ function InvestSection({ onOpen, amount, setAmount }: Props) {
 
   return (
     <Box width={'600px'}>
+      <Text fontSize={'2xl'} fontWeight={'bold'} mb={4}>
+        Invest
+      </Text>
+
       <HStack>
         <TokenSelector
           selectedToken={token}
@@ -110,7 +114,7 @@ function InvestSection({ onOpen, amount, setAmount }: Props) {
           disabled={token === initialToken || amount === 0}
         >
           <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-            Invest
+            Deposit
           </Text>
         </Button>
       </Center>

@@ -1,6 +1,6 @@
+import { useState } from 'react';
+
 import {
-  Alert,
-  AlertIcon,
   Center,
   Container,
   Flex,
@@ -11,12 +11,11 @@ import {
 
 import FooterApp from '../../footers/FootersApp';
 import NavbarApp from '../../navbar/NavbarApp';
-import InvestSection from '../components/InvestSection';
 
-import { ReactComponent as AaveStrategy } from '../../../../assets/images/aave_strategy.svg';
+import InvestSection from '../components/InvestSection';
+import BalanceAndWitdraw from '../components/BalanceAndWithdraw';
 
 import InvestAaveModal from './InvestAaveModal';
-import { useState } from 'react';
 
 function Lending() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -77,6 +76,10 @@ function Lending() {
             amount={amount}
             setAmount={setAmount}
           />
+        </Center>
+
+        <Center marginTop={'50px'}>
+          <BalanceAndWitdraw />
         </Center>
       </Container>
 

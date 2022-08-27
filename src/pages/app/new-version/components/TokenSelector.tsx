@@ -52,12 +52,6 @@ function TokenSelector({
     }
 
     setBalanceLoading(false);
-
-    // console.log(tokens);
-
-    // setBalanceLoading(false);
-    // const amount = (Number(nativeToken.balance!) / 1e18).toFixed(3);
-    // setMaxAmount(Number(amount));
   };
 
   return (
