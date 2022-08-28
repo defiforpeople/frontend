@@ -20,9 +20,6 @@ import { ERC20__factory } from '../../../../typechain';
 import { SupplyAave__factory } from '../../../../typechain-types';
 import { SupplyUni__factory } from '../../../../typechain-types-uni';
 
-import strategies from './hardcode-contracts.json';
-import { token } from '../../../../typechain-types/@openzeppelin/contracts';
-
 declare global {
   interface Window {
     ethereum: any;
@@ -252,10 +249,6 @@ export default class DfpAdapter implements IAdapter {
     try {
       if (!this._ready) {
         await this.initAdapter();
-      }
-
-      if (!this._network) {
-        throw new Error('Adapter: network is not defined');
       }
 
       const response = await fetch(

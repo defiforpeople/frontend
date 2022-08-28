@@ -44,6 +44,7 @@ function BalanceUni() {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      console.log(process.env.PUBLIC_URL);
       setIsLoading(true);
 
       const nativeToken = await adapter.getNativeToken();
@@ -115,7 +116,10 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./weth-logo.png" width={'12%'} />
+                      <Image
+                        src={process.env.PUBLIC_URL + '/weth-logo.png'}
+                        width={'12%'}
+                      />
                       <Text fontSize={14}>WETH</Text>
                     </HStack>
                   </Td>
@@ -127,7 +131,10 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./wmatic-logo.png" width={'15%'} />
+                      <Image
+                        src={process.env.PUBLIC_URL + '/wmatic-logo.png'}
+                        width={'15%'}
+                      />
                       <Text fontSize={14}>WMATIC</Text>
                     </HStack>
                   </Td>
@@ -168,7 +175,10 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./weth-logo.png" width={'15%'} />
+                      <Image
+                        src={process.env.PUBLIC_URL + '/weth-logo.png'}
+                        width={'15%'}
+                      />
                       <Text fontSize={14}>WETH</Text>
                     </HStack>
                   </Td>
@@ -180,7 +190,10 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/wmatic-logo.png" width={'15%'} />
+                      <Image
+                        src={process.env.PUBLIC_URL + '/wmatic-logo.png'}
+                        width={'15%'}
+                      />
                       <Text fontSize={14}>WMATIC</Text>
                     </HStack>
                   </Td>

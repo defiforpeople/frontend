@@ -80,11 +80,17 @@ function TokenSelector({
         >
           <HStack>
             <Box display={selectedToken === 'WMATIC' ? 'block' : 'none'}>
-              <Image src="./frontend/wmatic-logo.png" width={'30px'} />
+              <Image
+                src={process.env.PUBLIC_URL + '/wmatic-logo.png'}
+                width={'30px'}
+              />
             </Box>
 
             <Box display={selectedToken === 'WETH' ? 'block' : 'none'}>
-              <Image src="./frontend/weth-logo.png" width={'15%'} />
+              <Image
+                src={process.env.PUBLIC_URL + '/weth-logo.png'}
+                width={'15%'}
+              />
             </Box>
 
             <Box display={selectedToken === 'DAI' ? 'block' : 'none'}>

@@ -13,7 +13,7 @@ import FooterApp from '../../footers/FootersApp';
 import NavbarApp from '../../navbar/NavbarApp';
 
 import InvestAaveSection from '../components/InvestAaveSection';
-import BalanceAndWitdraw from '../components/BalanceAndWithdraw';
+import BalanceAndWitdraw from '../components/BalanceAave';
 
 import InvestAaveModal from './InvestAaveModal';
 
