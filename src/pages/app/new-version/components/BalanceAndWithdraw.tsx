@@ -108,7 +108,7 @@ function BalanceAndWitdraw() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/wmatic-logo.png" width={'15%'} />
+                      <Image src="./wmatic-logo.png" width={'15%'} />
                       <Text fontSize={14}>WMATIC</Text>
                     </HStack>
                   </Td>
@@ -145,7 +145,7 @@ function BalanceAndWitdraw() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/wmatic-logo.png" width={'15%'} />
+                      <Image src="./wmatic-logo.png" width={'15%'} />
                       <Text fontSize={14}>WMATIC</Text>
                     </HStack>
                   </Td>

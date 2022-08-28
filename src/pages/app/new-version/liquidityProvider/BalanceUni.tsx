@@ -115,7 +115,7 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/weth-logo.png" width={'12%'} />
+                      <Image src="./weth-logo.png" width={'12%'} />
                       <Text fontSize={14}>WETH</Text>
                     </HStack>
                   </Td>
@@ -127,7 +127,7 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/wmatic-logo.png" width={'15%'} />
+                      <Image src="./wmatic-logo.png" width={'15%'} />
                       <Text fontSize={14}>WMATIC</Text>
                     </HStack>
                   </Td>
@@ -168,7 +168,7 @@ function BalanceUni() {
                 <Tr>
                   <Td>
                     <HStack>
-                      <Image src="./frontend/weth-logo.png" width={'15%'} />
+                      <Image src="./weth-logo.png" width={'15%'} />
                       <Text fontSize={14}>WETH</Text>
                     </HStack>
                   </Td>
