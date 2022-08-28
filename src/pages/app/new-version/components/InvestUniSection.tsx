@@ -163,7 +163,7 @@ function InvestUniSection({
               type="number"
               border={'0'}
               focusBorderColor="white"
-              value={amount1}
+              value={amount2}
               onChange={(event: any) => setAmount2(event.target.value)}
               margin={'auto'}
               size={'lg'}

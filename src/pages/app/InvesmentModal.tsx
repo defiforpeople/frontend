@@ -201,7 +201,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
         const approveDeposit = await adapter.approveDepositUniswap(
           amount,
           symbol,
-          0,
         );
         setShowAlertConfirm(true);
         const approveTx = await approveDeposit.wait();
@@ -234,7 +233,6 @@ function InvesmentModal({ isOpen, onClose }: Props) {
       const approveDeposit = await adapter.approveDepositUniswap(
         amount2,
         'eth',
-        1,
       );
       setShowAlertConfirm(true);
       const approveTx = await approveDeposit.wait();

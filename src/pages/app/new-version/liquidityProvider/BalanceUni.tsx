@@ -38,8 +38,6 @@ function BalanceUni() {
 
   const [token2Balance, setToken2Balance] = useState(0);
 
-  const [aaveBalance, setAaveBalance] = useState(0);
-
   const [isLoading, setIsLoading] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,14 +57,12 @@ function BalanceUni() {
       const tokenWETH = tokens.find((t: any) => t.symbol === 'WETH');
 
       setToken1Balance(
-        Number((Number(tokenWMATIC?.balance) / 1e18).toFixed(3)),
+        Number((Number(tokenWMATIC?.balance) / 1e18).toFixed(4)),
       );
 
-      setToken2Balance(Number((Number(tokenWETH?.balance) / 1e18).toFixed(3)));
+      setToken2Balance(Number((Number(tokenWETH?.balance) / 1e18).toFixed(4)));
 
       const tokensInAave = await adapter.getBalanceAave();
-
-      setAaveBalance(tokensInAave);
 
       setIsLoading(false);
     };
@@ -218,11 +214,7 @@ function BalanceUni() {
         * We only show tokens used in this strategy dApp
       </Text>
 
-      <WithdrawAaveModal
-        isOpen={isOpen}
-        onClose={onClose}
-        tokenBalance={aaveBalance}
-      />
+      <WithdrawAaveModal isOpen={isOpen} onClose={onClose} tokenBalance={0} />
     </Box>
   );
 }

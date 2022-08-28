@@ -9,6 +9,7 @@ import {
   Center,
   HStack,
   Image,
+  Link,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -27,18 +28,22 @@ import { ReactComponent as PolygonLogo } from '../../../../assets/logos/polygon-
 
 import { useAdapter } from '../../../../hooks/use-adapter';
 
+import { TokenSymbol } from '../../../../utils/network-manager/manager.types';
+
 type Props = {
   isOpen: any;
   onClose: any;
-  amount: any;
+  amount1: any;
+  amount2: any;
 };
 
-function InvestUniModal({ isOpen, onClose, amount }: Props) {
+function InvestUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
   const { adapter } = useAdapter();
 
   const steps = [
-    { label: 'Approve move tokens' },
-    { label: 'Deposit tokens in Aave protocol' },
+    { label: 'Approve move first token' },
+    { label: 'Approve move second token' },
+    { label: 'Provide liquidity' },
     { label: 'Finish proccess! 🎉' },
   ];
 
@@ -50,13 +55,16 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
   const [signed, setSigned] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
 
-  const handleApprove = async () => {
+  const handleApprove = async (tokenSymbol: TokenSymbol) => {
     setIsLoading(true);
     setShowAlertError(false);
     setSigned(false);
 
     try {
-      const approveDeposit = await adapter.approveDepositAave(amount);
+      const approveDeposit = await adapter.approveDepositUniswap(
+        amount1,
+        tokenSymbol,
+      );
 
       setIsLoading(false);
       setSigned(true);
@@ -81,26 +89,29 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
     }
   };
 
-  const handleDeposit = async () => {
+  const handleProvideLiquidity = async () => {
     setIsLoading(true);
     setShowAlertError(false);
     setSigned(false);
 
     try {
-      const deposit = await adapter.depositAave(amount);
+      const provideLiquidity = await adapter.mintNewPosition(amount1, amount2);
 
       setIsLoading(false);
       setSigned(true);
 
-      const depositTx = await deposit.wait();
+      const provideLiquidityTx = await provideLiquidity.wait();
+
+      console.log(
+        '[dfp][ui][InvestUniModal][handleProvideLiquidity] handleProvideLiquidity() provideLiquidityTx:',
+        provideLiquidityTx,
+      );
 
       setShowAlertError(false);
       setSigned(false);
 
       nextStep();
       nextStep();
-
-      console.log('depositTx', depositTx);
     } catch (error) {
       console.log(error);
 
@@ -120,7 +131,7 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={'4xl'}>
       <ModalOverlay />
       <ModalContent borderRadius={20}>
-        <ModalHeader>Deposit tokens in Aave</ModalHeader>
+        <ModalHeader>Deposit tokens in Uniswap</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box>
@@ -139,16 +150,17 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
           {activeStep === 0 && !signed && !showAlertError && (
             <Box>
               <Text paddingLeft={10} paddingTop={10}>
-                First, you have to approve our contract to move your tokens.
+                First approve. This will allow to our contract to move your
+                first token.
               </Text>
 
               <HStack paddingTop={10}>
                 <Text paddingLeft={10}>
-                  You are going to allow us to move{' '}
+                  You are going to allow us to move &nbsp;
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount} WMATIC{' '}
-                  </Text>{' '}
-                  to the Aave protocol. In the polygon network
+                    {amount1} WMATIC
+                  </Text>
+                  &nbsp; to the Uniswap protocol. In the polygon network
                 </Text>
                 <PolygonLogo width={40} height={40} />
               </HStack>
@@ -156,7 +168,11 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
               <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
                 <Alert status="warning" borderRadius={10}>
                   <AlertIcon />
-                  Remember, you are going to do two transacctions.
+                  Remember, you are going to do &nbsp;
+                  <Text as="span" fontSize={16} fontWeight={700}>
+                    3
+                  </Text>
+                  &nbsp; transacctions.
                 </Alert>
               </Center>
 
@@ -179,57 +195,95 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
                 </Alert>
               </Center>
 
-              <Text padding={10}>
-                Thanks for allowing us to move your tokens to Aave protocol 🙌
+              <Text paddingTop={10} paddingLeft={10}>
+                Thanks for allowing us to move your token to Uniswap protocol 🙌
               </Text>
 
-              <Text paddingLeft={10}>
-                Now we are going to{' '}
-                <Text as="b" color={'primary'}>
-                  deposit
-                </Text>{' '}
-                in Aave protocol. Your tokens will be used by Aave to lend to
-                other borrowers.
-              </Text>
-
-              <HStack paddingTop={10}>
-                <Text paddingLeft={10}>
-                  You are going to deposit{' '}
+              <HStack paddingTop={10} paddingLeft={10}>
+                <Text>
+                  Now, you are going to allow us to move &nbsp;
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount} WMATIC{' '}
-                  </Text>{' '}
-                  to the Aave protocol. In the Polygon network.
+                    {amount2} WETH
+                  </Text>
+                  &nbsp; to the Uniswap protocol. In the polygon network
                 </Text>
                 <PolygonLogo width={40} height={40} />
               </HStack>
             </>
           )}
 
-          {activeStep === 3 && !signed && !showAlertError && (
+          {activeStep === 2 && !signed && !showAlertError && (
             <>
               <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
                 <Alert status="success" borderRadius={10}>
                   <AlertIcon />
-                  Deposit successfully!
+                  Approved successfully!
                 </Alert>
               </Center>
 
-              <Text padding={10}>
-                Congratulations, you have just deposited{' '}
-                <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                  {amount} WMATIC{' '}
-                </Text>{' '}
-                in the Aave protocol 🎉.
+              <Text paddingTop={10} paddingLeft={10}>
+                Thanks for allowing us to move your tokens to Uniswap protocol
+                🙌
               </Text>
 
-              <HStack>
-                <Text paddingLeft={10}>
-                  Your balance update will be available in a few seconds.
+              <HStack paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Text>
+                  Now, you are going to allow us to provide liquidity &nbsp;
+                  <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
+                    {amount1} WMATIC
+                  </Text>
+                  &nbsp; and &nbsp;
+                  <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
+                    {amount1} WETH
+                  </Text>
+                  &nbsp;to the Uniswap protocol.
                 </Text>
               </HStack>
 
+              <HStack paddingTop={10} paddingLeft={10}>
+                <Text>
+                  You can see the pool to which you are going to grant
+                  liquidities here:
+                </Text>
+                <Link
+                  href="https://info.uniswap.org/#/polygon/pools/0x86f1d8390222a3691c28938ec7404a1661e618e0"
+                  isExternal
+                >
+                  <Text fontSize={'18'} fontWeight={700} color="primary">
+                    Pool WMATIC/WETH
+                  </Text>
+                </Link>
+              </HStack>
+            </>
+          )}
+
+          {activeStep === 4 && !signed && !showAlertError && (
+            <>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="success" borderRadius={10}>
+                  <AlertIcon />
+                  Successfully providing liquidity!!
+                </Alert>
+              </Center>
+
+              <Text paddingTop={10} paddingLeft={10} paddingRight={10}>
+                Congratulations, you have just deposited{' '}
+                <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
+                  {amount1} WMATIC{' '}
+                </Text>{' '}
+                and{' '}
+                <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
+                  {amount1} WETH{' '}
+                </Text>{' '}
+                in the pool of Uniswap protocol.
+              </Text>
+
+              <Text paddingTop={10} paddingLeft={10} paddingRight={10}>
+                Your balance update will be available in a few seconds.
+              </Text>
+
               <HStack>
-                <Text paddingLeft={10}>
+                <Text paddingTop={10} paddingLeft={10} paddingRight={10}>
                   You can withdraw them at any time with the claim button.
                 </Text>
               </HStack>
@@ -311,11 +365,11 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
               boxShadow="0px 1px 10px rgba(0, 0, 0, 0.15)"
               borderRadius={'10px'}
               color={'white'}
-              onClick={handleApprove}
+              onClick={() => handleApprove('WMATIC')}
               marginLeft={'20px'}
               disabled={isLoading || signed || showAlertError}
             >
-              Approve
+              Approve token 1
             </Button>
           )}
 
@@ -325,11 +379,25 @@ function InvestUniModal({ isOpen, onClose, amount }: Props) {
               boxShadow="0px 1px 10px rgba(0, 0, 0, 0.15)"
               borderRadius={'10px'}
               color={'white'}
-              onClick={handleDeposit}
+              onClick={() => handleApprove('WETH')}
               marginLeft={'20px'}
               disabled={isLoading || signed || showAlertError}
             >
-              Deposit
+              Approve token 2
+            </Button>
+          )}
+
+          {activeStep === 2 && (
+            <Button
+              bg="primary"
+              boxShadow="0px 1px 10px rgba(0, 0, 0, 0.15)"
+              borderRadius={'10px'}
+              color={'white'}
+              onClick={handleProvideLiquidity}
+              marginLeft={'20px'}
+              disabled={isLoading || signed || showAlertError}
+            >
+              Provide liquidity
             </Button>
           )}
         </ModalFooter>

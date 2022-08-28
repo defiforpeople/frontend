@@ -32,11 +32,7 @@ export interface IAdapter {
   withdrawAave(amount: number): Promise<any>;
   getBalanceAave(): Promise<number>;
 
-  approveDepositUniswap(
-    amount: number,
-    symbol: TokenSymbol,
-    tokenNumber: number,
-  ): Promise<any>;
+  approveDepositUniswap(amount: number, symbol: TokenSymbol): Promise<any>;
   mintNewPosition(amount1: number, amount2: number): Promise<any>;
 
   deposit(deposit: Deposit): Promise<Deposit>;

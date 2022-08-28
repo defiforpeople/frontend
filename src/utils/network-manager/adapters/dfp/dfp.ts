@@ -21,6 +21,7 @@ import { SupplyAave__factory } from '../../../../typechain-types';
 import { SupplyUni__factory } from '../../../../typechain-types-uni';
 
 import strategies from './hardcode-contracts.json';
+import { token } from '../../../../typechain-types/@openzeppelin/contracts';
 
 declare global {
   interface Window {
@@ -411,8 +412,6 @@ export default class DfpAdapter implements IAdapter {
       };
     } = await response.json();
 
-    // const datahardcoded = strategies;
-
     const networkName = this._network.chainName;
 
     const strategy = data.strategies[networkName].find(
@@ -717,10 +716,23 @@ export default class DfpAdapter implements IAdapter {
   public async approveDepositUniswap(
     amount: number,
     symbol: TokenSymbol,
-    tokenNumber: number,
   ): Promise<any> {
-    // format amount
+    console.log('');
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] approveDepositUniswap(amount: number)`,
+    );
+    console.log(`[dfp][adapter][approveDepositUniswap] amount: ${amount}`);
+
+    // validate inputs
+    const { balance } = await this.getNativeToken();
+
+    // format amount and balance
+    const balanceFormated = ethers.utils.parseEther(balance);
     const amountFormated = ethers.utils.parseEther(amount.toString());
+
+    if (amountFormated.isZero() || amountFormated.gt(balanceFormated)) {
+      throw new Error('invalid amount');
+    }
 
     // get token address and contract from API
     const response = await fetch(
@@ -741,46 +753,65 @@ export default class DfpAdapter implements IAdapter {
       (strategy) => strategy.type === 'supply-uniswap',
     ) as SupplyUniswapStrategy;
 
-    console.log(symbol);
-
     if (!strategy) {
       throw new Error('strategy not found');
     }
+
+    const tokens = [strategy.data.token0, strategy.data.token1];
+
+    const tokenFounded = tokens.find((token) => token.symbol === symbol);
+
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] networkName: ${networkName}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] amountFormated: ${amountFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] balanceFormated: ${balanceFormated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] contractAddress: ${strategy.contract}`,
+    );
+
+    console.log(
+      `[dfp][adapter][approveDepositUniswap] tokenAddress: ${
+        tokenFounded!.address
+      }`,
+    );
 
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const signer = provider.getSigner();
 
-      let tokenContract;
-      if (tokenNumber === 0) {
-        tokenContract = strategy.data.token0.address;
-      } else if (tokenNumber === 1) {
-        tokenContract = strategy.data.token1.address;
-      }
-
-      console.log(tokenContract);
-
-      const erc20Contract = new ethers.Contract(
-        tokenContract as string,
+      const token = new ethers.Contract(
+        tokenFounded!.address,
         ERC20__factory.abi,
         signer,
       );
 
-      const GAS_LIMIT = BigNumber.from('2074000');
-
       try {
-        const transaction = await erc20Contract.approve(
-          strategy.contract,
-          amountFormated,
-          {
-            gasLimit: GAS_LIMIT,
-          },
+        console.log(`[dfp][adapter][approveDepositUniswap] signer: `);
+        console.log(signer);
+
+        const userAddress = await signer.getAddress();
+
+        console.log(
+          `[dfp][adapter][approveDepositUniswap] userAddress: ${userAddress}`,
         );
+
+        const transaction = await token
+          .connect(signer)
+          .approve(strategy.contract, amountFormated);
 
         return transaction;
       } catch (error) {
-        console.log(error);
+        console.log(`[dfp][adapter][approveDepositUniswap] error: ${error}`);
+        throw error;
       }
     }
 
@@ -789,34 +820,20 @@ export default class DfpAdapter implements IAdapter {
 
   public async deposit(deposit: Deposit): Promise<Deposit> {
     return {} as Deposit;
-    // // get strategy address
-    // const contractAddr = this.network.strategies['recursive_farming'].address;
-    // // prepare provider
-    // const provider = await Moralis.enableWeb3();
-    // const ethers = Moralis.web3Library;
-    // const signer = provider.getSigner();
-    // // parse amount to bignumber
-    // const parsedAmount = ethers.utils.parseEther(deposit.amount.toString());
-    // console.log('PARSED AMOUNT');
-    // console.log('PARSED AMOUNT');
-    // console.log('PARSED AMOUNT');
-    // console.log('PARSED AMOUNT');
-    // console.log('PARSED AMOUNT', parsedAmount, contractAddr);
-    // // prepare strategy contract
-    // const strategyContract = new ethers.Contract(
-    //   contractAddr,
-    //   StrategyRecursiveFarming__factory.abi,
-    //   signer,
-    // ) as StrategyRecursiveFarming;
-    // // make transaction
-    // const tx = await strategyContract.deposit(parsedAmount);
-    // return {
-    //   ...deposit,
-    //   depositTx: tx,
-    // };
   }
 
   public async mintNewPosition(amount1: number, amount2: number): Promise<any> {
+    console.log('');
+    console.log(
+      `[dfp][adapter][mintNewPosition] mintNewPosition(amount1: number, amount2: number)`,
+    );
+    console.log(`[dfp][adapter][mintNewPosition] amount1: ${amount1}`);
+    console.log(`[dfp][adapter][mintNewPosition] amount2: ${amount2}`);
+
+    const amount1Formated = ethers.utils.parseEther(amount1.toString());
+
+    const amount2Formated = ethers.utils.parseEther(amount2.toString());
+
     // get token address and contract from API
     const response = await fetch(
       `${this._apiURL}/api/v1/strategies-by-networks`,
@@ -840,10 +857,33 @@ export default class DfpAdapter implements IAdapter {
       throw new Error('strategy not found');
     }
 
+    console.log(`[dfp][adapter][mintNewPosition] networkName: ${networkName}`);
+
+    console.log(
+      `[dfp][adapter][mintNewPosition] amount1Formated: ${amount1Formated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][mintNewPosition] amount2Formated: ${amount2Formated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][mintNewPosition] contractAddress: ${strategy.contract}`,
+    );
+
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
 
       const signer = provider.getSigner();
+
+      console.log(`[dfp][adapter][mintNewPosition] signer: `);
+      console.log(signer);
+
+      const userAddress = await signer.getAddress();
+
+      console.log(
+        `[dfp][adapter][mintNewPosition] userAddress: ${userAddress}`,
+      );
 
       const supplyUniContract = new ethers.Contract(
         strategy.contract,
@@ -856,8 +896,8 @@ export default class DfpAdapter implements IAdapter {
       try {
         const supplyTx = await supplyUniContract.mintNewPosition(
           strategy.data.poolId,
-          ethers.utils.parseEther(amount1.toString()),
-          ethers.utils.parseEther(amount2.toString()),
+          amount1Formated,
+          amount2Formated,
           BigNumber.from(100),
           {
             gasLimit: GAS_LIMIT,
@@ -866,6 +906,7 @@ export default class DfpAdapter implements IAdapter {
 
         return supplyTx;
       } catch (error) {
+        console.log(`[dfp][adapter][mintNewPosition] error: ${error}`);
         console.log(error);
       }
     }

@@ -14,7 +14,7 @@ import NavbarApp from '../../navbar/NavbarApp';
 
 import InvestUniSection from '../components/InvestUniSection';
 
-import InvestAaveModal from './InvestUniModal';
+import InvestUniModal from './InvestUniModal';
 import BalanceUni from './BalanceUni';
 
 function LiquidityProvider() {
@@ -92,7 +92,12 @@ function LiquidityProvider() {
         </Center>
       </Container>
 
-      <InvestAaveModal isOpen={isOpen} onClose={onClose} amount={amount1} />
+      <InvestUniModal
+        isOpen={isOpen}
+        onClose={onClose}
+        amount1={amount1}
+        amount2={amount2}
+      />
 
       <FooterApp />
     </Flex>

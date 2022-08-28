@@ -8,7 +8,8 @@ export type TokenSymbol =
   | 'wavax'
   | 'bnb'
   | 'ftm'
-  | 'matic';
+  | 'matic'
+  | 'WMATIC';
 
 export type Token = {
   balance: string;
