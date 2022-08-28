@@ -229,7 +229,7 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
               </HStack>
 
               <HStack>
-                <Text paddingLeft={10}>
+                <Text paddingLeft={10} paddingTop={10}>
                   You can withdraw them at any time with the claim button.
                 </Text>
               </HStack>

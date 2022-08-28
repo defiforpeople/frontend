@@ -131,7 +131,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
           </Box>
 
           {activeStep === 0 && !signed && !showAlertError && (
-            <Box>
+            <Box paddingBottom={10}>
               <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
                 <Center>
                   <Box width={'300px'}>
@@ -281,12 +281,12 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                 </Box>
               </SimpleGrid>
 
-              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+              {/* <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
                 <Alert status="warning" borderRadius={10}>
                   <AlertIcon />
                   You are going to do only one transaction. We will do the rest.
                 </Alert>
-              </Center>
+              </Center> */}
             </Box>
           )}
 

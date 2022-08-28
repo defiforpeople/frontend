@@ -32,9 +32,15 @@ function InvestUniSection({
 
   const [token1, setToken1] = useState(initialToken);
 
-  const [maxAmount, setMaxAmount] = useState(0);
+  const [token2, setToken2] = useState(initialToken);
 
-  const [balanceLoading, setBalanceLoading] = useState(false);
+  const [maxAmount1, setMaxAmount1] = useState(0);
+
+  const [maxAmount2, setMaxAmount2] = useState(0);
+
+  const [balance1Loading, setBalance1Loading] = useState(false);
+
+  const [balance2Loading, setBalance2Loading] = useState(false);
 
   return (
     <Box width={'600px'}>
@@ -48,8 +54,8 @@ function InvestUniSection({
           selectedToken={token1}
           setselectedToken={setToken1}
           setAmount={setAmount1}
-          setMaxAmount={setMaxAmount}
-          setBalanceLoading={setBalanceLoading}
+          setMaxAmount={setMaxAmount1}
+          setBalanceLoading={setBalance1Loading}
         />
 
         <Box>
@@ -64,13 +70,13 @@ function InvestUniSection({
               Amount
             </Text>
 
-            {!balanceLoading ? (
+            {!balance1Loading ? (
               <Text
                 fontSize={'12px'}
                 lineHeight={'14.06px'}
                 color={'grayLetter'}
               >
-                Available: {maxAmount}
+                Available: {maxAmount1}
               </Text>
             ) : (
               <Spinner marginTop={25} color="#E33E84" size={'xs'} />
@@ -97,7 +103,7 @@ function InvestUniSection({
                 border="2px"
                 borderColor="primary"
                 borderRadius={'53px'}
-                onClick={() => setAmount1(maxAmount)}
+                onClick={() => setAmount1(maxAmount1)}
               >
                 <Text
                   fontWeight={400}
@@ -116,11 +122,11 @@ function InvestUniSection({
       <HStack paddingTop={5}>
         <TokenSelector
           tokenNumber={2}
-          selectedToken={token1}
-          setselectedToken={setToken1}
-          setAmount={setAmount1}
-          setMaxAmount={setMaxAmount}
-          setBalanceLoading={setBalanceLoading}
+          selectedToken={token2}
+          setselectedToken={setToken2}
+          setAmount={setAmount2}
+          setMaxAmount={setMaxAmount2}
+          setBalanceLoading={setBalance2Loading}
         />
 
         <Box>
@@ -135,13 +141,13 @@ function InvestUniSection({
               Amount
             </Text>
 
-            {!balanceLoading ? (
+            {!balance2Loading ? (
               <Text
                 fontSize={'12px'}
                 lineHeight={'14.06px'}
                 color={'grayLetter'}
               >
-                Available: {maxAmount}
+                Available: {maxAmount2}
               </Text>
             ) : (
               <Spinner marginTop={25} color="#E33E84" size={'xs'} />
@@ -158,7 +164,7 @@ function InvestUniSection({
               border={'0'}
               focusBorderColor="white"
               value={amount1}
-              onChange={(event: any) => setAmount1(event.target.value)}
+              onChange={(event: any) => setAmount2(event.target.value)}
               margin={'auto'}
               size={'lg'}
             />
@@ -168,7 +174,7 @@ function InvestUniSection({
                 border="2px"
                 borderColor="primary"
                 borderRadius={'53px'}
-                onClick={() => setAmount1(maxAmount)}
+                onClick={() => setAmount2(maxAmount2)}
               >
                 <Text
                   fontWeight={400}

@@ -14,8 +14,6 @@ import {
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 
-import { ReactComponent as EthLogo } from '../../../../assets/logos/eth-logo.svg';
-import { ReactComponent as PolygonLogo } from '../../../../assets/logos/polygon-matic-icon.svg';
 import { ReactComponent as DaiLogo } from '../../../../assets/logos/dai-logo.svg';
 
 import { useAdapter } from '../../../../hooks/use-adapter';
@@ -33,6 +31,7 @@ function TokenSelector({
   const initialToken = 'Select token';
 
   const handleTokenChange = async (token: string) => {
+    console.log('[dfp][ui][TokenSelector][handleTokenChange] token: ', token);
     setselectedToken(token);
     setBalanceLoading(true);
 
@@ -43,11 +42,14 @@ function TokenSelector({
       return;
     }
 
-    console.log(token);
-
     const tokens = await adapter.getTokens();
 
     const tokenFound = tokens.find((t: any) => t.symbol === token);
+
+    console.log(
+      '[dfp][ui][TokenSelector][handleTokenChange] tokenFound: ',
+      tokenFound,
+    );
 
     if (tokenFound) {
       setMaxAmount((Number(tokenFound.balance) / 1e18).toFixed(3));
@@ -81,12 +83,12 @@ function TokenSelector({
               <Image src="./frontend/wmatic-logo.png" width={'30px'} />
             </Box>
 
-            <Box display={selectedToken === 'DAI' ? 'block' : 'none'}>
-              <DaiLogo width={25} height={25} />
+            <Box display={selectedToken === 'WETH' ? 'block' : 'none'}>
+              <Image src="./frontend/weth-logo.png" width={'15%'} />
             </Box>
 
-            <Box display={selectedToken === 'ETH' ? 'block' : 'none'}>
-              <EthLogo width={25} height={25} />
+            <Box display={selectedToken === 'DAI' ? 'block' : 'none'}>
+              <DaiLogo width={25} height={25} />
             </Box>
 
             <Text
@@ -115,7 +117,7 @@ function TokenSelector({
             </Text>
           </MenuItem>
 
-          <MenuItem onClick={() => handleTokenChange('WMATIC')}>
+          <MenuItem onClick={() => handleTokenChange('WETH')}>
             <Image src="./frontend/weth-logo.png" width={'15%'} />
 
             <Text
