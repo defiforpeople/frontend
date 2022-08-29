@@ -39,7 +39,7 @@ function IncresePosition() {
   return (
     <Box width={'600px'}>
       <Text fontSize={'2xl'} fontWeight={'bold'} mb={4}>
-        Increse position
+        Increase position
       </Text>
 
       <HStack>
@@ -195,7 +195,7 @@ function IncresePosition() {
           disabled={token1 === initialToken || amount1 === 0}
         >
           <Text fontSize={'18'} lineHeight={'21.6px'} color="white">
-            Increse position
+            Increase position
           </Text>
         </Button>
       </Center>
