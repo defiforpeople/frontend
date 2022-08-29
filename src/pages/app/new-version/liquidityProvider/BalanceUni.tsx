@@ -50,7 +50,6 @@ function BalanceUni() {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      console.log(process.env.PUBLIC_URL);
       setIsLoading(true);
 
       const nativeToken = await adapter.getNativeToken();
@@ -72,9 +71,21 @@ function BalanceUni() {
       const uniswapPosition: UniswapPosition =
         await adapter.getBalanceUniswap();
 
-      setToken1Deposited(Number(Number(uniswapPosition.token0).toFixed(6)));
+      setToken1Deposited(
+        Number(
+          (
+            Number(uniswapPosition.token0) * Number(uniswapPosition.totalSupply)
+          ).toFixed(6),
+        ),
+      );
 
-      setToken2Deposited(Number(Number(uniswapPosition.token1).toFixed(6)));
+      setToken2Deposited(
+        Number(
+          (
+            Number(uniswapPosition.token1) * Number(uniswapPosition.totalSupply)
+          ).toFixed(6),
+        ),
+      );
 
       setIsLoading(false);
     };

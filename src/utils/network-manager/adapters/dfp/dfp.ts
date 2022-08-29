@@ -960,6 +960,12 @@ export default class DfpAdapter implements IAdapter {
           .getOwnerInfo(this._profile.address, poolId);
 
         console.log(
+          `[dfp][adapter][getBalanceUni] tuple: ${ethers.utils.formatEther(
+            balance[0],
+          )}`,
+        );
+
+        console.log(
           `[dfp][adapter][getBalanceUni] totalSupply: ${ethers.utils.formatEther(
             balance[1],
           )}`,
@@ -979,7 +985,8 @@ export default class DfpAdapter implements IAdapter {
 
         const uniswapPosition: UniswapPosition = {
           poolId: poolId,
-          totalSupply: ethers.utils.formatEther(balance[0]),
+          tuple: ethers.utils.formatEther(balance[0]),
+          totalSupply: ethers.utils.formatEther(balance[1]),
           token0: ethers.utils.formatEther(balance[2]),
           token1: ethers.utils.formatEther(balance[3]),
         };

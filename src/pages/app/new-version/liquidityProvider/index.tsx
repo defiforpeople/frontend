@@ -1,16 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Center, Container, Flex, Heading, Text } from '@chakra-ui/react';
+import {
+  Center,
+  Container,
+  Flex,
+  Heading,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
 
 import FooterApp from '../../footers/FootersApp';
 import NavbarApp from '../../navbar/NavbarApp';
 
-import InvestUniSection from './InvestUniSection';
-
 import BalanceUni from './BalanceUni';
 import IncresePosition from './IncresePosition';
 
+import { useAdapter } from '../../../../hooks/use-adapter';
+import InvestUniSection from './InvestUniSection';
+
 function LiquidityProvider() {
+  const { adapter } = useAdapter();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [firstPosition, setFirstPosition] = useState(false);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      setIsLoading(true);
+
+      const balance = await adapter.getBalanceUniswap();
+
+      setFirstPosition(balance.tuple === '0.0' ? true : false);
+
+      setIsLoading(false);
+    };
+
+    fetchProfile();
+  }, [adapter]);
+
   return (
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
@@ -57,13 +85,20 @@ function LiquidityProvider() {
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
           2. Deposit your tokens Uniswap pool ETH/MATIC to provide liquidity.
         </Text>
-        <Center marginTop={'50px'}>
-          <InvestUniSection />
-        </Center>
 
-        <Center marginTop={'50px'}>
-          <IncresePosition />
-        </Center>
+        {isLoading ? (
+          <Center>
+            <Spinner color="primary" size={'lg'} />
+          </Center>
+        ) : firstPosition ? (
+          <Center marginTop={'50px'}>
+            <InvestUniSection />
+          </Center>
+        ) : (
+          <Center marginTop={'50px'}>
+            <IncresePosition />
+          </Center>
+        )}
 
         <Center marginTop={'50px'}>
           <BalanceUni />

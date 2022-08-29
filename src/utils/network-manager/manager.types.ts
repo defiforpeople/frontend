@@ -118,6 +118,7 @@ export type SupplyUniswapStrategy = Strategy & {
 
 export type UniswapPosition = {
   poolId: string;
+  tuple: string;
   totalSupply: string;
   token0: string;
   token1: string;
