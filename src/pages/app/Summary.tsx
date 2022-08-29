@@ -54,7 +54,7 @@ function Summary() {
 
       // calculate sum
       const sum = sortedDeposits.reduce((s, deposit) => s + deposit.amount, 0);
-      setDeposits(Number((sum / 1e18).toFixed(3)));
+      setDeposits(Number((sum / 1e18).toFixed(6)));
       setDepositsLoading(false);
     };
 
@@ -85,7 +85,7 @@ function Summary() {
         (s, withdraw) => s + withdraw.amount,
         0,
       );
-      setWithdrawals(Number((sum / 1e18).toFixed(3)));
+      setWithdrawals(Number((sum / 1e18).toFixed(6)));
       setWithdrawalsLoading(false);
     };
 

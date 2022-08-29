@@ -43,7 +43,7 @@ function IncreseUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
   const steps = [
     { label: 'Approve move first token' },
     { label: 'Approve move second token' },
-    { label: 'Increse position' },
+    { label: 'Increase position' },
     { label: 'Finish proccess! 🎉' },
   ];
 
@@ -131,7 +131,7 @@ function IncreseUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={'4xl'}>
       <ModalOverlay />
       <ModalContent borderRadius={20}>
-        <ModalHeader>Increse position in Uniswap</ModalHeader>
+        <ModalHeader>Increase position in Uniswap</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box>
@@ -203,7 +203,7 @@ function IncreseUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
                 <Text>
                   Now, you are going to allow us to move &nbsp;
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount2} WETH
+                    {amount2} WMATIC
                   </Text>
                   &nbsp; to the Uniswap protocol. In the polygon network
                 </Text>
@@ -230,11 +230,11 @@ function IncreseUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
                 <Text>
                   Now, you are going to allow us to provide liquidity &nbsp;
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount1} WMATIC
+                    {amount1} WETH
                   </Text>
                   &nbsp; and &nbsp;
                   <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                    {amount1} WETH
+                    {amount2} WMATIC
                   </Text>
                   &nbsp;to the Uniswap protocol.
                 </Text>
@@ -298,52 +298,40 @@ function IncreseUniModal({ isOpen, onClose, amount1, amount2 }: Props) {
           )}
 
           {signed && (
-            <Center>
-              <VStack paddingTop={10}>
-                <Alert
-                  marginBottom={5}
-                  status="info"
-                  borderRadius={15}
-                  width={'80%'}
-                >
+            <Box>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="info" borderRadius={15}>
                   <AlertIcon />
                   <AlertTitle fontWeight={'light'}>
                     The transaction is being processed.
                   </AlertTitle>
                 </Alert>
+              </Center>
 
-                <HStack paddingLeft={10}>
-                  <Text fontWeight={700}>
-                    Waiting transacctions to be mined...
-                  </Text>
+              <HStack paddingTop={10} paddingLeft={10}>
+                <Text>Waiting transacctions to be mined...</Text>
 
-                  <Image
-                    src="https://feature.undp.org/beyond-bitcoin/es/assets/mbNja7QNnr/block3.gif"
-                    width={'50%'}
-                  />
-                </HStack>
-              </VStack>
-            </Center>
+                <Image
+                  src="https://feature.undp.org/beyond-bitcoin/es/assets/mbNja7QNnr/block3.gif"
+                  width={'50%'}
+                />
+              </HStack>
+            </Box>
           )}
 
           {showAlertError && (
-            <Box padding={10}>
-              <VStack>
-                <Alert
-                  marginBottom={5}
-                  status="error"
-                  borderRadius={15}
-                  width={'80%'}
-                >
+            <Box>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="error" borderRadius={10}>
                   <AlertIcon />
-                  <AlertTitle>The transaction has failed</AlertTitle>
+                  The transaction has failed
                 </Alert>
+              </Center>
 
-                <Text>
-                  Please, try again 10 minutes later. If the problem persists,
-                  contact us.
-                </Text>
-              </VStack>
+              <Text paddingTop={10} paddingLeft={10}>
+                Please, try again 10 minutes later. If the problem persists,
+                contact us.
+              </Text>
             </Box>
           )}
         </ModalBody>

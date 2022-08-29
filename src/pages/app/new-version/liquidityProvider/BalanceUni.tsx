@@ -54,7 +54,7 @@ function BalanceUni() {
 
       const nativeToken = await adapter.getNativeToken();
 
-      setNativeBalance(Number((Number(nativeToken.balance) / 1e18).toFixed(3)));
+      setNativeBalance(Number((Number(nativeToken.balance) / 1e18).toFixed(6)));
 
       const tokens = await adapter.getTokens();
 
@@ -63,10 +63,10 @@ function BalanceUni() {
       const tokenWETH = tokens.find((t: any) => t.symbol === 'WETH');
 
       setToken1Balance(
-        Number((Number(tokenWMATIC?.balance) / 1e18).toFixed(4)),
+        Number((Number(tokenWMATIC?.balance) / 1e18).toFixed(6)),
       );
 
-      setToken2Balance(Number((Number(tokenWETH?.balance) / 1e18).toFixed(4)));
+      setToken2Balance(Number((Number(tokenWETH?.balance) / 1e18).toFixed(6)));
 
       const uniswapPosition: UniswapPosition =
         await adapter.getBalanceUniswap();

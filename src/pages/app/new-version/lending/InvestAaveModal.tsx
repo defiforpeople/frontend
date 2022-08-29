@@ -273,23 +273,18 @@ function InvestAaveModal({ isOpen, onClose, amount }: Props) {
           )}
 
           {showAlertError && (
-            <Box padding={10}>
-              <VStack>
-                <Alert
-                  marginBottom={5}
-                  status="error"
-                  borderRadius={15}
-                  width={'80%'}
-                >
+            <Box>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="error" borderRadius={10}>
                   <AlertIcon />
-                  <AlertTitle>The transaction has failed</AlertTitle>
+                  The transaction has failed
                 </Alert>
+              </Center>
 
-                <Text>
-                  Please, try again 10 minutes later. If the problem persists,
-                  contact us.
-                </Text>
-              </VStack>
+              <Text paddingTop={10} paddingLeft={10}>
+                Please, try again 10 minutes later. If the problem persists,
+                contact us.
+              </Text>
             </Box>
           )}
         </ModalBody>

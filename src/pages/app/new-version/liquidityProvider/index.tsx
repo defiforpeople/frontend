@@ -87,7 +87,7 @@ function LiquidityProvider() {
         </Text>
 
         {isLoading ? (
-          <Center>
+          <Center padding={20}>
             <Spinner color="primary" size={'lg'} />
           </Center>
         ) : firstPosition ? (

@@ -51,7 +51,7 @@ function TokenSelector({
     );
 
     if (tokenFound) {
-      setMaxAmount((Number(tokenFound.balance) / 1e18).toFixed(3));
+      setMaxAmount((Number(tokenFound.balance) / 1e18).toFixed(6));
     }
 
     setBalanceLoading(false);
@@ -129,7 +129,7 @@ function TokenSelector({
 
           <MenuItem
             onClick={() => handleTokenChange('WMATIC')}
-            display={tokenNumber === 2 ? 'block' : 'none'}
+            display={tokenNumber === 2 || tokenNumber === '' ? 'block' : 'none'}
           >
             <HStack>
               <Image src="./frontend/wmatic-logo.png" width={'20%'} />

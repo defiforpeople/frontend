@@ -327,51 +327,39 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
 
           {signed && (
             <Center>
-              <VStack paddingTop={10}>
-                <Alert
-                  marginBottom={5}
-                  status="info"
-                  borderRadius={15}
-                  width={'80%'}
-                >
+              <Box paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="info" borderRadius={15}>
                   <AlertIcon />
                   <AlertTitle fontWeight={'light'}>
                     The transaction is being processed.
                   </AlertTitle>
                 </Alert>
+              </Box>
 
-                <HStack paddingLeft={10}>
-                  <Text fontWeight={700}>
-                    Waiting transacctions to be mined...
-                  </Text>
+              <HStack paddingLeft={10}>
+                <Text>Waiting transacctions to be mined...</Text>
 
-                  <Image
-                    src="https://feature.undp.org/beyond-bitcoin/es/assets/mbNja7QNnr/block3.gif"
-                    width={'50%'}
-                  />
-                </HStack>
-              </VStack>
+                <Image
+                  src="https://feature.undp.org/beyond-bitcoin/es/assets/mbNja7QNnr/block3.gif"
+                  width={'50%'}
+                />
+              </HStack>
             </Center>
           )}
 
           {showAlertError && (
-            <Box padding={10}>
-              <VStack>
-                <Alert
-                  marginBottom={5}
-                  status="error"
-                  borderRadius={15}
-                  width={'80%'}
-                >
+            <Box>
+              <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
+                <Alert status="error" borderRadius={10}>
                   <AlertIcon />
-                  <AlertTitle>The transaction has failed</AlertTitle>
+                  The transaction has failed
                 </Alert>
+              </Center>
 
-                <Text>
-                  Please, try again 10 minutes later. If the problem persists,
-                  contact us.
-                </Text>
-              </VStack>
+              <Text paddingTop={10} paddingLeft={10}>
+                Please, try again 10 minutes later. If the problem persists,
+                contact us.
+              </Text>
             </Box>
           )}
         </ModalBody>
