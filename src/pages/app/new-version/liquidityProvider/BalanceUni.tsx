@@ -27,7 +27,9 @@ import { FaMoneyBillAlt } from 'react-icons/fa';
 
 import { useAdapter } from '../../../../hooks/use-adapter';
 
-import WithdrawAaveModal from '../lending/WithdrawAaveModal';
+import WithdrawUniModal from './WithdrawUniModal';
+
+import { UniswapPosition } from '../../../../utils/network-manager';
 
 function BalanceUni() {
   const { adapter } = useAdapter();
@@ -37,6 +39,10 @@ function BalanceUni() {
   const [token1Balance, setToken1Balance] = useState(0);
 
   const [token2Balance, setToken2Balance] = useState(0);
+
+  const [token1Deposited, setToken1Deposited] = useState(0);
+
+  const [token2Deposited, setToken2Deposited] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +69,12 @@ function BalanceUni() {
 
       setToken2Balance(Number((Number(tokenWETH?.balance) / 1e18).toFixed(4)));
 
-      const tokensInAave = await adapter.getBalanceAave();
+      const uniswapPosition: UniswapPosition =
+        await adapter.getBalanceUniswap();
+
+      setToken1Deposited(Number(Number(uniswapPosition.token0).toFixed(6)));
+
+      setToken2Deposited(Number(Number(uniswapPosition.token1).toFixed(6)));
 
       setIsLoading(false);
     };
@@ -183,7 +194,7 @@ function BalanceUni() {
                     </HStack>
                   </Td>
                   <Td isNumeric>
-                    {isLoading ? <Spinner color="primary" /> : 'Not available'}
+                    {isLoading ? <Spinner color="primary" /> : token1Deposited}
                   </Td>
                 </Tr>
 
@@ -198,22 +209,16 @@ function BalanceUni() {
                     </HStack>
                   </Td>
                   <Td isNumeric>
-                    {isLoading ? <Spinner color="primary" /> : 'Not available'}
+                    {isLoading ? <Spinner color="primary" /> : token2Deposited}
                   </Td>
                 </Tr>
 
                 <Tr>
                   <Td colSpan={2}>
                     <Center>
-                      <HStack>
-                        <Button color={'white'} bg="sixth" onClick={onOpen}>
-                          Claim
-                        </Button>
-
-                        <Button color={'white'} bg="sixth" onClick={onOpen}>
-                          Collect all fees
-                        </Button>
-                      </HStack>
+                      <Button color={'white'} bg="sixth" onClick={onOpen}>
+                        Withdraw
+                      </Button>
                     </Center>
                   </Td>
                 </Tr>
@@ -227,7 +232,12 @@ function BalanceUni() {
         * We only show tokens used in this strategy dApp
       </Text>
 
-      <WithdrawAaveModal isOpen={isOpen} onClose={onClose} tokenBalance={0} />
+      <WithdrawUniModal
+        isOpen={isOpen}
+        onClose={onClose}
+        token1Balance={token1Deposited}
+        token2Balance={token2Deposited}
+      />
     </Box>
   );
 }

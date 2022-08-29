@@ -13,6 +13,7 @@ import {
   StrategiesByNetworks,
   SupplyAaveStrategy,
   SupplyUniswapStrategy,
+  UniswapPosition,
 } from '../../manager.types';
 import { AdapterName, IAdapter } from '../adapter.types';
 
@@ -900,6 +901,272 @@ export default class DfpAdapter implements IAdapter {
         return supplyTx;
       } catch (error) {
         console.log(`[dfp][adapter][mintNewPosition] error: ${error}`);
+        console.log(error);
+      }
+    }
+  }
+
+  public async getBalanceUniswap(): Promise<UniswapPosition> {
+    console.log('');
+    console.log(`[dfp][adapter][getBalanceUni] getBalanceUni()`);
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      // get token address and contract from API
+      const response = await fetch(
+        `${this._apiURL}/api/v1/strategies-by-networks`,
+      );
+
+      const {
+        data,
+      }: {
+        data: {
+          strategies: { [key: string]: DFPStrategy[] };
+        };
+      } = await response.json();
+
+      const networkName = this._network.chainName;
+
+      const strategy = data.strategies[networkName].find(
+        (strategy) => strategy.type === 'supply-uniswap',
+      ) as SupplyUniswapStrategy;
+
+      if (!strategy) {
+        throw new Error('strategy not found from API in this network');
+      }
+
+      console.log(`[dfp][adapter][getBalanceUni] networkName: ${networkName}`);
+
+      console.log(
+        `[dfp][adapter][getBalanceUni] contractAddress: ${strategy.contract}`,
+      );
+
+      const poolId = strategy.data.poolId;
+
+      console.log(`[dfp][adapter][getBalanceUni] poolId: ${poolId}`);
+
+      const supplyUniContract = new ethers.Contract(
+        strategy.contract,
+        SupplyUni__factory.abi,
+        signer,
+      );
+
+      try {
+        const balance = await supplyUniContract
+          .connect(provider)
+          .getOwnerInfo(this._profile.address, poolId);
+
+        console.log(
+          `[dfp][adapter][getBalanceUni] totalSupply: ${ethers.utils.formatEther(
+            balance[1],
+          )}`,
+        );
+
+        console.log(
+          `[dfp][adapter][getBalanceUni] token1: ${ethers.utils.formatEther(
+            balance[2],
+          )}`,
+        );
+
+        console.log(
+          `[dfp][adapter][getBalanceUni] token2: ${ethers.utils.formatEther(
+            balance[3],
+          )}`,
+        );
+
+        const uniswapPosition: UniswapPosition = {
+          poolId: poolId,
+          totalSupply: ethers.utils.formatEther(balance[0]),
+          token0: ethers.utils.formatEther(balance[2]),
+          token1: ethers.utils.formatEther(balance[3]),
+        };
+
+        return uniswapPosition;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    return {} as UniswapPosition;
+  }
+
+  public async increasePosition(
+    amount1: number,
+    amount2: number,
+  ): Promise<any> {
+    console.log('');
+    console.log(
+      `[dfp][adapter][increasePosition] increasePosition(amount1: number, amount2: number)`,
+    );
+    console.log(`[dfp][adapter][increasePosition] amount1: ${amount1}`);
+    console.log(`[dfp][adapter][increasePosition] amount2: ${amount2}`);
+
+    const amount1Formated = ethers.utils.parseEther(amount1.toString());
+
+    const amount2Formated = ethers.utils.parseEther(amount2.toString());
+
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: { [key: string]: DFPStrategy[] };
+      };
+    } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-uniswap',
+    ) as SupplyUniswapStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
+
+    console.log(`[dfp][adapter][increasePosition] networkName: ${networkName}`);
+
+    console.log(
+      `[dfp][adapter][increasePosition] amount1Formated: ${amount1Formated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][increasePosition] amount2Formated: ${amount2Formated}`,
+    );
+
+    console.log(
+      `[dfp][adapter][increasePosition] contractAddress: ${strategy.contract}`,
+    );
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      console.log(`[dfp][adapter][increasePosition] signer: `);
+      console.log(signer);
+
+      const userAddress = await signer.getAddress();
+
+      console.log(
+        `[dfp][adapter][increasePosition] userAddress: ${userAddress}`,
+      );
+
+      const supplyUniContract = new ethers.Contract(
+        strategy.contract,
+        SupplyUni__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const supplyTx = await supplyUniContract.increasePosition(
+          strategy.data.poolId,
+          amount1Formated,
+          amount2Formated,
+          BigNumber.from(100),
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return supplyTx;
+      } catch (error) {
+        console.log(`[dfp][adapter][increasePosition] error: ${error}`);
+        console.log(error);
+      }
+    }
+  }
+
+  public async decreasePosition(
+    poolId: number,
+    percentage: number,
+    maxSlip: number,
+  ): Promise<any> {
+    console.log('');
+    console.log(
+      `[dfp][adapter][decreasePosition] decreasePosition(poolId: string, percentage: number, maxSlip: number)`,
+    );
+
+    console.log(`[dfp][adapter][decreasePosition] poolId: ${poolId}`);
+
+    console.log(`[dfp][adapter][decreasePosition] percentage: ${percentage}`);
+
+    console.log(`[dfp][adapter][decreasePosition] maxSlip: ${maxSlip}`);
+
+    // get token address and contract from API
+    const response = await fetch(
+      `${this._apiURL}/api/v1/strategies-by-networks`,
+    );
+
+    const {
+      data,
+    }: {
+      data: {
+        strategies: { [key: string]: DFPStrategy[] };
+      };
+    } = await response.json();
+
+    const networkName = this._network.chainName;
+
+    const strategy = data.strategies[networkName].find(
+      (strategy) => strategy.type === 'supply-uniswap',
+    ) as SupplyUniswapStrategy;
+
+    if (!strategy) {
+      throw new Error('strategy not found');
+    }
+
+    console.log(`[dfp][adapter][decreasePosition] networkName: ${networkName}`);
+
+    console.log(
+      `[dfp][adapter][decreasePosition] contractAddress: ${strategy.contract}`,
+    );
+
+    if (typeof window.ethereum !== 'undefined') {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+      const signer = provider.getSigner();
+
+      console.log(`[dfp][adapter][decreasePosition] signer: `);
+
+      console.log(signer);
+
+      const userAddress = await signer.getAddress();
+
+      console.log(
+        `[dfp][adapter][decreasePosition] userAddress: ${userAddress}`,
+      );
+
+      const supplyUniContract = new ethers.Contract(
+        strategy.contract,
+        SupplyUni__factory.abi,
+        signer,
+      );
+
+      const GAS_LIMIT = BigNumber.from('2074000');
+
+      try {
+        const supplyTx = await supplyUniContract.decreasePosition(
+          strategy.data.poolId,
+          percentage,
+          maxSlip,
+          {
+            gasLimit: GAS_LIMIT,
+          },
+        );
+
+        return supplyTx;
+      } catch (error) {
+        console.log(`[dfp][adapter][decreasePosition] error: ${error}`);
         console.log(error);
       }
     }

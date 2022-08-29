@@ -116,6 +116,13 @@ export type SupplyUniswapStrategy = Strategy & {
   };
 };
 
+export type UniswapPosition = {
+  poolId: string;
+  totalSupply: string;
+  token0: string;
+  token1: string;
+};
+
 export type DFPStrategy = SupplyAaveStrategy | SupplyUniswapStrategy;
 
 export type StrategiesByNetworks = {

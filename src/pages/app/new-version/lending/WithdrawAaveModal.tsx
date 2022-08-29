@@ -63,7 +63,10 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
 
   const [showAlertError, setShowAlertError] = useState(false);
 
-  const steps = [{ label: 'Claim tokens' }, { label: 'Finish proccess! 🎉' }];
+  const steps = [
+    { label: 'Withdraw tokens' },
+    { label: 'Finish proccess! 🎉' },
+  ];
 
   const { nextStep, activeStep, reset } = useSteps({
     initialStep: 0,
@@ -182,7 +185,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                       fontWeight={700}
                       letterSpacing={'2px'}
                     >
-                      Claim
+                      Withdraw
                     </Text>
                   </HStack>
 
@@ -295,12 +298,12 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
               <Center paddingTop={10} paddingLeft={10} paddingRight={10}>
                 <Alert status="success" borderRadius={10}>
                   <AlertIcon />
-                  Claim successfully!
+                  Withdraw successfully!
                 </Alert>
               </Center>
 
               <Text padding={10}>
-                Congratulations, you have just claim{' '}
+                Congratulations, you have just Withdraw{' '}
                 <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
                   {amount} WMATIC{' '}
                 </Text>{' '}
@@ -394,7 +397,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
               marginLeft={'20px'}
               disabled={amount === 0 || isLoading || signed || showAlertError}
             >
-              Claim
+              Withdraw
             </Button>
           )}
         </ModalFooter>

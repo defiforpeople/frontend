@@ -46,13 +46,13 @@ function BalanceAndWitdraw() {
 
       const nativeToken = await adapter.getNativeToken();
 
-      setNativeBalance(Number((Number(nativeToken.balance) / 1e18).toFixed(3)));
+      setNativeBalance(Number((Number(nativeToken.balance) / 1e18).toFixed(6)));
 
       const tokens = await adapter.getTokens();
 
       const tokenFound = tokens.find((t: any) => t.symbol === 'WMATIC');
 
-      setTokenBalance(Number((Number(tokenFound?.balance) / 1e18).toFixed(3)));
+      setTokenBalance(Number((Number(tokenFound?.balance) / 1e18).toFixed(6)));
 
       const tokensInAave = await adapter.getBalanceAave();
 
@@ -163,7 +163,7 @@ function BalanceAndWitdraw() {
                   <Td colSpan={2}>
                     <Center>
                       <Button color={'white'} bg="sixth" onClick={onOpen}>
-                        Claim
+                        Withdraw
                       </Button>
                     </Center>
                   </Td>

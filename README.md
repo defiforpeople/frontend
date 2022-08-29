@@ -13,7 +13,7 @@
 
 ## About this project
 
-This is a repository of a web application made in ReactJs for - Chainlink Spring 2022 Hackathon.
+This is a repository of a web application made in ReactJs.
 
 The application has been developed with:
 

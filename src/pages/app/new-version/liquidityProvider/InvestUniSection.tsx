@@ -8,31 +8,25 @@ import {
   InputRightElement,
   Spinner,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import TokenSelector from './TokenSelector';
+import TokenSelector from '../components/TokenSelector';
+import InvestUniModal from './InvestUniModal';
 
-type Props = {
-  onOpen: any;
-  amount1: any;
-  amount2: any;
-  setAmount1: any;
-  setAmount2: any;
-};
+function InvestUniSection() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-function InvestUniSection({
-  onOpen,
-  amount1,
-  amount2,
-  setAmount1,
-  setAmount2,
-}: Props) {
   const initialToken = 'Select token';
 
   const [token1, setToken1] = useState(initialToken);
 
   const [token2, setToken2] = useState(initialToken);
+
+  const [amount1, setAmount1] = useState(0);
+
+  const [amount2, setAmount2] = useState(0);
 
   const [maxAmount1, setMaxAmount1] = useState(0);
 
@@ -205,6 +199,13 @@ function InvestUniSection({
           </Text>
         </Button>
       </Center>
+
+      <InvestUniModal
+        isOpen={isOpen}
+        onClose={onClose}
+        amount1={amount1}
+        amount2={amount2}
+      />
     </Box>
   );
 }

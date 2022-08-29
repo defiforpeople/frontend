@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import TokenSelector from './TokenSelector';
+import TokenSelector from '../components/TokenSelector';
 
 type Props = {
   onOpen: any;

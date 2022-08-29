@@ -1,29 +1,16 @@
 import { useState } from 'react';
 
-import {
-  Center,
-  Container,
-  Flex,
-  Heading,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Center, Container, Flex, Heading, Text } from '@chakra-ui/react';
 
 import FooterApp from '../../footers/FootersApp';
 import NavbarApp from '../../navbar/NavbarApp';
 
-import InvestUniSection from '../components/InvestUniSection';
+import InvestUniSection from './InvestUniSection';
 
-import InvestUniModal from './InvestUniModal';
 import BalanceUni from './BalanceUni';
+import IncresePosition from './IncresePosition';
 
 function LiquidityProvider() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [amount1, setAmount1] = useState(0);
-
-  const [amount2, setAmount2] = useState(0);
-
   return (
     <Flex display={'flex'} flexDirection="column" height={'100vh'}>
       <NavbarApp />
@@ -38,13 +25,11 @@ function LiquidityProvider() {
         >
           Liquidity provider
         </Heading>
-
         <Text color={'gray.500'} paddingTop={10}>
           This strategy provides liquidity in pool ETH/MATIC in Uniswap
           protocol. This protocol keeps to the users swap tokens in a
           descentralized way.
         </Text>
-
         <Text color={'gray.500'} paddingTop={5}>
           It means you provide two assets for someone who needs a swap of it,
           and you earn a fee by what the
@@ -60,44 +45,30 @@ function LiquidityProvider() {
           You can withdraw the amount of the liquidity (plus the earned fees)
           whenever you want.
         </Text>
-
         <Text color={'gray.500'} paddingTop={10}>
           This strategy requires you to make 3 transactions:
         </Text>
-
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
           1. Allow our contract to move your first token.
         </Text>
-
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
           1. Allow our contract to move your seconds token.
         </Text>
-
         <Text color={'gray.500'} paddingTop={3} paddingLeft={5}>
           2. Deposit your tokens Uniswap pool ETH/MATIC to provide liquidity.
         </Text>
+        <Center marginTop={'50px'}>
+          <InvestUniSection />
+        </Center>
 
         <Center marginTop={'50px'}>
-          <InvestUniSection
-            onOpen={onOpen}
-            amount1={amount1}
-            amount2={amount2}
-            setAmount1={setAmount1}
-            setAmount2={setAmount2}
-          />
+          <IncresePosition />
         </Center>
 
         <Center marginTop={'50px'}>
           <BalanceUni />
         </Center>
       </Container>
-
-      <InvestUniModal
-        isOpen={isOpen}
-        onClose={onClose}
-        amount1={amount1}
-        amount2={amount2}
-      />
 
       <FooterApp />
     </Flex>

@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Center,
-  Flex,
   HStack,
   Image,
   Input,
@@ -41,21 +40,28 @@ import {
 
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 
-import { AiFillBank } from 'react-icons/ai';
+import { AiOutlineSwap } from 'react-icons/ai';
 import { GiReceiveMoney } from 'react-icons/gi';
+import { FaMoneyBillAlt, FaRegMoneyBillAlt } from 'react-icons/fa';
 
 import { useAdapter } from '../../../../hooks/use-adapter';
 
 type Props = {
   isOpen: any;
   onClose: any;
-  tokenBalance: any;
+  token1Balance: any;
+  token2Balance: any;
 };
 
-function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
+function WithdrawUniModal({
+  isOpen,
+  onClose,
+  token1Balance,
+  token2Balance,
+}: Props) {
   const { adapter } = useAdapter();
 
-  const [amount, setAmount] = useState(0);
+  const [percentage, setPercentage] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -63,7 +69,10 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
 
   const [showAlertError, setShowAlertError] = useState(false);
 
-  const steps = [{ label: 'Claim tokens' }, { label: 'Finish proccess! 🎉' }];
+  const steps = [
+    { label: 'Decrease position ' },
+    { label: 'Finish proccess! 🎉' },
+  ];
 
   const { nextStep, activeStep, reset } = useSteps({
     initialStep: 0,
@@ -77,7 +86,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
     setShowAlertError(false);
 
     try {
-      const withdraw = await adapter.withdrawAave(amount);
+      const withdraw = await adapter.decreasePosition(1, percentage, 100);
 
       setIsLoading(false);
       setSigned(true);
@@ -85,7 +94,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
       const withdrawTx = await withdraw.wait();
 
       console.log(
-        '[dfp][ui][InvestAaveModal][handleApprove] handleApprove() withdrawTx:',
+        '[dfp][ui][InvestUniModal][handleWithdraw] handleApprove() withdrawTx:',
         withdrawTx,
       );
 
@@ -114,7 +123,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
     <Modal isOpen={isOpen} onClose={onClose} isCentered size={'4xl'}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Claim deposit in Aave</ModalHeader>
+        <ModalHeader>Decrese position in Uniswap</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Box>
@@ -136,14 +145,16 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                 <Center>
                   <Box width={'300px'}>
                     <HStack>
-                      <AiFillBank size={30} color="#F72585" />
+                      <FaMoneyBillAlt size={20} color="#F72585" />
+                      <AiOutlineSwap size={20} color="#F72585" />
+                      <FaRegMoneyBillAlt size={20} color="#F72585" />
                       <Text
                         fontSize={30}
                         color={'primary'}
                         fontWeight={700}
                         letterSpacing={'2px'}
                       >
-                        Deposited
+                        Position
                       </Text>
                     </HStack>
                     <TableContainer>
@@ -159,13 +170,25 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                             <Td>
                               <HStack>
                                 <Image
+                                  src="./frontend/weth-logo.png"
+                                  width={'15%'}
+                                />
+                                <Text fontSize={14}>WETH</Text>
+                              </HStack>
+                            </Td>
+                            <Td isNumeric>{token1Balance}</Td>
+                          </Tr>
+                          <Tr>
+                            <Td>
+                              <HStack>
+                                <Image
                                   src="./frontend/wmatic-logo.png"
                                   width={'15%'}
                                 />
                                 <Text fontSize={14}>WMATIC</Text>
                               </HStack>
                             </Td>
-                            <Td isNumeric>{tokenBalance}</Td>
+                            <Td isNumeric>{token2Balance}</Td>
                           </Tr>
                         </Tbody>
                       </Table>
@@ -182,71 +205,23 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                       fontWeight={700}
                       letterSpacing={'2px'}
                     >
-                      Claim
+                      Withdraw
                     </Text>
                   </HStack>
 
-                  <Center>
-                    <HStack width={'300px'} justifyContent="space-between">
-                      <Text>Commit:</Text>
-                      <HStack justifyContent="end">
-                        <Image src="./frontend/wmatic-logo.png" width={'15%'} />
-                        <Text fontSize={14} fontWeight={700}>
-                          WMATIC
-                        </Text>
-                      </HStack>
-                    </HStack>
-                  </Center>
-
-                  <Center paddingTop={'0'}>
-                    <InputGroup
-                      boxShadow={'0px 4px 14px rgba(0, 0, 0, 0.1)'}
-                      borderRadius={'8px'}
-                      height={'50px'}
-                      width={'300px'}
-                    >
-                      <Input
-                        type="number"
-                        border={'0'}
-                        focusBorderColor="white"
-                        value={amount}
-                        onChange={(event: any) => setAmount(event.target.value)}
-                        margin={'auto'}
-                        size={'lg'}
-                      />
-                      <InputRightElement
-                        width="30"
-                        paddingRight={'5px'}
-                        paddingTop={2}
-                      >
-                        <Button
-                          height={'24px'}
-                          border="2px"
-                          borderColor="primary"
-                          borderRadius={'53px'}
-                          onClick={() => setAmount(tokenBalance)}
-                        >
-                          <Text
-                            fontWeight={400}
-                            fontSize={'14px'}
-                            lineHeight={'16.8px'}
-                            color={'primary'}
-                          >
-                            Max
-                          </Text>
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
-                  </Center>
+                  <Text padding={'5'}>
+                    In this strategy you can only withdraw a percentage of your
+                    position. From 0 to 100%.{' '}
+                  </Text>
 
                   <Center paddingTop={'3'}>
                     <Slider
                       id="slider"
-                      defaultValue={5}
+                      step={5}
                       min={0}
                       max={100}
-                      value={(amount / tokenBalance) * 100}
-                      onChange={(v) => setAmount(v * (tokenBalance / 100))}
+                      value={percentage}
+                      onChange={(v) => setPercentage(v)}
                       onMouseEnter={() => setShowTooltip(true)}
                       onMouseLeave={() => setShowTooltip(false)}
                       width={'300px'}
@@ -272,7 +247,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
                         color="white"
                         placement="top"
                         isOpen={showTooltip}
-                        label={`${(amount / tokenBalance) * 100}%`}
+                        label={percentage}
                       >
                         <SliderThumb />
                       </Tooltip>
@@ -302,7 +277,7 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
               <Text padding={10}>
                 Congratulations, you have just claim{' '}
                 <Text as="span" fontWeight={700} color="sixth" fontSize={20}>
-                  {amount} WMATIC{' '}
+                  {token1Balance} WMATIC{' '}
                 </Text>{' '}
                 from Aave protocol 🎉.
               </Text>
@@ -392,9 +367,11 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
               color={'white'}
               onClick={handleWithdraw}
               marginLeft={'20px'}
-              disabled={amount === 0 || isLoading || signed || showAlertError}
+              disabled={
+                percentage === 0 || isLoading || signed || showAlertError
+              }
             >
-              Claim
+              Withdraw
             </Button>
           )}
         </ModalFooter>
@@ -403,4 +380,4 @@ function WithdrawAaveModal({ isOpen, onClose, tokenBalance }: Props) {
   );
 }
 
-export default WithdrawAaveModal;
+export default WithdrawUniModal;

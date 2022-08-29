@@ -8,6 +8,7 @@ import {
   TokenSymbol,
   DFPStrategy,
   StrategiesByNetworks,
+  UniswapPosition,
 } from '../manager.types';
 
 export type AdapterName = 'moralis' | 'web3' | 'ethers.js' | 'dfp' | 'none';
@@ -34,6 +35,13 @@ export interface IAdapter {
 
   approveDepositUniswap(amount: number, symbol: TokenSymbol): Promise<any>;
   mintNewPosition(amount1: number, amount2: number): Promise<any>;
+  getBalanceUniswap(): Promise<UniswapPosition>;
+  increasePosition(amount1: number, amount2: number): Promise<any>;
+  decreasePosition(
+    poolId: number,
+    percentage: number,
+    maxSlip: number,
+  ): Promise<any>;
 
   deposit(deposit: Deposit): Promise<Deposit>;
   listStrategies(): Promise<DFPStrategy[]>;

@@ -22,7 +22,6 @@ function TokenSelector({
   tokenNumber,
   selectedToken,
   setselectedToken,
-  setAmount,
   setMaxAmount,
   setBalanceLoading,
 }: any) {
@@ -89,7 +88,7 @@ function TokenSelector({
             <Box display={selectedToken === 'WETH' ? 'block' : 'none'}>
               <Image
                 src={process.env.PUBLIC_URL + '/weth-logo.png'}
-                width={'15%'}
+                width={'30px'}
               />
             </Box>
 
@@ -109,32 +108,41 @@ function TokenSelector({
         </MenuButton>
 
         <MenuList border={'0'} minW="0" w={'200px'}>
-          <MenuItem onClick={() => handleTokenChange('WMATIC')}>
-            <Image src="./frontend/wmatic-logo.png" width={'20%'} />
+          <MenuItem
+            onClick={() => handleTokenChange('WETH')}
+            display={tokenNumber === 1 ? 'block' : 'none'}
+          >
+            <HStack>
+              <Image src="./frontend/weth-logo.png" width={'15%'} />
 
-            <Text
-              fontSize={'16px'}
-              lineHeight={'18.75px'}
-              letterSpacing="5%"
-              color={'black'}
-              padding={3}
-            >
-              WMATIC
-            </Text>
+              <Text
+                fontSize={'16px'}
+                lineHeight={'18.75px'}
+                letterSpacing="5%"
+                color={'black'}
+                padding={3}
+              >
+                WETH
+              </Text>
+            </HStack>
           </MenuItem>
 
-          <MenuItem onClick={() => handleTokenChange('WETH')}>
-            <Image src="./frontend/weth-logo.png" width={'15%'} />
-
-            <Text
-              fontSize={'16px'}
-              lineHeight={'18.75px'}
-              letterSpacing="5%"
-              color={'black'}
-              padding={3}
-            >
-              WETH
-            </Text>
+          <MenuItem
+            onClick={() => handleTokenChange('WMATIC')}
+            display={tokenNumber === 2 ? 'block' : 'none'}
+          >
+            <HStack>
+              <Image src="./frontend/wmatic-logo.png" width={'20%'} />
+              <Text
+                fontSize={'16px'}
+                lineHeight={'18.75px'}
+                letterSpacing="5%"
+                color={'black'}
+                padding={3}
+              >
+                WMATIC
+              </Text>
+            </HStack>
           </MenuItem>
 
           {/* <MenuItem onClick={() => handleTokenChange('DAI')}>
